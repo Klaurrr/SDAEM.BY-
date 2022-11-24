@@ -3,16 +3,17 @@ import userIcon from "../../assets/images/userIcon.png";
 import geoGray from "../../assets/images/geoGray2.png";
 import metro from "../../assets/images/metro.png";
 import phone from "../../assets/images/phone.png";
+import styles from "./card.module.scss";
 import "./style.scss";
 
 const Card = ({ data }) => {
   return (
     <>
       {data.map((flat) => (
-        <div className="card_container">
-          <div className="card_img">
-            <img src={flatOne} alt="" />
-            <p className="card_category">Gold</p>
+        <div className={styles.container}>
+          <div className={styles.img}>
+            <img src={flatOne} alt="flatOne" />
+            <p>Gold</p>
           </div>
           <div className="card_desc__container">
             <div className="card_wrapper">
@@ -22,11 +23,11 @@ const Card = ({ data }) => {
                 <span>за сутки</span>
               </div>
               <div className="card_desc__container-2">
-                <p className="card_desc-p">
+                <p className={styles.desc}>
                   <img src={userIcon} alt="userIcon"></img>4 (2+2)
                 </p>
-                <p className="card_desc-p">{flat.rooms} комн.</p>
-                <p className="card_desc-p">179 м²</p>
+                <p className={styles.desc}>{flat.rooms} комн.</p>
+                <p className={styles.desc}>179 м²</p>
               </div>
             </div>
             <div className="card_wrapper-2">

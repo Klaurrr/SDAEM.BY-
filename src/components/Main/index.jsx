@@ -16,6 +16,8 @@ import AdFree from "../../assets/images/AD_Free.png";
 import AdUp from "../../assets/images/AD_Up.png";
 import Card from "../Card";
 import geoYellow from "../../assets/images/geoYellow.png";
+import clsx from "clsx";
+import styles from "./main.module.scss";
 import "./style.scss";
 
 const Main = () => {
@@ -209,16 +211,16 @@ const Main = () => {
 
   return (
     <>
-      <main className="main_container">
+      <main className={styles.container}>
         <div
-          className="main_wrapper"
+          className={styles.wrapper}
           style={{ background: `url(${mainBackGround})` }}
         >
-          <div className="main_background">
-            <h1 className="main_title">
+          <div className={styles.background}>
+            <h1 className={styles.title}>
               Sdaem.by - у нас живут <span>ваши объявления</span>
             </h1>
-            <ul className="main_ul">
+            <ul className={styles.ul}>
               <li
                 onClick={() => setStyle(style === "one" ? "one" : "one")}
                 className={`main_li ${style === "one" ? "active" : ""}`}
@@ -244,17 +246,17 @@ const Main = () => {
                 Авто напрокат
               </li>
             </ul>
-            <div className="main_select">
-              <div className="select_item city">
-                <p className="select_item-title">Город</p>
+            <div className={styles.select}>
+              <div className={clsx(styles["select_item"], styles.city)}>
+                <p className={styles["select_item-title"]}>Город</p>
                 <div>
                   <div
                     className={
-                      selectFirst ? "select_city-active" : "select_city"
+                      selectFirst ? "select_city-active" : `${styles.city}`
                     }
                     onClick={(e) => selectActiveFirst(e)}
                   >
-                    <div className="select_city-wrapper">
+                    <div className={styles["city-wrapper"]}>
                       {nameSelect}
                       <img src={checkMark} alt="" />
                     </div>
@@ -268,31 +270,31 @@ const Main = () => {
                     }
                   >
                     <p
-                      className="select_city-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueFirst(e)}
                     >
                       Минск
                     </p>
                     <p
-                      className="select_city-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueFirst(e)}
                     >
                       Гомель
                     </p>
                     <p
-                      className="select_city-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueFirst(e)}
                     >
                       Гродно
                     </p>
                     <p
-                      className="select_city-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueFirst(e)}
                     >
                       Могилев
                     </p>
                     <p
-                      className="select_city-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueFirst(e)}
                     >
                       Брест
@@ -300,18 +302,18 @@ const Main = () => {
                   </div>
                 </div>
               </div>
-              <div className="select_item rooms">
-                <p className="select_item-title">Комнаты</p>
+              <div className={clsx(styles["select_item"], styles.rooms)}>
+                <p className={styles["select_item-title"]}>Комнаты</p>
                 <div>
                   <div
                     className={
-                      selectSecond ? "select_city-active" : "select_city"
+                      selectSecond ? "select_city-active" : `${styles.city}`
                     }
                     onClick={(e) => selectActiveTwo(e)}
                   >
-                    <div className="select_city-wrapper">
+                    <div className={styles["city-wrapper"]}>
                       {nameSelectRooms}
-                      <img src={checkMark} alt="" />
+                      <img src={checkMark} alt="checkMark" />
                     </div>
                   </div>
                   <div
@@ -323,25 +325,25 @@ const Main = () => {
                     }
                   >
                     <p
-                      className="select_rooms-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueSecond(e)}
                     >
                       1
                     </p>
                     <p
-                      className="select_rooms-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueSecond(e)}
                     >
                       2
                     </p>
                     <p
-                      className="select_rooms-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueSecond(e)}
                     >
                       3
                     </p>
                     <p
-                      className="select_rooms-p"
+                      className={styles["city-p"]}
                       onClick={(e) => selectValueSecond(e)}
                     >
                       4
@@ -349,16 +351,17 @@ const Main = () => {
                   </div>
                 </div>
               </div>
-              <div className="select_item cost" id="cost">
-                <p
-                  className="select_item-title"
-                  style={{ marginBottom: "10px" }}
-                >
+              <div
+                className={clsx(
+                  styles["select_item"],
+                  styles["select_item_cost"]
+                )}
+              >
+                <p className={styles["select_item-title"]}>
                   Цена за сутки (BYN)
                 </p>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <input
-                    className="main_input"
                     type="text"
                     placeholder="От"
                     onChange={(e) =>
@@ -369,7 +372,6 @@ const Main = () => {
                   />
                   -
                   <input
-                    className="main_input"
                     type="text"
                     placeholder="До"
                     onChange={(e) =>
@@ -380,14 +382,14 @@ const Main = () => {
                   />
                 </div>
               </div>
-              <div className="select_item" id="more">
-                <div className="more">
+              <div className={styles["select_item"]} id="more">
+                <div className={styles.more}>
                   Больше опций
-                  <img className="img_more" src={more} alt="more" />
+                  <img src={more} alt="more" />
                 </div>
               </div>
-              <div className="select_item">
-                <div className="more_two">
+              <div className={styles["select_item"]}>
+                <div className={styles["more_two"]}>
                   На карте
                   <img
                     className="img_geo-purple"
@@ -406,7 +408,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className="main_cards-wrapper">
+        <div className={styles.cards}>
           {data ? (
             data.length > 0 ? (
               data.map((item) => <Card data={[item]} />)
@@ -420,9 +422,9 @@ const Main = () => {
             )
           ) : (
             <>
-              <section className="main_container-2">
+              <section className={styles["container-2"]}>
                 <div>
-                  <div className="main_wrapper-2">
+                  <div className={styles["wrapper-2"]}>
                     <div
                       style={{
                         background: `url(${apartment})`,
@@ -431,14 +433,14 @@ const Main = () => {
                         borderRadius: "10px",
                       }}
                     >
-                      <p className="main_title-2">Снять квартиру</p>
-                      <p className="main_subtitle-2">Квартиры на сутки</p>
-                      <ul className="main_ul-2">
+                      <p className={styles["title-2"]}>Снять квартиру</p>
+                      <p className={styles["subtitle-2"]}>Квартиры на сутки</p>
+                      <ul className={styles["ul-2"]}>
                         <li>Минск</li>
                         <li>Витебск</li>
                         <li>Гродно</li>
                         <li>Гомель</li>
-                        <li id="li_brest">Брест</li>
+                        <li id={styles["li_brest"]}>Брест</li>
                         <li>Могилев</li>
                       </ul>
                     </div>
@@ -451,8 +453,10 @@ const Main = () => {
                         marginLeft: "30px",
                       }}
                     >
-                      <p className="main_title-2">СНЯТЬ коттедж НА ПРАЗДНИК</p>
-                      <p className="main_subtitle-2">Коттеджи и усадьбы</p>
+                      <p className={styles["title-2"]}>
+                        СНЯТЬ коттедж НА ПРАЗДНИК
+                      </p>
+                      <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
                       <img
                         className="img_chevron"
                         src={chevron}
@@ -460,7 +464,10 @@ const Main = () => {
                       />
                     </div>
                   </div>
-                  <div className="main_wrapper-2" style={{ marginTop: "30px" }}>
+                  <div
+                    className={styles["wrapper-2"]}
+                    style={{ marginTop: "30px" }}
+                  >
                     <div
                       style={{
                         background: `url(${bathHouse})`,
@@ -469,10 +476,10 @@ const Main = () => {
                         borderRadius: "10px",
                       }}
                     >
-                      <p className="main_title-2">
+                      <p className={styles["title-2"]}>
                         Попариться в бане с друзьями
                       </p>
-                      <p className="main_subtitle-2">Бани и сауны</p>
+                      <p className={styles["subtitle-2"]}>Бани и сауны</p>
                       <img
                         className="img_chevron"
                         src={chevron}
@@ -488,8 +495,10 @@ const Main = () => {
                         marginLeft: "30px",
                       }}
                     >
-                      <p className="main_title-2">EСЛИ СРОЧНО НУЖНА МАШИНА</p>
-                      <p className="main_subtitle-2">Авто на прокат</p>
+                      <p className={styles["title-2"]}>
+                        EСЛИ СРОЧНО НУЖНА МАШИНА
+                      </p>
+                      <p className={styles["subtitle-2"]}>Авто на прокат</p>
                       <img
                         className="img_chevron"
                         id="img_chevron_cars"
