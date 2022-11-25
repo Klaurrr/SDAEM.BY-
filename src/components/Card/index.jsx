@@ -32,11 +32,15 @@ const Card = ({ data }) => {
             </div>
             <div className="card_wrapper-2">
               <p>
-                <img src={geoGray} alt="geoGray" />
+                <img
+                  src={geoGray}
+                  alt="geoGray"
+                  style={{ paddingRight: "11px" }}
+                />
                 {flat.city}, б-р Мулявина, д. 10
               </p>
               <p>
-                <img src={metro} alt="metro" />
+                <img src={metro} alt="metro" style={{ paddingRight: "6px" }} />
                 Грушевка <span>•</span>Шабаны
               </p>
             </div>

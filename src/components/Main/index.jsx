@@ -8,8 +8,10 @@ import chevron from "../../assets/images/chevron.png";
 import more from "../../assets/images/more.png";
 import geoPurple from "../../assets/images/geoPurple.png";
 import gaps from "../../assets/images/gaps.png";
+import gapsWhite from "../../assets/images/gaps_2.png";
 import metro from "../../assets/images/metro.png";
 import checkMark from "../../assets/images/checkMark.png";
+import glare from "../../assets/images/glare.png";
 import chevronNavigate from "../../assets/images/chevronLeft.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
 import AdFree from "../../assets/images/AD_Free.png";
@@ -595,7 +597,7 @@ const Main = () => {
                   </div>
                   <div>
                     <h2>Коттеджи и усадьбы</h2>
-                    <p>Аггроусадьбы</p>
+                    <p>Агроусадьбы</p>
                     <p>Коттеджи</p>
                     <p>Загородный комплекс</p>
                     <p>Базы отдыха</p>
@@ -710,7 +712,12 @@ const Main = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section style={{ position: "relative" }}>
+        <img
+          style={{ position: "absolute", right: "140px", top: "46px" }}
+          src={gapsWhite}
+          alt="gaps_white"
+        />
         <div
           style={{
             background: `url(${mainBackGround})`,
@@ -719,40 +726,44 @@ const Main = () => {
             backgroundSize: "100% 100%",
           }}
         >
-          <div className={styles["background-2"]}>
-            <div className={styles["search-desc"]}>
-              <h3>Поиск квартир на карте</h3>
-              <p>
-                Ищите квартиры на сутки в центре города,
-                <br /> возле парка или в живописном районе
-              </p>
-              <button>
-                <div>
-                  <img src={geoYellow} alt="geoYellow" />
-                  <p>Открыть карту</p>
-                </div>
-              </button>
+          <div style={{ position: "relative" }}>
+            <div className={styles["background-2"]}>
+              <div className={styles["search-desc"]}>
+                <h3>Поиск квартир на карте</h3>
+                <p>
+                  Ищите квартиры на сутки в центре города,
+                  <br /> возле парка или в живописном районе
+                </p>
+                <button>
+                  <div>
+                    <img src={geoYellow} alt="geoYellow" />
+                    <p>Открыть карту</p>
+                  </div>
+                </button>
+              </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                margin: "94px 80px 0px",
-                justifyContent: "space-between",
-              }}
-            >
+            <div className={styles["search-wrap"]}>
               <div className={styles["search-cards"]}>
-                <div style={{ padding: "25px 0px 0px 37px" }}>
+                <div
+                  style={{
+                    paddingLeft: "37px",
+                    paddingTop: "27px",
+                    paddingRight: "39px",
+                  }}
+                >
                   <div className={styles["search-cards-title"]}>
-                    <img src={AdFree} alt="" />
+                    <div className={styles.circle}>
+                      <img src={AdFree} alt="ad_free" />
+                    </div>
                     <p>
                       Начните привлекать <br /> клиентов бесплатно!
                     </p>
                   </div>
-                  <div>
+                  <div className={styles["search-cards-desc"]}>
                     <p>
                       Пройдя простую регистрацию на сайте у Вас появится личный
                       кабинет, в котором возможно{" "}
-                      <span>бесплатно создавать и публиковать</span>
+                      <span>бесплатно создавать и публиковать </span>
                       объявления на сайте.
                     </p>
                   </div>
@@ -760,42 +771,68 @@ const Main = () => {
                 </div>
               </div>
               <div className={styles["search-cards"]}>
-                <div className={styles["search-cards-title"]}>
-                  <img src={AdUp} alt="" />
-                  <p>
-                    Поднимайте <br /> объявления
-                  </p>
+                <div
+                  style={{
+                    paddingLeft: "37px",
+                    paddingTop: "27px",
+                    paddingRight: "39px",
+                  }}
+                >
+                  <div className={styles["search-cards-title"]}>
+                    <div className={styles.circle}>
+                      <img src={AdUp} alt="AD_UP" />
+                    </div>
+                    <p>
+                      Поднимайте <br /> объявления
+                    </p>
+                  </div>
+                  <div className={styles["search-cards-desc"]}>
+                    <p>
+                      Вы в любое время можете <span>поднимать</span> объявления{" "}
+                      <span>вверх первой страницы</span> каталога, они
+                      разместятся сразу после платных объявлений до тех пор,
+                      пока другой пользователь не повторит процедуру.
+                    </p>
+                  </div>
+                  <button>
+                    <p>Узнать стоимость услуги</p>
+                    <img
+                      style={{ filter: "invert(1)" }}
+                      src={checkMarkRight}
+                      alt="checkMarkRight"
+                    />
+                  </button>
                 </div>
-                <div>
-                  <p>
-                    Вы в любое время можете <span>поднимать</span> объявления{" "}
-                    <span>вверх первой страницы</span> каталога, они разместятся
-                    сразу после платных объявлений до тех пор, пока другой
-                    пользователь не повторит процедуру.
-                  </p>
-                </div>
-                <button>
-                  <p>Узнать стоимость услуги</p>
-                  <img src={checkMarkRight} alt="checkMarkRight" />
-                </button>
               </div>
               <div className={clsx(styles["search-cards"], styles.gold)}>
+                <img
+                  src={glare}
+                  alt="glare"
+                  style={{ position: "absolute", left: "134px", top: "118px" }}
+                />
                 <h2>Приоритет Gold</h2>
-                <div>
-                  <p>
-                    Приоритетное размещение <span>Gold</span> позволяет{" "}
-                    <span>закрепить ваше объявление</span> в верхней части
-                    каталога!
-                  </p>
-                  <p>
-                    Gold объявления <span>перемещаются каждые 5 мин</span> на 1
-                    позицию, что делает размещение одинаковым для всех.
-                  </p>
+                <div
+                  style={{
+                    paddingLeft: "37px",
+                    paddingRight: "39px",
+                  }}
+                >
+                  <div className={styles["gold-desc"]}>
+                    <p>
+                      Приоритетное размещение <span>Gold</span> позволяет{" "}
+                      <span>закрепить ваше объявление</span> в верхней части
+                      каталога!
+                    </p>
+                    <p>
+                      Gold объявления <span>перемещаются каждые 5 мин</span> на
+                      1 позицию, что делает размещение одинаковым для всех.
+                    </p>
+                  </div>
+                  <button id={styles["btn-purple"]}>
+                    <p>Еще о тарифе Gold</p>
+                    <img src={checkMarkRight} alt="checkMarkRight" />
+                  </button>
                 </div>
-                <button>
-                  <p>Еще о тарифе Gold</p>
-                  <img src={checkMarkRight} alt="checkMarkRight" />
-                </button>
               </div>
             </div>
           </div>
