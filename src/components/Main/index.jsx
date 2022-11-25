@@ -18,7 +18,6 @@ import Card from "../Card";
 import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
-import "./style.scss";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -223,25 +222,33 @@ const Main = () => {
             <ul className={styles.ul}>
               <li
                 onClick={() => setStyle(style === "one" ? "one" : "one")}
-                className={`main_li ${style === "one" ? "active" : ""}`}
+                className={`main_li ${
+                  style === "one" ? `${styles.active}` : ""
+                }`}
               >
                 Квартиры на сутки
               </li>
               <li
                 onClick={() => setStyle(style === "two" ? "two" : "two")}
-                className={`main_li ${style === "two" ? "active" : ""}`}
+                className={`main_li ${
+                  style === "two" ? `${styles.active}` : ""
+                }`}
               >
                 Коттеджи и усадьбы
               </li>
               <li
                 onClick={() => setStyle(style == "three" ? "three" : "three")}
-                className={`main_li ${style === "three" ? "active" : ""}`}
+                className={`main_li ${
+                  style === "three" ? `${styles.active}` : ""
+                }`}
               >
                 Бани и сауны
               </li>
               <li
                 onClick={() => setStyle(style == "four" ? "four" : "four")}
-                className={`main_li ${style === "four" ? "active" : ""}`}
+                className={`main_li ${
+                  style === "four" ? `${styles.active}` : ""
+                }`}
               >
                 Авто напрокат
               </li>
@@ -252,7 +259,9 @@ const Main = () => {
                 <div>
                   <div
                     className={
-                      selectFirst ? "select_city-active" : `${styles.city}`
+                      selectFirst
+                        ? `${styles["select-active"]}`
+                        : `${styles.city}`
                     }
                     onClick={(e) => selectActiveFirst(e)}
                   >
@@ -265,8 +274,8 @@ const Main = () => {
                     style={{ position: "relative", left: "0" }}
                     className={
                       selectFirst
-                        ? "main_drop-down-active"
-                        : "main_drop-down-disabled"
+                        ? `${styles["drop-down-active"]}`
+                        : `${styles["drop-down-unactive"]}`
                     }
                   >
                     <p
@@ -307,7 +316,9 @@ const Main = () => {
                 <div>
                   <div
                     className={
-                      selectSecond ? "select_city-active" : `${styles.city}`
+                      selectSecond
+                        ? `${styles["select-active"]}`
+                        : `${styles.city}`
                     }
                     onClick={(e) => selectActiveTwo(e)}
                   >
@@ -320,8 +331,8 @@ const Main = () => {
                     style={{ position: "relative", left: "0" }}
                     className={
                       selectSecond
-                        ? "main_drop-down-active"
-                        : "main_drop-down-disabled"
+                        ? `${styles["drop-down-active"]}`
+                        : `${styles["drop-down-unactive"]}`
                     }
                   >
                     <p
@@ -382,7 +393,10 @@ const Main = () => {
                   />
                 </div>
               </div>
-              <div className={styles["select_item"]} id="more">
+              <div
+                className={styles["select_item"]}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
                 <div className={styles.more}>
                   Больше опций
                   <img src={more} alt="more" />
@@ -458,7 +472,7 @@ const Main = () => {
                       </p>
                       <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
                       <img
-                        className="img_chevron"
+                        style={{ paddingLeft: "346px", marginTop: "20%" }}
                         src={chevron}
                         alt="chevron"
                       />
@@ -481,7 +495,7 @@ const Main = () => {
                       </p>
                       <p className={styles["subtitle-2"]}>Бани и сауны</p>
                       <img
-                        className="img_chevron"
+                        style={{ paddingLeft: "346px", marginTop: "20%" }}
                         src={chevron}
                         alt="chevron"
                       />
@@ -500,16 +514,28 @@ const Main = () => {
                       </p>
                       <p className={styles["subtitle-2"]}>Авто на прокат</p>
                       <img
-                        className="img_chevron"
-                        id="img_chevron_cars"
+                        style={{
+                          marginLeft: "88%",
+                          marginTop: "16%",
+                          padding: "0px",
+                        }}
                         src={chevron}
                         alt="chevron"
                       />
                     </div>
                   </div>
-                  <img className="img_gaps" src={gaps} alt="gaps"></img>
+                  <img
+                    style={{
+                      marginTop: "41px",
+                      width: "61.19px",
+                      height: "61.19px",
+                      marginLeft: "-28px",
+                    }}
+                    src={gaps}
+                    alt="gaps"
+                  ></img>
                 </div>
-                <div className="main_wrapper_desc-2">
+                <div className={styles.desc}>
                   <div>
                     <h2>Квартиры</h2>
                     <p>
@@ -591,12 +617,12 @@ const Main = () => {
           )}
         </div>
       </main>
-      <section className="main_container-3">
+      <section className={styles["container-3"]}>
         <div>
-          <p className="main_title-3">Квартиры на сутки</p>
-          <h3 className="main_subtitle-3">Аренда квартир в Минске</h3>
+          <p className={styles["title-3"]}>Квартиры на сутки</p>
+          <h3 className={styles["subtitle-3"]}>Аренда квартир в Минске</h3>
 
-          <div className="main_flat-card">
+          <div className={styles["flat-Wrap"]}>
             <Card
               data={[...apartments].filter((item) => item.city == "Минск")}
             />
@@ -608,7 +634,7 @@ const Main = () => {
               display: "flex",
             }}
           >
-            <div className="main_offers_wrap">
+            <div className={styles.offers}>
               <h1>
                 {[...apartments].filter((el) => el.city === "Минск").length}{" "}
                 <span>+</span>
@@ -618,7 +644,7 @@ const Main = () => {
             <div
               style={{ height: "70px", display: "flex", alignItems: "center" }}
             >
-              <button className="main_offers_button">
+              <button className={styles["offers-button"]}>
                 Посмотреть все
                 <img src={checkMarkRight} alt="checkMarkRight" />
               </button>
@@ -627,36 +653,38 @@ const Main = () => {
         </div>
 
         <div style={{ position: "relative" }}>
-          <div className="main_wrapper-3"></div>
-          <div className="main_drop-down">
+          <div className={styles["wrapper-3"]}></div>
+          <div className={styles["drop-down"]}>
             <div style={{ display: "flex" }}>
               <div
-                className="main_drop-down__item"
+                className={styles["drop-down__item"]}
                 onClick={() => setDrop(drop ? false : true)}
               >
                 <div
-                  className="main_drop-down__item-wrap"
+                  className={styles["drop-down__item_wrap"]}
                   style={{
                     display: "flex",
                     alignItems: "center",
                   }}
                 >
-                  <img src={metro} alt="" />
+                  <img src={metro} alt="metro" />
                   <p style={{ marginLeft: "8px" }}>{nameDrop}</p>
                 </div>
-                <img className="main_img-checkMark" src={checkMark} alt="" />
+                <img style={{ marginRight: "16px" }} src={checkMark} alt="" />
               </div>
               <div
-                className="main_drop-down__item"
+                className={styles["drop-down__item"]}
                 onClick={() => setDropTwo(dropTwo ? false : true)}
               >
-                <p className="main_drop-down__item-wrap">{nameDropTwo}</p>
-                <img className="main_img-checkMark" src={checkMark} alt="" />
+                <p className={styles["drop-down__item_wrap"]}>{nameDropTwo}</p>
+                <img style={{ marginRight: "16px" }} src={checkMark} alt="" />
               </div>
             </div>
             <div
               className={
-                drop ? "main_drop-down-active" : "main_drop-down-disabled"
+                drop
+                  ? `${styles["drop-down-active"]}`
+                  : `${styles["drop-down-unactive"]}`
               }
             >
               <p onClick={(e) => setDropDown(e.target.outerText)}>Есть</p>
@@ -664,7 +692,9 @@ const Main = () => {
             </div>
             <div
               className={
-                dropTwo ? "main_drop-down-active" : "main_drop-down-disabled"
+                dropTwo
+                  ? `${styles["drop-down-active"]}`
+                  : `${styles["drop-down-unactive"]}`
               }
               style={{ left: "16em" }}
             >
@@ -674,15 +704,14 @@ const Main = () => {
               <p onClick={(e) => setDropDownTwo(e.target.outerText)}>Район 4</p>
             </div>
           </div>
-          <div className="main_chevrons">
-            <img src={chevronNavigate} alt="" />
-            <img src={chevronNavigate} alt="" />
+          <div className={styles.chevrons}>
+            <img src={chevronNavigate} alt="chevronNavigate" />
+            <img src={chevronNavigate} alt="chevronNavigate" />
           </div>
         </div>
       </section>
-      <section className="main_container-4">
+      <section>
         <div
-          className="main_search-map"
           style={{
             background: `url(${mainBackGround})`,
             width: "1440px",
@@ -690,8 +719,8 @@ const Main = () => {
             backgroundSize: "100% 100%",
           }}
         >
-          <div className="main_background-4">
-            <div className="main_search-desc">
+          <div className={styles["background-2"]}>
+            <div className={styles["search-desc"]}>
               <h3>Поиск квартир на карте</h3>
               <p>
                 Ищите квартиры на сутки в центре города,
@@ -711,9 +740,9 @@ const Main = () => {
                 justifyContent: "space-between",
               }}
             >
-              <div className="main_search-cards">
+              <div className={styles["search-cards"]}>
                 <div style={{ padding: "25px 0px 0px 37px" }}>
-                  <div className="main_search-cards-title">
+                  <div className={styles["search-cards-title"]}>
                     <img src={AdFree} alt="" />
                     <p>
                       Начните привлекать <br /> клиентов бесплатно!
@@ -730,8 +759,8 @@ const Main = () => {
                   <button>+ Разместить объявление</button>
                 </div>
               </div>
-              <div className="main_search-cards">
-                <div className="main_search-cards-title">
+              <div className={styles["search-cards"]}>
+                <div className={styles["search-cards-title"]}>
                   <img src={AdUp} alt="" />
                   <p>
                     Поднимайте <br /> объявления
@@ -750,7 +779,7 @@ const Main = () => {
                   <img src={checkMarkRight} alt="checkMarkRight" />
                 </button>
               </div>
-              <div className="main_search-cards gold">
+              <div className={clsx(styles["search-cards"], styles.gold)}>
                 <h2>Приоритет Gold</h2>
                 <div>
                   <p>
