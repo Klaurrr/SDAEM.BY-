@@ -15,6 +15,7 @@ import glare from "../../assets/images/glare.png";
 import chevronNavigate from "../../assets/images/chevronLeft.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
 import AdFree from "../../assets/images/AD_Free.png";
+import orchid from "../../assets/images/orchid.png";
 import AdUp from "../../assets/images/AD_Up.png";
 import Card from "../Card";
 import geoYellow from "../../assets/images/geoYellow.png";
@@ -467,6 +468,7 @@ const Main = () => {
                         height: "270px",
                         borderRadius: "10px",
                         marginLeft: "30px",
+                        cursor: "pointer",
                       }}
                     >
                       <p className={styles["title-2"]}>
@@ -490,6 +492,7 @@ const Main = () => {
                         width: "407px",
                         height: "270px",
                         borderRadius: "10px",
+                        cursor: "pointer",
                       }}
                     >
                       <p className={styles["title-2"]}>
@@ -509,6 +512,7 @@ const Main = () => {
                         height: "270px",
                         borderRadius: "10px",
                         marginLeft: "30px",
+                        cursor: "pointer",
                       }}
                     >
                       <p className={styles["title-2"]}>
@@ -808,7 +812,12 @@ const Main = () => {
                 <img
                   src={glare}
                   alt="glare"
-                  style={{ position: "absolute", left: "134px", top: "118px" }}
+                  style={{
+                    position: "absolute",
+                    left: "134px",
+                    top: "118px",
+                    borderRadius: "0px 0px 10px",
+                  }}
                 />
                 <h2>Приоритет Gold</h2>
                 <div
@@ -834,6 +843,91 @@ const Main = () => {
                   </button>
                 </div>
               </div>
+            </div>
+            <img
+              style={{
+                position: "absolute",
+                marginLeft: "1210px",
+                marginTop: "264px",
+              }}
+              src={gaps}
+              alt="gaps"
+            />
+          </div>
+        </div>
+      </section>
+      <section className={styles["container-4"]}>
+        <div style={{ display: "flex" }}>
+          <div>
+            <p className={styles["title-4"]}>Что такое SDAEM.BY</p>
+            <h3 className={styles["subtitle-4"]}>Квартира на сутки в Минске</h3>
+            <div style={{ width: "842px", marginTop: "30px" }}>
+              <div style={{ display: "flex", position: "relative" }}>
+                <img src={orchid} alt="orchid_img" id={styles.orchid} />
+                <img
+                  style={{
+                    position: "absolute",
+                    marginTop: "181px",
+                    marginLeft: "346px",
+                  }}
+                  src={gaps}
+                  alt="gaps"
+                />
+                <div className={styles["desc-4"]}>
+                  <p>
+                    <span>Нужна квартира на сутки в Минске?</span> На веб-сайте
+                    sdaem.by вас ждет масса выгодных предложений. Каталог
+                    насчитывает <span>более 500 квартир.</span> Благодаря
+                    удобной навигации вы быстро найдете подходящий вариант.
+                  </p>
+                  <p>
+                    В каталоге представлены комфортабельные однокомнатные
+                    квартиры на сутки и квартиры с большим количеством комнат в
+                    разных районах города, с различной степенью удобства от
+                    дешевых до VIP с джакузи.
+                  </p>
+                </div>
+              </div>
+              <p className={styles["desc-4-p"]}>
+                Чтобы снять квартиру на сутки в Минске, вам достаточно
+                определиться с выбором и связаться с владельцем для уточнения
+                условий аренды и заключить договор. Заметим, на сайте
+                представлены исключительно квартиры на сутки без посредников,
+                что избавляет посетителей от необходимости взаимодействовать с
+                агентствами, тратя свое время и деньги. Также пользователи сайта
+                могут совершенно бесплатно размещать объявления о готовности
+                сдать квартиру на сутки.{" "}
+              </p>
+            </div>
+          </div>
+          <div className={styles.news}>
+            <div style={{ marginLeft: "23px" }}>
+              <h2>Новости</h2>
+              <div className={styles["news-desc"]}>
+                <div>
+                  <h5>Линия Сталина: суровый отдых в усадьбах на сутки</h5>
+                  <p>14 Январь</p>
+                </div>
+                <div>
+                  <h5>Аренда квартиры посуточно</h5>
+                  <p>14 Январь</p>
+                </div>
+                <div>
+                  <h5>Дворцово-парковый комплекс Чапских</h5>
+                  <p>14 Январь</p>
+                </div>
+                <div>
+                  <h5>Дворцово-парковый комплекс Чапских</h5>
+                  <p>14 Январь</p>
+                </div>
+                <div>
+                  <h5>Дворцово-парковый комплекс Чапских</h5>
+                  <p>14 Январь</p>
+                </div>
+              </div>
+              <button>
+                Посмотреть все <img src={checkMark} alt="checkMarkRight" />
+              </button>
             </div>
           </div>
         </div>
