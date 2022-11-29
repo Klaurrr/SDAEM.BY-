@@ -1,4 +1,5 @@
 import flatOne from "../../assets/images/flat_one.png";
+import { useState } from "react";
 import userIcon from "../../assets/images/userIcon.png";
 import geoGray from "../../assets/images/geoGray2.png";
 import metro from "../../assets/images/metro.png";
@@ -7,6 +8,8 @@ import styles from "./card.module.scss";
 import "./style.scss";
 
 const Card = ({ data }) => {
+  const [contact, setContact] = useState(false);
+
   return (
     <>
       {data.map((flat) => (
@@ -61,6 +64,7 @@ const Card = ({ data }) => {
               <button className="card_button-yellow">Подробнее</button>
             </div>
           </div>
+          {/* <div className={styles["contact-modal"]}></div> */}
         </div>
       ))}
     </>

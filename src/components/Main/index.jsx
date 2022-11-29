@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import mainBackGround from "../../assets/images/mainBackGround.png";
 import apartment from "../../assets/images/apartments-day.jpg";
 import cottagesAndEstates from "../../assets/images/cottages&estates.jpg";
@@ -21,6 +22,7 @@ import Card from "../Card";
 import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
+import Header from "../Header";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -42,6 +44,29 @@ const Main = () => {
 
   const [nameDrop, setNameDrop] = useState("Метро");
   const [nameDropTwo, setNameDropTwo] = useState("Район");
+
+  const news = [
+    {
+      news: "Линия Сталина: суровый отдых в усадьбах на сутки",
+      date: "14 Января",
+    },
+    {
+      news: "Дворцово-парковый комплекс Чапских",
+      date: "15 Декабря",
+    },
+    {
+      news: "Дворцово-парковый комплекс Чапских",
+      date: "14 Января",
+    },
+    {
+      news: "Аренда квартиры посуточно",
+      date: "5 Августа",
+    },
+    {
+      news: "Линия Сталина: суровый отдых в усадьбах на сутки",
+      date: "23 Июня",
+    },
+  ];
 
   const apartments = [
     {
@@ -414,9 +439,13 @@ const Main = () => {
                     alt="geo-purple"
                   />
                   <button
-                    onClick={() =>
-                      createFinallyObj(city, rooms, costMin, costMax)
-                    }
+                    onClick={() => {
+                      createFinallyObj(city, rooms, costMin, costMax);
+                      setTimeout(() => {
+                        setNameSelect("Выберите");
+                        setNameSelectRooms("Выберите");
+                      }, 10);
+                    }}
                   >
                     Показать {">"}
                   </button>
@@ -904,26 +933,13 @@ const Main = () => {
             <div style={{ marginLeft: "23px" }}>
               <h2>Новости</h2>
               <div className={styles["news-desc"]}>
-                <div>
-                  <h5>Линия Сталина: суровый отдых в усадьбах на сутки</h5>
-                  <p>14 Январь</p>
-                </div>
-                <div>
-                  <h5>Аренда квартиры посуточно</h5>
-                  <p>14 Январь</p>
-                </div>
-                <div>
-                  <h5>Дворцово-парковый комплекс Чапских</h5>
-                  <p>14 Январь</p>
-                </div>
-                <div>
-                  <h5>Дворцово-парковый комплекс Чапских</h5>
-                  <p>14 Январь</p>
-                </div>
-                <div>
-                  <h5>Дворцово-парковый комплекс Чапских</h5>
-                  <p>14 Январь</p>
-                </div>
+                {news &&
+                  news.map((item, index) => (
+                    <NavLink to={`/detail/${index}`}>
+                      <h5>{item.news}</h5>
+                      <p>{item.date}</p>
+                    </NavLink>
+                  ))}
               </div>
               <button>
                 Посмотреть все <img src={checkMark} alt="checkMarkRight" />

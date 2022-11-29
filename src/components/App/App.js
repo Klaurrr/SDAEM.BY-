@@ -1,8 +1,11 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
 import MainPage from "../../pages/MainPage";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import FlatsList from "../FlatsList";
 import styles from "./app.module.scss";
+import Header from "../Header";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -10,21 +13,51 @@ const App = () => {
   );
   const [userName, setUserName] = useState(localStorage.getItem("userName"));
 
+  // let location = useLocation();
+
+  // useEffect(() => {
+  //   console.log("локал стордж поменялся");
+  // }, [localStorage.getItem("isLoggedIn")]);
+
+  // if (location.pathname === "/login") {
+  //   localStorage.setItem("isLoggedIn", "false");
+  // }
+
   return (
     <div className={styles.container}>
-      <Routes>
-        <Route path="/main" element={<MainPage />} />
-        <Route
-          path="/login"
-          element={
-            <LoginPage
-              setIsLoggedIn={setIsLoggedIn}
-              setUserName={setUserName}
-            />
-          }
-        />
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
+      {/* <Header /> */}
+      {/* {isLoggedIn ? ( */}
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/flatsList" element={<FlatsList />} />
+          <Route
+            path="/login"
+            element={
+              <LoginPage
+                setIsLoggedIn={setIsLoggedIn}
+                setUserName={setUserName}
+              />
+            }
+          />
+          {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+        </Routes>
+      </div>
+      {/* ) : (
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <LoginPage
+                setIsLoggedIn={setIsLoggedIn}
+                setUserName={setUserName}
+              />
+            }
+          />
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      )} */}
     </div>
   );
 };

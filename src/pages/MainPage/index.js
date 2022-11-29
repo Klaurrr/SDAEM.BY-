@@ -7,7 +7,7 @@ import "./style.scss";
 const MainPage = () => {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Main />
     </div>
   );

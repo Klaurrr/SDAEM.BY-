@@ -828,10 +828,12 @@
                 color: #8291A3;
             }
 
-            div {
+            a {
+                display: inline-block;
                 border-bottom: 1px solid rgba(102, 78, 249, 0.1);
                 padding-bottom: 10px;
                 margin-bottom: 10px;
+                text-decoration: none;
 
                 &:last-child {
                     border: none;
