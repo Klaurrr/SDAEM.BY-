@@ -646,6 +646,7 @@
             background: linear-gradient(270deg, #7E6AF3 0%, #6540CD 100%);
             box-shadow: 0px 15px 40px rgba(0, 96, 206, 0.15);
             margin-top: 37px;
+            position: absolute;
         }
     }
 
@@ -680,6 +681,7 @@
 
             p:last-child {
                 width: 328px;
+                margin-bottom: 0px;
             }
         }
 

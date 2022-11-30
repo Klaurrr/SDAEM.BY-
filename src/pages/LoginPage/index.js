@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BG from "./../../assets/images/BG.png";
 
-import "./style.scss";
+import styles from "./login.module.scss";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   const [login, setLogin] = useState("");
@@ -21,27 +22,27 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   };
 
   return (
-    <div className="login_page">
-      <form className="login_page-form" onSubmit={handleLogIn}>
-        <input
-          className="login_page-input-1"
-          type="name"
-          onChange={(e) => setLogin(e.target.value)}
-          placeholder="Имя"
-          required
-        />
-        <input
-          className="login_page-input-2"
-          type="password"
-          autoComplete="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Пароль"
-          required
-        />
-        <button className="login_page-btn" type="submit">
-          Войти
-        </button>
-      </form>
+    <div style={{ backgroundImage: `url(${BG})`, height: "100vh" }}>
+      <div className={styles["background-color"]}>
+        <form onSubmit={handleLogIn}>
+          <input
+            type="name"
+            onChange={(e) => setLogin(e.target.value)}
+            placeholder="Имя"
+            required
+          />
+          <input
+            type="password"
+            autoComplete="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Пароль"
+            required
+          />
+          <button className="login_page-btn" type="submit">
+            Войти
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

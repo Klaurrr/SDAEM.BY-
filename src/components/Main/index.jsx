@@ -23,6 +23,8 @@ import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
 import Header from "../Header";
+import { useDispatch } from "react-redux";
+import { filter } from "../../store/slices/filterSlice";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -44,6 +46,8 @@ const Main = () => {
 
   const [nameDrop, setNameDrop] = useState("Метро");
   const [nameDropTwo, setNameDropTwo] = useState("Район");
+
+  const dispatch = useDispatch();
 
   const news = [
     {
@@ -157,6 +161,7 @@ const Main = () => {
 
   const createFinallyObj = (city, rooms, costMin, costMax) => {
     const finallyObj = Object.assign({}, city, rooms, costMin, costMax);
+    // dispatch(filter(finallyObj));
     setData(
       apartments.filter((el) => {
         if (finallyObj.city && finallyObj.city !== "Выберите") {

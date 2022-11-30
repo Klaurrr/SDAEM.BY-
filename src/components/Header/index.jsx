@@ -114,6 +114,7 @@ const Header = () => {
             alt="logo"
             onClick={() => {
               navigate("/main");
+              setFlatsValue("Квартиры на сутки");
             }}
             style={{ cursor: "pointer" }}
           />

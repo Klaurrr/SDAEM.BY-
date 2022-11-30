@@ -106,6 +106,10 @@
             display: flex;
             align-items: center;
 
+            a {
+                cursor: pointer;
+            }
+
             &:first-child {
                 margin-left: 0;
             }

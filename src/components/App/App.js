@@ -2,7 +2,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
 import MainPage from "../../pages/MainPage";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FlatsList from "../FlatsList";
 import styles from "./app.module.scss";
 import Header from "../Header";
@@ -13,7 +13,7 @@ const App = () => {
   );
   const [userName, setUserName] = useState(localStorage.getItem("userName"));
 
-  // let location = useLocation();
+  let location = useLocation();
 
   // useEffect(() => {
   //   console.log("локал стордж поменялся");
@@ -24,14 +24,13 @@ const App = () => {
   // }
 
   return (
-    <div className={styles.container}>
-      {/* <Header /> */}
-      {/* {isLoggedIn ? ( */}
+    <div className={location.pathname === "/login" ? null : styles.container}>
       <div>
-        <Header />
+        {location.pathname != "/login" && <Header />}
         <Routes>
           <Route path="/main" element={<MainPage />} />
           <Route path="/flatsList" element={<FlatsList />} />
+
           <Route
             path="/login"
             element={
