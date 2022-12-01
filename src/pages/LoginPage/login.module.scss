@@ -1,5 +1,74 @@
 .background-color {
     background: linear-gradient(1.09deg, #7E6AF3 0.86%, #6540CD 99.01%);
     mix-blend-mode: overlay;
-    height: 100vh
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-wrapper {
+    width: 406px;
+    height: 536px;
+    background: #FFFEFE;
+    box-shadow: 0px 20px 40px rgba(39, 95, 158, 0.2);
+    border-radius: 10px;
+
+    h3 {
+        text-align: center;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 30px;
+        margin: 50px 0 15px;
+    }
+
+    p {
+        text-align: center;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #686868;
+        margin: 0 0 35px;
+    }
+}
+
+.input-wrapper {
+    width: 306px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border: 2px solid rgba(78, 100, 249, 0.8);
+    border-radius: 30px;
+
+    &:first-child {
+        margin-bottom: 20px;
+    }
+
+    img {
+        margin-left: 21px;
+        margin-right: 16px;
+
+    }
+
+    input {
+        width: 100%;
+        border: none;
+        border-radius: 30px;
+        height: 95%;
+        width: 100%;
+
+
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+
 }

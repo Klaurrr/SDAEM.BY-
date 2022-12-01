@@ -30,7 +30,6 @@ const App = () => {
         <Routes>
           <Route path="/main" element={<MainPage />} />
           <Route path="/flatsList" element={<FlatsList />} />
-
           <Route
             path="/login"
             element={
@@ -43,20 +42,6 @@ const App = () => {
           {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
         </Routes>
       </div>
-      {/* ) : (
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <LoginPage
-                setIsLoggedIn={setIsLoggedIn}
-                setUserName={setUserName}
-              />
-            }
-          />
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
-      )} */}
     </div>
   );
 };
