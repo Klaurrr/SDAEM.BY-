@@ -26,7 +26,9 @@ const App = () => {
   return (
     <div className={location.pathname === "/login" ? null : styles.container}>
       <div>
-        {location.pathname != "/login" && <Header />}
+        {location.pathname != "/login" && location.pathname != "/" && (
+          <Header />
+        )}
         <Routes>
           <Route path="/main" element={<MainPage />} />
           <Route path="/flatsList" element={<FlatsList />} />

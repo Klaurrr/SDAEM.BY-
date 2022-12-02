@@ -43,30 +43,40 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
             Авторизируйтесь, чтобы начать <br /> публиковать свои объявления
           </p>
           <form onSubmit={handleLogIn}>
-            <div className={styles["input-wrapper"]}>
-              <img src={userLogin} />
-              <input
-                type="name"
-                placeholder="Логин"
-                onChange={(e) => setLogin(e.target.value)}
-                required
-              />
-            </div>
-            <div className={styles["input-wrapper"]}>
-              <img src={lock} />
-              <input
-                type="password"
-                autoComplete="password"
-                style={{ paddingLeft: "20px" }}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Пароль"
-                required
-              />
-            </div>
+            <div>
+              <div className={styles["input-wrapper"]}>
+                <img src={userLogin} />
+                <input
+                  type="name"
+                  placeholder="Логин"
+                  onChange={(e) => setLogin(e.target.value)}
+                  required
+                />
+              </div>
+              <div className={styles["input-wrapper"]}>
+                <img src={lock} />
+                <input
+                  type="password"
+                  autoComplete="password"
+                  style={{ paddingLeft: "20px" }}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Пароль"
+                  required
+                />
+              </div>
+              <div>
+                <label class={styles.checkbox}>
+                  <input type="checkbox" />
+                  <span class={styles["checkbox-switch"]}></span>
+                </label>
+                <p>Запомнить меня</p>
+                <p>Забыли пароль?</p>
+              </div>
 
-            <button className="login_page-btn" type="submit">
-              Войти
-            </button>
+              <button className="login_page-btn" type="submit">
+                Войти
+              </button>
+            </div>
           </form>
         </div>
       </div>
