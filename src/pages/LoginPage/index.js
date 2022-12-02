@@ -6,6 +6,7 @@ import BG from "./../../assets/images/BG.png";
 import userLogin from "./../../assets/images/UserLogin.png";
 import lock from "./../../assets/images/lock.png";
 import styles from "./login.module.scss";
+import clsx from "clsx";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   const [login, setLogin] = useState("");
@@ -46,15 +47,17 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
               <img src={userLogin} />
               <input
                 type="name"
+                placeholder="Логин"
                 onChange={(e) => setLogin(e.target.value)}
                 required
               />
             </div>
             <div className={styles["input-wrapper"]}>
-              <img src={lock} style={{ marginRight: "20px" }} />
+              <img src={lock} />
               <input
                 type="password"
                 autoComplete="password"
+                style={{ paddingLeft: "20px" }}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Пароль"
                 required

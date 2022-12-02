@@ -43,8 +43,10 @@ form {
     height: 50px;
     display: flex;
     align-items: center;
-    border: 2px solid rgba(78, 100, 249, 0.8);
     border-radius: 30px;
+    background: #F7F7F7;
+    border: 2px solid rgba(78, 100, 249, 0.8);
+
 
     &:first-child {
         margin-bottom: 20px;
@@ -52,7 +54,6 @@ form {
 
     img {
         margin-left: 21px;
-        margin-right: 16px;
 
     }
 
@@ -62,8 +63,8 @@ form {
         border-radius: 30px;
         height: 95%;
         width: 100%;
-
-
+        padding-left: 16px;
+        background: #F7F7F7;
 
         &:focus {
             border: none;
