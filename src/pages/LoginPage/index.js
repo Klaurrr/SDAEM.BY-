@@ -43,7 +43,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
             Авторизируйтесь, чтобы начать <br /> публиковать свои объявления
           </p>
           <form onSubmit={handleLogIn}>
-            <div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <div className={styles["input-wrapper"]}>
                 <img src={userLogin} />
                 <input
@@ -64,20 +64,24 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   required
                 />
               </div>
-              <div>
-                <label class={styles.checkbox}>
-                  <input type="checkbox" />
-                  <span class={styles["checkbox-switch"]}></span>
-                </label>
-                <p>Запомнить меня</p>
-                <p>Забыли пароль?</p>
+              <div className={styles["buttons-wrapper"]}>
+                <div>
+                  <label class={styles.checkbox}>
+                    <input type="checkbox" />
+                    <span class={styles["checkbox-switch"]}></span>
+                  </label>
+                  <p>Запомнить меня</p>
+                </div>
+                <p className={styles["forgot-pass"]}>Забыли пароль?</p>
               </div>
-
               <button className="login_page-btn" type="submit">
                 Войти
               </button>
             </div>
           </form>
+          <p className={styles["create-acc"]}>
+            Еще нет аккаунта? <span>Создайте аккаунт</span>
+          </p>
         </div>
       </div>
     </div>

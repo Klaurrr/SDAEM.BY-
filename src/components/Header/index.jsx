@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo_1 from "../../assets/images/logo 1.png";
 import geoYellow from "../../assets/images/geoYellow.png";
 import geoGray from "../../assets/images/geoGray.png";
@@ -12,6 +12,7 @@ const Header = () => {
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <header>
@@ -125,7 +126,8 @@ const Header = () => {
                 <a
                   onClick={() => setDrop(!drop)}
                   style={
-                    flatsValue != "Квартиры на сутки"
+                    flatsValue != "Квартиры на сутки" &&
+                    location.pathname == "/flatsList"
                       ? {
                           borderBottom: "3px solid #FFD54F",
                           paddingBottom: "18px",

@@ -11,6 +11,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 35px;
 }
 
 .form-wrapper {
@@ -34,7 +35,22 @@ form {
         font-size: 14px;
         line-height: 17px;
         color: #686868;
-        margin: 0 0 35px;
+        // margin: 0;
+    }
+
+    button {
+        background: #FFD54F;
+        border-radius: 33px;
+        border: none;
+        cursor: pointer;
+        // padding: 12px 159px;
+        height: 48px;
+        color: #1E2123;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 38px;
+        margin-bottom: 40px;
     }
 }
 
@@ -146,5 +162,42 @@ form {
 
     .checkbox.focused .checkbox-switch:before {
         box-shadow: inset 0px 0px 4px #ff5623;
+    }
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    p {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0;
+    }
+
+    div {
+        display: flex;
+    }
+
+    .forgot-pass {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        cursor: pointer;
+        color: #664EF9;
+    }
+}
+
+.create-acc {
+    margin: 0;
+
+    span {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 26px;
+        color: #664EF9;
+        cursor: pointer;
     }
 }
