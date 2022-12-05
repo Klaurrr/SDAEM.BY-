@@ -6,6 +6,7 @@ import { useState } from "react";
 import FlatsList from "../FlatsList";
 import styles from "./app.module.scss";
 import Header from "../Header";
+import RegisterPage from "../../pages/RegisterPage";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -24,11 +25,17 @@ const App = () => {
   // }
 
   return (
-    <div className={location.pathname === "/login" ? null : styles.container}>
+    <div
+      className={
+        location.pathname === "/login" || location.pathname === "/register"
+          ? null
+          : styles.container
+      }
+    >
       <div>
-        {location.pathname != "/login" && location.pathname != "/" && (
-          <Header />
-        )}
+        {location.pathname != "/login" &&
+          location.pathname != "/register" &&
+          location.pathname != "/" && <Header />}
         <Routes>
           <Route path="/main" element={<MainPage />} />
           <Route path="/flatsList" element={<FlatsList />} />
@@ -41,6 +48,7 @@ const App = () => {
               />
             }
           />
+          <Route path="/register" element={<RegisterPage />} />
           {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
         </Routes>
       </div>

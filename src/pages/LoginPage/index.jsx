@@ -6,27 +6,37 @@ import BG from "./../../assets/images/BG.png";
 import userLogin from "./../../assets/images/UserLogin.png";
 import lock from "./../../assets/images/lock.png";
 import styles from "./login.module.scss";
+import { useForm } from "react-hook-form";
 import clsx from "clsx";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-
   const navigateToHome = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogIn = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-    localStorage.setItem("isLoggedIn", true);
-    localStorage.setItem("userName", login);
-
-    dispatch(setUser({ login, password }));
-
-    setIsLoggedIn(true);
-    setUserName(login);
+  const onSubmit = (data) => {
+    dispatch(setUser({ login: data.login, password: data.password }));
     navigateToHome("/main");
   };
+
+  // const handleLogIn = (e) => {
+  //   e.preventDefault();
+
+  //   localStorage.setItem("isLoggedIn", true);
+  //   localStorage.setItem("userName", login);
+
+  //   dispatch(setUser({ login, password }));
+
+  //   setIsLoggedIn(true);
+  //   setUserName(login);
+  //   navigateToHome("/main");
+  // };
 
   return (
     <div
@@ -42,33 +52,55 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
           <p>
             Авторизируйтесь, чтобы начать <br /> публиковать свои объявления
           </p>
-          <form onSubmit={handleLogIn}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <div className={styles["input-wrapper"]}>
+              <div
+                className={styles["input-wrapper"]}
+                style={{
+                  border: errors.login && "2px solid red",
+                }}
+              >
                 <img src={userLogin} />
                 <input
                   type="name"
-                  placeholder="Логин"
-                  onChange={(e) => setLogin(e.target.value)}
-                  required
+                  {...register("login", { required: true, minLength: 4 })}
+                  placeholder={errors.login ? `Логин > 4 символов` : "Логин"}
+                  onChange={(e) => {
+                    // setLogin(e.target.value);
+                    console.log(errors.login);
+                    // errors.login = false;
+                  }}
                 />
               </div>
-              <div className={styles["input-wrapper"]}>
+              <div
+                className={styles["input-wrapper"]}
+                style={{
+                  border: errors.password && "2px solid red",
+                }}
+              >
                 <img src={lock} />
                 <input
                   type="password"
-                  autoComplete="password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 4,
+                    maxLength: 30,
+                  })}
                   style={{ paddingLeft: "20px" }}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Пароль"
-                  required
+                  onChange={(e) => {
+                    // setPassword(e.target.value);
+                    errors.password = false;
+                  }}
+                  placeholder={
+                    errors.password ? `Пароль > 4 символов` : "Пароль"
+                  }
                 />
               </div>
               <div className={styles["buttons-wrapper"]}>
                 <div>
-                  <label class={styles.checkbox}>
+                  <label className={styles.checkbox}>
                     <input type="checkbox" />
-                    <span class={styles["checkbox-switch"]}></span>
+                    <span className={styles["checkbox-switch"]}></span>
                   </label>
                   <p>Запомнить меня</p>
                 </div>
