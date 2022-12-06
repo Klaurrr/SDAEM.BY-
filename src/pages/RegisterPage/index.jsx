@@ -12,19 +12,24 @@ import captcha from "../../assets/images/recaptcha.jpg";
 import clsx from "clsx";
 
 const RegisterPage = () => {
-  const navigateToHome = useNavigate();
+  const navigateToLogin = useNavigate();
   const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
+    clearErrors,
   } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(setUser({ login: data.login, password: data.password }));
-    navigateToHome("/main");
+    dispatch(
+      setUser({ login: data.login, password: data.password, email: data.email })
+    );
+    localStorage.setItem("login", data.login);
+    localStorage.setItem("password", data.password);
+
+    navigateToLogin("/login");
   };
 
   return (
@@ -52,7 +57,8 @@ const RegisterPage = () => {
                     type="name"
                     {...register("login", { required: true, minLength: 4 })}
                     placeholder={errors.login ? `Логин > 4 символов` : "Логин"}
-                    onChange={() => (errors.login = false)}
+                    onChange={() => clearErrors("login")}
+                    autoComplete="on"
                   />
                 </div>
                 <div
@@ -63,17 +69,18 @@ const RegisterPage = () => {
                 >
                   <img src={email} style={{ opacity: "0.3" }} />
                   <input
-                    type="text"
+                    type="email"
                     {...register("email", {
                       required: true,
                       minLength: 4,
                       maxLength: 30,
                     })}
                     style={{ paddingLeft: "17px" }}
-                    onChange={(e) => (errors.email = false)}
+                    onChange={() => clearErrors("email")}
                     placeholder={
                       errors.email ? `Почта > 4 символов` : "Электронная почта"
                     }
+                    autoComplete="on"
                   />
                 </div>
                 <div
@@ -91,31 +98,35 @@ const RegisterPage = () => {
                       maxLength: 30,
                     })}
                     style={{ paddingLeft: "20px" }}
-                    onChange={(e) => (errors.password = false)}
+                    onChange={() => clearErrors("password")}
                     placeholder={
                       errors.password ? `Пароль > 4 символов` : "Пароль"
                     }
+                    autoComplete="on"
                   />
                 </div>
                 <div
                   className={styles["input-wrapper"]}
                   style={{
-                    border: errors.password && "2px solid red",
+                    border: errors.repeatPass && "2px solid red",
                   }}
                 >
                   <img src={lock} style={{ opacity: "0.3" }} />
                   <input
                     type="password"
-                    {...register("password", {
+                    {...register("repeatPass", {
                       required: true,
                       minLength: 4,
                       maxLength: 30,
                     })}
                     style={{ paddingLeft: "20px" }}
-                    onChange={(e) => (errors.password = false)}
+                    onChange={() => clearErrors("repeatPass")}
                     placeholder={
-                      errors.password ? `Повторите пароль` : "Повторите пароль"
+                      errors.repeatPass
+                        ? `Повторите пароль`
+                        : "Повторите пароль"
                     }
+                    autoComplete="on"
                   />
                 </div>
                 <div style={{ position: "relative" }}>
@@ -127,7 +138,13 @@ const RegisterPage = () => {
                         marginLeft: "10px",
                       }}
                     >
-                      <input type="checkbox" className={styles.checkbox} />
+                      <input
+                        type="checkbox"
+                        className={styles.checkbox}
+                        {...register("checkbox", {
+                          required: true,
+                        })}
+                      />
                       <p style={{ marginLeft: "15px" }}>Я не робот</p>
                     </div>
                     <img src={captcha} alt="reCaptcha" />

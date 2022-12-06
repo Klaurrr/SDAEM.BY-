@@ -10,33 +10,28 @@ import { useForm } from "react-hook-form";
 import clsx from "clsx";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
-  const navigateToHome = useNavigate();
+  const navigateTo = useNavigate();
   const dispatch = useDispatch();
+
+  const [labelState, setLabelState] = useState(false);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
+    clearErrors,
+    setError,
+    reset,
   } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(setUser({ login: data.login, password: data.password }));
-    navigateToHome("/main");
+    // labelState
+    //   ? localStorage.setItem("isLogged", true)
+    //   : localStorage.setItem("isLogged", false);
+    localStorage.getItem("login") === data.login &&
+      localStorage.getItem("password") === data.password &&
+      navigateTo("/main");
   };
-
-  // const handleLogIn = (e) => {
-  //   e.preventDefault();
-
-  //   localStorage.setItem("isLoggedIn", true);
-  //   localStorage.setItem("userName", login);
-
-  //   dispatch(setUser({ login, password }));
-
-  //   setIsLoggedIn(true);
-  //   setUserName(login);
-  //   navigateToHome("/main");
-  // };
 
   return (
     <div
@@ -63,13 +58,17 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                 <img src={userLogin} />
                 <input
                   type="name"
-                  {...register("login", { required: true, minLength: 4 })}
-                  placeholder={errors.login ? `Логин > 4 символов` : "Логин"}
-                  onChange={(e) => {
-                    // setLogin(e.target.value);
-                    console.log(errors.login);
-                    // errors.login = false;
-                  }}
+                  {...register("login", {
+                    required: true,
+                    validate: (value) =>
+                      value === localStorage.getItem("login"),
+                  })}
+                  value={errors.login && ""}
+                  placeholder={
+                    errors.login ? `Логин не зарегестрирован` : "Логин"
+                  }
+                  onChange={() => clearErrors("login")}
+                  autocomplete="on"
                 />
               </div>
               <div
@@ -83,22 +82,24 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   type="password"
                   {...register("password", {
                     required: true,
-                    minLength: 4,
-                    maxLength: 30,
+                    validate: (value) =>
+                      value === localStorage.getItem("password"),
                   })}
+                  value={errors.password && ""}
                   style={{ paddingLeft: "20px" }}
-                  onChange={(e) => {
-                    // setPassword(e.target.value);
-                    errors.password = false;
-                  }}
+                  onChange={() => clearErrors("password")}
                   placeholder={
-                    errors.password ? `Пароль > 4 символов` : "Пароль"
+                    errors.password ? `Пароль не зарегестрирован` : "Пароль"
                   }
+                  autocomplete="on"
                 />
               </div>
               <div className={styles["buttons-wrapper"]}>
                 <div>
-                  <label className={styles.checkbox}>
+                  <label
+                    className={styles.checkbox}
+                    // onClick={() => setLabelState(!labelState)}
+                  >
                     <input type="checkbox" />
                     <span className={styles["checkbox-switch"]}></span>
                   </label>
@@ -112,7 +113,10 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
             </div>
           </form>
           <p className={styles["create-acc"]}>
-            Еще нет аккаунта? <span>Создайте аккаунт</span>
+            Еще нет аккаунта?{" "}
+            <span onClick={() => navigateTo("/register")}>
+              Создайте аккаунт
+            </span>
           </p>
         </div>
       </div>
