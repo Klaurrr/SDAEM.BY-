@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setUser } from "../../store/slices/userSlice";
 import BG from "./../../assets/images/BG.png";
 import userLogin from "./../../assets/images/UserLogin.png";
@@ -8,21 +8,31 @@ import lock from "./../../assets/images/lock.png";
 import styles from "./login.module.scss";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
+import { useEffect } from "react";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
-  const [labelState, setLabelState] = useState(false);
+  useEffect(() => {
+    localStorage.removeItem("Logged");
+    // localStorage.setItem('Logged')
+  }, []);
+
+  // const [labelState, setLabelState] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     clearErrors,
-    setError,
-    reset,
   } = useForm();
+
+  const logged = () => {
+    navigateTo("/main");
+    localStorage.setItem("Logged", true);
+  };
 
   const onSubmit = (data) => {
     // labelState
@@ -30,7 +40,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
     //   : localStorage.setItem("isLogged", false);
     localStorage.getItem("login") === data.login &&
       localStorage.getItem("password") === data.password &&
-      navigateTo("/main");
+      logged();
   };
 
   return (
@@ -60,6 +70,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   type="name"
                   {...register("login", {
                     required: true,
+                    minLength: 4,
                     validate: (value) =>
                       value === localStorage.getItem("login"),
                   })}
@@ -82,15 +93,14 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   type="password"
                   {...register("password", {
                     required: true,
+                    minLength: 4,
                     validate: (value) =>
                       value === localStorage.getItem("password"),
                   })}
                   value={errors.password && ""}
                   style={{ paddingLeft: "20px" }}
                   onChange={() => clearErrors("password")}
-                  placeholder={
-                    errors.password ? `Пароль не зарегестрирован` : "Пароль"
-                  }
+                  placeholder={errors.password ? `Неверный пароль` : "Пароль"}
                   autocomplete="on"
                 />
               </div>

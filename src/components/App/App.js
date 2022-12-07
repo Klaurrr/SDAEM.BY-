@@ -10,7 +10,7 @@ import RegisterPage from "../../pages/RegisterPage";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("isLoggedIn") === "true"
+    localStorage.getItem("Logged") === "true"
   );
   const [userName, setUserName] = useState(localStorage.getItem("userName"));
 

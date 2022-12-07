@@ -15,10 +15,13 @@ const RegisterPage = () => {
   const navigateToLogin = useNavigate();
   const dispatch = useDispatch();
 
+  const [password, setPassword] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    validate,
     clearErrors,
   } = useForm();
 
@@ -98,7 +101,10 @@ const RegisterPage = () => {
                       maxLength: 30,
                     })}
                     style={{ paddingLeft: "20px" }}
-                    onChange={() => clearErrors("password")}
+                    onChange={(e) => {
+                      clearErrors("password");
+                      setPassword(e.target.value);
+                    }}
                     placeholder={
                       errors.password ? `Пароль > 4 символов` : "Пароль"
                     }
@@ -118,12 +124,13 @@ const RegisterPage = () => {
                       required: true,
                       minLength: 4,
                       maxLength: 30,
+                      validate: (value) => value === password,
                     })}
                     style={{ paddingLeft: "20px" }}
                     onChange={() => clearErrors("repeatPass")}
                     placeholder={
                       errors.repeatPass
-                        ? `Повторите пароль`
+                        ? `Пароль не совпадает`
                         : "Повторите пароль"
                     }
                     autoComplete="on"
@@ -145,7 +152,14 @@ const RegisterPage = () => {
                           required: true,
                         })}
                       />
-                      <p style={{ marginLeft: "15px" }}>Я не робот</p>
+                      <p
+                        style={{
+                          marginLeft: "15px",
+                          borderBottom: errors.checkbox && "2px solid red",
+                        }}
+                      >
+                        {errors.checkbox ? "Вы робот?" : "Я не робот"}
+                      </p>
                     </div>
                     <img src={captcha} alt="reCaptcha" />
                   </div>
@@ -159,7 +173,23 @@ const RegisterPage = () => {
                 </button>
               </div>
             </form>
-            <div></div>
+            <div className={styles.desc}>
+              <p>
+                <span>Пользователь обязуется:</span> <br />• предоставлять
+                достоверную и актуальную информацию при регистрации и добавлении
+                объекта; <br /> • добавлять фотографии объектов соответствующие
+                действительности. Администрация сайта sdaem.by оставляет за
+                собой право удалять любую информацию, размещенную пользователем,
+                если сочтет, что информация не соответствует действительности,
+                носит оскорбительный характер, нарушает права и законные
+                интересы других граждан либо действующее законодательство
+                Республики Беларусь.
+              </p>
+              <p className={styles["create-acc"]}>
+                Уже есть аккаунт?{" "}
+                <span onClick={() => navigateToLogin("/login")}>Войдите</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -168,9 +198,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
-{
-  /* <p className={styles["create-acc"]}>
-            Еще нет аккаунта? <span>Создайте аккаунт</span>
-          </p> */
-}
