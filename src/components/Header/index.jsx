@@ -5,9 +5,11 @@ import geoYellow from "../../assets/images/geoYellow.png";
 import geoGray from "../../assets/images/geoGray.png";
 import heart from "../../assets/images/heart.png";
 import styles from "./header.module.scss";
+import cat from "../../assets/images/cat.jpg";
+import checkMark from "../../assets/images/checkMark.png";
 import { useState } from "react";
 
-const Header = () => {
+const Header = ({ userName, isLoggedIn }) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
 
@@ -105,7 +107,26 @@ const Header = () => {
             Закладки
             <img src={heart} alt="heart" />
           </li>
-          <li>Вход и регистрация</li>
+          {isLoggedIn ? (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img src={cat} className={styles.cat}></img>
+              <p
+                className={styles.userName}
+                style={{
+                  color: "#1E2123",
+                  marginRight: "15px",
+                  fontWeight: "500",
+                }}
+              >
+                {localStorage.getItem("remember") === "true"
+                  ? localStorage.getItem("login")
+                  : sessionStorage.getItem("login")}
+              </p>
+              <img src={checkMark}></img>
+            </div>
+          ) : (
+            <li onClick={() => navigate("/login")}>Вход и регистрация</li>
+          )}
         </ul>
       </div>
       <div className={styles["col-2"]}>

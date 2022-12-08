@@ -693,7 +693,7 @@ const Main = () => {
         </div>
 
         <div style={{ position: "relative" }}>
-          <div className={styles["wrapper-3"]}></div>
+          <div className={styles["wrapper-3"]}></div> {/* Проблема тут */}
           <div className={styles["drop-down"]}>
             <div style={{ display: "flex" }}>
               <div

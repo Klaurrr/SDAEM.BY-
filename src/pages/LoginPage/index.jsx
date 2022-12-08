@@ -12,15 +12,14 @@ import { useEffect } from "react";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   const navigateTo = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
 
   useEffect(() => {
-    localStorage.removeItem("Logged");
-    // localStorage.setItem('Logged')
+    setIsLoggedIn(false);
+    localStorage.setItem("Logged", false);
+    localStorage.removeItem("remember");
   }, []);
 
-  // const [labelState, setLabelState] = useState(false);
+  const [labelState, setLabelState] = useState(false);
 
   const {
     register,
@@ -29,18 +28,21 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
     clearErrors,
   } = useForm();
 
-  const logged = () => {
+  const logged = (data) => {
     navigateTo("/main");
-    localStorage.setItem("Logged", true);
+    setIsLoggedIn(true);
+    setUserName(data.login);
+    labelState
+      ? localStorage.setItem("Logged", true)
+      : sessionStorage.setItem("Logged", true);
+    localStorage.setItem("remember", labelState);
+    sessionStorage.setItem("login", localStorage.getItem("login"));
   };
 
   const onSubmit = (data) => {
-    // labelState
-    //   ? localStorage.setItem("isLogged", true)
-    //   : localStorage.setItem("isLogged", false);
     localStorage.getItem("login") === data.login &&
       localStorage.getItem("password") === data.password &&
-      logged();
+      logged(data);
   };
 
   return (
@@ -79,7 +81,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                     errors.login ? `Логин не зарегестрирован` : "Логин"
                   }
                   onChange={() => clearErrors("login")}
-                  autocomplete="on"
+                  autoсomplete="on"
                 />
               </div>
               <div
@@ -101,7 +103,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   style={{ paddingLeft: "20px" }}
                   onChange={() => clearErrors("password")}
                   placeholder={errors.password ? `Неверный пароль` : "Пароль"}
-                  autocomplete="on"
+                  autoсomplete="on"
                 />
               </div>
               <div className={styles["buttons-wrapper"]}>
@@ -109,6 +111,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   <label
                     className={styles.checkbox}
                     // onClick={() => setLabelState(!labelState)}
+                    onChange={() => setLabelState(!labelState)}
                   >
                     <input type="checkbox" />
                     <span className={styles["checkbox-switch"]}></span>
