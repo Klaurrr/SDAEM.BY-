@@ -9,9 +9,13 @@ import cat from "../../assets/images/cat.jpg";
 import checkMark from "../../assets/images/checkMark.png";
 import { useState } from "react";
 
-const Header = ({ userName, isLoggedIn }) => {
+const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
+
+  const [userDrop, setUserDrop] = useState(false);
+
+  console.log(userDrop);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -108,21 +112,45 @@ const Header = ({ userName, isLoggedIn }) => {
             <img src={heart} alt="heart" />
           </li>
           {isLoggedIn ? (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <img src={cat} className={styles.cat}></img>
-              <p
-                className={styles.userName}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div
                 style={{
-                  color: "#1E2123",
-                  marginRight: "15px",
-                  fontWeight: "500",
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
                 }}
+                onClick={() => setUserDrop(!userDrop)}
               >
-                {localStorage.getItem("remember") === "true"
-                  ? localStorage.getItem("login")
-                  : sessionStorage.getItem("login")}
-              </p>
-              <img src={checkMark}></img>
+                <img src={cat} className={styles.cat}></img>
+                <p
+                  className={styles.userName}
+                  style={{
+                    color: "#1E2123",
+                    marginRight: "15px",
+                    fontWeight: "500",
+                  }}
+                >
+                  {localStorage.getItem("remember") === "true"
+                    ? localStorage.getItem("login")
+                    : sessionStorage.getItem("login")}
+                </p>
+                <img src={checkMark}></img>
+              </div>
+              <div
+                className={styles.userDrop}
+                style={{ display: userDrop ? "flex" : "none" }}
+              >
+                <p
+                  onClick={() => {
+                    localStorage.removeItem("Logged");
+                    sessionStorage.removeItem("Logged");
+                    setUserDrop(false);
+                    setIsLoggedIn(false);
+                  }}
+                >
+                  Выйти
+                </p>
+              </div>
             </div>
           ) : (
             <li onClick={() => navigate("/login")}>Вход и регистрация</li>

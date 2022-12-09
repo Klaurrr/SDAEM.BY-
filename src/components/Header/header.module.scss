@@ -82,6 +82,25 @@
         height: 30px;
         margin-right: 10px;
     }
+
+    .userDrop {
+        width: 100px;
+        height: 50px;
+        background: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 40px;
+        box-shadow: 0px 0px 40px rgb(135 124 202 / 30%);
+        border-radius: 10px;
+
+        p {
+            margin: 0;
+            cursor: pointer;
+            color: #664EF9;
+        }
+    }
 }
 
 .col-2 {

@@ -1,9 +1,7 @@
 import React from "react";
-import Header from "../Header";
-import { useContext } from "react";
 
 const flatsList = (props) => {
-  return <h1>Hello</h1>;
+  return <h1>Flats</h1>;
 };
 
 export default flatsList;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import mainBackGround from "../../assets/images/mainBackGround.png";
 import apartment from "../../assets/images/apartments-day.jpg";
@@ -22,9 +22,8 @@ import Card from "../Card";
 import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
-import Header from "../Header";
 import { useDispatch } from "react-redux";
-import { filter } from "../../store/slices/filterSlice";
+import { setNews } from "../../store/slices/newsSlice";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -53,24 +52,42 @@ const Main = () => {
     {
       news: "Линия Сталина: суровый отдых в усадьбах на сутки",
       date: "14 Января",
+      id: 1,
     },
     {
       news: "Дворцово-парковый комплекс Чапских",
       date: "15 Декабря",
+      id: 2,
     },
     {
       news: "Дворцово-парковый комплекс Чапских",
       date: "14 Января",
+      id: 3,
     },
     {
       news: "Аренда квартиры посуточно",
       date: "5 Августа",
+      id: 4,
     },
     {
       news: "Линия Сталина: суровый отдых в усадьбах на сутки",
       date: "23 Июня",
+      id: 5,
     },
   ];
+
+  // useEffect(() => {
+  //   // dispatch(setNews({ news: news.news, date: news.date, id: news.id }));
+  //   news.map((item) => {
+  //     dispatch(setNews({ news: item }));
+  //     console.log(item);
+  //   });
+  //   console.log("эффект отработал");
+  // }, []);
+
+  // news.map((item) => {
+  //   dispatch(setNews({ news: item }));
+  // });
 
   const apartments = [
     {
@@ -939,8 +956,8 @@ const Main = () => {
               <h2>Новости</h2>
               <div className={styles["news-desc"]}>
                 {news &&
-                  news.map((item, index) => (
-                    <NavLink to={`/detail/${index}`}>
+                  news.map((item) => (
+                    <NavLink to={`/detail/${item.id}`}>
                       <h5>{item.news}</h5>
                       <p>{item.date}</p>
                     </NavLink>
