@@ -7,7 +7,6 @@ import styles from "./app.module.scss";
 import Header from "../Header";
 import RegisterPage from "../../pages/RegisterPage";
 import DetailPage from "../../pages/DetailPage";
-import Mocks from "../Mocks";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -29,7 +28,6 @@ const App = () => {
       }
     >
       <div>
-        <Mocks />
         {location.pathname != "/login" &&
           location.pathname != "/register" &&
           location.pathname != "/" && (
@@ -52,7 +50,7 @@ const App = () => {
             }
           />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/newsList/detail/:id" element={<DetailPage />} />
           {/* <Route path="*" element={<Navigate to="/main" replace />} /> */}
         </Routes>
       </div>

@@ -22,8 +22,8 @@ import Card from "../Card";
 import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
-import { useDispatch } from "react-redux";
-import { setNews } from "../../store/slices/newsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setNews } from "../../store/slices/dataSlice";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -46,106 +46,8 @@ const Main = () => {
   const [nameDrop, setNameDrop] = useState("Метро");
   const [nameDropTwo, setNameDropTwo] = useState("Район");
 
-  const dispatch = useDispatch();
-
-  const news = [
-    {
-      news: "Линия Сталина: суровый отдых в усадьбах на сутки",
-      date: "14 Января",
-      id: 1,
-    },
-    {
-      news: "Дворцово-парковый комплекс Чапских",
-      date: "15 Декабря",
-      id: 2,
-    },
-    {
-      news: "Дворцово-парковый комплекс Чапских",
-      date: "14 Января",
-      id: 3,
-    },
-    {
-      news: "Аренда квартиры посуточно",
-      date: "5 Августа",
-      id: 4,
-    },
-    {
-      news: "Линия Сталина: суровый отдых в усадьбах на сутки",
-      date: "23 Июня",
-      id: 5,
-    },
-  ];
-
-  // useEffect(() => {
-  //   // dispatch(setNews({ news: news.news, date: news.date, id: news.id }));
-  //   news.map((item) => {
-  //     dispatch(setNews({ news: item }));
-  //     console.log(item);
-  //   });
-  //   console.log("эффект отработал");
-  // }, []);
-
-  // news.map((item) => {
-  //   dispatch(setNews({ news: item }));
-  // });
-
-  const apartments = [
-    {
-      city: "Минск",
-      rooms: 2,
-      costMin: 30,
-    },
-    {
-      city: "Минск",
-      rooms: 4,
-      costMin: 80,
-    },
-    {
-      city: "Минск",
-      rooms: 1,
-      costMin: 10,
-    },
-    {
-      city: "Гомель",
-      rooms: 3,
-      costMin: 50,
-    },
-    {
-      city: "Гродно",
-      rooms: 4,
-      costMin: 80,
-    },
-    {
-      city: "Могилев",
-      rooms: 2,
-      costMin: 20,
-    },
-    {
-      city: "Брест",
-      rooms: 3,
-      costMin: 50,
-    },
-    {
-      city: "Гомель",
-      rooms: 4,
-      costMin: 90,
-    },
-    {
-      city: "Гродно",
-      rooms: 1,
-      costMin: 20,
-    },
-    {
-      city: "Брест",
-      rooms: 2,
-      costMin: 20,
-    },
-    {
-      city: "Могилев",
-      rooms: 4,
-      costMin: 20,
-    },
-  ];
+  const news = useSelector((state) => state.data.news);
+  const apartments = useSelector((state) => state.data.apartments);
 
   const selectActiveFirst = (e) => {
     setSelectFirst(selectFirst ? false : true);
@@ -178,7 +80,6 @@ const Main = () => {
 
   const createFinallyObj = (city, rooms, costMin, costMax) => {
     const finallyObj = Object.assign({}, city, rooms, costMin, costMax);
-    // dispatch(filter(finallyObj));
     setData(
       apartments.filter((el) => {
         if (finallyObj.city && finallyObj.city !== "Выберите") {
@@ -710,7 +611,7 @@ const Main = () => {
         </div>
 
         <div style={{ position: "relative" }}>
-          <div className={styles["wrapper-3"]}></div> {/* Проблема тут */}
+          <div className={styles["wrapper-3"]}></div>
           <div className={styles["drop-down"]}>
             <div style={{ display: "flex" }}>
               <div
@@ -883,7 +784,7 @@ const Main = () => {
                       <span>закрепить ваше объявление</span> в верхней части
                       каталога!
                     </p>
-                    <p>
+                    <p style={{ marginTop: "14px" }}>
                       Gold объявления <span>перемещаются каждые 5 мин</span> на
                       1 позицию, что делает размещение одинаковым для всех.
                     </p>
@@ -957,8 +858,8 @@ const Main = () => {
               <div className={styles["news-desc"]}>
                 {news &&
                   news.map((item) => (
-                    <NavLink to={`/detail/${item.id}`}>
-                      <h5>{item.news}</h5>
+                    <NavLink to={`/newsList/detail/${item.id}`}>
+                      <h5>{item.title}</h5>
                       <p>{item.date}</p>
                     </NavLink>
                   ))}

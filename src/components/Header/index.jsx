@@ -15,8 +15,6 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
 
   const [userDrop, setUserDrop] = useState(false);
 
-  console.log(userDrop);
-
   const navigate = useNavigate();
   const location = useLocation();
 

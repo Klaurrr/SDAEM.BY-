@@ -110,7 +110,6 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                 <div>
                   <label
                     className={styles.checkbox}
-                    // onClick={() => setLabelState(!labelState)}
                     onChange={() => setLabelState(!labelState)}
                   >
                     <input type="checkbox" />
