@@ -1,12 +1,14 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
 import Main from "../Main";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import FlatsList from "../FlatsList";
 import styles from "./app.module.scss";
 import Header from "../Header";
 import RegisterPage from "../../pages/RegisterPage";
 import DetailPage from "../../pages/DetailPage";
+import { ScaleLoader } from "react-spinners";
+import { useEffect } from "react";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -15,9 +17,17 @@ const App = () => {
       : sessionStorage.getItem("Logged")
   );
 
-  const [userName, setUserName] = useState(localStorage.getItem("userName"));
-
   let location = useLocation();
+
+  const [userName, setUserName] = useState(localStorage.getItem("userName"));
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [location]);
 
   return (
     <div
@@ -28,31 +38,39 @@ const App = () => {
       }
     >
       <div>
-        {location.pathname != "/login" &&
-          location.pathname != "/register" &&
-          location.pathname != "/" && (
-            <Header
-              userName={userName}
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-            />
-          )}
-        <Routes>
-          <Route path="/main" element={<Main />} />
-          <Route path="/flatsList" element={<FlatsList />} />
-          <Route
-            path="/login"
-            element={
-              <LoginPage
-                setIsLoggedIn={setIsLoggedIn}
-                setUserName={setUserName}
+        {loading ? (
+          <div style={{ textAlign: "center", marginTop: "50vh" }}>
+            <ScaleLoader color="#664EF9" height={25} width={5} />
+          </div>
+        ) : (
+          <>
+            {location.pathname != "/login" &&
+              location.pathname != "/register" &&
+              location.pathname != "/" && (
+                <Header
+                  userName={userName}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              )}
+            <Routes>
+              <Route path="/main" element={<Main />} />
+              <Route path="/flatsList" element={<FlatsList />} />
+              <Route
+                path="/login"
+                element={
+                  <LoginPage
+                    setIsLoggedIn={setIsLoggedIn}
+                    setUserName={setUserName}
+                  />
+                }
               />
-            }
-          />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/newsList/detail/:id" element={<DetailPage />} />
-          {/* <Route path="*" element={<Navigate to="/main" replace />} /> */}
-        </Routes>
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/newsList/detail/:id" element={<DetailPage />} />
+              {/* <Route path="*" element={<Navigate to="/main" replace />} /> */}
+            </Routes>
+          </>
+        )}
       </div>
     </div>
   );

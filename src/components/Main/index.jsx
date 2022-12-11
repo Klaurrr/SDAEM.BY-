@@ -22,8 +22,7 @@ import Card from "../Card";
 import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setNews } from "../../store/slices/dataSlice";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -77,6 +76,15 @@ const Main = () => {
     setDropTwo(dropTwo ? false : true);
     setNameDropTwo(e);
   };
+
+  // window.addEventListener("scroll", () => {
+  //   console.log(window.scrollY);
+  //   localStorage.setItem("scrollY", window.scrollY);
+  // });
+
+  // useEffect(() => {
+  //   window.scrollTo(0, localStorage.getItem("scrollY"));
+  // }, []);
 
   const createFinallyObj = (city, rooms, costMin, costMax) => {
     const finallyObj = Object.assign({}, city, rooms, costMin, costMax);
@@ -600,7 +608,11 @@ const Main = () => {
               <p>Предложений по Минску</p>
             </div>
             <div
-              style={{ height: "70px", display: "flex", alignItems: "center" }}
+              style={{
+                height: "70px",
+                display: "flex",
+                alignItems: "center",
+              }}
             >
               <button className={styles["offers-button"]}>
                 Посмотреть все

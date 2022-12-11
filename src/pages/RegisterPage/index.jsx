@@ -9,7 +9,6 @@ import styles from "./register.module.scss";
 import { useForm } from "react-hook-form";
 import email from "../../assets/images/email.png";
 import captcha from "../../assets/images/recaptcha.jpg";
-import clsx from "clsx";
 
 const RegisterPage = () => {
   const navigateToLogin = useNavigate();
@@ -55,7 +54,7 @@ const RegisterPage = () => {
                     border: errors.login && "2px solid red",
                   }}
                 >
-                  <img src={userGray} />
+                  <img src={userGray} alt="userGray-img" />
                   <input
                     type="name"
                     {...register("login", { required: true, minLength: 4 })}
@@ -70,7 +69,7 @@ const RegisterPage = () => {
                     border: errors.email && "2px solid red",
                   }}
                 >
-                  <img src={email} style={{ opacity: "0.3" }} />
+                  <img src={email} style={{ opacity: "0.3" }} alt="email-img" />
                   <input
                     type="email"
                     {...register("email", {
@@ -92,7 +91,7 @@ const RegisterPage = () => {
                     border: errors.password && "2px solid red",
                   }}
                 >
-                  <img src={lock} style={{ opacity: "0.3" }} />
+                  <img src={lock} style={{ opacity: "0.3" }} alt="lock-img" />
                   <input
                     type="password"
                     {...register("password", {
@@ -117,7 +116,7 @@ const RegisterPage = () => {
                     border: errors.repeatPass && "2px solid red",
                   }}
                 >
-                  <img src={lock} style={{ opacity: "0.3" }} />
+                  <img src={lock} style={{ opacity: "0.3" }} alt="lock-img" />
                   <input
                     type="password"
                     {...register("repeatPass", {
