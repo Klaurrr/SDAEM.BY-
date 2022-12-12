@@ -1,9 +1,6 @@
 .wrapper {
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 60px;
-    left: 298px;
 
 
     img:first-child {
@@ -15,13 +12,12 @@
         font-weight: 400;
         font-size: 14px;
         color: #686868;
-        margin: 0px 0px 0px 7px;
     }
 
     span {
         p {
             color: #4E64F9;
-            margin: 0px 7px;
+            margin: 0px 0px 0px 7px;
             cursor: pointer;
         }
 

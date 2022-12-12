@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import mainBackGround from "../../assets/images/mainBackGround.png";
 import apartment from "../../assets/images/apartments-day.jpg";
 import cottagesAndEstates from "../../assets/images/cottages&estates.jpg";
@@ -23,6 +23,7 @@ import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -48,13 +49,7 @@ const Main = () => {
   const news = useSelector((state) => state.data.news);
   const apartments = useSelector((state) => state.data.apartments);
 
-  const selectActiveFirst = (e) => {
-    setSelectFirst(selectFirst ? false : true);
-  };
-
-  const selectActiveTwo = (e) => {
-    setSelectSecond(selectSecond ? false : true);
-  };
+  const navigate = useNavigate();
 
   const selectValueFirst = (e) => {
     setSelectFirst(selectFirst ? false : true);
@@ -76,15 +71,6 @@ const Main = () => {
     setDropTwo(dropTwo ? false : true);
     setNameDropTwo(e);
   };
-
-  // window.addEventListener("scroll", () => {
-  //   console.log(window.scrollY);
-  //   localStorage.setItem("scrollY", window.scrollY);
-  // });
-
-  // useEffect(() => {
-  //   window.scrollTo(0, localStorage.getItem("scrollY"));
-  // }, []);
 
   const createFinallyObj = (city, rooms, costMin, costMax) => {
     const finallyObj = Object.assign({}, city, rooms, costMin, costMax);
@@ -168,7 +154,11 @@ const Main = () => {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <main className={styles.container}>
         <div
           className={styles.wrapper}
@@ -222,7 +212,7 @@ const Main = () => {
                         ? `${styles["select-active"]}`
                         : `${styles.city}`
                     }
-                    onClick={(e) => selectActiveFirst(e)}
+                    onClick={() => setSelectFirst(selectFirst ? false : true)}
                   >
                     <div className={styles["city-wrapper"]}>
                       {nameSelect}
@@ -279,7 +269,7 @@ const Main = () => {
                         ? `${styles["select-active"]}`
                         : `${styles.city}`
                     }
-                    onClick={(e) => selectActiveTwo(e)}
+                    onClick={() => setSelectSecond(selectSecond ? false : true)}
                   >
                     <div className={styles["city-wrapper"]}>
                       {nameSelectRooms}
@@ -869,21 +859,21 @@ const Main = () => {
               <h2>Новости</h2>
               <div className={styles["news-desc"]}>
                 {news &&
-                  news.map((item) => (
+                  news.slice(0, 5).map((item) => (
                     <NavLink to={`/newsList/detail/${item.id}`}>
                       <h5>{item.title}</h5>
                       <p>{item.date}</p>
                     </NavLink>
                   ))}
               </div>
-              <button>
+              <button onClick={() => navigate("/newsList")}>
                 Посмотреть все <img src={checkMark} alt="checkMarkRight" />
               </button>
             </div>
           </div>
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
 

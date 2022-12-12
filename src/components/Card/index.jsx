@@ -6,14 +6,20 @@ import metro from "../../assets/images/metro.png";
 import phone from "../../assets/images/phone.png";
 import styles from "./card.module.scss";
 import "./style.scss";
+import { useEffect } from "react";
 
 const Card = ({ data }) => {
   const [contact, setContact] = useState(false);
+  const [cardId, setCardId] = useState(0);
+
+  // useEffect(() => {
+  //   setContact(false);
+  // }, [cardId]);
 
   return (
     <>
-      {data.map((flat) => (
-        <div className={styles.container}>
+      {data.map((flat, index) => (
+        <div className={styles.container} key={flat.id}>
           <div className={styles.img}>
             <img src={flatOne} alt="flatOne" />
             <p>Gold</p>
@@ -57,14 +63,25 @@ const Card = ({ data }) => {
               <p></p>
             </div>
             <div className="card_buttons">
-              <button className="card_button-purple">
+              <button
+                className="card_button-purple"
+                onClick={() => {
+                  setContact(!contact);
+                  setCardId(flat.id);
+                }}
+              >
                 <img src={phone} alt="phone" />
                 Контакты
               </button>
               <button className="card_button-yellow">Подробнее</button>
             </div>
           </div>
-          {/* <div className={styles["contact-modal"]}></div> */}
+          <div
+            className={styles.modal}
+            style={{
+              display: cardId === flat.id && contact ? "block" : "none",
+            }}
+          ></div>
         </div>
       ))}
     </>

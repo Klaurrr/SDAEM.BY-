@@ -7,18 +7,20 @@ const BreadCrumbs = ({ crumbTitle, crumbSubTitle }) => {
   const navigate = useNavigate();
 
   return (
-    <section>
-      <div className={styles.wrapper}>
-        <img src={House} alt="house-img" onClick={() => navigate('/main')}/>
-        <span>
-          <p onClick={() => navigate(crumbTitle === "Новости" && "/newsList")}>
-            {crumbTitle}
-          </p>
-        </span>
-        <img src={breadCrumbsDot} alt="breadCrumbsDot-img" />
-        <p>{crumbSubTitle}</p>
-      </div>
-    </section>
+    <div className={styles.wrapper}>
+      <img src={House} alt="house-img" onClick={() => navigate("/main")} />
+      <span style={{ display: crumbTitle ? "block" : "none" }}>
+        <p onClick={() => navigate(crumbTitle === "Новости" && "/newsList")}>
+          {crumbTitle}
+        </p>
+      </span>
+      <img
+        src={breadCrumbsDot}
+        alt="breadCrumbsDot-img"
+        style={{ margin: "0px 7px" }}
+      />
+      <p>{crumbSubTitle}</p>
+    </div>
   );
 };
 

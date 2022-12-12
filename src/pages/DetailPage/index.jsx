@@ -9,7 +9,10 @@ import faceBook from "../../assets/images/Facebook.png";
 import telegram from "../../assets/images/telegram.png";
 import hotel from "../../assets/images/hotel.png";
 import styles from "./detail.module.scss";
+import gaps from "../../assets/images/gaps.png";
 import clsx from "clsx";
+import { motion } from "framer-motion";
+import NewsCard from "../../components/NewsCard";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -19,13 +22,29 @@ const DetailPage = () => {
   window.scrollTo(0, 0);
 
   return (
-    <section style={{ position: "relative" }}>
+    <motion.section
+      style={{ position: "relative" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       {news.length > 0 &&
         news.map((item) => (
           <>
             <div className={styles.background}></div>
+            <img
+              src={gaps}
+              alt="gaps-img"
+              style={{ position: "absolute", margin: "37px 0px 0px 189px" }}
+            />
             <div className={styles.wrapper}>
-              <BreadCrumbs crumbTitle={"Новости"} crumbSubTitle={item.title} />
+              <div style={{ position: "absolute", top: "60px", left: "298px" }}>
+                <BreadCrumbs
+                  crumbTitle={"Новости"}
+                  crumbSubTitle={item.title}
+                />
+              </div>
+
               <div className={styles.container__info}>
                 <h1>{item.title}</h1>
                 <div style={{ display: "flex", margin: "30px 0px" }}>
@@ -64,36 +83,14 @@ const DetailPage = () => {
                   <h3>Читайте также</h3>
                   <div className={styles.card_wrapper}>
                     {data &&
-                      data.slice(0, 3).map((item) => (
-                        <div className={styles.card}>
-                          <img src={hotel} alt="hotel_img" />
-                          <div className={styles.card__desc}>
-                            <h4>{item.title}</h4>
-                            <p className={styles["card__desc-p"]}>
-                              Чем заняться в выходные? Когда нет
-                              безотлагательных домашних дел, а на улице хорошая
-                              погода, хочется уехать из города, чтобы сменить
-                              обстановку. Например, снять коттедж на сутки для
-                              семьи или большой компании друзей. А...
-                            </p>
-                          </div>{" "}
-                          <div className={styles.buttons}>
-                            <p className={styles["card_date"]}>
-                              {item.date} {item.year}
-                            </p>
-                            <NavLink to={`/newsList/detail/${item.id}`}>
-                              <p className={styles["card_read"]}>Читать</p>
-                            </NavLink>
-                          </div>
-                        </div>
-                      ))}
+                      data.slice(0, 3).map((item) => <NewsCard item={item} />)}
                   </div>
                 </div>
               </div>
             </div>
           </>
         ))}
-    </section>
+    </motion.section>
   );
 };
 

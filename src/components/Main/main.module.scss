@@ -173,11 +173,14 @@
                         border-radius: 20px;
                         background: #F8F8F8;
                         border: 1px solid #F8F8F8;
-                        font-weight: 500;
-                        font-size: 14px;
-                        line-height: 17px;
                         color: #686868;
                         padding-left: 14px;
+
+                        &::-webkit-input-placeholder {
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 17px;
+                        }
 
 
                         &:focus {

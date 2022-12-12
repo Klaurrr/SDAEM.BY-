@@ -9,6 +9,7 @@ import styles from "./register.module.scss";
 import { useForm } from "react-hook-form";
 import email from "../../assets/images/email.png";
 import captcha from "../../assets/images/recaptcha.jpg";
+import { motion } from "framer-motion";
 
 const RegisterPage = () => {
   const navigateToLogin = useNavigate();
@@ -35,12 +36,15 @@ const RegisterPage = () => {
   };
 
   return (
-    <div
+    <motion.div
       style={{
         backgroundImage: `url(${BG})`,
         height: "100vh",
         backgroundSize: "cover",
       }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
       <div className={styles["background-color"]}>
         <div className={styles["form-wrapper"]}>
@@ -192,7 +196,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

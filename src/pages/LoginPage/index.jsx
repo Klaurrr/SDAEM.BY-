@@ -9,6 +9,7 @@ import styles from "./login.module.scss";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   const navigateTo = useNavigate();
@@ -46,12 +47,15 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   };
 
   return (
-    <div
+    <motion.div
       style={{
         backgroundImage: `url(${BG})`,
         height: "100vh",
         backgroundSize: "cover",
       }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
       <div className={styles["background-color"]}>
         <div className={styles["form-wrapper"]}>
@@ -59,7 +63,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
           <p>
             Авторизируйтесь, чтобы начать <br /> публиковать свои объявления
           </p>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div
                 className={styles["input-wrapper"]}
@@ -132,7 +136,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
