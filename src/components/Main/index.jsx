@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import mainBackGround from "../../assets/images/mainBackGround.png";
 import apartment from "../../assets/images/apartments-day.jpg";
@@ -71,6 +71,16 @@ const Main = () => {
     setDropTwo(dropTwo ? false : true);
     setNameDropTwo(e);
   };
+
+  useLayoutEffect(() => {
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "Escape") {
+        setSelectFirst(false);
+        setSelectSecond(selectSecond && false);
+        window.removeEventListener("keyup", e);
+      }
+    });
+  });
 
   const createFinallyObj = (city, rooms, costMin, costMax) => {
     const finallyObj = Object.assign({}, city, rooms, costMin, costMax);

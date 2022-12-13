@@ -5,8 +5,12 @@ import geoGray from "../../assets/images/geoGray2.png";
 import metro from "../../assets/images/metro.png";
 import phone from "../../assets/images/phone.png";
 import styles from "./card.module.scss";
-import "./style.scss";
+import boy from "../../assets/images/boy.png";
+import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
+import viberWhite from "../../assets/images/ViberWhite.png";
+import mail from "../../assets/images/mail.png";
 import { useEffect } from "react";
+import "./style.scss";
 
 const Card = ({ data }) => {
   const [contact, setContact] = useState(false);
@@ -33,7 +37,12 @@ const Card = ({ data }) => {
               </div>
               <div className="card_desc__container-2">
                 <p className={styles.desc}>
-                  <img src={userIcon} alt="userIcon"></img>4 (2+2)
+                  <img
+                    src={userIcon}
+                    alt="userIcon"
+                    style={{ marginRight: "6px" }}
+                  />{" "}
+                  4 (2+2)
                 </p>
                 <p className={styles.desc}>{flat.rooms} комн.</p>
                 <p className={styles.desc}>179 м²</p>
@@ -81,7 +90,38 @@ const Card = ({ data }) => {
             style={{
               display: cardId === flat.id && contact ? "block" : "none",
             }}
-          ></div>
+          >
+            <div className={styles.modal__img}>
+              <img
+                src={require(`../../assets/images/${flat.img}`)}
+                alt="boy-img"
+              />
+            </div>
+            <div className={styles.modal__desc}>
+              <p className={styles.owner__title}>Владелец</p>
+              <p className={styles.owner__info}>{flat.owner}</p>
+              <p
+                className={styles.owner__info}
+                style={{ marginBottom: "15px" }}
+              >
+                <a href={`tel: +${flat.phone}`}>+{flat.phone}</a>
+              </p>
+              <a className={styles.owner__email} href={`mailto: ${flat.email}`}>
+                {flat.email}
+              </a>
+              <div className={styles.socials}>
+                <div style={{ background: "#7B519D" }}>
+                  <img src={viberWhite} alt="viber-png" />
+                </div>
+                <div style={{ background: "#0DBB41" }}>
+                  <img src={whatsAppWhite} alt="whatsApp-png" />
+                </div>
+                <div style={{ background: "#664EF9" }}>
+                  <img src={mail} alt="email-png" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       ))}
     </>

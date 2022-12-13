@@ -62,4 +62,83 @@
     position: absolute;
     bottom: 75px;
     right: 184px;
+
+    &__desc {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .owner__title {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #BDBDBD;
+            margin-bottom: 5px;
+        }
+
+        .owner__info {
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 100%;
+            color: #1E2123;
+            margin-bottom: 18px;
+
+            a {
+                text-decoration: none;
+                color: #1E2123;
+            }
+
+        }
+
+        .owner__email {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+            color: #664EF9;
+        }
+
+        .socials {
+            display: flex;
+            margin-top: 27px;
+
+            div {
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                &:nth-child(2) {
+                    margin: 0 20px;
+                }
+
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+    }
+
+
+    &__img {
+        border: 4px solid rgb(102, 78, 249);
+        border-radius: 50%;
+        width: 59px;
+        height: 59px;
+        margin: 26px 103px 15px;
+
+        img {
+            border-radius: 50%;
+            width: 59px;
+            height: 59px;
+        }
+
+
+    }
+
+
 }
