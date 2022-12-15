@@ -1,0 +1,31 @@
+.ul {
+    margin: 50px 0px 0px;
+    display: flex;
+    padding: 0;
+
+    .li {
+        list-style: none;
+        margin-left: 8px;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color: #686868;
+        cursor: pointer;
+        padding: 0 5px;
+
+
+        &_active {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 22px;
+            color: #000000;
+            border-bottom: 2px solid #FFD54F;
+        }
+
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+    }
+}

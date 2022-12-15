@@ -6,12 +6,22 @@ import styles from "./news.module.scss";
 import { useSelector } from "react-redux";
 import NewsCard from "../../components/NewsCard";
 import { useEffect } from "react";
+import Pagination from "../../components/Pagination";
 
 const NewsPage = () => {
   const [value, setValue] = useState("");
   const [news, setNews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [newsPerPage] = useState(9);
+
   const data = useSelector((state) => state.data.news);
   window.scrollTo(0, 0);
+
+  const lastNewsIndex = currentPage * newsPerPage;
+  const firstNewsIndex = lastNewsIndex - newsPerPage;
+  const currentNews = data.slice(firstNewsIndex, lastNewsIndex);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -20,42 +30,52 @@ const NewsPage = () => {
 
   return (
     <motion.section
-      className={styles.container}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div>
+      <div className={styles.container}>
+        {" "}
         <div>
-          <BreadCrumbs crumbSubTitle={"Новости"} />
+          <div>
+            <BreadCrumbs crumbSubTitle={"Новости"} />
+          </div>
+          <h1>Новости</h1>
         </div>
-        <h1>Новости</h1>
-      </div>
-      <div style={{ position: "relative" }}>
-        <div className={styles.background}></div>
-        <form className={styles.form} onSubmit={(e) => handleSearch(e)}>
-          <input
-            type="text"
-            placeholder="Поиск по статьям"
-            onChange={(e) => setValue(e.target.value)}
-          />
-          <button type="submit" className={styles.button}>
-            <img src={magnifier} alt="magnifier-img" />
-          </button>
-        </form>
-      </div>
-      <div className={styles.card_container}>
-        {news.length > 0
-          ? news.map((item) => (
-              <div className={styles.wrapper} key={item.id}>
-                <NewsCard item={item} />
-              </div>
-            ))
-          : data.map((item) => (
-              <div className={styles.wrapper} key={item.id}>
-                <NewsCard item={item} />
-              </div>
-            ))}
+        <div style={{ position: "relative" }}>
+          <div className={styles.background}></div>
+          <form className={styles.form} onSubmit={(e) => handleSearch(e)}>
+            <input
+              type="text"
+              placeholder="Поиск по статьям"
+              onChange={(e) => setValue(e.target.value)}
+            />
+            <button type="submit" className={styles.button}>
+              <img src={magnifier} alt="magnifier-img" />
+            </button>
+          </form>
+        </div>
+        <div className={styles.card_container}>
+          {news.length > 0
+            ? news.map((item) => (
+                <div className={styles.wrapper} key={item.id}>
+                  <NewsCard item={item} />
+                </div>
+              ))
+            : currentNews.map((item) => (
+                <div className={styles.wrapper} key={item.id}>
+                  <NewsCard item={item} />
+                </div>
+              ))}
+          <div>
+            <Pagination
+              newsPerPage={newsPerPage}
+              totalNews={data.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </div>
+        </div>
       </div>
     </motion.section>
   );

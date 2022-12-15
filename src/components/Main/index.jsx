@@ -24,6 +24,9 @@ import clsx from "clsx";
 import styles from "./main.module.scss";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Slider from "react-slick";
+import "./swiper.scss";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -45,6 +48,15 @@ const Main = () => {
 
   const [nameDrop, setNameDrop] = useState("Метро");
   const [nameDropTwo, setNameDropTwo] = useState("Район");
+
+  // const [slider, setSlider] = useState(0);
+
+  // useEffect(() => {
+  //   if (slider === [...apartments].filter((el) => el.city === "Минск").length) {
+  //     setSlider(0);
+  //   }
+  //   console.log(slider);
+  // }, [slider]);
 
   const news = useSelector((state) => state.data.news);
   const apartments = useSelector((state) => state.data.apartments);
@@ -590,7 +602,10 @@ const Main = () => {
 
           <div className={styles["flat-Wrap"]}>
             <Card
-              data={[...apartments].filter((item) => item.city == "Минск")}
+              data={[...apartments]
+                // .slice(slider, slider + 3)
+                .slice(0, 3)
+                .filter((item) => item.city == "Минск")}
             />
           </div>
           <div
@@ -675,8 +690,16 @@ const Main = () => {
             </div>
           </div>
           <div className={styles.chevrons}>
-            <img src={chevronNavigate} alt="chevronNavigate" />
-            <img src={chevronNavigate} alt="chevronNavigate" />
+            <img
+              src={chevronNavigate}
+              alt="chevronNavigate"
+              // onClick={() => setSlider(slider - 3)}
+            />
+            <img
+              src={chevronNavigate}
+              alt="chevronNavigate"
+              // onClick={() => setSlider(slider + 3)}
+            />
           </div>
         </div>
       </section>
