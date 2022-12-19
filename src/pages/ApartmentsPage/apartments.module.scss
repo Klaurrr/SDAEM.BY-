@@ -1,0 +1,49 @@
+.background {
+    background: linear-gradient(90deg, #94AFFF 0%, #4E64F9 94.5%);
+    opacity: 0.1;
+    height: 100%;
+}
+
+.container_1 {
+    position: absolute;
+    top: 45px;
+    left: 80px;
+    right: 104px;
+
+    h1 {
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 100%;
+        color: #1E2123;
+        // margin: 30px 0px 40px;
+    }
+
+    .subtitle {
+
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        margin-bottom: 10px;
+    }
+
+    .checkbox {
+        background: rgba(102, 78, 249, 0.1);
+        border-radius: 17px;
+        padding: 6px 10px;
+        color: #664EF9;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin: 15px 15px 0px 0px;
+
+        &_active {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        &:hover {
+            background: rgba(102, 78, 249, 0.2);
+        }
+    }
+}

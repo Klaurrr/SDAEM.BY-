@@ -1,14 +1,12 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
-import Main from "../Main";
+import Main from "../../pages/MainPage";
 import { useState, useRef } from "react";
-import FlatsList from "../FlatsList";
+import Apartments from "../../pages/ApartmentsPage";
 import styles from "./app.module.scss";
 import Header from "../Header";
 import RegisterPage from "../../pages/RegisterPage";
 import DetailPage from "../../pages/DetailPage";
-import { ScaleLoader } from "react-spinners";
-import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import NewsPage from "../../pages/NewsPage";
 
@@ -22,14 +20,6 @@ const App = () => {
   let location = useLocation();
 
   const [userName, setUserName] = useState(localStorage.getItem("userName"));
-  // const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 500);
-  // }, [location]);
 
   return (
     <div
@@ -40,12 +30,6 @@ const App = () => {
       }
     >
       <div>
-        {/* {loading ? (
-          <div style={{ textAlign: "center", marginTop: "50vh" }}>
-            <ScaleLoader color="#664EF9" height={25} width={5} />
-          </div>
-        ) : ( */}
-
         <>
           {location.pathname != "/login" &&
             location.pathname != "/register" &&
@@ -59,8 +43,8 @@ const App = () => {
           <AnimatePresence>
             <Routes>
               <Route path="/main" element={<Main />} />
-              <Route path="/flatsList" element={<FlatsList />} />
-              <Route path="/NewsList" element={<NewsPage />} />
+              <Route path="/apartments/:city" element={<Apartments />} />
+              <Route path="/newsList" element={<NewsPage />} />
               <Route
                 path="/login"
                 element={
@@ -76,8 +60,6 @@ const App = () => {
             </Routes>
           </AnimatePresence>
         </>
-
-        {/* )} */}
       </div>
     </div>
   );

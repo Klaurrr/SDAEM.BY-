@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import mainBackGround from "../../assets/images/mainBackGround.png";
 import apartment from "../../assets/images/apartments-day.jpg";
@@ -13,20 +13,16 @@ import gapsWhite from "../../assets/images/gaps_2.png";
 import metro from "../../assets/images/metro.png";
 import checkMark from "../../assets/images/checkMark.png";
 import glare from "../../assets/images/glare.png";
-import chevronNavigate from "../../assets/images/chevronLeft.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
 import AdFree from "../../assets/images/AD_Free.png";
 import orchid from "../../assets/images/orchid.png";
 import AdUp from "../../assets/images/AD_Up.png";
-import Card from "../Card";
+import Card from "../../components/Card";
 import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Slider from "react-slick";
-import "./swiper.scss";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -690,16 +686,21 @@ const Main = () => {
             </div>
           </div>
           <div className={styles.chevrons}>
-            <img
-              src={chevronNavigate}
-              alt="chevronNavigate"
-              // onClick={() => setSlider(slider - 3)}
-            />
-            <img
-              src={chevronNavigate}
-              alt="chevronNavigate"
-              // onClick={() => setSlider(slider + 3)}
-            />
+            <div>
+              <img
+                src={checkMark}
+                alt="chevronNavigate"
+                // onClick={() => setSlider(slider - 3)}
+              />
+            </div>
+            <div>
+              {" "}
+              <img
+                src={checkMark}
+                alt="chevronNavigate"
+                // onClick={() => setSlider(slider + 3)}
+              />
+            </div>
           </div>
         </div>
       </section>

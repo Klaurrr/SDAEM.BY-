@@ -92,6 +92,11 @@
         font-weight: 700;
         font-size: 14px;
         line-height: 17px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: #F5F3FF;
+        }
 
         img {
             margin-right: 13px;
@@ -104,6 +109,11 @@
         font-weight: 700;
         font-size: 14px;
         line-height: 17px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: rgba(255, 213, 79, 0.2);
+        }
     }
 
     button {

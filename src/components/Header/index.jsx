@@ -8,15 +8,32 @@ import styles from "./header.module.scss";
 import cat from "../../assets/images/cat.jpg";
 import checkMark from "../../assets/images/checkMark.png";
 import { useState } from "react";
+import Apartments from "../../pages/ApartmentsPage";
+import { useEffect } from "react";
 
 const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
-
   const [userDrop, setUserDrop] = useState(false);
 
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    location.pathname === "/apartments/Minsk"
+      ? setFlatsValue("Квартиры в Минске")
+      : location.pathname === "/apartments/Gomel"
+      ? setFlatsValue("Квартиры в Гомеле")
+      : location.pathname === "/apartments/Brest"
+      ? setFlatsValue("Квартиры в Бресте")
+      : location.pathname === "/apartments/Vitebsk"
+      ? setFlatsValue("Квартиры в Витебске")
+      : location.pathname === "/apartments/Grodno"
+      ? setFlatsValue("Квартиры в Гродно")
+      : location.pathname === "/apartments/Mogilev"
+      ? setFlatsValue("Квартиры в Могилеве")
+      : setFlatsValue("Квартиры на сутки");
+  }, [location.pathname]);
 
   return (
     <header>
@@ -174,7 +191,7 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
                   onClick={() => setDrop(!drop)}
                   style={
                     flatsValue != "Квартиры на сутки" &&
-                    location.pathname == "/flatsList"
+                    location.pathname.slice(0, 11) == "/apartments"
                       ? {
                           borderBottom: "3px solid #FFD54F",
                           paddingBottom: "18px",
@@ -248,58 +265,22 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
         style={drop ? { display: "block" } : { display: "none" }}
       >
         <nav>
-          <NavLink
-            to="/flatsList"
-            onClick={() => {
-              setFlatsValue("Квартиры в Минске");
-              setDrop(false);
-            }}
-          >
+          <NavLink to="/apartments/Minsk" onClick={() => setDrop(false)}>
             Квартиры на сутки в Минске
           </NavLink>
-          <NavLink
-            to="#"
-            onClick={() => {
-              setFlatsValue("Квартиры в Гомеле");
-              setDrop(false);
-            }}
-          >
+          <NavLink to="/apartments/Gomel" onClick={() => setDrop(false)}>
             Квартиры на сутки в Гомеле
           </NavLink>
-          <NavLink
-            to="#"
-            onClick={() => {
-              setFlatsValue("Квартиры в Бресте");
-              setDrop(false);
-            }}
-          >
+          <NavLink to="/apartments/Brest" onClick={() => setDrop(false)}>
             Квартиры на сутки в Бресте
           </NavLink>
-          <NavLink
-            to="#"
-            onClick={() => {
-              setFlatsValue("Квартиры в Витебске");
-              setDrop(false);
-            }}
-          >
+          <NavLink to="/apartments/Vitebsk" onClick={() => setDrop(false)}>
             Квартиры на сутки в Витебске
           </NavLink>
-          <NavLink
-            to="#"
-            onClick={() => {
-              setFlatsValue("Квартиры в Гродно");
-              setDrop(false);
-            }}
-          >
+          <NavLink to="/apartments/Grodno" onClick={() => setDrop(false)}>
             Квартиры на сутки в Гродно
           </NavLink>
-          <NavLink
-            to="#"
-            onClick={() => {
-              setFlatsValue("Квартиры в Могилеве");
-              setDrop(false);
-            }}
-          >
+          <NavLink to="/apartments/Mogilev" onClick={() => setDrop(false)}>
             Квартиры на сутки в Могилеве
           </NavLink>
         </nav>

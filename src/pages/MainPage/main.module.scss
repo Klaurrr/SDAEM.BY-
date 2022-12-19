@@ -453,6 +453,11 @@
             align-items: center;
             margin-left: 25px;
 
+
+            &:hover {
+                background: linear-gradient(90deg, #867CFC 0%, #6929F3 94.5%);
+            }
+
             img {
                 margin-left: 12px;
                 padding-right: 25px;
@@ -476,19 +481,40 @@
             position: absolute;
             margin-top: -253px;
             margin-left: 40px;
+            display: flex;
 
-            img {
+            div {
+                width: 39px;
+                height: 39px;
+                border: 1px solid #664EF9;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 cursor: pointer;
 
-                img:hover {
+                &:hover {
                     background: rgba(102, 78, 249, 0.1);
+
+                }
+
+
+                &:first-child {
+                    margin-right: 13px;
+
+                    img {
+                        transform: rotate(90deg);
+                    }
+
+                }
+
+                &:last-child {
+                    img {
+                        transform: rotate(-90deg);
+                    }
                 }
             }
 
-            :last-child {
-                transform: scale(-1, 1);
-                margin-left: 13px;
-            }
         }
     }
 
@@ -522,12 +548,26 @@
         }
 
         button {
+
+
+            p {
+                transition: all 0.3s ease;
+            }
+
+            &:hover {
+                p {
+                    color: #FEC100;
+                }
+            }
+
             div {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 padding: 10px 18px;
                 gap: 10px;
+
+
 
 
                 p {
@@ -543,6 +583,8 @@
             cursor: pointer;
             border: none;
         }
+
+
     }
 
 
@@ -860,6 +902,7 @@
             cursor: pointer;
             padding: 0;
             margin-top: 32px;
+
 
             img {
                 transform: rotate(-90deg);
