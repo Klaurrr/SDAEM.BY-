@@ -203,6 +203,9 @@
                         width: 260px;
 
                         button {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                             margin-left: 36px;
                             border-radius: 22px;
                             background: #FFD54F;
@@ -213,6 +216,10 @@
                             height: 37px;
                             cursor: pointer;
                             border: none;
+
+                            img {
+                                filter: invert(1)
+                            }
                         }
 
                         img {

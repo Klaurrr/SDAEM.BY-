@@ -21,8 +21,9 @@ import Card from "../../components/Card";
 import geoYellow from "../../assets/images/geoYellow.png";
 import clsx from "clsx";
 import styles from "./main.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { setApartments } from "../../store/slices/searchApartmentsSlice";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -45,14 +46,7 @@ const Main = () => {
   const [nameDrop, setNameDrop] = useState("Метро");
   const [nameDropTwo, setNameDropTwo] = useState("Район");
 
-  // const [slider, setSlider] = useState(0);
-
-  // useEffect(() => {
-  //   if (slider === [...apartments].filter((el) => el.city === "Минск").length) {
-  //     setSlider(0);
-  //   }
-  //   console.log(slider);
-  // }, [slider]);
+  const dispatch = useDispatch();
 
   const news = useSelector((state) => state.data.news);
   const apartments = useSelector((state) => state.data.apartments);
@@ -92,81 +86,164 @@ const Main = () => {
 
   const createFinallyObj = (city, rooms, costMin, costMax) => {
     const finallyObj = Object.assign({}, city, rooms, costMin, costMax);
-    setData(
-      apartments.filter((el) => {
-        if (finallyObj.city && finallyObj.city !== "Выберите") {
-          if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
-            if (finallyObj.costMin && finallyObj.costMax) {
-              return (
-                finallyObj.city === el.city &&
-                finallyObj.rooms == el.rooms &&
-                finallyObj.costMin <= el.costMin &&
-                finallyObj.costMax >= el.costMin
-              );
-            } else if (finallyObj.costMin) {
-              return (
-                finallyObj.city === el.city &&
-                finallyObj.rooms == el.rooms &&
-                finallyObj.costMin <= el.costMin
-              );
-            } else if (finallyObj.costMax) {
-              return (
-                finallyObj.city === el.city &&
-                finallyObj.costMax > el.costMin &&
-                finallyObj.rooms == el.rooms
-              );
+    // setData(
+
+    //   apartments.filter((el) => {
+    //     if (finallyObj.city && finallyObj.city !== "Выберите") {
+    //       if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
+    //         if (finallyObj.costMin && finallyObj.costMax) {
+    //           return (
+    //             finallyObj.city === el.city &&
+    //             finallyObj.rooms == el.rooms &&
+    //             finallyObj.costMin <= el.costMin &&
+    //             finallyObj.costMax >= el.costMin
+    //           );
+    //         } else if (finallyObj.costMin) {
+    //           return (
+    //             finallyObj.city === el.city &&
+    //             finallyObj.rooms == el.rooms &&
+    //             finallyObj.costMin <= el.costMin
+    //           );
+    //         } else if (finallyObj.costMax) {
+    //           return (
+    //             finallyObj.city === el.city &&
+    //             finallyObj.costMax > el.costMin &&
+    //             finallyObj.rooms == el.rooms
+    //           );
+    //         } else {
+    //           return (
+    //             finallyObj.city === el.city && finallyObj.rooms == el.rooms
+    //           );
+    //         }
+    //       } else {
+    //         if (finallyObj.costMin && finallyObj.costMax) {
+    //           return (
+    //             finallyObj.city === el.city &&
+    //             finallyObj.costMin <= el.costMin &&
+    //             finallyObj.costMax >= el.costMin
+    //           );
+    //         } else if (finallyObj.costMin) {
+    //           return (
+    //             finallyObj.city === el.city && finallyObj.costMin <= el.costMin
+    //           );
+    //         } else if (finallyObj.costMax) {
+    //           return (
+    //             finallyObj.city === el.city && finallyObj.costMax > el.costMin
+    //           );
+    //         } else return finallyObj.city === el.city;
+    //       }
+    //     } else {
+    //       if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
+    //         if (finallyObj.costMin && finallyObj.costMax) {
+    //           return (
+    //             finallyObj.rooms == el.rooms &&
+    //             finallyObj.costMin <= el.costMin &&
+    //             finallyObj.costMax >= el.costMin
+    //           );
+    //         } else if (finallyObj.costMin) {
+    //           return (
+    //             finallyObj.rooms == el.rooms && finallyObj.costMin <= el.costMin
+    //           );
+    //         } else if (finallyObj.costMax) {
+    //           return (
+    //             finallyObj.rooms == el.rooms && finallyObj.costMax > el.costMin
+    //           );
+    //         } else return finallyObj.rooms == el.rooms;
+    //       } else {
+    //         if (finallyObj.costMin && finallyObj.costMax) {
+    //           return (
+    //             finallyObj.costMin <= el.costMin &&
+    //             finallyObj.costMax >= el.costMin
+    //           );
+    //         } else if (finallyObj.costMin) {
+    //           return finallyObj.costMin <= el.costMin;
+    //         } else if (finallyObj.costMax) {
+    //           return finallyObj.costMax > el.costMin;
+    //         } else return undefined;
+    //       }
+    //     }
+    //   })
+    // );
+    dispatch(
+      setApartments({
+        searchedApartments: apartments.filter((el) => {
+          if (finallyObj.city && finallyObj.city !== "Выберите") {
+            if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
+              if (finallyObj.costMin && finallyObj.costMax) {
+                return (
+                  finallyObj.city === el.city &&
+                  finallyObj.rooms == el.rooms &&
+                  finallyObj.costMin <= el.costMin &&
+                  finallyObj.costMax >= el.costMin
+                );
+              } else if (finallyObj.costMin) {
+                return (
+                  finallyObj.city === el.city &&
+                  finallyObj.rooms == el.rooms &&
+                  finallyObj.costMin <= el.costMin
+                );
+              } else if (finallyObj.costMax) {
+                return (
+                  finallyObj.city === el.city &&
+                  finallyObj.costMax > el.costMin &&
+                  finallyObj.rooms == el.rooms
+                );
+              } else {
+                return (
+                  finallyObj.city === el.city && finallyObj.rooms == el.rooms
+                );
+              }
             } else {
-              return (
-                finallyObj.city === el.city && finallyObj.rooms == el.rooms
-              );
+              if (finallyObj.costMin && finallyObj.costMax) {
+                return (
+                  finallyObj.city === el.city &&
+                  finallyObj.costMin <= el.costMin &&
+                  finallyObj.costMax >= el.costMin
+                );
+              } else if (finallyObj.costMin) {
+                return (
+                  finallyObj.city === el.city &&
+                  finallyObj.costMin <= el.costMin
+                );
+              } else if (finallyObj.costMax) {
+                return (
+                  finallyObj.city === el.city && finallyObj.costMax > el.costMin
+                );
+              } else return finallyObj.city === el.city;
             }
           } else {
-            if (finallyObj.costMin && finallyObj.costMax) {
-              return (
-                finallyObj.city === el.city &&
-                finallyObj.costMin <= el.costMin &&
-                finallyObj.costMax >= el.costMin
-              );
-            } else if (finallyObj.costMin) {
-              return (
-                finallyObj.city === el.city && finallyObj.costMin <= el.costMin
-              );
-            } else if (finallyObj.costMax) {
-              return (
-                finallyObj.city === el.city && finallyObj.costMax > el.costMin
-              );
-            } else return finallyObj.city === el.city;
+            if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
+              if (finallyObj.costMin && finallyObj.costMax) {
+                return (
+                  finallyObj.rooms == el.rooms &&
+                  finallyObj.costMin <= el.costMin &&
+                  finallyObj.costMax >= el.costMin
+                );
+              } else if (finallyObj.costMin) {
+                return (
+                  finallyObj.rooms == el.rooms &&
+                  finallyObj.costMin <= el.costMin
+                );
+              } else if (finallyObj.costMax) {
+                return (
+                  finallyObj.rooms == el.rooms &&
+                  finallyObj.costMax > el.costMin
+                );
+              } else return finallyObj.rooms == el.rooms;
+            } else {
+              if (finallyObj.costMin && finallyObj.costMax) {
+                return (
+                  finallyObj.costMin <= el.costMin &&
+                  finallyObj.costMax >= el.costMin
+                );
+              } else if (finallyObj.costMin) {
+                return finallyObj.costMin <= el.costMin;
+              } else if (finallyObj.costMax) {
+                return finallyObj.costMax > el.costMin;
+              } else return undefined;
+            }
           }
-        } else {
-          if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
-            if (finallyObj.costMin && finallyObj.costMax) {
-              return (
-                finallyObj.rooms == el.rooms &&
-                finallyObj.costMin <= el.costMin &&
-                finallyObj.costMax >= el.costMin
-              );
-            } else if (finallyObj.costMin) {
-              return (
-                finallyObj.rooms == el.rooms && finallyObj.costMin <= el.costMin
-              );
-            } else if (finallyObj.costMax) {
-              return (
-                finallyObj.rooms == el.rooms && finallyObj.costMax > el.costMin
-              );
-            } else return finallyObj.rooms == el.rooms;
-          } else {
-            if (finallyObj.costMin && finallyObj.costMax) {
-              return (
-                finallyObj.costMin <= el.costMin &&
-                finallyObj.costMax >= el.costMin
-              );
-            } else if (finallyObj.costMin) {
-              return finallyObj.costMin <= el.costMin;
-            } else if (finallyObj.costMax) {
-              return finallyObj.costMax > el.costMin;
-            } else return undefined;
-          }
-        }
+        }),
       })
     );
   };
@@ -340,7 +417,7 @@ const Main = () => {
                 </p>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="От"
                     onChange={(e) =>
                       setCostMin({
@@ -350,7 +427,7 @@ const Main = () => {
                   />
                   -
                   <input
-                    type="text"
+                    type="number"
                     placeholder="До"
                     onChange={(e) =>
                       setCostMax({
@@ -380,13 +457,27 @@ const Main = () => {
                   <button
                     onClick={() => {
                       createFinallyObj(city, rooms, costMin, costMax);
+                      navigate(
+                        `/apartments/${
+                          city.city === "Минск"
+                            ? "Minsk"
+                            : city.city === "Гомель"
+                            ? "Gomel"
+                            : city.city === "Гродно"
+                            ? "Grodno"
+                            : city.city === "Могилев"
+                            ? "Mogilev"
+                            : "Brest"
+                        }`
+                      );
                       setTimeout(() => {
                         setNameSelect("Выберите");
                         setNameSelectRooms("Выберите");
                       }, 10);
                     }}
                   >
-                    Показать {">"}
+                    Показать
+                    <img src={checkMarkRight} alt="checkmarkRight-png" />
                   </button>
                 </div>
               </div>
@@ -394,201 +485,174 @@ const Main = () => {
           </div>
         </div>
         <div className={styles.cards}>
-          {data ? (
-            data.length > 0 ? (
-              data.map((item) => <Card data={[item]} />)
-            ) : (
-              <div>
-                <h1>Такого экземпляра нет, посмотрите что-нибудь другое</h1>
-                <button onClick={() => setData(undefined)}>
-                  Вернуться к выбору
-                </button>
+          <section className={styles["container-2"]}>
+            <div>
+              <div className={styles["wrapper-2"]}>
+                <div
+                  style={{
+                    background: `url(${apartment})`,
+                    width: "516px",
+                    height: "270px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <p className={styles["title-2"]}>Снять квартиру</p>
+                  <p className={styles["subtitle-2"]}>Квартиры на сутки</p>
+                  <ul className={styles["ul-2"]}>
+                    <li>Минск</li>
+                    <li>Витебск</li>
+                    <li>Гродно</li>
+                    <li>Гомель</li>
+                    <li id={styles["li_brest"]}>Брест</li>
+                    <li>Могилев</li>
+                  </ul>
+                </div>
+                <div
+                  style={{
+                    background: `url(${cottagesAndEstates})`,
+                    width: "407px",
+                    height: "270px",
+                    borderRadius: "10px",
+                    marginLeft: "30px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <p className={styles["title-2"]}>СНЯТЬ коттедж НА ПРАЗДНИК</p>
+                  <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
+                  <img
+                    style={{ paddingLeft: "346px", marginTop: "20%" }}
+                    src={chevron}
+                    alt="chevron"
+                  />
+                </div>
               </div>
-            )
-          ) : (
-            <>
-              <section className={styles["container-2"]}>
-                <div>
-                  <div className={styles["wrapper-2"]}>
-                    <div
-                      style={{
-                        background: `url(${apartment})`,
-                        width: "516px",
-                        height: "270px",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      <p className={styles["title-2"]}>Снять квартиру</p>
-                      <p className={styles["subtitle-2"]}>Квартиры на сутки</p>
-                      <ul className={styles["ul-2"]}>
-                        <li>Минск</li>
-                        <li>Витебск</li>
-                        <li>Гродно</li>
-                        <li>Гомель</li>
-                        <li id={styles["li_brest"]}>Брест</li>
-                        <li>Могилев</li>
-                      </ul>
-                    </div>
-                    <div
-                      style={{
-                        background: `url(${cottagesAndEstates})`,
-                        width: "407px",
-                        height: "270px",
-                        borderRadius: "10px",
-                        marginLeft: "30px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <p className={styles["title-2"]}>
-                        СНЯТЬ коттедж НА ПРАЗДНИК
-                      </p>
-                      <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
-                      <img
-                        style={{ paddingLeft: "346px", marginTop: "20%" }}
-                        src={chevron}
-                        alt="chevron"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className={styles["wrapper-2"]}
-                    style={{ marginTop: "30px" }}
-                  >
-                    <div
-                      style={{
-                        background: `url(${bathHouse})`,
-                        width: "407px",
-                        height: "270px",
-                        borderRadius: "10px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <p className={styles["title-2"]}>
-                        Попариться в бане с друзьями
-                      </p>
-                      <p className={styles["subtitle-2"]}>Бани и сауны</p>
-                      <img
-                        style={{ paddingLeft: "346px", marginTop: "20%" }}
-                        src={chevron}
-                        alt="chevron"
-                      />
-                    </div>
-                    <div
-                      style={{
-                        background: `url(${cars})`,
-                        width: "516px",
-                        height: "270px",
-                        borderRadius: "10px",
-                        marginLeft: "30px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <p className={styles["title-2"]}>
-                        EСЛИ СРОЧНО НУЖНА МАШИНА
-                      </p>
-                      <p className={styles["subtitle-2"]}>Авто на прокат</p>
-                      <img
-                        style={{
-                          marginLeft: "88%",
-                          marginTop: "16%",
-                          padding: "0px",
-                        }}
-                        src={chevron}
-                        alt="chevron"
-                      />
-                    </div>
-                  </div>
+              <div
+                className={styles["wrapper-2"]}
+                style={{ marginTop: "30px" }}
+              >
+                <div
+                  style={{
+                    background: `url(${bathHouse})`,
+                    width: "407px",
+                    height: "270px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <p className={styles["title-2"]}>
+                    Попариться в бане с друзьями
+                  </p>
+                  <p className={styles["subtitle-2"]}>Бани и сауны</p>
+                  <img
+                    style={{ paddingLeft: "346px", marginTop: "20%" }}
+                    src={chevron}
+                    alt="chevron"
+                  />
+                </div>
+                <div
+                  style={{
+                    background: `url(${cars})`,
+                    width: "516px",
+                    height: "270px",
+                    borderRadius: "10px",
+                    marginLeft: "30px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <p className={styles["title-2"]}>EСЛИ СРОЧНО НУЖНА МАШИНА</p>
+                  <p className={styles["subtitle-2"]}>Авто на прокат</p>
                   <img
                     style={{
-                      marginTop: "41px",
-                      width: "61.19px",
-                      height: "61.19px",
-                      marginLeft: "-28px",
+                      marginLeft: "88%",
+                      marginTop: "16%",
+                      padding: "0px",
                     }}
-                    src={gaps}
-                    alt="gaps"
-                  ></img>
+                    src={chevron}
+                    alt="chevron"
+                  />
                 </div>
-                <div className={styles.desc}>
-                  <div>
-                    <h2>Квартиры</h2>
-                    <p>
-                      Квартиры в Минске
-                      <span>
-                        {
-                          [...apartments].filter((el) => el.city === "Минск")
-                            .length
-                        }
-                      </span>
-                    </p>
-                    <p>
-                      Квартиры в Гомеле
-                      <span>
-                        {
-                          [...apartments].filter((el) => el.city === "Гомель")
-                            .length
-                        }
-                      </span>
-                    </p>
-                    <p>
-                      Квартиры в Гродно
-                      <span>
-                        {
-                          [...apartments].filter((el) => el.city === "Гродно")
-                            .length
-                        }
-                      </span>
-                    </p>
-                    <p>
-                      Квартиры в Могилеве{" "}
-                      <span>
-                        {
-                          [...apartments].filter((el) => el.city === "Могилев")
-                            .length
-                        }
-                      </span>
-                    </p>
-                    <p>
-                      Квартиры в Бресте
-                      <span>
-                        {
-                          [...apartments].filter((el) => el.city === "Брест")
-                            .length
-                        }
-                      </span>
-                    </p>
-                    <p>
-                      Квартиры в Витебске{" "}
-                      <span>
-                        {
-                          [...apartments].filter((el) => el.city === "Город 6")
-                            .length
-                        }
-                      </span>
-                    </p>
-                  </div>
-                  <div>
-                    <h2>Коттеджи и усадьбы</h2>
-                    <p>Агроусадьбы</p>
-                    <p>Коттеджи</p>
-                    <p>Загородный комплекс</p>
-                    <p>Базы отдыха</p>
-                    <select>
-                      <option value="Еще">Еще</option>
-                    </select>
-                  </div>
-                  <div>
-                    <h2>Популярные направления</h2>
-                    <p>Коттеджи и усадьбы на о.Брасласких </p>
-                    <p>Коттеджи и усадьбы (жилье) на Нарочи</p>
-                    <p>
-                      Коттеджи и усадьбы (жилье) у воды, на берегу, на озере
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </>
-          )}
+              </div>
+              <img
+                style={{
+                  marginTop: "41px",
+                  width: "61.19px",
+                  height: "61.19px",
+                  marginLeft: "-28px",
+                }}
+                src={gaps}
+                alt="gaps"
+              ></img>
+            </div>
+            <div className={styles.desc}>
+              <div>
+                <h2>Квартиры</h2>
+                <p>
+                  Квартиры в Минске
+                  <span>
+                    {[...apartments].filter((el) => el.city === "Минск").length}
+                  </span>
+                </p>
+                <p>
+                  Квартиры в Гомеле
+                  <span>
+                    {
+                      [...apartments].filter((el) => el.city === "Гомель")
+                        .length
+                    }
+                  </span>
+                </p>
+                <p>
+                  Квартиры в Гродно
+                  <span>
+                    {
+                      [...apartments].filter((el) => el.city === "Гродно")
+                        .length
+                    }
+                  </span>
+                </p>
+                <p>
+                  Квартиры в Могилеве{" "}
+                  <span>
+                    {
+                      [...apartments].filter((el) => el.city === "Могилев")
+                        .length
+                    }
+                  </span>
+                </p>
+                <p>
+                  Квартиры в Бресте
+                  <span>
+                    {[...apartments].filter((el) => el.city === "Брест").length}
+                  </span>
+                </p>
+                <p>
+                  Квартиры в Витебске{" "}
+                  <span>
+                    {
+                      [...apartments].filter((el) => el.city === "Город 6")
+                        .length
+                    }
+                  </span>
+                </p>
+              </div>
+              <div>
+                <h2>Коттеджи и усадьбы</h2>
+                <p>Агроусадьбы</p>
+                <p>Коттеджи</p>
+                <p>Загородный комплекс</p>
+                <p>Базы отдыха</p>
+                <select>
+                  <option value="Еще">Еще</option>
+                </select>
+              </div>
+              <div>
+                <h2>Популярные направления</h2>
+                <p>Коттеджи и усадьбы на о.Брасласких </p>
+                <p>Коттеджи и усадьбы (жилье) на Нарочи</p>
+                <p>Коттеджи и усадьбы (жилье) у воды, на берегу, на озере</p>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
       <section className={styles["container-3"]}>
@@ -599,7 +663,6 @@ const Main = () => {
           <div className={styles["flat-Wrap"]}>
             <Card
               data={[...apartments]
-                // .slice(slider, slider + 3)
                 .slice(0, 3)
                 .filter((item) => item.city == "Минск")}
             />
@@ -687,19 +750,11 @@ const Main = () => {
           </div>
           <div className={styles.chevrons}>
             <div>
-              <img
-                src={checkMark}
-                alt="chevronNavigate"
-                // onClick={() => setSlider(slider - 3)}
-              />
+              <img src={checkMark} alt="chevronNavigate" />
             </div>
             <div>
               {" "}
-              <img
-                src={checkMark}
-                alt="chevronNavigate"
-                // onClick={() => setSlider(slider + 3)}
-              />
+              <img src={checkMark} alt="chevronNavigate" />
             </div>
           </div>
         </div>
@@ -894,7 +949,7 @@ const Main = () => {
               <div className={styles["news-desc"]}>
                 {news &&
                   news.slice(0, 5).map((item) => (
-                    <NavLink to={`/newsList/detail/${item.id}`}>
+                    <NavLink to={`/newsList/detail/${item.id}`} key={item.id}>
                       <h5>{item.title}</h5>
                       <p>{item.date}</p>
                     </NavLink>

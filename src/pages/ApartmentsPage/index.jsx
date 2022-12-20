@@ -1,42 +1,140 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import styles from "./apartments.module.scss";
+import more from "../../assets/images/more.png";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import cross from "../../assets/images/cross.png";
+import checkMark from "../../assets/images/checkMark.png";
+import checkMarkRight from "../../assets/images/checkMark_right.png";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
-// import { useState } from "react";
 
 const Apartments = () => {
   const location = useLocation();
 
   const apartments = useSelector((state) => state.data.apartments);
+  const searchedApartments = useSelector((state) => state.search);
+
+  // searchedApartments ? console.log(searchedApartments) : console.log(data);
 
   const [data, setData] = useState(undefined);
+
   const [selected, setSelected] = useState("");
+
+  const [selectActive, setSelectActive] = useState(false);
+
+  const [nameSelectRooms, setNameSelectRooms] = useState("Выберите");
+
+  const [costMax, setCostMax] = useState(undefined);
+  const [costMin, setCostMin] = useState(undefined);
+  const [rooms, setRooms] = useState(undefined);
+  const [city, setCity] = useState({
+    city:
+      location.pathname === "/apartments/Minsk"
+        ? "Минск"
+        : location.pathname === "/apartments/Gomel"
+        ? "Гомель"
+        : location.pathname === "/apartments/Brest"
+        ? "Брест"
+        : location.pathname === "/apartments/Vitebsk"
+        ? "Витебск"
+        : location.pathname === "/apartments/Grodno"
+        ? "Гродно"
+        : "Могилев",
+  });
+
+  useEffect(() => {
+    setCity({
+      city:
+        location.pathname === "/apartments/Minsk"
+          ? "Минск"
+          : location.pathname === "/apartments/Gomel"
+          ? "Гомель"
+          : location.pathname === "/apartments/Brest"
+          ? "Брест"
+          : location.pathname === "/apartments/Vitebsk"
+          ? "Витебск"
+          : location.pathname === "/apartments/Grodno"
+          ? "Гродно"
+          : "Могилев",
+    });
+  }, [location.pathname]);
+
+  const selectValue = (e) => {
+    setSelectActive(selectActive ? false : true);
+    setRooms({ rooms: e.target.outerText });
+    setNameSelectRooms(e.target.outerText);
+  };
+
+  const createFinallyObj = (rooms, costMin, costMax) => {
+    const finallyObj = Object.assign({}, rooms, costMin, costMax);
+    setData(
+      apartments.filter((el) => {
+        {
+          if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
+            if (finallyObj.costMin && finallyObj.costMax) {
+              return (
+                city.city == el.city &&
+                finallyObj.rooms == el.rooms &&
+                finallyObj.costMin <= el.costMin &&
+                finallyObj.costMax >= el.costMin
+              );
+            } else if (finallyObj.costMin) {
+              return (
+                finallyObj.rooms == el.rooms &&
+                finallyObj.costMin <= el.costMin &&
+                city.city == el.city
+              );
+            } else if (finallyObj.costMax) {
+              return (
+                finallyObj.rooms == el.rooms &&
+                city.city == el.city &&
+                finallyObj.costMax > el.costMin
+              );
+            } else return finallyObj.rooms == el.rooms && city.city == el.city;
+          } else {
+            if (finallyObj.costMin && finallyObj.costMax) {
+              return (
+                city.city == el.city &&
+                finallyObj.costMin <= el.costMin &&
+                finallyObj.costMax >= el.costMin
+              );
+            } else if (finallyObj.costMin) {
+              return city.city == el.city && finallyObj.costMin <= el.costMin;
+            } else if (finallyObj.costMax) {
+              return city.city == el.city && finallyObj.costMax > el.costMin;
+            } else return undefined;
+          }
+        }
+      })
+    );
+  };
 
   const checkbox = (el) => {
     setSelected(el);
     setData(
       apartments.filter((item) =>
         el === "Недорогие"
-          ? item.costMin < 30
+          ? item.costMin < 30 && item.city == city.city
           : el === "1-комнатные"
-          ? item.rooms === 1
+          ? item.rooms === 1 && item.city == city.city
           : el === "2-комнатные"
-          ? item.rooms === 2
+          ? item.rooms === 2 && item.city == city.city
           : el === "3-комнатные"
-          ? item.rooms === 3
+          ? item.rooms === 3 && item.city == city.city
           : el === "4-комнатные"
-          ? item.rooms === 4
+          ? item.rooms === 4 && item.city == city.city
           : el === "5-комнатные"
-          ? item.rooms === 5
+          ? item.rooms === 5 && item.city == city.city
           : ""
       )
     );
   };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <motion.section
@@ -187,6 +285,98 @@ const Apartments = () => {
           )}
         </div>
       </div>
+      <div className={styles.search}>
+        <div>
+          <div className={clsx(styles["select_item"], styles.rooms)}>
+            <p className={styles["select_item-title"]}>Комнаты</p>
+            <div style={{ position: "relative" }}>
+              <div
+                className={
+                  selectActive ? `${styles["select-active"]}` : `${styles.city}`
+                }
+                onClick={() => setSelectActive(selectActive ? false : true)}
+              >
+                <div className={styles["city-wrapper"]}>
+                  {nameSelectRooms}
+                  <img src={checkMark} alt="checkMark" />
+                </div>
+              </div>
+              <div
+                className={
+                  selectActive
+                    ? `${styles["drop-down-active"]}`
+                    : `${styles["drop-down-unactive"]}`
+                }
+              >
+                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
+                  1
+                </p>
+                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
+                  2
+                </p>
+                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
+                  3
+                </p>
+                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
+                  4
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style={{ width: "431px", display: "flex" }}>
+          <div
+            className={clsx(styles["select_item"], styles["select_item_cost"])}
+            style={{ width: "100%" }}
+          >
+            <p className={styles["select_item-title"]}>Цена за сутки (BYN)</p>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <input
+                type="text"
+                placeholder="От"
+                onChange={(e) =>
+                  setCostMin({
+                    costMin: e.target.value,
+                  })
+                }
+              />
+              -
+              <input
+                type="text"
+                placeholder="До"
+                onChange={(e) =>
+                  setCostMax({
+                    costMax: e.target.value,
+                  })
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div style={{ width: "187px" }}>
+          <div className={styles["select_item"]}>
+            <div className={styles.more}>
+              Больше опций
+              <img src={more} alt="more" />
+            </div>
+          </div>
+        </div>
+        <div className={styles.buttons}>
+          <button onClick={() => setData(undefined)}>Очистить</button>
+          <button
+            onClick={() => {
+              createFinallyObj(rooms, costMin, costMax);
+              setTimeout(() => {
+                setNameSelectRooms("Выберите");
+              }, 10);
+            }}
+          >
+            Показать объекты
+            <img src={checkMarkRight} alt="checkMarkRight-img" />
+          </button>
+        </div>
+      </div>
+      <div></div>
     </motion.section>
   );
 };

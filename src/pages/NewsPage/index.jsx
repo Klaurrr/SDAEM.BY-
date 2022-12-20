@@ -26,7 +26,9 @@ const NewsPage = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setNews(
-      data.filter((item) => item.title.toLowerCase() === value.toLowerCase())
+      data.filter((item) =>
+        item.title.toLowerCase().includes(value.toLowerCase())
+      )
     );
   };
 

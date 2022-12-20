@@ -30,7 +30,7 @@ const DetailPage = () => {
     >
       {news.length > 0 &&
         news.map((item) => (
-          <>
+          <div key={item.id}>
             <div className={styles.background}></div>
             <img
               src={gaps}
@@ -83,12 +83,14 @@ const DetailPage = () => {
                   <h3>Читайте также</h3>
                   <div className={styles.card_wrapper}>
                     {data &&
-                      data.slice(0, 3).map((item) => <NewsCard item={item} />)}
+                      data
+                        .slice(0, 3)
+                        .map((item) => <NewsCard item={item} key={item.id} />)}
                   </div>
                 </div>
               </div>
             </div>
-          </>
+          </div>
         ))}
     </motion.section>
   );
