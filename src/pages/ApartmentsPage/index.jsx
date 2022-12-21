@@ -12,6 +12,7 @@ import list from "../../assets/images/list.png";
 import tiles from "../../assets/images/tiles.png";
 import geoPurple from "../../assets/images/geoPurple.png";
 import { useSelector } from "react-redux";
+import Card from "../../components/Card";
 import clsx from "clsx";
 
 const Apartments = () => {
@@ -438,18 +439,26 @@ const Apartments = () => {
           результата
         </h1>
         <div>
-          {data
-            ? data.map((item) => item.city)
-            : apartments
-                .filter((item) => item.city === city.city)
-                .map((item) => (
-                  <>
-                    <p>{item.city}</p>
-                    <p>
-                      {item.costMin} - {item.costMax}
-                    </p>
-                  </>
-                ))}
+          {
+            data ? (
+              // data.map((item) => item.city)
+              <Card data={[...data]} />
+            ) : (
+              <Card
+                data={[...apartments].filter((item) => item.city === city.city)}
+              ></Card>
+            )
+            // : apartments
+            //     .filter((item) => item.city === city.city)
+            //     .map((item) => (
+            //       <>
+            //         <p>{item.city}</p>
+            //         <p>
+            //           {item.costMin} - {item.costMax}
+            //         </p>
+            //       </>
+            //     ))
+          }
         </div>
       </div>
     </motion.section>
