@@ -1,5 +1,6 @@
 import { useState, useLayoutEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+
 import mainBackGround from "../../assets/images/mainBackGround.png";
 import apartment from "../../assets/images/apartments-day.jpg";
 import cottagesAndEstates from "../../assets/images/cottages&estates.jpg";
@@ -19,11 +20,14 @@ import orchid from "../../assets/images/orchid.png";
 import AdUp from "../../assets/images/AD_Up.png";
 import Card from "../../components/Card";
 import geoYellow from "../../assets/images/geoYellow.png";
+
 import clsx from "clsx";
-import styles from "./main.module.scss";
+
 import { useDispatch, useSelector } from "react-redux";
-import { motion } from "framer-motion";
 import { setApartments } from "../../store/slices/searchApartmentsSlice";
+
+import { motion } from "framer-motion";
+import styles from "./main.module.scss";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -32,7 +36,6 @@ const Main = () => {
   const [rooms, setRooms] = useState(undefined);
   const [costMax, setCostMax] = useState(undefined);
   const [costMin, setCostMin] = useState(undefined);
-  const [data, setData] = useState(undefined);
 
   const [selectFirst, setSelectFirst] = useState(false);
   const [selectSecond, setSelectSecond] = useState(false);
@@ -46,12 +49,12 @@ const Main = () => {
   const [nameDrop, setNameDrop] = useState("Метро");
   const [nameDropTwo, setNameDropTwo] = useState("Район");
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const news = useSelector((state) => state.data.news);
   const apartments = useSelector((state) => state.data.apartments);
-
-  const navigate = useNavigate();
 
   const selectValueFirst = (e) => {
     setSelectFirst(selectFirst ? false : true);
@@ -86,84 +89,6 @@ const Main = () => {
 
   const createFinallyObj = (city, rooms, costMin, costMax) => {
     const finallyObj = Object.assign({}, city, rooms, costMin, costMax);
-    // setData(
-
-    //   apartments.filter((el) => {
-    //     if (finallyObj.city && finallyObj.city !== "Выберите") {
-    //       if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
-    //         if (finallyObj.costMin && finallyObj.costMax) {
-    //           return (
-    //             finallyObj.city === el.city &&
-    //             finallyObj.rooms == el.rooms &&
-    //             finallyObj.costMin <= el.costMin &&
-    //             finallyObj.costMax >= el.costMin
-    //           );
-    //         } else if (finallyObj.costMin) {
-    //           return (
-    //             finallyObj.city === el.city &&
-    //             finallyObj.rooms == el.rooms &&
-    //             finallyObj.costMin <= el.costMin
-    //           );
-    //         } else if (finallyObj.costMax) {
-    //           return (
-    //             finallyObj.city === el.city &&
-    //             finallyObj.costMax > el.costMin &&
-    //             finallyObj.rooms == el.rooms
-    //           );
-    //         } else {
-    //           return (
-    //             finallyObj.city === el.city && finallyObj.rooms == el.rooms
-    //           );
-    //         }
-    //       } else {
-    //         if (finallyObj.costMin && finallyObj.costMax) {
-    //           return (
-    //             finallyObj.city === el.city &&
-    //             finallyObj.costMin <= el.costMin &&
-    //             finallyObj.costMax >= el.costMin
-    //           );
-    //         } else if (finallyObj.costMin) {
-    //           return (
-    //             finallyObj.city === el.city && finallyObj.costMin <= el.costMin
-    //           );
-    //         } else if (finallyObj.costMax) {
-    //           return (
-    //             finallyObj.city === el.city && finallyObj.costMax > el.costMin
-    //           );
-    //         } else return finallyObj.city === el.city;
-    //       }
-    //     } else {
-    //       if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
-    //         if (finallyObj.costMin && finallyObj.costMax) {
-    //           return (
-    //             finallyObj.rooms == el.rooms &&
-    //             finallyObj.costMin <= el.costMin &&
-    //             finallyObj.costMax >= el.costMin
-    //           );
-    //         } else if (finallyObj.costMin) {
-    //           return (
-    //             finallyObj.rooms == el.rooms && finallyObj.costMin <= el.costMin
-    //           );
-    //         } else if (finallyObj.costMax) {
-    //           return (
-    //             finallyObj.rooms == el.rooms && finallyObj.costMax > el.costMin
-    //           );
-    //         } else return finallyObj.rooms == el.rooms;
-    //       } else {
-    //         if (finallyObj.costMin && finallyObj.costMax) {
-    //           return (
-    //             finallyObj.costMin <= el.costMin &&
-    //             finallyObj.costMax >= el.costMin
-    //           );
-    //         } else if (finallyObj.costMin) {
-    //           return finallyObj.costMin <= el.costMin;
-    //         } else if (finallyObj.costMax) {
-    //           return finallyObj.costMax > el.costMin;
-    //         } else return undefined;
-    //       }
-    //     }
-    //   })
-    // );
     dispatch(
       setApartments({
         searchedApartments: apartments.filter((el) => {
@@ -297,7 +222,7 @@ const Main = () => {
                 Авто напрокат
               </li>
             </ul>
-            <div className={styles.select}>
+            <form className={styles.select}>
               <div className={clsx(styles["select_item"], styles.city)}>
                 <p className={styles["select_item-title"]}>Город</p>
                 <div>
@@ -456,7 +381,9 @@ const Main = () => {
                   />
                   <button
                     onClick={() => {
-                      createFinallyObj(city, rooms, costMin, costMax);
+                      city
+                        ? createFinallyObj(city, rooms, costMin, costMax)
+                        : alert("Укажите город");
                       navigate(
                         `/apartments/${
                           city.city === "Минск"
@@ -481,7 +408,7 @@ const Main = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         <div className={styles.cards}>

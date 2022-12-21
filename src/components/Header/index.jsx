@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo_1 from "../../assets/images/logo 1.png";
 import geoYellow from "../../assets/images/geoYellow.png";
@@ -34,6 +34,16 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
       ? setFlatsValue("Квартиры в Могилеве")
       : setFlatsValue("Квартиры на сутки");
   }, [location.pathname]);
+
+  useLayoutEffect(() => {
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "Escape") {
+        setDrop(false);
+        setUserDrop(false);
+        window.removeEventListener("keyup", e);
+      }
+    });
+  });
 
   return (
     <header>

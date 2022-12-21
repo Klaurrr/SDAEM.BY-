@@ -7,6 +7,10 @@ import BreadCrumbs from "../../components/BreadCrumbs";
 import cross from "../../assets/images/cross.png";
 import checkMark from "../../assets/images/checkMark.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
+import byDefault from "../../assets/images/byDefault.png";
+import list from "../../assets/images/list.png";
+import tiles from "../../assets/images/tiles.png";
+import geoPurple from "../../assets/images/geoPurple.png";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
 
@@ -16,8 +20,6 @@ const Apartments = () => {
   const apartments = useSelector((state) => state.data.apartments);
   const searchedApartments = useSelector((state) => state.search);
 
-  // searchedApartments ? console.log(searchedApartments) : console.log(data);
-
   const [data, setData] = useState(undefined);
 
   const [selected, setSelected] = useState("");
@@ -25,6 +27,8 @@ const Apartments = () => {
   const [selectActive, setSelectActive] = useState(false);
 
   const [nameSelectRooms, setNameSelectRooms] = useState("Выберите");
+
+  const [showApartments, setShowApartments] = useState("list");
 
   const [costMax, setCostMax] = useState(undefined);
   const [costMin, setCostMin] = useState(undefined);
@@ -43,6 +47,11 @@ const Apartments = () => {
         ? "Гродно"
         : "Могилев",
   });
+
+  useEffect(() => {
+    searchedApartments.searchedApartments.length > 0 &&
+      setData(searchedApartments.searchedApartments);
+  }, []);
 
   useEffect(() => {
     setCity({
@@ -134,6 +143,7 @@ const Apartments = () => {
 
   useEffect(() => {
     console.log(data);
+    // console.log(apartments);
   }, [data]);
 
   return (
@@ -277,7 +287,10 @@ const Apartments = () => {
           ) : (
             <button
               className={clsx(styles.checkbox, styles.checkbox_active)}
-              onClick={() => setSelected("")}
+              onClick={() => {
+                setSelected("");
+                setData(undefined);
+              }}
             >
               {selected}
               <img src={cross} alt="cross-img" style={{ marginLeft: "10px" }} />
@@ -309,16 +322,16 @@ const Apartments = () => {
                 }
               >
                 <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  1
+                  1 комн.
                 </p>
                 <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  2
+                  2 комн.
                 </p>
                 <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  3
+                  3 комн.
                 </p>
                 <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  4
+                  4 комн.
                 </p>
               </div>
             </div>
@@ -362,7 +375,16 @@ const Apartments = () => {
           </div>
         </div>
         <div className={styles.buttons}>
-          <button onClick={() => setData(undefined)}>Очистить</button>
+          <button
+            onClick={() => {
+              setData(undefined);
+              setCostMin(undefined);
+              setCostMax(undefined);
+              setRooms(undefined);
+            }}
+          >
+            Очистить
+          </button>
           <button
             onClick={() => {
               createFinallyObj(rooms, costMin, costMax);
@@ -376,7 +398,60 @@ const Apartments = () => {
           </button>
         </div>
       </div>
-      <div></div>
+      <div className={styles.buttons_2}>
+        <div className={styles.button_byDefault}>
+          <img src={byDefault} alt="byDefault-img" />
+          <p>По умолчанию</p>
+          <img src={checkMark} alt="checkmark-png" />
+        </div>
+        <div
+          className={clsx(
+            styles.button_list,
+            showApartments === "list" && styles.button_active
+          )}
+          onClick={() => setShowApartments("list")}
+        >
+          <img src={list} alt="list-img" />
+          <p>Список</p>
+        </div>
+        <div
+          className={clsx(
+            styles.button_tiles,
+            showApartments === "tiles" && styles.button_active
+          )}
+          onClick={() => setShowApartments("tiles")}
+        >
+          <img src={tiles} alt="tiles-img" />
+          <p>Плитки</p>
+        </div>
+        <div className={styles.button_map}>
+          <img src={geoPurple} alt="geoPurple-img" />
+          <p>Показать на карте</p>
+        </div>
+      </div>
+      <div>
+        <h1>
+          Найдено{" "}
+          {data
+            ? data.length
+            : apartments.filter((item) => item.city === city.city).length}{" "}
+          результата
+        </h1>
+        <div>
+          {data
+            ? data.map((item) => item.city)
+            : apartments
+                .filter((item) => item.city === city.city)
+                .map((item) => (
+                  <>
+                    <p>{item.city}</p>
+                    <p>
+                      {item.costMin} - {item.costMax}
+                    </p>
+                  </>
+                ))}
+        </div>
+      </div>
     </motion.section>
   );
 };
