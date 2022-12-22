@@ -1,17 +1,20 @@
+import React from "react";
 import flatOne from "../../assets/images/flat_one.png";
 import { useState } from "react";
 import userIcon from "../../assets/images/userIcon.png";
-import geoGray from "../../assets/images/geoGray2.png";
-import metro from "../../assets/images/metro.png";
-import phone from "../../assets/images/phone.png";
-import styles from "./card.module.scss";
-import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
+import geoPurple from "../../assets/images/geoPurple.png";
+import metroPurple from "../../assets/images/metroPurple.png";
 import viberWhite from "../../assets/images/ViberWhite.png";
+import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
+import phone from "../../assets/images/phone.png";
+import styles from "./cardList.module.scss";
 import heartRed from "../../assets/images/HeartRed.png";
+import orchid from "../../assets/images/orchid.png";
+import boy from "../../assets/images/boy.png";
 import mail from "../../assets/images/mail.png";
 import { useLocation } from "react-router-dom";
 
-const Card = ({ data }) => {
+const CardList = ({ data }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
 
@@ -20,73 +23,41 @@ const Card = ({ data }) => {
   return (
     <>
       {data.map((flat) => (
-        <div
-          className={styles.container}
-          key={flat.id}
-          style={{
-            marginBottom:
-              location.pathname.slice(0, 11) === "/apartments" && "30px",
-          }}
-        >
-          <div className={styles.img}>
-            <img src={flatOne} alt="flatOne" />
-            <p>Gold</p>
+        <div className={styles.container} key={flat.id}>
+          <div style={{ position: "relative", marginRight: "25px" }}>
+            <img className={styles.orchid} src={orchid} alt="orchid-img" />
+            <p className={styles.gold}>Gold</p>
           </div>
-          <div className={styles.desc_container}>
-            <div className={styles.wrapper_1}>
-              <div className={styles.price}>
-                <p>{flat.costMin}.00 BY</p>
-
-                <span>за сутки</span>
-              </div>
-              <div className={styles.desc_container_2}>
-                <p className={styles.desc}>
-                  <img
-                    src={userIcon}
-                    alt="userIcon"
-                    style={{ marginRight: "6px" }}
-                  />{" "}
-                  4 (2+2)
-                </p>
-                <p className={styles.desc}>{flat.rooms} комн.</p>
-                <p className={styles.desc}>179 м²</p>
-              </div>
+          <div>
+            <h4>4 комн. апартаменты на Грушевке</h4>
+            <div className={styles.geo}>
+              <img src={geoPurple} alt="geoPurple-img" />
+              <p>{flat.city}, б-р Мулявина, д. 10</p>
             </div>
-            <div className={styles.wrapper_2}>
+            <div className={styles.desc_1}>
               <p>
-                <img
-                  src={geoGray}
-                  alt="geoGray"
-                  style={{ paddingRight: "11px" }}
-                />
-                {flat.city}, б-р Мулявина, д. 10
+                <img src={userIcon} alt="userIcon-img" />4 (2 + 2)
+              </p>
+              <p>{flat.rooms} комн. </p>
+              <p>
+                <img src={metroPurple} alt="metroPurple-img" />
+                Грушевка
               </p>
               <p>
-                <img src={metro} alt="metro" style={{ paddingRight: "6px" }} />
-                Грушевка <span>•</span>Шабаны
+                <span>район: </span>
+                Шабаны
               </p>
             </div>
             <div className={styles.desc_2}>
               <p>
-                Какое-то описание квартиры, описание квартиры, описание
-                квартиры, описание квартиры, описание квартиры, описание
-                квартиры, описание квартиры, описание квартиры, описание
-                квартиры, описание...
+                Большая четырехкомнатная студия! Большая джкакузи на двоих, на
+                теливизоре есть приложение Megogo, YouTube, Smart TV, сможете
+                выбрать фильм по вкусу!) Цена зависит от количества проживающих,
+                уточняйте, пожалуйста, по телефону! В пяти минутах ходьбы
+                Минск-Арена, ...
               </p>
-              <p></p>
             </div>
             <div className={styles.buttons}>
-              <button
-                className={styles.heart}
-                style={{
-                  display:
-                    location.pathname.slice(0, 11) === "/apartments"
-                      ? "block"
-                      : "none",
-                }}
-              >
-                <img src={heartRed} alt="heartRed-img" />
-              </button>
               <button
                 className={styles.button_purple}
                 onClick={() => {
@@ -97,7 +68,24 @@ const Card = ({ data }) => {
                 <img src={phone} alt="phone" />
                 Контакты
               </button>
+              <button
+                className={styles.heart}
+                style={{
+                  display:
+                    location.pathname.slice(0, 11) === "/apartments"
+                      ? "flex"
+                      : "none",
+                }}
+              >
+                <p>В закладки</p>
+                <img src={heartRed} alt="heartRed-img" />
+              </button>
+
               <button className={styles.button_yellow}>Подробнее</button>
+            </div>
+            <div className={styles.price}>
+              <p>{flat.costMin}.00 BYN</p>
+              <span>за сутки</span>
             </div>
           </div>
           <div
@@ -147,4 +135,4 @@ const Card = ({ data }) => {
   );
 };
 
-export default Card;
+export default CardList;

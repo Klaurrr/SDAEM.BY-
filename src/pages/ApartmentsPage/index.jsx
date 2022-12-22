@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApartments } from "../../store/slices/searchApartmentsSlice";
 import Card from "../../components/Card";
 import clsx from "clsx";
+import CardList from "../../components/CardList";
 
 const Apartments = () => {
   const location = useLocation();
@@ -56,6 +57,8 @@ const Apartments = () => {
         ? "Гродно"
         : "Могилев",
   });
+
+  const [sort, setSort] = useState(false);
 
   useEffect(() => {
     setCity({
@@ -431,8 +434,16 @@ const Apartments = () => {
         </div>
       </div>
       <div className={styles.buttons_2}>
-        <div className={styles.button_byDefault}>
-          <img src={byDefault} alt="byDefault-img" />
+        <div className={styles.button_byDefault} onClick={() => setSort(!sort)}>
+          <img
+            src={byDefault}
+            alt="byDefault-img"
+            style={{
+              filter:
+                sort &&
+                "invert(57%) sepia(85%) saturate(3360%) hue-rotate(225deg) brightness(91%) contrast(160%)",
+            }}
+          />
           <p>По умолчанию</p>
           <img src={checkMark} alt="checkmark-png" />
         </div>
@@ -467,8 +478,8 @@ const Apartments = () => {
           <p>Показать на карте</p>
         </div>
       </div>
-      <div>
-        <h1>
+      <div style={{ padding: "0px 80px" }}>
+        <h1 className={styles.title}>
           Найдено{" "}
           {data
             ? data.length
@@ -477,14 +488,66 @@ const Apartments = () => {
             : apartments.filter((item) => item.city === city.city).length}{" "}
           результатов
         </h1>
-        <div>
+        <div className={showApartments === "tiles" && styles.wrapper}>
           {data ? (
-            <Card data={[...data]} />
+            showApartments === "tiles" ? (
+              <Card
+                data={
+                  sort
+                    ? [...data].sort((a, b) => a.costMin - b.costMin)
+                    : [...data]
+                }
+              />
+            ) : (
+              <CardList
+                data={
+                  sort
+                    ? [...data].sort((a, b) => a.costMin - b.costMin)
+                    : [...data]
+                }
+              />
+            )
           ) : searchedApartments.searchedApartments.length ? (
-            <Card data={[...searchedApartments.searchedApartments]} />
-          ) : (
+            showApartments === "tiles" ? (
+              <Card
+                data={
+                  sort
+                    ? [...searchedApartments.searchedApartments].sort(
+                        (a, b) => a.costMin - b.costMin
+                      )
+                    : [...searchedApartments.searchedApartments]
+                }
+              />
+            ) : (
+              <CardList
+                data={
+                  sort
+                    ? [...searchedApartments.searchedApartments].sort(
+                        (a, b) => a.costMin - b.costMin
+                      )
+                    : [...searchedApartments.searchedApartments]
+                }
+              />
+            )
+          ) : showApartments === "tiles" ? (
             <Card
-              data={[...apartments].filter((item) => item.city === city.city)}
+              data={
+                sort
+                  ? [...apartments]
+                      .filter((item) => item.city === city.city)
+                      .sort((a, b) => a.costMin - b.costMin)
+                  : [...apartments].filter((item) => item.city === city.city)
+              }
+            />
+          ) : (
+            <CardList
+              data={
+                sort
+                  ? [...apartments]
+                      .filter((item) => item.city === city.city)
+                      .sort((a, b) => a.costMin - b.costMin)
+                  : [...apartments].filter((item) => item.city === city.city)
+              }
             />
           )}
         </div>
