@@ -8,17 +8,18 @@ import styles from "./card.module.scss";
 import boy from "../../assets/images/boy.png";
 import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
 import viberWhite from "../../assets/images/ViberWhite.png";
+import heartRed from "../../assets/images/HeartRed.png";
+import heartFill from "../../assets/images/HeartFill.png";
 import mail from "../../assets/images/mail.png";
 import { useEffect } from "react";
 import "./style.scss";
+import { useLocation } from "react-router-dom";
 
 const Card = ({ data }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
 
-  // useEffect(() => {
-  //   setContact(false);
-  // }, [cardId]);
+  const location = useLocation();
 
   return (
     <>
@@ -72,6 +73,17 @@ const Card = ({ data }) => {
               <p></p>
             </div>
             <div className="card_buttons">
+              <button
+                className={styles.heart}
+                style={{
+                  display:
+                    location.pathname.slice(0, 11) === "/apartments"
+                      ? "block"
+                      : "none",
+                }}
+              >
+                <img src={heartRed} alt="heartRed-img" />
+              </button>
               <button
                 className="card_button-purple"
                 onClick={() => {

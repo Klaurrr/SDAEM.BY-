@@ -247,36 +247,47 @@ const Main = () => {
                         : `${styles["drop-down-unactive"]}`
                     }
                   >
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueFirst(e)}
-                    >
-                      Минск
-                    </p>
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueFirst(e)}
-                    >
-                      Гомель
-                    </p>
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueFirst(e)}
-                    >
-                      Гродно
-                    </p>
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueFirst(e)}
-                    >
-                      Могилев
-                    </p>
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueFirst(e)}
-                    >
-                      Брест
-                    </p>
+                    <div>
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueFirst(e)}
+                      >
+                        Минск
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueFirst(e)}
+                      >
+                        Гомель
+                      </p>
+                    </div>
+                    <div>
+                      {" "}
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueFirst(e)}
+                      >
+                        Гродно
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueFirst(e)}
+                      >
+                        Могилев
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueFirst(e)}
+                      >
+                        Брест
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -304,30 +315,41 @@ const Main = () => {
                         : `${styles["drop-down-unactive"]}`
                     }
                   >
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueSecond(e)}
-                    >
-                      1
-                    </p>
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueSecond(e)}
-                    >
-                      2
-                    </p>
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueSecond(e)}
-                    >
-                      3
-                    </p>
-                    <p
-                      className={styles["city-p"]}
-                      onClick={(e) => selectValueSecond(e)}
-                    >
-                      4
-                    </p>
+                    <div>
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueSecond(e)}
+                      >
+                        1
+                      </p>
+                    </div>
+                    <div>
+                      {" "}
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueSecond(e)}
+                      >
+                        2
+                      </p>
+                    </div>
+                    <div>
+                      {" "}
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueSecond(e)}
+                      >
+                        3
+                      </p>
+                    </div>
+                    <div>
+                      {" "}
+                      <p
+                        className={styles["city-p"]}
+                        onClick={(e) => selectValueSecond(e)}
+                      >
+                        4
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -426,12 +448,25 @@ const Main = () => {
                   <p className={styles["title-2"]}>Снять квартиру</p>
                   <p className={styles["subtitle-2"]}>Квартиры на сутки</p>
                   <ul className={styles["ul-2"]}>
-                    <li>Минск</li>
-                    <li>Витебск</li>
-                    <li>Гродно</li>
-                    <li>Гомель</li>
-                    <li id={styles["li_brest"]}>Брест</li>
-                    <li>Могилев</li>
+                    <li onClick={() => navigate("/apartments/Minsk")}>Минск</li>
+                    <li onClick={() => navigate("/apartments/Vitebsk")}>
+                      Витебск
+                    </li>
+                    <li onClick={() => navigate("/apartments/Grodno")}>
+                      Гродно
+                    </li>
+                    <li onClick={() => navigate("/apartments/Gomel")}>
+                      Гомель
+                    </li>
+                    <li
+                      onClick={() => navigate("/apartments/Brest")}
+                      id={styles["li_brest"]}
+                    >
+                      Брест
+                    </li>
+                    <li onClick={() => navigate("/apartments/Mogilev")}>
+                      Могилев
+                    </li>
                   </ul>
                 </div>
                 <div
@@ -513,13 +548,13 @@ const Main = () => {
             <div className={styles.desc}>
               <div>
                 <h2>Квартиры</h2>
-                <p>
+                <p onClick={() => navigate("/apartments/Minsk")}>
                   Квартиры в Минске
                   <span>
                     {[...apartments].filter((el) => el.city === "Минск").length}
                   </span>
                 </p>
-                <p>
+                <p onClick={() => navigate("/apartments/Gomel")}>
                   Квартиры в Гомеле
                   <span>
                     {
@@ -528,7 +563,7 @@ const Main = () => {
                     }
                   </span>
                 </p>
-                <p>
+                <p onClick={() => navigate("/apartments/Grodno")}>
                   Квартиры в Гродно
                   <span>
                     {
@@ -537,7 +572,7 @@ const Main = () => {
                     }
                   </span>
                 </p>
-                <p>
+                <p onClick={() => navigate("/apartments/Mogilev")}>
                   Квартиры в Могилеве{" "}
                   <span>
                     {
@@ -546,13 +581,13 @@ const Main = () => {
                     }
                   </span>
                 </p>
-                <p>
+                <p onClick={() => navigate("/apartments/Brest")}>
                   Квартиры в Бресте
                   <span>
                     {[...apartments].filter((el) => el.city === "Брест").length}
                   </span>
                 </p>
-                <p>
+                <p onClick={() => navigate("/apartments/Vitebsk")}>
                   Квартиры в Витебске{" "}
                   <span>
                     {
@@ -615,7 +650,10 @@ const Main = () => {
                 alignItems: "center",
               }}
             >
-              <button className={styles["offers-button"]}>
+              <button
+                className={styles["offers-button"]}
+                onClick={() => navigate("/apartments/Minsk")}
+              >
                 Посмотреть все
                 <img src={checkMarkRight} alt="checkMarkRight" />
               </button>
@@ -658,8 +696,12 @@ const Main = () => {
                   : `${styles["drop-down-unactive"]}`
               }
             >
-              <p onClick={(e) => setDropDown(e.target.outerText)}>Есть</p>
-              <p onClick={(e) => setDropDown(e.target.outerText)}>Нет</p>
+              <div>
+                <p onClick={(e) => setDropDown(e.target.outerText)}>Есть</p>
+              </div>
+              <div>
+                <p onClick={(e) => setDropDown(e.target.outerText)}>Нет</p>
+              </div>
             </div>
             <div
               className={
@@ -669,10 +711,26 @@ const Main = () => {
               }
               style={{ left: "16em" }}
             >
-              <p onClick={(e) => setDropDownTwo(e.target.outerText)}>Район 1</p>
-              <p onClick={(e) => setDropDownTwo(e.target.outerText)}>Район 2</p>
-              <p onClick={(e) => setDropDownTwo(e.target.outerText)}>Район 3</p>
-              <p onClick={(e) => setDropDownTwo(e.target.outerText)}>Район 4</p>
+              <div>
+                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                  Район 1
+                </p>
+              </div>
+              <div>
+                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                  Район 2
+                </p>
+              </div>
+              <div>
+                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                  Район 3
+                </p>
+              </div>
+              <div>
+                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                  Район 4
+                </p>
+              </div>
             </div>
           </div>
           <div className={styles.chevrons}>

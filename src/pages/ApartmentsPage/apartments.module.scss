@@ -275,6 +275,11 @@
         border-radius: 10px;
         width: 165px;
 
+        div:hover {
+            background: #F8F8F8;
+            border-radius: 10px;
+        }
+
         p {
             cursor: pointer;
             color: black;

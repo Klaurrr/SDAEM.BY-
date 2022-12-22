@@ -142,3 +142,12 @@
 
 
 }
+
+.heart {
+    background: rgba(235, 87, 87, 0.1);
+    border-radius: 22px !important;
+    transform: rotate(0.25deg);
+    padding: 9px 9px !important;
+    width: 33px;
+    height: 33px;
+}

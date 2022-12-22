@@ -9,14 +9,18 @@ import checkMark from "../../assets/images/checkMark.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
 import byDefault from "../../assets/images/byDefault.png";
 import list from "../../assets/images/list.png";
+import listGray from "../../assets/images/listGray.png";
 import tiles from "../../assets/images/tiles.png";
+import tilesGray from "../../assets/images/tilesGray.png";
 import geoPurple from "../../assets/images/geoPurple.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setApartments } from "../../store/slices/searchApartmentsSlice";
 import Card from "../../components/Card";
 import clsx from "clsx";
 
 const Apartments = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const apartments = useSelector((state) => state.data.apartments);
   const searchedApartments = useSelector((state) => state.search);
@@ -33,6 +37,10 @@ const Apartments = () => {
 
   const [costMax, setCostMax] = useState(undefined);
   const [costMin, setCostMin] = useState(undefined);
+
+  const [costMinValue, setCostMinValue] = useState("");
+  const [costMaxValue, setCostMaxValue] = useState("");
+
   const [rooms, setRooms] = useState(undefined);
   const [city, setCity] = useState({
     city:
@@ -50,11 +58,6 @@ const Apartments = () => {
   });
 
   useEffect(() => {
-    searchedApartments.searchedApartments.length > 0 &&
-      setData(searchedApartments.searchedApartments);
-  }, []);
-
-  useEffect(() => {
     setCity({
       city:
         location.pathname === "/apartments/Minsk"
@@ -69,11 +72,12 @@ const Apartments = () => {
           ? "Гродно"
           : "Могилев",
     });
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   const selectValue = (e) => {
     setSelectActive(selectActive ? false : true);
-    setRooms({ rooms: e.target.outerText });
+    setRooms({ rooms: e.target.outerText.slice(0, 1) });
     setNameSelectRooms(e.target.outerText);
   };
 
@@ -141,11 +145,6 @@ const Apartments = () => {
       )
     );
   };
-
-  useEffect(() => {
-    console.log(data);
-    // console.log(apartments);
-  }, [data]);
 
   return (
     <motion.section
@@ -322,18 +321,40 @@ const Apartments = () => {
                     : `${styles["drop-down-unactive"]}`
                 }
               >
-                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  1 комн.
-                </p>
-                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  2 комн.
-                </p>
-                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  3 комн.
-                </p>
-                <p className={styles["city-p"]} onClick={(e) => selectValue(e)}>
-                  4 комн.
-                </p>
+                <div>
+                  <p
+                    className={styles["city-p"]}
+                    onClick={(e) => selectValue(e)}
+                    value={1}
+                  >
+                    1 комн.
+                  </p>
+                </div>
+                <div>
+                  <p
+                    className={styles["city-p"]}
+                    onClick={(e) => selectValue(e)}
+                  >
+                    2 комн.
+                  </p>
+                </div>
+                <div>
+                  {" "}
+                  <p
+                    className={styles["city-p"]}
+                    onClick={(e) => selectValue(e)}
+                  >
+                    3 комн.
+                  </p>
+                </div>
+                <div>
+                  <p
+                    className={styles["city-p"]}
+                    onClick={(e) => selectValue(e)}
+                  >
+                    4 комн.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -348,21 +369,25 @@ const Apartments = () => {
               <input
                 type="text"
                 placeholder="От"
-                onChange={(e) =>
+                onChange={(e) => {
                   setCostMin({
                     costMin: e.target.value,
-                  })
-                }
+                  });
+                  setCostMinValue(e.target.value);
+                }}
+                value={costMinValue}
               />
               -
               <input
                 type="text"
                 placeholder="До"
-                onChange={(e) =>
+                onChange={(e) => {
                   setCostMax({
                     costMax: e.target.value,
-                  })
-                }
+                  });
+                  setCostMaxValue(e.target.value);
+                }}
+                value={costMaxValue}
               />
             </div>
           </div>
@@ -382,6 +407,15 @@ const Apartments = () => {
               setCostMin(undefined);
               setCostMax(undefined);
               setRooms(undefined);
+              setNameSelectRooms("Выберите");
+              setCostMinValue("");
+              setCostMaxValue("");
+              setSelected("");
+              dispatch(
+                setApartments({
+                  searchedApartments: [],
+                })
+              );
             }}
           >
             Очистить
@@ -389,9 +423,6 @@ const Apartments = () => {
           <button
             onClick={() => {
               createFinallyObj(rooms, costMin, costMax);
-              setTimeout(() => {
-                setNameSelectRooms("Выберите");
-              }, 10);
             }}
           >
             Показать объекты
@@ -412,7 +443,10 @@ const Apartments = () => {
           )}
           onClick={() => setShowApartments("list")}
         >
-          <img src={list} alt="list-img" />
+          <img
+            src={showApartments === "list" ? list : listGray}
+            alt="list-img"
+          />
           <p>Список</p>
         </div>
         <div
@@ -422,7 +456,10 @@ const Apartments = () => {
           )}
           onClick={() => setShowApartments("tiles")}
         >
-          <img src={tiles} alt="tiles-img" />
+          <img
+            src={showApartments === "tiles" ? tiles : tilesGray}
+            alt="tiles-img"
+          />
           <p>Плитки</p>
         </div>
         <div className={styles.button_map}>
@@ -435,30 +472,21 @@ const Apartments = () => {
           Найдено{" "}
           {data
             ? data.length
+            : searchedApartments.searchedApartments.length > 0
+            ? searchedApartments.searchedApartments.length
             : apartments.filter((item) => item.city === city.city).length}{" "}
-          результата
+          результатов
         </h1>
         <div>
-          {
-            data ? (
-              // data.map((item) => item.city)
-              <Card data={[...data]} />
-            ) : (
-              <Card
-                data={[...apartments].filter((item) => item.city === city.city)}
-              ></Card>
-            )
-            // : apartments
-            //     .filter((item) => item.city === city.city)
-            //     .map((item) => (
-            //       <>
-            //         <p>{item.city}</p>
-            //         <p>
-            //           {item.costMin} - {item.costMax}
-            //         </p>
-            //       </>
-            //     ))
-          }
+          {data ? (
+            <Card data={[...data]} />
+          ) : searchedApartments.searchedApartments.length ? (
+            <Card data={[...searchedApartments.searchedApartments]} />
+          ) : (
+            <Card
+              data={[...apartments].filter((item) => item.city === city.city)}
+            />
+          )}
         </div>
       </div>
     </motion.section>
