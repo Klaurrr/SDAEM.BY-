@@ -29,7 +29,7 @@ const CardList = ({ data }) => {
             <p className={styles.gold}>Gold</p>
           </div>
           <div>
-            <h4>4 комн. апартаменты на Грушевке</h4>
+            <h4>{flat.rooms} комн. апартаменты на Грушевке</h4>
             <div className={styles.geo}>
               <img src={geoPurple} alt="geoPurple-img" />
               <p>{flat.city}, б-р Мулявина, д. 10</p>
