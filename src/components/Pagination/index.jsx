@@ -2,15 +2,15 @@ import clsx from "clsx";
 import React from "react";
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ newsPerPage, totalNews, currentPage, paginate }) => {
+const Pagination = ({ dataPerPage, totalData, currentPage, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalNews / newsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalData / dataPerPage); i++) {
     pageNumbers.push(i);
   }
 
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       <ul className={styles.ul}>
         <>
           {pageNumbers.length > 7 ? (

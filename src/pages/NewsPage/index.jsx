@@ -76,8 +76,8 @@ const NewsPage = () => {
             </div>
             <div style={{ position: "absolute" }}>
               <Pagination
-                newsPerPage={newsPerPage}
-                totalNews={data.length}
+                dataPerPage={newsPerPage}
+                totalData={data.length}
                 paginate={paginate}
                 currentPage={currentPage}
               />

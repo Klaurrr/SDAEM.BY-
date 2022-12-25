@@ -18,6 +18,7 @@ import { setApartments } from "../../store/slices/searchApartmentsSlice";
 import Card from "../../components/Card";
 import clsx from "clsx";
 import CardList from "../../components/CardList";
+import Pagination from "../../components/Pagination";
 
 const Apartments = () => {
   const location = useLocation();
@@ -58,7 +59,16 @@ const Apartments = () => {
         : "Могилев",
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [apartmentsPerPage, setApartmentsPerPage] = useState(4);
+
   const [sort, setSort] = useState(false);
+
+  useEffect(() => {
+    showApartments === "list"
+      ? setApartmentsPerPage(4)
+      : setApartmentsPerPage(9);
+  }, [showApartments]);
 
   useEffect(() => {
     setCity({
@@ -77,6 +87,9 @@ const Apartments = () => {
     });
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  const lastApartmentsIndex = currentPage * apartmentsPerPage;
+  const firstApartmentsIndex = lastApartmentsIndex - apartmentsPerPage;
 
   const selectValue = (e) => {
     setSelectActive(selectActive ? false : true);
@@ -148,6 +161,8 @@ const Apartments = () => {
       )
     );
   };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <motion.section
@@ -494,16 +509,20 @@ const Apartments = () => {
               <Card
                 data={
                   sort
-                    ? [...data].sort((a, b) => a.costMin - b.costMin)
-                    : [...data]
+                    ? [...data]
+                        .sort((a, b) => a.costMin - b.costMin)
+                        .slice(firstApartmentsIndex, lastApartmentsIndex)
+                    : [...data].slice(firstApartmentsIndex, lastApartmentsIndex)
                 }
               />
             ) : (
               <CardList
                 data={
                   sort
-                    ? [...data].sort((a, b) => a.costMin - b.costMin)
-                    : [...data]
+                    ? [...data]
+                        .sort((a, b) => a.costMin - b.costMin)
+                        .slice(firstApartmentsIndex, lastApartmentsIndex)
+                    : [...data].slice(firstApartmentsIndex, lastApartmentsIndex)
                 }
               />
             )
@@ -512,20 +531,26 @@ const Apartments = () => {
               <Card
                 data={
                   sort
-                    ? [...searchedApartments.searchedApartments].sort(
-                        (a, b) => a.costMin - b.costMin
+                    ? [...searchedApartments.searchedApartments]
+                        .sort((a, b) => a.costMin - b.costMin)
+                        .slice(firstApartmentsIndex, lastApartmentsIndex)
+                    : [...searchedApartments.searchedApartments].slice(
+                        firstApartmentsIndex,
+                        lastApartmentsIndex
                       )
-                    : [...searchedApartments.searchedApartments]
                 }
               />
             ) : (
               <CardList
                 data={
                   sort
-                    ? [...searchedApartments.searchedApartments].sort(
-                        (a, b) => a.costMin - b.costMin
+                    ? [...searchedApartments.searchedApartments]
+                        .sort((a, b) => a.costMin - b.costMin)
+                        .slice(firstApartmentsIndex, lastApartmentsIndex)
+                    : [...searchedApartments.searchedApartments].slice(
+                        firstApartmentsIndex,
+                        lastApartmentsIndex
                       )
-                    : [...searchedApartments.searchedApartments]
                 }
               />
             )
@@ -536,7 +561,10 @@ const Apartments = () => {
                   ? [...apartments]
                       .filter((item) => item.city === city.city)
                       .sort((a, b) => a.costMin - b.costMin)
-                  : [...apartments].filter((item) => item.city === city.city)
+                      .slice(firstApartmentsIndex, lastApartmentsIndex)
+                  : [...apartments]
+                      .filter((item) => item.city === city.city)
+                      .slice(firstApartmentsIndex, lastApartmentsIndex)
               }
             />
           ) : (
@@ -546,11 +574,28 @@ const Apartments = () => {
                   ? [...apartments]
                       .filter((item) => item.city === city.city)
                       .sort((a, b) => a.costMin - b.costMin)
-                  : [...apartments].filter((item) => item.city === city.city)
+                      .slice(firstApartmentsIndex, lastApartmentsIndex)
+                  : [...apartments]
+                      .filter((item) => item.city === city.city)
+                      .slice(firstApartmentsIndex, lastApartmentsIndex)
               }
             />
           )}
         </div>
+      </div>
+      <div className={styles.wrapper_2}>
+        <Pagination
+          dataPerPage={apartmentsPerPage}
+          totalData={
+            data
+              ? data.length
+              : searchedApartments.searchedApartments.length > 0
+              ? searchedApartments.searchedApartments.length
+              : apartments.filter((item) => item.city === city.city).length
+          }
+          paginate={paginate}
+          currentPage={currentPage}
+        />
       </div>
     </motion.section>
   );
