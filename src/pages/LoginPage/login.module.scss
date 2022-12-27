@@ -35,7 +35,6 @@
         font-size: 14px;
         line-height: 17px;
         color: #686868;
-        // margin: 0;
     }
 
     button {
@@ -43,7 +42,6 @@
         border-radius: 33px;
         border: none;
         cursor: pointer;
-        // padding: 12px 159px;
         height: 48px;
         color: #1E2123;
         font-weight: 700;
@@ -61,6 +59,7 @@
     align-items: center;
     border-radius: 30px;
     background: #F7F7F7;
+
     border: 2px solid rgba(78, 100, 249, 0.8);
 
 
@@ -68,9 +67,12 @@
         margin-bottom: 20px;
     }
 
-    img {
+    img:first-child {
         margin-left: 21px;
+    }
 
+    img:last-child {
+        margin-right: 21px;
     }
 
     input {
@@ -89,6 +91,7 @@
     }
 
 }
+
 
 .checkbox {
     display: inline-block;

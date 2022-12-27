@@ -7,7 +7,7 @@ import userLogin from "./../../assets/images/UserLogin.png";
 import lock from "./../../assets/images/lock.png";
 import styles from "./login.module.scss";
 import { useForm } from "react-hook-form";
-import clsx from "clsx";
+import alert from "../../assets/images/alert.png";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
@@ -87,6 +87,11 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   onChange={() => clearErrors("login")}
                   autoсomplete="on"
                 />
+                <img
+                  src={alert}
+                  alt="alert-png"
+                  style={{ display: errors.login ? "block" : "none" }}
+                />
               </div>
               <div
                 className={styles["input-wrapper"]}
@@ -108,6 +113,11 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   onChange={() => clearErrors("password")}
                   placeholder={errors.password ? `Неверный пароль` : "Пароль"}
                   autoсomplete="on"
+                />
+                <img
+                  src={alert}
+                  alt="alert-png"
+                  style={{ display: errors.password ? "block" : "none" }}
                 />
               </div>
               <div className={styles["buttons-wrapper"]}>

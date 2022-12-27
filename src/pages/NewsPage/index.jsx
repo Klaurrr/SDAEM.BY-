@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import NewsCard from "../../components/NewsCard";
 import { useEffect } from "react";
 import Pagination from "../../components/Pagination";
+import Footer from "../../components/Footer";
 
 const NewsPage = () => {
   const [value, setValue] = useState("");
@@ -59,29 +60,27 @@ const NewsPage = () => {
             </button>
           </form>
         </div>
-        <div style={{ position: "absolute" }}>
-          <div className={styles.card_container}>
-            <div style={{ display: "flex", flexWrap: "wrap" }}>
-              {news.length > 0
-                ? news.map((item) => (
-                    <div className={styles.wrapper} key={item.id}>
-                      <NewsCard item={item} />
-                    </div>
-                  ))
-                : currentNews.map((item) => (
-                    <div className={styles.wrapper} key={item.id}>
-                      <NewsCard item={item} />
-                    </div>
-                  ))}
-            </div>
-            <div style={{ position: "absolute" }}>
-              <Pagination
-                dataPerPage={newsPerPage}
-                totalData={data.length}
-                paginate={paginate}
-                currentPage={currentPage}
-              />
-            </div>
+        <div className={styles.card_container}>
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {news.length > 0
+              ? news.map((item) => (
+                  <div className={styles.wrapper} key={item.id}>
+                    <NewsCard item={item} />
+                  </div>
+                ))
+              : currentNews.map((item) => (
+                  <div className={styles.wrapper} key={item.id}>
+                    <NewsCard item={item} />
+                  </div>
+                ))}
+          </div>
+          <div style={{ position: "absolute" }}>
+            <Pagination
+              dataPerPage={newsPerPage}
+              totalData={data.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
           </div>
         </div>
       </div>

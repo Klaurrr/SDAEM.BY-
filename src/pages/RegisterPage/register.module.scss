@@ -53,9 +53,12 @@
     border: 2px solid rgba(78, 100, 249, 0.8);
     margin-bottom: 20px;
 
-    img {
+    img:first-child {
         margin-left: 21px;
+    }
 
+    img:last-child {
+        margin-right: 21px;
     }
 
     input {
@@ -134,5 +137,21 @@
     span {
         font-weight: 600;
     }
+}
 
+.errors_alert {
+    background: #EB5757;
+    border-radius: 33px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    margin-top: 20px;
+
+    img {
+        margin-left: 15px;
+    }
 }

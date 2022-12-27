@@ -19,6 +19,12 @@ import Card from "../../components/Card";
 import clsx from "clsx";
 import CardList from "../../components/CardList";
 import Pagination from "../../components/Pagination";
+import vk from "../../assets/images/vk.png";
+import whatsApp from "../../assets/images/whatsApp.png";
+import viber from "../../assets/images/Viber.png";
+import faceBook from "../../assets/images/Facebook.png";
+import telegram from "../../assets/images/telegram.png";
+import geoYellow from "../../assets/images/geoYellow.png";
 
 const Apartments = () => {
   const location = useLocation();
@@ -172,7 +178,7 @@ const Apartments = () => {
     >
       <div style={{ height: "319px", position: "relative" }}>
         <div className={styles.background}></div>
-        <div className={styles.container_1}>
+        <div className={styles.container}>
           <BreadCrumbs
             crumbSubTitle={`Квартиры в ${
               location.pathname === "/apartments/Minsk"
@@ -596,6 +602,41 @@ const Apartments = () => {
           paginate={paginate}
           currentPage={currentPage}
         />
+        <div className={styles.share}>
+          <p>Поделиться</p>
+          <div>
+            <img src={vk} alt="vk-img" />
+          </div>
+          <div>
+            <img src={faceBook} alt="facebook-img" />
+          </div>
+          <div>
+            <img src={viber} alt="viber-img" />
+          </div>
+          <div>
+            <img src={telegram} alt="telegram-img" />
+          </div>
+          <div>
+            <img src={whatsApp} alt="whatsApp-img" />
+          </div>
+        </div>
+      </div>
+      <div className={styles.wrapper_3}>
+        <div className={styles.background_2}>
+          <div className={styles.desc}>
+            <h1>Показать найденные квартиры на карте</h1>
+            <p className={styles.subtitle}>
+              Ищите новостройки рядом с работой,
+              <br /> парком или родственниками
+            </p>
+            <button>
+              <div>
+                <img src={geoYellow} alt="geoYellow" />
+                <p>Открыть карту</p>
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </motion.section>
   );

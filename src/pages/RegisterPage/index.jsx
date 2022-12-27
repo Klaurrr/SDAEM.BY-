@@ -9,6 +9,8 @@ import styles from "./register.module.scss";
 import { useForm } from "react-hook-form";
 import email from "../../assets/images/email.png";
 import captcha from "../../assets/images/recaptcha.jpg";
+import alert from "../../assets/images/alert.png";
+import alertWhite from "../../assets/images/alertWhite.png";
 import { motion } from "framer-motion";
 
 const RegisterPage = () => {
@@ -47,7 +49,10 @@ const RegisterPage = () => {
       exit={{ opacity: 0 }}
     >
       <div className={styles["background-color"]}>
-        <div className={styles["form-wrapper"]}>
+        <div
+          className={styles["form-wrapper"]}
+          style={{ height: Object.entries(errors).length != 0 && "654px" }}
+        >
           <h3>Регистрация</h3>
           <div style={{ display: "flex" }}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -65,6 +70,11 @@ const RegisterPage = () => {
                     placeholder={errors.login ? `Логин > 4 символов` : "Логин"}
                     onChange={() => clearErrors("login")}
                     autoComplete="on"
+                  />
+                  <img
+                    src={alert}
+                    alt="alert-png"
+                    style={{ display: errors.login ? "block" : "none" }}
                   />
                 </div>
                 <div
@@ -87,6 +97,11 @@ const RegisterPage = () => {
                       errors.email ? `Почта > 4 символов` : "Электронная почта"
                     }
                     autoComplete="on"
+                  />
+                  <img
+                    src={alert}
+                    alt="alert-png"
+                    style={{ display: errors.email ? "block" : "none" }}
                   />
                 </div>
                 <div
@@ -113,6 +128,11 @@ const RegisterPage = () => {
                     }
                     autoComplete="on"
                   />
+                  <img
+                    src={alert}
+                    alt="alert-png"
+                    style={{ display: errors.password ? "block" : "none" }}
+                  />
                 </div>
                 <div
                   className={styles["input-wrapper"]}
@@ -137,6 +157,11 @@ const RegisterPage = () => {
                         : "Повторите пароль"
                     }
                     autoComplete="on"
+                  />
+                  <img
+                    src={alert}
+                    alt="alert-png"
+                    style={{ display: errors.repeatPass ? "block" : "none" }}
                   />
                 </div>
                 <div style={{ position: "relative" }}>
@@ -170,10 +195,17 @@ const RegisterPage = () => {
                     Конфиденциальность - Условия использования
                   </p>
                 </div>
-
-                <button className="login_page-btn" type="submit">
-                  Зарегистрироваться
-                </button>
+                <div
+                  className={styles.errors_alert}
+                  style={{
+                    display:
+                      Object.entries(errors).length === 0 ? "none" : "flex",
+                  }}
+                >
+                  Ошибка ввода
+                  <img src={alertWhite} alt="alertWhite-png" />
+                </div>
+                <button type="submit">Зарегистрироваться</button>
               </div>
             </form>
             <div className={styles.desc}>

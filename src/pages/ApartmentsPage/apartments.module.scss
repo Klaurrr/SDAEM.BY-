@@ -4,7 +4,7 @@
     height: 100%;
 }
 
-.container_1 {
+.container {
     position: absolute;
     top: 45px;
     left: 80px;
@@ -341,6 +341,10 @@
         background: none;
         box-shadow: none;
 
+        &:hover {
+            background: #F8F8F8;
+        }
+
         p {
             font-weight: 500;
         }
@@ -357,6 +361,10 @@
         box-shadow: none;
         margin-right: 15px;
         width: 106px;
+
+        &:hover {
+            background: #F8F8F8;
+        }
 
         p {
             font-weight: 500;
@@ -397,7 +405,7 @@
 .wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+
 }
 
 .title {
@@ -411,5 +419,112 @@
 
 .wrapper_2 {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 0px 81px 51px 80px;
+
+    .share {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+
+        p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: #686868;
+            margin-right: 20px;
+        }
+
+        div {
+            background: #F8F8F8;
+            border-radius: 25px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        img {
+            filter: brightness(0%);
+
+        }
+    }
+}
+
+.wrapper_3 {
+    background-image: url(../../assets/images/mainBackGround.png);
+    width: 1440px;
+    height: 310px;
+    background-size: cover;
+}
+
+.background_2 {
+    mix-blend-mode: overlay;
+    background: linear-gradient(360deg, #7E6AF3 15.95%, #6540CD 63.1%);
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    .desc {
+        position: absolute;
+        top: 74px;
+
+        h1 {
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 30px;
+            color: #FFFFFF;
+        }
+
+        .subtitle {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: #FFFFFF;
+            margin: 20px 0px 23px;
+        }
+
+        button {
+
+
+            p {
+                transition: all 0.3s ease;
+            }
+
+            &:hover {
+                p {
+                    color: #FEC100;
+                }
+            }
+
+            div {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 10px 18px;
+                gap: 10px;
+
+
+
+
+                p {
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: black;
+                    margin: 0;
+                }
+            }
+
+            border-radius: 19px;
+            cursor: pointer;
+            border: none;
+        }
+    }
 }

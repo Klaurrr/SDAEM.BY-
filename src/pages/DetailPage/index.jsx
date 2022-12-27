@@ -57,20 +57,20 @@ const DetailPage = () => {
                       className={styles.img_wrapper}
                       style={{ marginLeft: "15px" }}
                     >
-                      <img src={vk} alt="" />
+                      <img src={vk} alt="vk-img" />
                     </div>
                     <div className={styles.img_wrapper}>
-                      <img src={faceBook} alt="" />
+                      <img src={faceBook} alt="facebook-img" />
                     </div>
                     <div className={styles.img_wrapper}>
-                      <img src={viber} alt="" />
+                      <img src={viber} alt="viber-img" />
                     </div>
                     <div className={styles.img_wrapper}>
-                      <img src={telegram} alt="" />
+                      <img src={telegram} alt="telegram-img" />
                     </div>
                     <div className={styles.img_wrapper}>
                       {" "}
-                      <img src={whatsApp} alt="" />
+                      <img src={whatsApp} alt="whatsApp-img" />
                     </div>
                   </div>
                 </div>

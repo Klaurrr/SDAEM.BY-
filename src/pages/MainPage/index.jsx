@@ -1,11 +1,6 @@
 import { useState, useLayoutEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import mainBackGround from "../../assets/images/mainBackGround.png";
-import apartment from "../../assets/images/apartments-day.jpg";
-import cottagesAndEstates from "../../assets/images/cottages&estates.jpg";
-import cars from "../../assets/images/cars.jpg";
-import bathHouse from "../../assets/images/bath.png";
 import chevron from "../../assets/images/chevron.png";
 import more from "../../assets/images/more.png";
 import geoPurple from "../../assets/images/geoPurple.png";
@@ -180,271 +175,253 @@ const Main = () => {
       exit={{ opacity: 0 }}
     >
       <main className={styles.container}>
-        <div
-          className={styles.wrapper}
-          style={{ background: `url(${mainBackGround})` }}
-        >
-          <div className={styles.background}>
-            <h1 className={styles.title}>
-              Sdaem.by - у нас живут <span>ваши объявления</span>
-            </h1>
-            <ul className={styles.ul}>
-              <li
-                onClick={() => setStyle(style === "one" ? "one" : "one")}
-                className={`main_li ${
-                  style === "one" ? `${styles.active}` : ""
-                }`}
-              >
-                Квартиры на сутки
-              </li>
-              <li
-                onClick={() => setStyle(style === "two" ? "two" : "two")}
-                className={`main_li ${
-                  style === "two" ? `${styles.active}` : ""
-                }`}
-              >
-                Коттеджи и усадьбы
-              </li>
-              <li
-                onClick={() => setStyle(style == "three" ? "three" : "three")}
-                className={`main_li ${
-                  style === "three" ? `${styles.active}` : ""
-                }`}
-              >
-                Бани и сауны
-              </li>
-              <li
-                onClick={() => setStyle(style == "four" ? "four" : "four")}
-                className={`main_li ${
-                  style === "four" ? `${styles.active}` : ""
-                }`}
-              >
-                Авто напрокат
-              </li>
-            </ul>
-            <form className={styles.select}>
-              <div className={clsx(styles["select_item"], styles.city)}>
-                <p className={styles["select_item-title"]}>Город</p>
-                <div>
-                  <div
-                    className={
-                      selectFirst
-                        ? `${styles["select-active"]}`
-                        : `${styles.city}`
-                    }
-                    onClick={() => setSelectFirst(selectFirst ? false : true)}
-                  >
-                    <div className={styles["city-wrapper"]}>
-                      {nameSelect}
-                      <img src={checkMark} alt="" />
-                    </div>
+        <div className={styles.wrapper}>
+          <h1 className={styles.title}>
+            Sdaem.by - у нас живут <span>ваши объявления</span>
+          </h1>
+          <ul className={styles.ul}>
+            <li
+              onClick={() => setStyle(style === "one" ? "one" : "one")}
+              className={`main_li ${style === "one" ? `${styles.active}` : ""}`}
+            >
+              Квартиры на сутки
+            </li>
+            <li
+              onClick={() => setStyle(style === "two" ? "two" : "two")}
+              className={`main_li ${style === "two" ? `${styles.active}` : ""}`}
+            >
+              Коттеджи и усадьбы
+            </li>
+            <li
+              onClick={() => setStyle(style == "three" ? "three" : "three")}
+              className={`main_li ${
+                style === "three" ? `${styles.active}` : ""
+              }`}
+            >
+              Бани и сауны
+            </li>
+            <li
+              onClick={() => setStyle(style == "four" ? "four" : "four")}
+              className={`main_li ${
+                style === "four" ? `${styles.active}` : ""
+              }`}
+            >
+              Авто напрокат
+            </li>
+          </ul>
+          <form className={styles.select}>
+            <div className={clsx(styles["select_item"], styles.city)}>
+              <p className={styles["select_item-title"]}>Город</p>
+              <div>
+                <div
+                  className={
+                    selectFirst
+                      ? `${styles["select-active"]}`
+                      : `${styles.city}`
+                  }
+                  onClick={() => setSelectFirst(selectFirst ? false : true)}
+                >
+                  <div className={styles["city-wrapper"]}>
+                    {nameSelect}
+                    <img src={checkMark} alt="" />
                   </div>
-                  <div
-                    style={{ position: "relative", left: "0" }}
-                    className={
-                      selectFirst
-                        ? `${styles["drop-down-active"]}`
-                        : `${styles["drop-down-unactive"]}`
-                    }
-                  >
-                    <div>
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueFirst(e)}
-                      >
-                        Минск
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueFirst(e)}
-                      >
-                        Гомель
-                      </p>
-                    </div>
-                    <div>
-                      {" "}
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueFirst(e)}
-                      >
-                        Гродно
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueFirst(e)}
-                      >
-                        Могилев
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueFirst(e)}
-                      >
-                        Брест
-                      </p>
-                    </div>
+                </div>
+                <div
+                  style={{ position: "relative", left: "0" }}
+                  className={
+                    selectFirst
+                      ? `${styles["drop-down-active"]}`
+                      : `${styles["drop-down-unactive"]}`
+                  }
+                >
+                  <div>
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueFirst(e)}
+                    >
+                      Минск
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueFirst(e)}
+                    >
+                      Гомель
+                    </p>
+                  </div>
+                  <div>
+                    {" "}
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueFirst(e)}
+                    >
+                      Гродно
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueFirst(e)}
+                    >
+                      Могилев
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueFirst(e)}
+                    >
+                      Брест
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className={clsx(styles["select_item"], styles.rooms)}>
-                <p className={styles["select_item-title"]}>Комнаты</p>
-                <div>
-                  <div
-                    className={
-                      selectSecond
-                        ? `${styles["select-active"]}`
-                        : `${styles.city}`
-                    }
-                    onClick={() => setSelectSecond(selectSecond ? false : true)}
-                  >
-                    <div className={styles["city-wrapper"]}>
-                      {nameSelectRooms}
-                      <img src={checkMark} alt="checkMark" />
-                    </div>
-                  </div>
-                  <div
-                    style={{ position: "relative", left: "0" }}
-                    className={
-                      selectSecond
-                        ? `${styles["drop-down-active"]}`
-                        : `${styles["drop-down-unactive"]}`
-                    }
-                  >
-                    <div>
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueSecond(e)}
-                      >
-                        1
-                      </p>
-                    </div>
-                    <div>
-                      {" "}
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueSecond(e)}
-                      >
-                        2
-                      </p>
-                    </div>
-                    <div>
-                      {" "}
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueSecond(e)}
-                      >
-                        3
-                      </p>
-                    </div>
-                    <div>
-                      {" "}
-                      <p
-                        className={styles["city-p"]}
-                        onClick={(e) => selectValueSecond(e)}
-                      >
-                        4
-                      </p>
-                    </div>
+            </div>
+            <div className={clsx(styles["select_item"], styles.rooms)}>
+              <p className={styles["select_item-title"]}>Комнаты</p>
+              <div>
+                <div
+                  className={
+                    selectSecond
+                      ? `${styles["select-active"]}`
+                      : `${styles.city}`
+                  }
+                  onClick={() => setSelectSecond(selectSecond ? false : true)}
+                >
+                  <div className={styles["city-wrapper"]}>
+                    {nameSelectRooms}
+                    <img src={checkMark} alt="checkMark" />
                   </div>
                 </div>
-              </div>
-              <div
-                className={clsx(
-                  styles["select_item"],
-                  styles["select_item_cost"]
-                )}
-              >
-                <p className={styles["select_item-title"]}>
-                  Цена за сутки (BYN)
-                </p>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <input
-                    type="number"
-                    placeholder="От"
-                    onChange={(e) =>
-                      setCostMin({
-                        costMin: e.target.value,
-                      })
-                    }
-                  />
-                  -
-                  <input
-                    type="number"
-                    placeholder="До"
-                    onChange={(e) =>
-                      setCostMax({
-                        costMax: e.target.value,
-                      })
-                    }
-                  />
+                <div
+                  style={{ position: "relative", left: "0" }}
+                  className={
+                    selectSecond
+                      ? `${styles["drop-down-active"]}`
+                      : `${styles["drop-down-unactive"]}`
+                  }
+                >
+                  <div>
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueSecond(e)}
+                    >
+                      1
+                    </p>
+                  </div>
+                  <div>
+                    {" "}
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueSecond(e)}
+                    >
+                      2
+                    </p>
+                  </div>
+                  <div>
+                    {" "}
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueSecond(e)}
+                    >
+                      3
+                    </p>
+                  </div>
+                  <div>
+                    {" "}
+                    <p
+                      className={styles["city-p"]}
+                      onClick={(e) => selectValueSecond(e)}
+                    >
+                      4
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div
-                className={styles["select_item"]}
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <div className={styles.more}>
-                  Больше опций
-                  <img src={more} alt="more" />
-                </div>
+            </div>
+            <div
+              className={clsx(
+                styles["select_item"],
+                styles["select_item_cost"]
+              )}
+            >
+              <p className={styles["select_item-title"]}>Цена за сутки (BYN)</p>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <input
+                  type="number"
+                  placeholder="От"
+                  onChange={(e) =>
+                    setCostMin({
+                      costMin: e.target.value,
+                    })
+                  }
+                />
+                -
+                <input
+                  type="number"
+                  placeholder="До"
+                  onChange={(e) =>
+                    setCostMax({
+                      costMax: e.target.value,
+                    })
+                  }
+                />
               </div>
-              <div className={styles["select_item"]}>
-                <div className={styles["more_two"]}>
-                  На карте
-                  <img
-                    className="img_geo-purple"
-                    src={geoPurple}
-                    alt="geo-purple"
-                  />
-                  <button
-                    onClick={() => {
-                      city
-                        ? createFinallyObj(city, rooms, costMin, costMax)
-                        : alert("Укажите город");
-                      navigate(
-                        `/apartments/${
-                          city.city === "Минск"
-                            ? "Minsk"
-                            : city.city === "Гомель"
-                            ? "Gomel"
-                            : city.city === "Гродно"
-                            ? "Grodno"
-                            : city.city === "Могилев"
-                            ? "Mogilev"
-                            : "Brest"
-                        }`
-                      );
-                      setTimeout(() => {
-                        setNameSelect("Выберите");
-                        setNameSelectRooms("Выберите");
-                      }, 10);
-                    }}
-                  >
-                    Показать
-                    <img src={checkMarkRight} alt="checkmarkRight-png" />
-                  </button>
-                </div>
+            </div>
+            <div
+              className={styles["select_item"]}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <div className={styles.more}>
+                Больше опций
+                <img src={more} alt="more" />
               </div>
-            </form>
-          </div>
+            </div>
+            <div className={styles["select_item"]}>
+              <div className={styles["more_two"]}>
+                На карте
+                <img
+                  className="img_geo-purple"
+                  src={geoPurple}
+                  alt="geo-purple"
+                />
+                <button
+                  onClick={() => {
+                    city
+                      ? createFinallyObj(city, rooms, costMin, costMax)
+                      : alert("Укажите город");
+                    navigate(
+                      `/apartments/${
+                        city.city === "Минск"
+                          ? "Minsk"
+                          : city.city === "Гомель"
+                          ? "Gomel"
+                          : city.city === "Гродно"
+                          ? "Grodno"
+                          : city.city === "Могилев"
+                          ? "Mogilev"
+                          : "Brest"
+                      }`
+                    );
+                    setTimeout(() => {
+                      setNameSelect("Выберите");
+                      setNameSelectRooms("Выберите");
+                    }, 10);
+                  }}
+                >
+                  Показать
+                  <img src={checkMarkRight} alt="checkmarkRight-png" />
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
         <div className={styles.cards}>
           <section className={styles["container-2"]}>
             <div>
               <div className={styles["wrapper-2"]}>
-                <div
-                  style={{
-                    background: `url(${apartment})`,
-                    width: "516px",
-                    height: "270px",
-                    borderRadius: "10px",
-                  }}
-                >
+                <div className={styles.apartment}>
                   <p className={styles["title-2"]}>Снять квартиру</p>
                   <p className={styles["subtitle-2"]}>Квартиры на сутки</p>
                   <ul className={styles["ul-2"]}>
@@ -469,16 +446,7 @@ const Main = () => {
                     </li>
                   </ul>
                 </div>
-                <div
-                  style={{
-                    background: `url(${cottagesAndEstates})`,
-                    width: "407px",
-                    height: "270px",
-                    borderRadius: "10px",
-                    marginLeft: "30px",
-                    cursor: "pointer",
-                  }}
-                >
+                <div className={styles.cottages}>
                   <p className={styles["title-2"]}>СНЯТЬ коттедж НА ПРАЗДНИК</p>
                   <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
                   <img
@@ -492,15 +460,7 @@ const Main = () => {
                 className={styles["wrapper-2"]}
                 style={{ marginTop: "30px" }}
               >
-                <div
-                  style={{
-                    background: `url(${bathHouse})`,
-                    width: "407px",
-                    height: "270px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                  }}
-                >
+                <div className={styles.bathHouse}>
                   <p className={styles["title-2"]}>
                     Попариться в бане с друзьями
                   </p>
@@ -511,16 +471,7 @@ const Main = () => {
                     alt="chevron"
                   />
                 </div>
-                <div
-                  style={{
-                    background: `url(${cars})`,
-                    width: "516px",
-                    height: "270px",
-                    borderRadius: "10px",
-                    marginLeft: "30px",
-                    cursor: "pointer",
-                  }}
-                >
+                <div className={styles.cars}>
                   <p className={styles["title-2"]}>EСЛИ СРОЧНО НУЖНА МАШИНА</p>
                   <p className={styles["subtitle-2"]}>Авто на прокат</p>
                   <img
@@ -750,138 +701,129 @@ const Main = () => {
           src={gapsWhite}
           alt="gaps_white"
         />
-        <div
-          style={{
-            background: `url(${mainBackGround})`,
-            width: "1440px",
-            height: "440px",
-            backgroundSize: "100% 100%",
-          }}
-        >
-          <div style={{ position: "relative" }}>
-            <div className={styles["background-2"]}>
-              <div className={styles["search-desc"]}>
-                <h3>Поиск квартир на карте</h3>
-                <p>
-                  Ищите квартиры на сутки в центре города,
-                  <br /> возле парка или в живописном районе
-                </p>
-                <button>
-                  <div>
-                    <img src={geoYellow} alt="geoYellow" />
-                    <p>Открыть карту</p>
+        <div className={styles["wrapper-4"]}>
+          <div className={styles["background-2"]}>
+            <div className={styles["search-desc"]}>
+              <h3>Поиск квартир на карте</h3>
+              <p>
+                Ищите квартиры на сутки в центре города,
+                <br /> возле парка или в живописном районе
+              </p>
+              <button>
+                <div>
+                  <img src={geoYellow} alt="geoYellow" />
+                  <p>Открыть карту</p>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div className={styles["search-wrap"]}>
+            <div className={styles["search-cards"]}>
+              <div
+                style={{
+                  paddingLeft: "37px",
+                  paddingTop: "27px",
+                  paddingRight: "39px",
+                }}
+              >
+                <div className={styles["search-cards-title"]}>
+                  <div className={styles.circle}>
+                    <img src={AdFree} alt="ad_free" />
                   </div>
+                  <p>
+                    Начните привлекать <br /> клиентов бесплатно!
+                  </p>
+                </div>
+                <div className={styles["search-cards-desc"]}>
+                  <p>
+                    Пройдя простую регистрацию на сайте у Вас появится личный
+                    кабинет, в котором возможно{" "}
+                    <span>бесплатно создавать и публиковать </span>
+                    объявления на сайте.
+                  </p>
+                </div>
+                <button>+ Разместить объявление</button>
+              </div>
+            </div>
+            <div className={styles["search-cards"]}>
+              <div
+                style={{
+                  paddingLeft: "37px",
+                  paddingTop: "27px",
+                  paddingRight: "39px",
+                }}
+              >
+                <div className={styles["search-cards-title"]}>
+                  <div className={styles.circle}>
+                    <img src={AdUp} alt="AD_UP" />
+                  </div>
+                  <p>
+                    Поднимайте <br /> объявления
+                  </p>
+                </div>
+                <div className={styles["search-cards-desc"]}>
+                  <p>
+                    Вы в любое время можете <span>поднимать</span> объявления{" "}
+                    <span>вверх первой страницы</span> каталога, они разместятся
+                    сразу после платных объявлений до тех пор, пока другой
+                    пользователь не повторит процедуру.
+                  </p>
+                </div>
+                <button>
+                  <p>Узнать стоимость услуги</p>
+                  <img
+                    style={{ filter: "invert(1)" }}
+                    src={checkMarkRight}
+                    alt="checkMarkRight"
+                  />
                 </button>
               </div>
             </div>
-            <div className={styles["search-wrap"]}>
-              <div className={styles["search-cards"]}>
-                <div
-                  style={{
-                    paddingLeft: "37px",
-                    paddingTop: "27px",
-                    paddingRight: "39px",
-                  }}
-                >
-                  <div className={styles["search-cards-title"]}>
-                    <div className={styles.circle}>
-                      <img src={AdFree} alt="ad_free" />
-                    </div>
-                    <p>
-                      Начните привлекать <br /> клиентов бесплатно!
-                    </p>
-                  </div>
-                  <div className={styles["search-cards-desc"]}>
-                    <p>
-                      Пройдя простую регистрацию на сайте у Вас появится личный
-                      кабинет, в котором возможно{" "}
-                      <span>бесплатно создавать и публиковать </span>
-                      объявления на сайте.
-                    </p>
-                  </div>
-                  <button>+ Разместить объявление</button>
+            <div className={clsx(styles["search-cards"], styles.gold)}>
+              <img
+                src={glare}
+                alt="glare"
+                style={{
+                  position: "absolute",
+                  left: "134px",
+                  top: "118px",
+                  borderRadius: "0px 0px 10px",
+                }}
+              />
+              <h2>Приоритет Gold</h2>
+              <div
+                style={{
+                  paddingLeft: "37px",
+                  paddingRight: "39px",
+                }}
+              >
+                <div className={styles["gold-desc"]}>
+                  <p>
+                    Приоритетное размещение <span>Gold</span> позволяет{" "}
+                    <span>закрепить ваше объявление</span> в верхней части
+                    каталога!
+                  </p>
+                  <p style={{ marginTop: "14px" }}>
+                    Gold объявления <span>перемещаются каждые 5 мин</span> на 1
+                    позицию, что делает размещение одинаковым для всех.
+                  </p>
                 </div>
-              </div>
-              <div className={styles["search-cards"]}>
-                <div
-                  style={{
-                    paddingLeft: "37px",
-                    paddingTop: "27px",
-                    paddingRight: "39px",
-                  }}
-                >
-                  <div className={styles["search-cards-title"]}>
-                    <div className={styles.circle}>
-                      <img src={AdUp} alt="AD_UP" />
-                    </div>
-                    <p>
-                      Поднимайте <br /> объявления
-                    </p>
-                  </div>
-                  <div className={styles["search-cards-desc"]}>
-                    <p>
-                      Вы в любое время можете <span>поднимать</span> объявления{" "}
-                      <span>вверх первой страницы</span> каталога, они
-                      разместятся сразу после платных объявлений до тех пор,
-                      пока другой пользователь не повторит процедуру.
-                    </p>
-                  </div>
-                  <button>
-                    <p>Узнать стоимость услуги</p>
-                    <img
-                      style={{ filter: "invert(1)" }}
-                      src={checkMarkRight}
-                      alt="checkMarkRight"
-                    />
-                  </button>
-                </div>
-              </div>
-              <div className={clsx(styles["search-cards"], styles.gold)}>
-                <img
-                  src={glare}
-                  alt="glare"
-                  style={{
-                    position: "absolute",
-                    left: "134px",
-                    top: "118px",
-                    borderRadius: "0px 0px 10px",
-                  }}
-                />
-                <h2>Приоритет Gold</h2>
-                <div
-                  style={{
-                    paddingLeft: "37px",
-                    paddingRight: "39px",
-                  }}
-                >
-                  <div className={styles["gold-desc"]}>
-                    <p>
-                      Приоритетное размещение <span>Gold</span> позволяет{" "}
-                      <span>закрепить ваше объявление</span> в верхней части
-                      каталога!
-                    </p>
-                    <p style={{ marginTop: "14px" }}>
-                      Gold объявления <span>перемещаются каждые 5 мин</span> на
-                      1 позицию, что делает размещение одинаковым для всех.
-                    </p>
-                  </div>
-                  <button id={styles["btn-purple"]}>
-                    <p>Еще о тарифе Gold</p>
-                    <img src={checkMarkRight} alt="checkMarkRight" />
-                  </button>
-                </div>
+                <button id={styles["btn-purple"]}>
+                  <p>Еще о тарифе Gold</p>
+                  <img src={checkMarkRight} alt="checkMarkRight" />
+                </button>
               </div>
             </div>
-            <img
-              style={{
-                position: "absolute",
-                marginLeft: "1210px",
-                marginTop: "264px",
-              }}
-              src={gaps}
-              alt="gaps"
-            />
           </div>
+          <img
+            style={{
+              position: "absolute",
+              right: "165px",
+              top: "705px",
+            }}
+            src={gaps}
+            alt="gaps"
+          />
         </div>
       </section>
       <section className={styles["container-4"]}>

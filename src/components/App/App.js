@@ -9,6 +9,8 @@ import RegisterPage from "../../pages/RegisterPage";
 import DetailPage from "../../pages/DetailPage";
 import { AnimatePresence } from "framer-motion";
 import NewsPage from "../../pages/NewsPage";
+import ErrorPage from "../../pages/ErrorPage";
+import Footer from "../Footer";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -41,12 +43,12 @@ const App = () => {
               />
             )}
           <AnimatePresence>
-            <Routes>
-              <Route path="/main" element={<Main />} />
-              <Route path="/apartments/:city" element={<Apartments />} />
-              <Route path="/newsList" element={<NewsPage />} />
+            <Routes path="/">
+              <Route default path="main" element={<Main />} />
+              <Route path="apartments/:city" element={<Apartments />} />
+              <Route path="newsList" element={<NewsPage />} />
               <Route
-                path="/login"
+                path="login"
                 element={
                   <LoginPage
                     setIsLoggedIn={setIsLoggedIn}
@@ -54,11 +56,15 @@ const App = () => {
                   />
                 }
               />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/newsList/detail/:id" element={<DetailPage />} />
-              {/* <Route path="*" element={<Navigate to="/main" replace />} /> */}
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="newsList/detail/:id" element={<DetailPage />} />
+              <Route path="/" element={<Navigate to="/main" replace />} />
+              <Route path="*" element={<ErrorPage />} />
             </Routes>
           </AnimatePresence>
+          {location.pathname != "/login" &&
+            location.pathname != "/register" &&
+            location.pathname != "/" && <Footer />}
         </>
       </div>
     </div>

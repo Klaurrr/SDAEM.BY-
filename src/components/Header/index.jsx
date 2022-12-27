@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
-import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
-import logo_1 from "../../assets/images/logo 1.png";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 import geoYellow from "../../assets/images/geoYellow.png";
 import geoGray from "../../assets/images/geoGray.png";
 import heart from "../../assets/images/heart.png";
@@ -8,7 +8,6 @@ import styles from "./header.module.scss";
 import cat from "../../assets/images/cat.jpg";
 import checkMark from "../../assets/images/checkMark.png";
 import { useState } from "react";
-import Apartments from "../../pages/ApartmentsPage";
 import { useEffect } from "react";
 
 const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
@@ -185,7 +184,7 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
       <div className={styles["col-2"]}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
-            src={logo_1}
+            src={logo}
             alt="logo"
             onClick={() => {
               navigate("/main");
