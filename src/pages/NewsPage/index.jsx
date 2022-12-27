@@ -32,7 +32,6 @@ const NewsPage = () => {
       )
     );
   };
-
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -42,13 +41,23 @@ const NewsPage = () => {
       <div className={styles.container}>
         {" "}
         <div>
-          <div>
+          <div style={{ marginTop: "10px" }}>
             <BreadCrumbs crumbSubTitle={"Новости"} />
           </div>
           <h1>Новости</h1>
         </div>
         <div style={{ position: "relative" }}>
           <div className={styles.background}></div>
+          <div
+            style={{
+              height:
+                currentNews.length === 9
+                  ? "906px"
+                  : currentNews.length === 6
+                  ? "375px"
+                  : "0px",
+            }}
+          ></div>
           <form className={styles.form} onSubmit={(e) => handleSearch(e)}>
             <input
               type="text"
@@ -74,7 +83,7 @@ const NewsPage = () => {
                   </div>
                 ))}
           </div>
-          <div style={{ position: "absolute" }}>
+          <div style={{ marginBottom: "100px" }}>
             <Pagination
               dataPerPage={newsPerPage}
               totalData={data.length}
@@ -83,7 +92,10 @@ const NewsPage = () => {
             />
           </div>
         </div>
-      </div>
+      </div>{" "}
+      {/* <div>
+        <Footer />
+      </div> */}
     </motion.section>
   );
 };

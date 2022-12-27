@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
 import Main from "../../pages/MainPage";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Apartments from "../../pages/ApartmentsPage";
 import styles from "./app.module.scss";
 import Header from "../Header";
@@ -33,9 +33,9 @@ const App = () => {
     >
       <div>
         <>
-          {location.pathname != "/login" &&
-            location.pathname != "/register" &&
-            location.pathname != "/" && (
+          {location.pathname !== "/login" &&
+            location.pathname !== "/register" &&
+            location.pathname !== "/" && (
               <Header
                 userName={userName}
                 isLoggedIn={isLoggedIn}
@@ -62,9 +62,9 @@ const App = () => {
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </AnimatePresence>
-          {location.pathname != "/login" &&
-            location.pathname != "/register" &&
-            location.pathname != "/" && <Footer />}
+          {location.pathname !== "/login" &&
+            location.pathname !== "/register" &&
+            location.pathname !== "/" && <Footer />}
         </>
       </div>
     </div>
