@@ -70,6 +70,8 @@ const Apartments = () => {
 
   const [sort, setSort] = useState(false);
 
+  const [showOptions, setShowOptions] = useState(false);
+
   useEffect(() => {
     showApartments === "list"
       ? setApartmentsPerPage(4)
@@ -417,7 +419,11 @@ const Apartments = () => {
           </div>
         </div>
         <div style={{ width: "187px" }}>
-          <div className={styles["select_item"]}>
+          <div
+            className={styles["select_item"]}
+            onClick={() => setShowOptions(!showOptions)}
+            style={{ borderBottom: showOptions ? "2px solid #4E64F9" : "none" }}
+          >
             <div className={styles.more}>
               Больше опций
               <img src={more} alt="more" />
@@ -454,6 +460,12 @@ const Apartments = () => {
           </button>
         </div>
       </div>
+      <div
+        className={styles.more_detail}
+        style={{
+          display: showOptions ? "block" : "none",
+        }}
+      ></div>
       <div className={styles.buttons_2}>
         <div className={styles.button_byDefault} onClick={() => setSort(!sort)}>
           <img

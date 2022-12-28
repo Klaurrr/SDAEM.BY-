@@ -1,13 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import magnifier from "../../assets/images/magnifier.png";
 import styles from "./news.module.scss";
 import { useSelector } from "react-redux";
 import NewsCard from "../../components/NewsCard";
-import { useEffect } from "react";
 import Pagination from "../../components/Pagination";
-import Footer from "../../components/Footer";
 
 const NewsPage = () => {
   const [value, setValue] = useState("");
@@ -27,11 +25,14 @@ const NewsPage = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setNews(
-      data.filter((item) =>
-        item.title.toLowerCase().includes(value.toLowerCase())
-      )
+      value != ""
+        ? data.filter((item) =>
+            item.title.toLowerCase().includes(value.toLowerCase())
+          )
+        : []
     );
   };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -39,36 +40,28 @@ const NewsPage = () => {
       exit={{ opacity: 0 }}
     >
       <div className={styles.container}>
-        {" "}
-        <div>
-          <div style={{ marginTop: "10px" }}>
-            <BreadCrumbs crumbSubTitle={"Новости"} />
+        <div className={styles.contaiter__inner}>
+          <div>
+            <div style={{ marginTop: "10px" }}>
+              <BreadCrumbs crumbSubTitle={"Новости"} />
+            </div>
+            <h1>Новости</h1>
           </div>
-          <h1>Новости</h1>
+          <div style={{ position: "relative" }}>
+            <div className={styles.background}></div>
+            <form className={styles.form} onSubmit={(e) => handleSearch(e)}>
+              <input
+                type="text"
+                placeholder="Поиск по статьям"
+                onChange={(e) => setValue(e.target.value)}
+              />
+              <button type="submit" className={styles.button}>
+                <img src={magnifier} alt="magnifier-img" />
+              </button>
+            </form>
+          </div>
         </div>
-        <div style={{ position: "relative" }}>
-          <div className={styles.background}></div>
-          <div
-            style={{
-              height:
-                currentNews.length === 9
-                  ? "906px"
-                  : currentNews.length === 6
-                  ? "375px"
-                  : "0px",
-            }}
-          ></div>
-          <form className={styles.form} onSubmit={(e) => handleSearch(e)}>
-            <input
-              type="text"
-              placeholder="Поиск по статьям"
-              onChange={(e) => setValue(e.target.value)}
-            />
-            <button type="submit" className={styles.button}>
-              <img src={magnifier} alt="magnifier-img" />
-            </button>
-          </form>
-        </div>
+
         <div className={styles.card_container}>
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             {news.length > 0
@@ -83,7 +76,7 @@ const NewsPage = () => {
                   </div>
                 ))}
           </div>
-          <div style={{ marginBottom: "100px" }}>
+          <div style={{ marginBottom: "100px", position: "relative" }}>
             <Pagination
               dataPerPage={newsPerPage}
               totalData={data.length}
@@ -92,10 +85,7 @@ const NewsPage = () => {
             />
           </div>
         </div>
-      </div>{" "}
-      {/* <div>
-        <Footer />
-      </div> */}
+      </div>
     </motion.section>
   );
 };
