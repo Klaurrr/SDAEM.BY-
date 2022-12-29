@@ -23,148 +23,162 @@ import { setApartments } from "../../store/slices/searchApartmentsSlice";
 
 import { motion } from "framer-motion";
 import styles from "./main.module.scss";
+import { useMemo } from "react";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
 
-  const [city, setCity] = useState(undefined);
-  const [rooms, setRooms] = useState(undefined);
-  const [costMax, setCostMax] = useState(undefined);
-  const [costMin, setCostMin] = useState(undefined);
+  const [data, setData] = useState({
+    city: undefined,
+    rooms: undefined,
+    costMin: undefined,
+    costMax: undefined,
+  });
 
-  const [selectFirst, setSelectFirst] = useState(false);
-  const [selectSecond, setSelectSecond] = useState(false);
+  const [selectIsOpen, setSelectIsOpen] = useState({
+    selectCity: false,
+    selectRooms: false,
+    selectMetro: false,
+    selectDistrict: false,
+  });
 
-  const [drop, setDrop] = useState(false);
-  const [dropTwo, setDropTwo] = useState(false);
-
-  const [nameSelect, setNameSelect] = useState("Выберите");
-  const [nameSelectRooms, setNameSelectRooms] = useState("Выберите");
-
-  const [nameDrop, setNameDrop] = useState("Метро");
-  const [nameDropTwo, setNameDropTwo] = useState("Район");
+  const [nameSelect, setNameSelect] = useState({
+    city: "Выберите",
+    rooms: "Выберите",
+    metro: "Метро",
+    district: "Район",
+  });
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const news = useSelector((state) => state.data.news);
   const apartments = useSelector((state) => state.data.apartments);
 
   const selectValueFirst = (e) => {
-    setSelectFirst(selectFirst ? false : true);
-    setCity({ city: e.target.outerText });
-    setNameSelect(e.target.outerText);
+    setSelectIsOpen((prev) => ({
+      ...prev,
+      selectCity: !selectIsOpen.selectCity,
+    }));
+    setData((prev) => ({ ...prev, city: e.target.outerText }));
+    setNameSelect((prev) => ({ ...prev, city: e.target.outerText }));
   };
 
   const selectValueSecond = (e) => {
-    setSelectSecond(selectSecond ? false : true);
-    setRooms({ rooms: e.target.outerText });
-    setNameSelectRooms(e.target.outerText);
+    setSelectIsOpen((prev) => ({
+      ...prev,
+      selectRooms: !selectIsOpen.selectRooms,
+    }));
+    setData((prev) => ({ ...prev, rooms: e.target.outerText }));
+    setNameSelect((prev) => ({ ...prev, rooms: e.target.outerText }));
   };
 
   const setDropDown = (e) => {
-    setDrop(drop ? false : true);
-    setNameDrop(e);
+    setSelectIsOpen((prev) => ({
+      ...prev,
+      selectMetro: !selectIsOpen.selectMetro,
+    }));
+    setNameSelect((prev) => ({ ...prev, metro: e }));
   };
   const setDropDownTwo = (e) => {
-    setDropTwo(dropTwo ? false : true);
-    setNameDropTwo(e);
+    setSelectIsOpen((prev) => ({
+      ...prev,
+      selectDistrict: !selectIsOpen.selectDistrict,
+    }));
+    setNameSelect((prev) => ({ ...prev, district: e }));
   };
 
   useLayoutEffect(() => {
     window.addEventListener("keyup", (e) => {
       if (e.key === "Escape") {
-        setSelectFirst(false);
-        setSelectSecond(selectSecond && false);
+        setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
+        setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
+        setSelectIsOpen((prev) => ({ ...prev, selectMetro: false }));
+        setSelectIsOpen((prev) => ({ ...prev, selectDistrict: false }));
         window.removeEventListener("keyup", e);
       }
     });
   });
 
-  const createFinallyObj = (city, rooms, costMin, costMax) => {
-    const finallyObj = Object.assign({}, city, rooms, costMin, costMax);
+  const createFinallyObj = () => {
     dispatch(
       setApartments({
         searchedApartments: apartments.filter((el) => {
-          if (finallyObj.city && finallyObj.city !== "Выберите") {
-            if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
-              if (finallyObj.costMin && finallyObj.costMax) {
+          if (data.city && data.city !== "Выберите") {
+            if (data.rooms && data.rooms !== "Выберите") {
+              if (data.costMin && data.costMax) {
                 return (
-                  finallyObj.city === el.city &&
-                  finallyObj.rooms == el.rooms &&
-                  finallyObj.costMin <= el.costMin &&
-                  finallyObj.costMax >= el.costMin
+                  data.city === el.city &&
+                  data.rooms == el.rooms &&
+                  data.costMin <= el.costMin &&
+                  data.costMax >= el.costMin
                 );
-              } else if (finallyObj.costMin) {
+              } else if (data.costMin) {
                 return (
-                  finallyObj.city === el.city &&
-                  finallyObj.rooms == el.rooms &&
-                  finallyObj.costMin <= el.costMin
+                  data.city === el.city &&
+                  data.rooms == el.rooms &&
+                  data.costMin <= el.costMin
                 );
-              } else if (finallyObj.costMax) {
+              } else if (data.costMax) {
                 return (
-                  finallyObj.city === el.city &&
-                  finallyObj.costMax > el.costMin &&
-                  finallyObj.rooms == el.rooms
+                  data.city === el.city &&
+                  data.costMax > el.costMin &&
+                  data.rooms == el.rooms
                 );
               } else {
-                return (
-                  finallyObj.city === el.city && finallyObj.rooms == el.rooms
-                );
+                return data.city === el.city && data.rooms == el.rooms;
               }
             } else {
-              if (finallyObj.costMin && finallyObj.costMax) {
+              if (data.costMin && data.costMax) {
                 return (
-                  finallyObj.city === el.city &&
-                  finallyObj.costMin <= el.costMin &&
-                  finallyObj.costMax >= el.costMin
+                  data.city === el.city &&
+                  data.costMin <= el.costMin &&
+                  data.costMax >= el.costMin
                 );
-              } else if (finallyObj.costMin) {
-                return (
-                  finallyObj.city === el.city &&
-                  finallyObj.costMin <= el.costMin
-                );
-              } else if (finallyObj.costMax) {
-                return (
-                  finallyObj.city === el.city && finallyObj.costMax > el.costMin
-                );
-              } else return finallyObj.city === el.city;
+              } else if (data.costMin) {
+                return data.city === el.city && data.costMin <= el.costMin;
+              } else if (data.costMax) {
+                return data.city === el.city && data.costMax > el.costMin;
+              } else return data.city === el.city;
             }
           } else {
-            if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
-              if (finallyObj.costMin && finallyObj.costMax) {
+            if (data.rooms && data.rooms !== "Выберите") {
+              if (data.costMin && data.costMax) {
                 return (
-                  finallyObj.rooms == el.rooms &&
-                  finallyObj.costMin <= el.costMin &&
-                  finallyObj.costMax >= el.costMin
+                  data.rooms == el.rooms &&
+                  data.costMin <= el.costMin &&
+                  data.costMax >= el.costMin
                 );
-              } else if (finallyObj.costMin) {
-                return (
-                  finallyObj.rooms == el.rooms &&
-                  finallyObj.costMin <= el.costMin
-                );
-              } else if (finallyObj.costMax) {
-                return (
-                  finallyObj.rooms == el.rooms &&
-                  finallyObj.costMax > el.costMin
-                );
-              } else return finallyObj.rooms == el.rooms;
+              } else if (data.costMin) {
+                return data.rooms == el.rooms && data.costMin <= el.costMin;
+              } else if (data.costMax) {
+                return data.rooms == el.rooms && data.costMax > el.costMin;
+              } else return data.rooms == el.rooms;
             } else {
-              if (finallyObj.costMin && finallyObj.costMax) {
-                return (
-                  finallyObj.costMin <= el.costMin &&
-                  finallyObj.costMax >= el.costMin
-                );
-              } else if (finallyObj.costMin) {
-                return finallyObj.costMin <= el.costMin;
-              } else if (finallyObj.costMax) {
-                return finallyObj.costMax > el.costMin;
+              if (data.costMin && data.costMax) {
+                return data.costMin <= el.costMin && data.costMax >= el.costMin;
+              } else if (data.costMin) {
+                return data.costMin <= el.costMin;
+              } else if (data.costMax) {
+                return data.costMax > el.costMin;
               } else return undefined;
             }
           }
         }),
       })
+    );
+    navigate(
+      `/apartments/${
+        data.city === "Минск"
+          ? "Minsk"
+          : data.city === "Гомель"
+          ? "Gomel"
+          : data.city === "Гродно"
+          ? "Grodno"
+          : data.city === "Могилев"
+          ? "Mogilev"
+          : "Brest"
+      }`
     );
   };
 
@@ -215,21 +229,26 @@ const Main = () => {
               <div>
                 <div
                   className={
-                    selectFirst
+                    selectIsOpen.selectCity
                       ? `${styles["select-active"]}`
                       : `${styles.city}`
                   }
-                  onClick={() => setSelectFirst(selectFirst ? false : true)}
+                  onClick={() =>
+                    setSelectIsOpen((prev) => ({
+                      ...prev,
+                      selectCity: !selectIsOpen.selectCity,
+                    }))
+                  }
                 >
                   <div className={styles["city-wrapper"]}>
-                    {nameSelect}
+                    {nameSelect.city}
                     <img src={checkMark} alt="" />
                   </div>
                 </div>
                 <div
                   style={{ position: "relative", left: "0" }}
                   className={
-                    selectFirst
+                    selectIsOpen.selectCity
                       ? `${styles["drop-down-active"]}`
                       : `${styles["drop-down-unactive"]}`
                   }
@@ -283,21 +302,26 @@ const Main = () => {
               <div>
                 <div
                   className={
-                    selectSecond
+                    selectIsOpen.selectRooms
                       ? `${styles["select-active"]}`
                       : `${styles.city}`
                   }
-                  onClick={() => setSelectSecond(selectSecond ? false : true)}
+                  onClick={() =>
+                    setSelectIsOpen((prev) => ({
+                      ...prev,
+                      selectRooms: !selectIsOpen.selectRooms,
+                    }))
+                  }
                 >
                   <div className={styles["city-wrapper"]}>
-                    {nameSelectRooms}
+                    {nameSelect.rooms}
                     <img src={checkMark} alt="checkMark" />
                   </div>
                 </div>
                 <div
                   style={{ position: "relative", left: "0" }}
                   className={
-                    selectSecond
+                    selectIsOpen.selectRooms
                       ? `${styles["drop-down-active"]}`
                       : `${styles["drop-down-unactive"]}`
                   }
@@ -352,9 +376,7 @@ const Main = () => {
                   type="number"
                   placeholder="От"
                   onChange={(e) =>
-                    setCostMin({
-                      costMin: e.target.value,
-                    })
+                    setData((prev) => ({ ...prev, costMin: e.target.value }))
                   }
                 />
                 -
@@ -362,9 +384,7 @@ const Main = () => {
                   type="number"
                   placeholder="До"
                   onChange={(e) =>
-                    setCostMax({
-                      costMax: e.target.value,
-                    })
+                    setData((prev) => ({ ...prev, costMax: e.target.value }))
                   }
                 />
               </div>
@@ -387,27 +407,9 @@ const Main = () => {
                   alt="geo-purple"
                 />
                 <button
-                  onClick={() => {
-                    city
-                      ? createFinallyObj(city, rooms, costMin, costMax)
-                      : alert("Укажите город");
-                    navigate(
-                      `/apartments/${
-                        city.city === "Минск"
-                          ? "Minsk"
-                          : city.city === "Гомель"
-                          ? "Gomel"
-                          : city.city === "Гродно"
-                          ? "Grodno"
-                          : city.city === "Могилев"
-                          ? "Mogilev"
-                          : "Brest"
-                      }`
-                    );
-                    setTimeout(() => {
-                      setNameSelect("Выберите");
-                      setNameSelectRooms("Выберите");
-                    }, 10);
+                  onClick={(e) => {
+                    e.preventDefault();
+                    data.city ? createFinallyObj() : alert("Укажите город");
                   }}
                 >
                   Показать
@@ -618,7 +620,12 @@ const Main = () => {
             <div style={{ display: "flex" }}>
               <div
                 className={styles["drop-down__item"]}
-                onClick={() => setDrop(drop ? false : true)}
+                onClick={() =>
+                  setSelectIsOpen((prev) => ({
+                    ...prev,
+                    selectMetro: !selectIsOpen.selectMetro,
+                  }))
+                }
               >
                 <div
                   className={styles["drop-down__item_wrap"]}
@@ -628,21 +635,28 @@ const Main = () => {
                   }}
                 >
                   <img src={metro} alt="metro" />
-                  <p style={{ marginLeft: "8px" }}>{nameDrop}</p>
+                  <p style={{ marginLeft: "8px" }}>{nameSelect.metro}</p>
                 </div>
                 <img style={{ marginRight: "16px" }} src={checkMark} alt="" />
               </div>
               <div
                 className={styles["drop-down__item"]}
-                onClick={() => setDropTwo(dropTwo ? false : true)}
+                onClick={() =>
+                  setSelectIsOpen((prev) => ({
+                    ...prev,
+                    selectDistrict: !selectIsOpen.selectDistrict,
+                  }))
+                }
               >
-                <p className={styles["drop-down__item_wrap"]}>{nameDropTwo}</p>
+                <p className={styles["drop-down__item_wrap"]}>
+                  {nameSelect.district}
+                </p>
                 <img style={{ marginRight: "16px" }} src={checkMark} alt="" />
               </div>
             </div>
             <div
               className={
-                drop
+                selectIsOpen.selectMetro
                   ? `${styles["drop-down-active"]}`
                   : `${styles["drop-down-unactive"]}`
               }
@@ -656,7 +670,7 @@ const Main = () => {
             </div>
             <div
               className={
-                dropTwo
+                selectIsOpen.selectDistrict
                   ? `${styles["drop-down-active"]}`
                   : `${styles["drop-down-unactive"]}`
               }

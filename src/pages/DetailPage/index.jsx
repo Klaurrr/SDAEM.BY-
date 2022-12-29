@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import vk from "../../assets/images/vk.png";
 import whatsApp from "../../assets/images/whatsApp.png";
@@ -10,7 +10,6 @@ import telegram from "../../assets/images/telegram.png";
 import hotel from "../../assets/images/hotel.png";
 import styles from "./detail.module.scss";
 import gaps from "../../assets/images/gaps.png";
-import clsx from "clsx";
 import { motion } from "framer-motion";
 import NewsCard from "../../components/NewsCard";
 
