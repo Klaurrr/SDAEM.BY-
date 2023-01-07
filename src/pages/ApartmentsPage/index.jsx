@@ -35,22 +35,7 @@ const Apartments = () => {
 
   const [data, setData] = useState(undefined);
 
-  const [selected, setSelected] = useState("");
-
-  const [selectActive, setSelectActive] = useState(false);
-
-  const [nameSelectRooms, setNameSelectRooms] = useState("Выберите");
-
-  const [showApartments, setShowApartments] = useState("list");
-
-  const [costMax, setCostMax] = useState(undefined);
-  const [costMin, setCostMin] = useState(undefined);
-
-  const [costMinValue, setCostMinValue] = useState("");
-  const [costMaxValue, setCostMaxValue] = useState("");
-
-  const [rooms, setRooms] = useState(undefined);
-  const [city, setCity] = useState({
+  const [apartmentsInfo, setApartmentsInfo] = useState({
     city:
       location.pathname === "/apartments/Minsk"
         ? "Минск"
@@ -63,14 +48,35 @@ const Apartments = () => {
         : location.pathname === "/apartments/Grodno"
         ? "Гродно"
         : "Могилев",
+    rooms: undefined,
+    costMin: undefined,
+    costMax: undefined,
   });
+
+  const [filterData, setFilterData] = useState({
+    selectActive: false,
+    showOptions: false,
+    nameSelect: "Выберите",
+    costMinValue: "",
+    costMaxValue: "",
+    selected: "",
+  });
+
+  const [moreDetailInfo, setMoreDetailInfo] = useState({
+    selectSleeping: "Выберите",
+    selectDistrict: "Выберите",
+    selectMetro: "Выберите",
+    selectSleepActive: false,
+    selectDistrictActive: false,
+    selectMetroActive: false,
+  });
+
+  const [showApartments, setShowApartments] = useState("list");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [apartmentsPerPage, setApartmentsPerPage] = useState(4);
 
   const [sort, setSort] = useState(false);
-
-  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     showApartments === "list"
@@ -79,7 +85,8 @@ const Apartments = () => {
   }, [showApartments]);
 
   useEffect(() => {
-    setCity({
+    setApartmentsInfo((prev) => ({
+      ...prev,
       city:
         location.pathname === "/apartments/Minsk"
           ? "Минск"
@@ -92,7 +99,7 @@ const Apartments = () => {
           : location.pathname === "/apartments/Grodno"
           ? "Гродно"
           : "Могилев",
-    });
+    }));
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
@@ -100,48 +107,63 @@ const Apartments = () => {
   const firstApartmentsIndex = lastApartmentsIndex - apartmentsPerPage;
 
   const selectValue = (e) => {
-    setSelectActive(selectActive ? false : true);
-    setRooms({ rooms: e.target.outerText.slice(0, 1) });
-    setNameSelectRooms(e.target.outerText);
+    setFilterData((prev) => ({
+      ...prev,
+      selectActive: !filterData.selectActive,
+      nameSelect: e.target.outerText,
+    }));
+    setApartmentsInfo((prev) => ({
+      ...prev,
+      rooms: e.target.outerText.slice(0, 1),
+    }));
   };
 
-  const createFinallyObj = (rooms, costMin, costMax) => {
-    const finallyObj = Object.assign({}, rooms, costMin, costMax);
+  const foundApartments = () => {
     setData(
       apartments.filter((el) => {
         {
-          if (finallyObj.rooms && finallyObj.rooms !== "Выберите") {
-            if (finallyObj.costMin && finallyObj.costMax) {
+          if (apartmentsInfo.rooms && apartmentsInfo.rooms !== "Выберите") {
+            if (apartmentsInfo.costMin && apartmentsInfo.costMax) {
               return (
-                city.city == el.city &&
-                finallyObj.rooms == el.rooms &&
-                finallyObj.costMin <= el.costMin &&
-                finallyObj.costMax >= el.costMin
+                apartmentsInfo.city == el.city &&
+                apartmentsInfo.rooms == el.rooms &&
+                apartmentsInfo.costMin <= el.costMin &&
+                apartmentsInfo.costMax >= el.costMin
               );
-            } else if (finallyObj.costMin) {
+            } else if (apartmentsInfo.costMin) {
               return (
-                finallyObj.rooms == el.rooms &&
-                finallyObj.costMin <= el.costMin &&
-                city.city == el.city
+                apartmentsInfo.rooms == el.rooms &&
+                apartmentsInfo.costMin <= el.costMin &&
+                apartmentsInfo.city == el.city
               );
-            } else if (finallyObj.costMax) {
+            } else if (apartmentsInfo.costMax) {
               return (
-                finallyObj.rooms == el.rooms &&
-                city.city == el.city &&
-                finallyObj.costMax > el.costMin
+                apartmentsInfo.rooms == el.rooms &&
+                apartmentsInfo.city == el.city &&
+                apartmentsInfo.costMax > el.costMin
               );
-            } else return finallyObj.rooms == el.rooms && city.city == el.city;
+            } else
+              return (
+                apartmentsInfo.rooms == el.rooms &&
+                apartmentsInfo.city == el.city
+              );
           } else {
-            if (finallyObj.costMin && finallyObj.costMax) {
+            if (apartmentsInfo.costMin && apartmentsInfo.costMax) {
               return (
-                city.city == el.city &&
-                finallyObj.costMin <= el.costMin &&
-                finallyObj.costMax >= el.costMin
+                apartmentsInfo.city == el.city &&
+                apartmentsInfo.costMin <= el.costMin &&
+                apartmentsInfo.costMax >= el.costMin
               );
-            } else if (finallyObj.costMin) {
-              return city.city == el.city && finallyObj.costMin <= el.costMin;
-            } else if (finallyObj.costMax) {
-              return city.city == el.city && finallyObj.costMax > el.costMin;
+            } else if (apartmentsInfo.costMin) {
+              return (
+                apartmentsInfo.city == el.city &&
+                apartmentsInfo.costMin <= el.costMin
+              );
+            } else if (apartmentsInfo.costMax) {
+              return (
+                apartmentsInfo.city == el.city &&
+                apartmentsInfo.costMax > el.costMin
+              );
             } else return undefined;
           }
         }
@@ -150,21 +172,21 @@ const Apartments = () => {
   };
 
   const checkbox = (el) => {
-    setSelected(el);
+    setFilterData((prev) => ({ ...prev, selected: el }));
     setData(
       apartments.filter((item) =>
         el === "Недорогие"
-          ? item.costMin < 30 && item.city == city.city
+          ? item.costMin < 30 && item.city == apartmentsInfo.city
           : el === "1-комнатные"
-          ? item.rooms === 1 && item.city == city.city
+          ? item.rooms === 1 && item.city == apartmentsInfo.city
           : el === "2-комнатные"
-          ? item.rooms === 2 && item.city == city.city
+          ? item.rooms === 2 && item.city == apartmentsInfo.city
           : el === "3-комнатные"
-          ? item.rooms === 3 && item.city == city.city
+          ? item.rooms === 3 && item.city == apartmentsInfo.city
           : el === "4-комнатные"
-          ? item.rooms === 4 && item.city == city.city
+          ? item.rooms === 4 && item.city == apartmentsInfo.city
           : el === "5-комнатные"
-          ? item.rooms === 5 && item.city == city.city
+          ? item.rooms === 5 && item.city == apartmentsInfo.city
           : ""
       )
     );
@@ -198,7 +220,8 @@ const Apartments = () => {
           />
           <h1
             style={{
-              margin: selected === "" ? "30px 0px 40px" : "30px 0px 15px",
+              margin:
+                filterData.selected === "" ? "30px 0px 40px" : "30px 0px 15px",
             }}
           >
             Аренда квартир на сутки в{" "}
@@ -214,7 +237,7 @@ const Apartments = () => {
               ? "Гродно"
               : "Могилеве"}
           </h1>
-          {selected === "" ? (
+          {filterData.selected === "" ? (
             <div>
               <p className={styles.subtitle}>Рекомендуем посмотреть</p>
               <div>
@@ -314,11 +337,11 @@ const Apartments = () => {
             <button
               className={clsx(styles.checkbox, styles.checkbox_active)}
               onClick={() => {
-                setSelected("");
+                setFilterData((prev) => ({ ...prev, selected: "" }));
                 setData(undefined);
               }}
             >
-              {selected}
+              {filterData.selected}
               <img src={cross} alt="cross-img" style={{ marginLeft: "10px" }} />
             </button>
           )}
@@ -331,18 +354,25 @@ const Apartments = () => {
             <div style={{ position: "relative" }}>
               <div
                 className={
-                  selectActive ? `${styles["select-active"]}` : `${styles.city}`
+                  filterData.selectActive
+                    ? `${styles["select-active"]}`
+                    : `${styles.city}`
                 }
-                onClick={() => setSelectActive(selectActive ? false : true)}
+                onClick={() =>
+                  setFilterData((prev) => ({
+                    ...prev,
+                    selectActive: !filterData.selectActive,
+                  }))
+                }
               >
                 <div className={styles["city-wrapper"]}>
-                  {nameSelectRooms}
+                  {filterData.nameSelect}
                   <img src={checkMark} alt="checkMark" />
                 </div>
               </div>
               <div
                 className={
-                  selectActive
+                  filterData.selectActive
                     ? `${styles["drop-down-active"]}`
                     : `${styles["drop-down-unactive"]}`
                 }
@@ -396,24 +426,32 @@ const Apartments = () => {
                 type="text"
                 placeholder="От"
                 onChange={(e) => {
-                  setCostMin({
+                  setApartmentsInfo((prev) => ({
+                    ...prev,
                     costMin: e.target.value,
-                  });
-                  setCostMinValue(e.target.value);
+                  }));
+                  setFilterData((prev) => ({
+                    ...prev,
+                    costMinValue: e.target.value,
+                  }));
                 }}
-                value={costMinValue}
+                value={filterData.costMinValue}
               />
               -
               <input
                 type="text"
                 placeholder="До"
                 onChange={(e) => {
-                  setCostMax({
+                  setApartmentsInfo((prev) => ({
+                    ...prev,
                     costMax: e.target.value,
-                  });
-                  setCostMaxValue(e.target.value);
+                  }));
+                  setFilterData((prev) => ({
+                    ...prev,
+                    costMaxValue: e.target.value,
+                  }));
                 }}
-                value={costMaxValue}
+                value={filterData.costMaxValue}
               />
             </div>
           </div>
@@ -421,8 +459,17 @@ const Apartments = () => {
         <div style={{ width: "187px" }}>
           <div
             className={styles["select_item"]}
-            onClick={() => setShowOptions(!showOptions)}
-            style={{ borderBottom: showOptions ? "2px solid #4E64F9" : "none" }}
+            onClick={() =>
+              setFilterData((prev) => ({
+                ...prev,
+                showOptions: !filterData.showOptions,
+              }))
+            }
+            style={{
+              borderBottom: filterData.showOptions
+                ? "2px solid #4E64F9"
+                : "none",
+            }}
           >
             <div className={styles.more}>
               Больше опций
@@ -434,13 +481,19 @@ const Apartments = () => {
           <button
             onClick={() => {
               setData(undefined);
-              setCostMin(undefined);
-              setCostMax(undefined);
-              setRooms(undefined);
-              setNameSelectRooms("Выберите");
-              setCostMinValue("");
-              setCostMaxValue("");
-              setSelected("");
+              setApartmentsInfo((prev) => ({
+                ...prev,
+                rooms: undefined,
+                costMax: undefined,
+                costMin: undefined,
+              }));
+              setFilterData((prev) => ({
+                ...prev,
+                selected: "",
+                nameSelect: "Выберите",
+                costMinValue: "",
+                costMaxValue: "",
+              }));
               dispatch(
                 setApartments({
                   searchedApartments: [],
@@ -450,11 +503,7 @@ const Apartments = () => {
           >
             Очистить
           </button>
-          <button
-            onClick={() => {
-              createFinallyObj(rooms, costMin, costMax);
-            }}
-          >
+          <button onClick={() => foundApartments()}>
             Показать объекты
             <img src={checkMarkRight} alt="checkMarkRight-img" />
           </button>
@@ -463,9 +512,518 @@ const Apartments = () => {
       <div
         className={styles.more_detail}
         style={{
-          display: showOptions ? "block" : "none",
+          display: filterData.showOptions ? "block" : "none",
         }}
-      ></div>
+      >
+        <div className={styles["more_detail-wrapper"]}>
+          <div style={{ position: "relative", marginRight: "50px" }}>
+            <p>Спальные места</p>
+            <div
+              className={
+                moreDetailInfo.selectSleepActive
+                  ? styles["detail_select-active"]
+                  : styles.detail_select
+              }
+              onClick={() =>
+                setMoreDetailInfo((prev) => ({
+                  ...prev,
+                  selectSleepActive: !moreDetailInfo.selectSleepActive,
+                }))
+              }
+            >
+              <p>{moreDetailInfo.selectSleeping}</p>
+              <img src={checkMark} alt="checkMark" />
+            </div>
+            <div
+              className={styles["detail_select_modal-window"]}
+              style={{
+                display: moreDetailInfo.selectSleepActive ? "block" : "none",
+              }}
+            >
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectSleepActive: false,
+                    selectSleeping: e.target.outerText,
+                  }))
+                }
+              >
+                <p>1</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectSleepActive: false,
+                    selectSleeping: e.target.outerText,
+                  }))
+                }
+              >
+                <p>2</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectSleepActive: false,
+                    selectSleeping: e.target.outerText,
+                  }))
+                }
+              >
+                <p>3</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectSleepActive: false,
+                    selectSleeping: e.target.outerText,
+                  }))
+                }
+              >
+                <p>4</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectSleepActive: false,
+                    selectSleeping: e.target.outerText,
+                  }))
+                }
+              >
+                <p>5</p>
+              </div>
+            </div>
+          </div>
+          <div style={{ position: "relative", marginRight: "50px" }}>
+            <p>Район</p>
+            <div
+              className={
+                moreDetailInfo.selectDistrictActive
+                  ? styles["detail_select-active"]
+                  : styles.detail_select
+              }
+              onClick={() =>
+                setMoreDetailInfo((prev) => ({
+                  ...prev,
+                  selectDistrictActive: !moreDetailInfo.selectDistrictActive,
+                }))
+              }
+            >
+              <p>{moreDetailInfo.selectDistrict}</p>
+              <img src={checkMark} alt="checkMark" />
+            </div>
+            <div
+              className={styles["detail_select_modal-window"]}
+              style={{
+                display: moreDetailInfo.selectDistrictActive ? "block" : "none",
+              }}
+            >
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Заводской</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Ленинский</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Московский</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Октябрьский</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Партизанский</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Первомайский</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Советский</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Фрунзенский</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectDistrictActive: false,
+                    selectDistrict: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Центральный</p>
+              </div>
+            </div>
+          </div>
+          <div style={{ position: "relative" }}>
+            <p>Метро</p>
+            <div
+              className={
+                moreDetailInfo.selectMetroActive
+                  ? styles["detail_select-active"]
+                  : styles.detail_select
+              }
+              onClick={() =>
+                setMoreDetailInfo((prev) => ({
+                  ...prev,
+                  selectMetroActive: !moreDetailInfo.selectMetroActive,
+                }))
+              }
+            >
+              <p>{moreDetailInfo.selectMetro}</p>
+              <img src={checkMark} alt="checkMark" />
+            </div>
+            <div
+              className={styles["detail_select_modal-window"]}
+              style={{
+                display: moreDetailInfo.selectMetroActive ? "block" : "none",
+              }}
+            >
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectMetroActive: false,
+                    selectMetro: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Есть</p>
+              </div>
+              <div
+                onClick={(e) =>
+                  setMoreDetailInfo((prev) => ({
+                    ...prev,
+                    selectMetroActive: false,
+                    selectMetro: e.target.outerText,
+                  }))
+                }
+              >
+                <p>Нет</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles["more_detail-wrapper-2"]}>
+          <div>
+            <div>
+              <input
+                type="checkbox"
+                id="1"
+                className={styles.custom_checkbox}
+              />
+              <label for="1">Газовая плита</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="2"
+                className={styles.custom_checkbox}
+              />
+              <label for="2">Духовка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="3"
+                className={styles.custom_checkbox}
+              />
+              <label for="3">Кофеварка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="4"
+                className={styles.custom_checkbox}
+              />
+              <label for="4">Микроволновая печь</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="5"
+                className={styles.custom_checkbox}
+              />
+              <label for="5">Посуда</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="6"
+                className={styles.custom_checkbox}
+              />
+              <label for="6">Посудомоечная машина</label>
+            </div>
+          </div>
+          <div>
+            <div>
+              <input
+                type="checkbox"
+                id="7"
+                className={styles.custom_checkbox}
+              />
+              <label for="7">Газовая плита</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="8"
+                className={styles.custom_checkbox}
+              />
+              <label for="8">Духовка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="9"
+                className={styles.custom_checkbox}
+              />
+              <label for="9">Кофеварка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="10"
+                className={styles.custom_checkbox}
+              />
+              <label for="10">Микроволновая печь</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="11"
+                className={styles.custom_checkbox}
+              />
+              <label for="11">Посуда</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="12"
+                className={styles.custom_checkbox}
+              />
+              <label for="12">Посудомоечная машина</label>
+            </div>
+          </div>
+          <div>
+            <div>
+              <input
+                type="checkbox"
+                id="13"
+                className={styles.custom_checkbox}
+              />
+              <label for="13">Газовая плита</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="14"
+                className={styles.custom_checkbox}
+              />
+              <label for="14">Духовка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="15"
+                className={styles.custom_checkbox}
+              />
+              <label for="15">Кофеварка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="16"
+                className={styles.custom_checkbox}
+              />
+              <label for="16">Микроволновая печь</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="17"
+                className={styles.custom_checkbox}
+              />
+              <label for="17">Посуда</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="18"
+                className={styles.custom_checkbox}
+              />
+              <label for="18">Посудомоечная машина</label>
+            </div>
+          </div>
+          <div>
+            <div>
+              <input
+                type="checkbox"
+                id="19"
+                className={styles.custom_checkbox}
+              />
+              <label for="19">Газовая плита</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="20"
+                className={styles.custom_checkbox}
+              />
+              <label for="20">Духовка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="21"
+                className={styles.custom_checkbox}
+              />
+              <label for="21">Кофеварка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="22"
+                className={styles.custom_checkbox}
+              />
+              <label for="22">Микроволновая печь</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="23"
+                className={styles.custom_checkbox}
+              />
+              <label for="23">Посуда</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="24"
+                className={styles.custom_checkbox}
+              />
+              <label for="24">Посудомоечная машина</label>
+            </div>
+          </div>
+          <div>
+            <div>
+              <input
+                type="checkbox"
+                id="25"
+                className={styles.custom_checkbox}
+              />
+              <label for="25">Газовая плита</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="26"
+                className={styles.custom_checkbox}
+              />
+              <label for="26">Духовка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="27"
+                className={styles.custom_checkbox}
+              />
+              <label for="27">Кофеварка</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="28"
+                className={styles.custom_checkbox}
+              />
+              <label for="28">Микроволновая печь</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="29"
+                className={styles.custom_checkbox}
+              />
+              <label for="29">Посуда</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="30"
+                className={styles.custom_checkbox}
+              />
+              <label for="30">Посудомоечная машина</label>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className={styles.buttons_2}>
         <div className={styles.button_byDefault} onClick={() => setSort(!sort)}>
           <img
@@ -518,7 +1076,8 @@ const Apartments = () => {
             ? data.length
             : searchedApartments.searchedApartments.length > 0
             ? searchedApartments.searchedApartments.length
-            : apartments.filter((item) => item.city === city.city).length}{" "}
+            : apartments.filter((item) => item.city === apartmentsInfo.city)
+                .length}{" "}
           результатов
         </h1>
         <div className={showApartments === "tiles" && styles.wrapper}>
@@ -577,11 +1136,11 @@ const Apartments = () => {
               data={
                 sort
                   ? [...apartments]
-                      .filter((item) => item.city === city.city)
+                      .filter((item) => item.city === apartmentsInfo.city)
                       .sort((a, b) => a.costMin - b.costMin)
                       .slice(firstApartmentsIndex, lastApartmentsIndex)
                   : [...apartments]
-                      .filter((item) => item.city === city.city)
+                      .filter((item) => item.city === apartmentsInfo.city)
                       .slice(firstApartmentsIndex, lastApartmentsIndex)
               }
             />
@@ -590,11 +1149,11 @@ const Apartments = () => {
               data={
                 sort
                   ? [...apartments]
-                      .filter((item) => item.city === city.city)
+                      .filter((item) => item.city === apartmentsInfo.city)
                       .sort((a, b) => a.costMin - b.costMin)
                       .slice(firstApartmentsIndex, lastApartmentsIndex)
                   : [...apartments]
-                      .filter((item) => item.city === city.city)
+                      .filter((item) => item.city === apartmentsInfo.city)
                       .slice(firstApartmentsIndex, lastApartmentsIndex)
               }
             />
@@ -609,7 +1168,8 @@ const Apartments = () => {
               ? data.length
               : searchedApartments.searchedApartments.length > 0
               ? searchedApartments.searchedApartments.length
-              : apartments.filter((item) => item.city === city.city).length
+              : apartments.filter((item) => item.city === apartmentsInfo.city)
+                  .length
           }
           paginate={paginate}
           currentPage={currentPage}

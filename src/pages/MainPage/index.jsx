@@ -23,7 +23,6 @@ import { setApartments } from "../../store/slices/searchApartmentsSlice";
 
 import { motion } from "framer-motion";
 import styles from "./main.module.scss";
-import { useMemo } from "react";
 
 const Main = () => {
   const [style, setStyle] = useState("one");
