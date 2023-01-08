@@ -104,6 +104,7 @@
 
                     &:hover {
                         outline: none;
+                        // border: 1px solid rgba(102, 78, 249, 0.1);
                         background: rgba(102, 78, 249, 0.1);
                         transition: all 0.2s;
                     }
@@ -794,6 +795,15 @@
         margin-left: 30px;
         cursor: pointer;
 
+
+        p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: #686868;
+
+        }
+
         &_wrap {
             margin-left: 14px;
             display: flex;
@@ -817,9 +827,11 @@
 
         p {
             cursor: pointer;
-            color: black;
+            color: #1E2123;
             padding: 10px 0px 10px 15px;
-            margin: 0;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
         }
     }
 

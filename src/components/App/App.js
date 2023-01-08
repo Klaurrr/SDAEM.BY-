@@ -11,6 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import NewsPage from "../../pages/NewsPage";
 import ErrorPage from "../../pages/ErrorPage";
 import Footer from "../Footer";
+import BookMarks from "../../pages/BookMarks";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -60,6 +61,7 @@ const App = () => {
               <Route path="newsList/detail/:id" element={<DetailPage />} />
               <Route path="/" element={<Navigate to="/main" replace />} />
               <Route path="*" element={<ErrorPage />} />
+              <Route path="bookMarks" element={<BookMarks />} />
             </Routes>
           </AnimatePresence>
           {location.pathname !== "/login" &&

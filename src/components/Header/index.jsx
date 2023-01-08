@@ -7,16 +7,20 @@ import heart from "../../assets/images/heart.png";
 import styles from "./header.module.scss";
 import cat from "../../assets/images/cat.jpg";
 import checkMark from "../../assets/images/checkMark.png";
+import heartFilled from "../../assets/images/HeartFilled.png";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
   const [userDrop, setUserDrop] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const flats = useSelector((state) => state.bookMarks.bookMarks);
 
   useEffect(() => {
     location.pathname === "/apartments/Minsk"
@@ -129,12 +133,30 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
               Контакты
             </NavLink>
           </div>
+          <div style={{ marginLeft: "230px" }}>
+            <NavLink
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      borderBottom: "3px solid #FFD54F",
+                      paddingBottom: "9px",
+                      marginRight: "0px",
+                    }
+                  : { marginRight: "0px" }
+              }
+              to="/bookMarks"
+            >
+              Закладки
+              <img
+                src={flats.length > 0 ? heartFilled : heart}
+                alt="heart"
+                className={styles.heart}
+              />
+            </NavLink>
+          </div>
         </nav>
+
         <ul className={styles["col-1__ul-2"]}>
-          <li className={styles.heart}>
-            Закладки
-            <img src={heart} alt="heart" />
-          </li>
           {isLoggedIn ? (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div
@@ -221,7 +243,7 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
-                          paddingBottom: "19px",
+                          paddingBottom: "18px",
                         }
                       : undefined
                   }
@@ -238,7 +260,7 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
-                          paddingBottom: "19px",
+                          paddingBottom: "18px",
                         }
                       : undefined
                   }
@@ -255,7 +277,7 @@ const Header = ({ userName, isLoggedIn, setIsLoggedIn }) => {
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
-                          paddingBottom: "19px",
+                          paddingBottom: "18px",
                         }
                       : undefined
                   }

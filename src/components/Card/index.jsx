@@ -8,14 +8,19 @@ import styles from "./card.module.scss";
 import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
 import viberWhite from "../../assets/images/ViberWhite.png";
 import heartRed from "../../assets/images/HeartRed.png";
+import heartFilled from "../../assets/images/HeartFilled.png";
 import mail from "../../assets/images/mail.png";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setBookMarks } from "../../store/slices/bookMarksSlice";
 
 const Card = ({ data }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
 
   const location = useLocation();
+  const dispatch = useDispatch();
+  const flats = useSelector((state) => state.bookMarks.bookMarks);
 
   return (
     <>
@@ -25,7 +30,8 @@ const Card = ({ data }) => {
           key={flat.id}
           style={{
             marginBottom:
-              location.pathname.slice(0, 11) === "/apartments" && "30px",
+              (location.pathname.slice(0, 11) === "/apartments" && "30px") ||
+              (location.pathname === "/bookMarks" && "30px"),
           }}
         >
           <div className={styles.img}>
@@ -77,6 +83,13 @@ const Card = ({ data }) => {
             </div>
             <div className={styles.buttons}>
               <button
+                onClick={() =>
+                  dispatch(
+                    setBookMarks({
+                      bookMarks: flat,
+                    })
+                  )
+                }
                 className={styles.heart}
                 style={{
                   display:
@@ -85,7 +98,10 @@ const Card = ({ data }) => {
                       : "none",
                 }}
               >
-                <img src={heartRed} alt="heartRed-img" />
+                <img
+                  src={flats.indexOf(flat) != -1 ? heartFilled : heartRed}
+                  alt="heartRed-img"
+                />
               </button>
               <button
                 className={styles.button_purple}

@@ -9,16 +9,21 @@ import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
 import phone from "../../assets/images/phone.png";
 import styles from "./cardList.module.scss";
 import heartRed from "../../assets/images/HeartRed.png";
+import heartFilled from "../../assets/images/HeartFilled.png";
 import orchid from "../../assets/images/orchid.png";
-import boy from "../../assets/images/boy.png";
 import mail from "../../assets/images/mail.png";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setBookMarks } from "../../store/slices/bookMarksSlice";
 
 const CardList = ({ data }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
 
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const flats = useSelector((state) => state.bookMarks.bookMarks);
 
   return (
     <>
@@ -70,6 +75,13 @@ const CardList = ({ data }) => {
               </button>
               <button
                 className={styles.heart}
+                onClick={() => {
+                  dispatch(
+                    setBookMarks({
+                      bookMarks: flat,
+                    })
+                  );
+                }}
                 style={{
                   display:
                     location.pathname.slice(0, 11) === "/apartments"
@@ -77,8 +89,11 @@ const CardList = ({ data }) => {
                       : "none",
                 }}
               >
-                <p>В закладки</p>
-                <img src={heartRed} alt="heartRed-img" />
+                <p>{flats.indexOf(flat) != -1 ? "Добавлено" : "В закладки"}</p>
+                <img
+                  src={flats.indexOf(flat) != -1 ? heartFilled : heartRed}
+                  alt="heartRed-img"
+                />
               </button>
 
               <button className={styles.button_yellow}>Подробнее</button>
