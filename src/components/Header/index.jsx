@@ -133,7 +133,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               Контакты
             </NavLink>
           </div>
-          <div style={{ marginLeft: "230px" }}>
+          <div style={{ marginLeft: "230px", position: "relative" }}>
             <NavLink
               style={({ isActive }) =>
                 isActive
@@ -141,8 +141,18 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                       borderBottom: "3px solid #FFD54F",
                       paddingBottom: "9px",
                       marginRight: "0px",
+                      position: "absolute",
+                      top: "2px",
+                      display: "flex",
+                      alignItems: "center",
                     }
-                  : { marginRight: "0px" }
+                  : {
+                      marginRight: "0px",
+                      position: "absolute",
+                      top: "2px",
+                      display: "flex",
+                      alignItems: "center",
+                    }
               }
               to="/bookMarks"
             >

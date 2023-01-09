@@ -13,6 +13,10 @@
         cursor: pointer;
         padding: 0 5px;
 
+        &:hover {
+            border-bottom: 2px solid #E4E2E2;
+        }
+
 
         &_active {
             font-weight: 700;

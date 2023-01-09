@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 
 import Card from "../../components/Card";
 
-import styles from "./bookMarks.module.scss";
 import Pagination from "../../components/Pagination";
+
+import { motion } from "framer-motion";
+import styles from "./bookMarks.module.scss";
 
 const BookMarks = () => {
   const [liActive, setLiActive] = useState("Квартиры");
@@ -22,7 +24,11 @@ const BookMarks = () => {
   const bookMarks = useSelector((state) => state.bookMarks.bookMarks);
 
   return (
-    <>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div style={{ position: "relative" }}>
         <div className={styles.background}></div>
         <div className={styles.col_1}>
@@ -82,7 +88,7 @@ const BookMarks = () => {
           />
         </div>
       </div>
-    </>
+    </motion.section>
   );
 };
 

@@ -101,6 +101,12 @@
         z-index: -1;
         opacity: 0;
 
+        &:hover:checked+label::before {
+            border-color: #664EF9;
+            background-color: #664EF9;
+            background-image: url('../../assets/images/checkbox.png');
+        }
+
         &:checked+label::before {
             border-color: #664EF9;
             background-color: #664EF9;
@@ -118,6 +124,17 @@
             line-height: 17px;
             color: #1E2123;
 
+            &:hover::before {
+                content: '';
+                background: rgba(102, 78, 249, 0.1);
+                border: 1px solid rgba(102, 78, 249, 0.1);
+                background-image: url('../../assets/images/checkbox.png');
+                background-repeat: no-repeat;
+                background-position: center center;
+            }
+
+
+
             &::before {
                 content: '';
                 display: inline-block;
@@ -130,6 +147,7 @@
                 margin-right: 10px;
                 background-repeat: no-repeat;
                 background-position: center center;
+
             }
 
 

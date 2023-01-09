@@ -12,6 +12,7 @@ import NewsPage from "../../pages/NewsPage";
 import ErrorPage from "../../pages/ErrorPage";
 import Footer from "../Footer";
 import BookMarks from "../../pages/BookMarks";
+import ContactsPage from "../../pages/ContactsPage";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -62,6 +63,7 @@ const App = () => {
               <Route path="/" element={<Navigate to="/main" replace />} />
               <Route path="*" element={<ErrorPage />} />
               <Route path="bookMarks" element={<BookMarks />} />
+              <Route path="contacts" element={<ContactsPage />} />
             </Routes>
           </AnimatePresence>
           {location.pathname !== "/login" &&

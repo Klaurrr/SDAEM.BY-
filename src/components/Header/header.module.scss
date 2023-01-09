@@ -94,8 +94,7 @@
 
 .col-2 {
     display: flex;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding: 0px 80px;
     height: 60px;
     align-items: center;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
@@ -179,7 +178,6 @@
     nav {
         display: flex;
         flex-direction: column;
-        padding: 10px 0px 0px 15px;
 
 
         a {
@@ -188,7 +186,19 @@
             font-weight: 500;
             font-size: 14px;
             line-height: 17px;
-            margin-bottom: 20px;
+            padding: 10px 0px 10px 15px;
+
+            &:first-child {
+                border-radius: 10px 10px 0px 0px;
+            }
+
+            &:last-child {
+                border-radius: 0px 0px 10px 10px;
+            }
+
+            &:hover {
+                background: #F8F8F8;
+            }
         }
     }
 }
