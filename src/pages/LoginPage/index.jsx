@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { setUser } from "../../store/slices/userSlice";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import BG from "./../../assets/images/BG.png";
 import userLogin from "./../../assets/images/UserLogin.png";
 import lock from "./../../assets/images/lock.png";
-import styles from "./login.module.scss";
-import { useForm } from "react-hook-form";
 import alert from "../../assets/images/alert.png";
-import { useEffect } from "react";
+
 import { motion } from "framer-motion";
+import styles from "./login.module.scss";
 
 const LoginPage = ({ setIsLoggedIn, setUserName }) => {
   const navigateTo = useNavigate();
@@ -89,7 +88,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                 />
                 <img
                   src={alert}
-                  alt="alert-png"
+                  alt="alert-img"
                   style={{ display: errors.login ? "block" : "none" }}
                 />
               </div>
@@ -116,7 +115,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                 />
                 <img
                   src={alert}
-                  alt="alert-png"
+                  alt="alert-img"
                   style={{ display: errors.password ? "block" : "none" }}
                 />
               </div>

@@ -1,7 +1,5 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
@@ -96,7 +94,7 @@ const RegisterPage = () => {
                     />
                     <img
                       src={alert}
-                      alt="alert-png"
+                      alt="alert-img"
                       style={{ display: errors.login ? "block" : "none" }}
                     />
                   </div>
@@ -129,7 +127,7 @@ const RegisterPage = () => {
                     />
                     <img
                       src={alert}
-                      alt="alert-png"
+                      alt="alert-img"
                       style={{ display: errors.email ? "block" : "none" }}
                     />
                   </div>
@@ -159,7 +157,7 @@ const RegisterPage = () => {
                     />
                     <img
                       src={alert}
-                      alt="alert-png"
+                      alt="alert-img"
                       style={{ display: errors.password ? "block" : "none" }}
                     />
                   </div>
@@ -189,7 +187,7 @@ const RegisterPage = () => {
                     />
                     <img
                       src={alert}
-                      alt="alert-png"
+                      alt="alert-img"
                       style={{ display: errors.repeatPass ? "block" : "none" }}
                     />
                   </div>
@@ -218,7 +216,7 @@ const RegisterPage = () => {
                           {errors.checkbox ? "Вы робот?" : "Я не робот"}
                         </p>
                       </div>
-                      <img src={captcha} alt="reCaptcha" />
+                      <img src={captcha} alt="reCaptcha-img" />
                     </div>
                     <p className={styles["captcha-desc"]}>
                       Конфиденциальность - Условия использования
@@ -232,7 +230,7 @@ const RegisterPage = () => {
                     }}
                   >
                     Ошибка ввода
-                    <img src={alertWhite} alt="alertWhite-png" />
+                    <img src={alertWhite} alt="alertWhite-img" />
                   </div>
                   <button type="submit">Зарегистрироваться</button>
                 </div>

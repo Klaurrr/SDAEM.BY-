@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+
 import hotel from "../../assets/images/hotel.png";
 
 import styles from "./newsCard.module.scss";
@@ -6,7 +7,7 @@ import styles from "./newsCard.module.scss";
 const NewsCard = ({ item }) => {
   return (
     <div className={styles.card}>
-      <img src={hotel} alt="hotel_img" />
+      <img src={hotel} alt="hotel-img" />
       <div className={styles.card__desc}>
         <h4>{item.title}</h4>
         <p className={styles["card__desc-p"]}>

@@ -1,20 +1,21 @@
-import React from "react";
-import flatOne from "../../assets/images/flat_one.png";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import userIcon from "../../assets/images/userIcon.png";
 import geoPurple from "../../assets/images/geoPurple.png";
 import metroPurple from "../../assets/images/metroPurple.png";
 import viberWhite from "../../assets/images/ViberWhite.png";
 import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
 import phone from "../../assets/images/phone.png";
-import styles from "./cardList.module.scss";
 import heartRed from "../../assets/images/HeartRed.png";
 import heartFilled from "../../assets/images/HeartFilled.png";
 import orchid from "../../assets/images/orchid.png";
 import mail from "../../assets/images/mail.png";
-import { useLocation } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setBookMarks } from "../../store/slices/bookMarksSlice";
+
+import styles from "./cardList.module.scss";
 
 const CardList = ({ data }) => {
   const [contact, setContact] = useState(false);
@@ -70,7 +71,7 @@ const CardList = ({ data }) => {
                   setCardId(flat.id);
                 }}
               >
-                <img src={phone} alt="phone" />
+                <img src={phone} alt="phone-img" />
                 Контакты
               </button>
               <button
@@ -133,13 +134,13 @@ const CardList = ({ data }) => {
               </a>
               <div className={styles.socials}>
                 <div style={{ background: "#7B519D" }}>
-                  <img src={viberWhite} alt="viber-png" />
+                  <img src={viberWhite} alt="viber-img" />
                 </div>
                 <div style={{ background: "#0DBB41" }}>
-                  <img src={whatsAppWhite} alt="whatsApp-png" />
+                  <img src={whatsAppWhite} alt="whatsApp-img" />
                 </div>
                 <div style={{ background: "#664EF9" }}>
-                  <img src={mail} alt="email-png" />
+                  <img src={mail} alt="email-img" />
                 </div>
               </div>
             </div>

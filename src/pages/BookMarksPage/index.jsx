@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import BreadCrumbs from "../../components/BreadCrumbs";
+import Card from "../../components/Card";
+import Pagination from "../../components/Pagination";
 
 import { useSelector } from "react-redux";
-
-import Card from "../../components/Card";
-
-import Pagination from "../../components/Pagination";
 
 import { motion } from "framer-motion";
 import styles from "./bookMarks.module.scss";

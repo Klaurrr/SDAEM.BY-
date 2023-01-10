@@ -1,6 +1,10 @@
 import { useState, useLayoutEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import clsx from "clsx";
+
+import Card from "../../components/Card";
+
 import chevron from "../../assets/images/chevron.png";
 import more from "../../assets/images/more.png";
 import geoPurple from "../../assets/images/geoPurple.png";
@@ -13,10 +17,7 @@ import checkMarkRight from "../../assets/images/checkMark_right.png";
 import AdFree from "../../assets/images/AD_Free.png";
 import orchid from "../../assets/images/orchid.png";
 import AdUp from "../../assets/images/AD_Up.png";
-import Card from "../../components/Card";
 import geoYellow from "../../assets/images/geoYellow.png";
-
-import clsx from "clsx";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setApartments } from "../../store/slices/searchApartmentsSlice";
@@ -241,7 +242,7 @@ const Main = () => {
                 >
                   <div className={styles["city-wrapper"]}>
                     {nameSelect.city}
-                    <img src={checkMark} alt="" />
+                    <img src={checkMark} alt="checkmark-img" />
                   </div>
                 </div>
                 <div
@@ -314,7 +315,7 @@ const Main = () => {
                 >
                   <div className={styles["city-wrapper"]}>
                     {nameSelect.rooms}
-                    <img src={checkMark} alt="checkMark" />
+                    <img src={checkMark} alt="checkMark-img" />
                   </div>
                 </div>
                 <div
@@ -394,7 +395,7 @@ const Main = () => {
             >
               <div className={styles.more}>
                 Больше опций
-                <img src={more} alt="more" />
+                <img src={more} alt="more-img" />
               </div>
             </div>
             <div className={styles["select_item"]}>
@@ -403,7 +404,7 @@ const Main = () => {
                 <img
                   className="img_geo-purple"
                   src={geoPurple}
-                  alt="geo-purple"
+                  alt="geo-purple-img"
                 />
                 <button
                   onClick={(e) => {
@@ -412,7 +413,7 @@ const Main = () => {
                   }}
                 >
                   Показать
-                  <img src={checkMarkRight} alt="checkmarkRight-png" />
+                  <img src={checkMarkRight} alt="checkmarkRight-img" />
                 </button>
               </div>
             </div>
@@ -453,7 +454,7 @@ const Main = () => {
                   <img
                     style={{ paddingLeft: "346px", marginTop: "20%" }}
                     src={chevron}
-                    alt="chevron"
+                    alt="chevron-img"
                   />
                 </div>
               </div>
@@ -469,7 +470,7 @@ const Main = () => {
                   <img
                     style={{ paddingLeft: "346px", marginTop: "20%" }}
                     src={chevron}
-                    alt="chevron"
+                    alt="chevron-img"
                   />
                 </div>
                 <div className={styles.cars}>
@@ -482,7 +483,7 @@ const Main = () => {
                       padding: "0px",
                     }}
                     src={chevron}
-                    alt="chevron"
+                    alt="chevron-img"
                   />
                 </div>
               </div>
@@ -494,7 +495,7 @@ const Main = () => {
                   marginLeft: "-28px",
                 }}
                 src={gaps}
-                alt="gaps"
+                alt="gaps-img"
               ></img>
             </div>
             <div className={styles.desc}>
@@ -607,7 +608,7 @@ const Main = () => {
                 onClick={() => navigate("/apartments/Minsk")}
               >
                 Посмотреть все
-                <img src={checkMarkRight} alt="checkMarkRight" />
+                <img src={checkMarkRight} alt="checkMarkRight-img" />
               </button>
             </div>
           </div>
@@ -633,10 +634,14 @@ const Main = () => {
                     alignItems: "center",
                   }}
                 >
-                  <img src={metro} alt="metro" />
+                  <img src={metro} alt="metro-img" />
                   <p style={{ marginLeft: "8px" }}>{nameSelect.metro}</p>
                 </div>
-                <img style={{ marginRight: "16px" }} src={checkMark} alt="" />
+                <img
+                  style={{ marginRight: "16px" }}
+                  src={checkMark}
+                  alt="checkmark-img"
+                />
               </div>
               <div
                 className={styles["drop-down__item"]}
@@ -650,7 +655,11 @@ const Main = () => {
                 <p className={styles["drop-down__item_wrap"]}>
                   {nameSelect.district}
                 </p>
-                <img style={{ marginRight: "16px" }} src={checkMark} alt="" />
+                <img
+                  style={{ marginRight: "16px" }}
+                  src={checkMark}
+                  alt="checkmark-img"
+                />
               </div>
             </div>
             <div
@@ -699,11 +708,11 @@ const Main = () => {
           </div>
           <div className={styles.chevrons}>
             <div>
-              <img src={checkMark} alt="chevronNavigate" />
+              <img src={checkMark} alt="chevronNavigate-img" />
             </div>
             <div>
               {" "}
-              <img src={checkMark} alt="chevronNavigate" />
+              <img src={checkMark} alt="chevronNavigate-img" />
             </div>
           </div>
         </div>
@@ -712,7 +721,7 @@ const Main = () => {
         <img
           style={{ position: "absolute", right: "140px", top: "46px" }}
           src={gapsWhite}
-          alt="gaps_white"
+          alt="gaps_white-img"
         />
         <div className={styles["wrapper-4"]}>
           <div className={styles["background-2"]}>
@@ -724,7 +733,7 @@ const Main = () => {
               </p>
               <button>
                 <div>
-                  <img src={geoYellow} alt="geoYellow" />
+                  <img src={geoYellow} alt="geoYellow-img" />
                   <p>Открыть карту</p>
                 </div>
               </button>
@@ -741,7 +750,7 @@ const Main = () => {
               >
                 <div className={styles["search-cards-title"]}>
                   <div className={styles.circle}>
-                    <img src={AdFree} alt="ad_free" />
+                    <img src={AdFree} alt="ad_free-img" />
                   </div>
                   <p>
                     Начните привлекать <br /> клиентов бесплатно!
@@ -768,7 +777,7 @@ const Main = () => {
               >
                 <div className={styles["search-cards-title"]}>
                   <div className={styles.circle}>
-                    <img src={AdUp} alt="AD_UP" />
+                    <img src={AdUp} alt="AD_UP-img" />
                   </div>
                   <p>
                     Поднимайте <br /> объявления
@@ -787,7 +796,7 @@ const Main = () => {
                   <img
                     style={{ filter: "invert(1)" }}
                     src={checkMarkRight}
-                    alt="checkMarkRight"
+                    alt="checkMarkRight-img"
                   />
                 </button>
               </div>
@@ -795,7 +804,7 @@ const Main = () => {
             <div className={clsx(styles["search-cards"], styles.gold)}>
               <img
                 src={glare}
-                alt="glare"
+                alt="glare-img"
                 style={{
                   position: "absolute",
                   left: "134px",
@@ -823,7 +832,7 @@ const Main = () => {
                 </div>
                 <button id={styles["btn-purple"]}>
                   <p>Еще о тарифе Gold</p>
-                  <img src={checkMarkRight} alt="checkMarkRight" />
+                  <img src={checkMarkRight} alt="checkMarkRight-img" />
                 </button>
               </div>
             </div>
@@ -835,7 +844,7 @@ const Main = () => {
               top: "705px",
             }}
             src={gaps}
-            alt="gaps"
+            alt="gaps-img"
           />
         </div>
       </section>
@@ -854,7 +863,7 @@ const Main = () => {
                     marginLeft: "346px",
                   }}
                   src={gaps}
-                  alt="gaps"
+                  alt="gaps-img"
                 />
                 <div className={styles["desc-4"]}>
                   <p>
@@ -896,7 +905,7 @@ const Main = () => {
                   ))}
               </div>
               <button onClick={() => navigate("/newsList")}>
-                Посмотреть все <img src={checkMark} alt="checkMarkRight" />
+                Посмотреть все <img src={checkMark} alt="checkMarkRight-img" />
               </button>
             </div>
           </div>

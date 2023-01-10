@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-
-import { motion } from "framer-motion";
 
 import geoWhite from "../../assets/images/geoWhite.png";
 import watch from "../../assets/images/watch.png";
@@ -15,15 +12,21 @@ import warning from "../../assets/images/warning.png";
 import userGray from "./../../assets/images/userGray.png";
 import alert from "../../assets/images/alert.png";
 import email from "../../assets/images/email.png";
-
 import instagram from "../../assets/images/instWhite.png";
 import vk from "../../assets/images/vkWhite.png";
 import faceBook from "../../assets/images/facebookWhite.png";
 
+import { motion } from "framer-motion";
 import styles from "./contacts.module.scss";
 
 const ContactsPage = () => {
   const [openWindow, setOpenWindow] = useState(false);
+
+  const [inputValue, setInputValue] = useState({
+    firstInput: "",
+    secondInput: "",
+    textarea: "",
+  });
 
   const {
     register,
@@ -35,6 +38,12 @@ const ContactsPage = () => {
 
   const onSubmit = () => {
     setOpenWindow(true);
+    setInputValue((prev) => ({
+      ...prev,
+      firstInput: "",
+      secondInput: "",
+      textarea: "",
+    }));
   };
 
   return (
@@ -122,12 +131,19 @@ const ContactsPage = () => {
                     placeholder={
                       errors.name ? `Заполните поле` : "Заполните поле"
                     }
-                    onChange={() => clearErrors("name")}
+                    onChange={(e) => {
+                      clearErrors("name");
+                      setInputValue((prev) => ({
+                        ...prev,
+                        firstInput: e.target.value,
+                      }));
+                    }}
                     autoComplete="on"
+                    value={inputValue.firstInput}
                   />
                   <img
                     src={alert}
-                    alt="alert-png"
+                    alt="alert-img"
                     style={{ display: errors.name ? "block" : "none" }}
                   />
                 </div>
@@ -151,12 +167,19 @@ const ContactsPage = () => {
                     placeholder={
                       errors.email ? `Заполните поле` : "Заполните поле"
                     }
-                    onChange={() => clearErrors("email")}
+                    onChange={(e) => {
+                      clearErrors("email");
+                      setInputValue((prev) => ({
+                        ...prev,
+                        secondInput: e.target.value,
+                      }));
+                    }}
                     autoComplete="on"
+                    value={inputValue.secondInput}
                   />
                   <img
                     src={alert}
-                    alt="alert-png"
+                    alt="alert-img"
                     style={{ display: errors.email ? "block" : "none" }}
                   />
                 </div>
@@ -173,8 +196,15 @@ const ContactsPage = () => {
                   maxLength: 3000,
                 })}
                 placeholder={errors.textarea ? `Сообщение` : "Сообщение"}
-                onChange={() => clearErrors("textarea")}
+                onChange={(e) => {
+                  clearErrors("textarea");
+                  setInputValue((prev) => ({
+                    ...prev,
+                    textarea: e.target.value,
+                  }));
+                }}
                 autoComplete="on"
+                value={inputValue.textarea}
               />
             </div>
             <button type="submit">Отправить</button>

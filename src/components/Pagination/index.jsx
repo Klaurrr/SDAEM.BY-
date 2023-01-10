@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+
 import styles from "./pagination.module.scss";
 
 const Pagination = ({ dataPerPage, totalData, currentPage, paginate }) => {

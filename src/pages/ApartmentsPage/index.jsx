@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-import styles from "./apartments.module.scss";
-import more from "../../assets/images/more.png";
+
+import clsx from "clsx";
+
+import Card from "../../components/Card";
+import CardList from "../../components/CardList";
+import Pagination from "../../components/Pagination";
 import BreadCrumbs from "../../components/BreadCrumbs";
+
+import more from "../../assets/images/more.png";
 import cross from "../../assets/images/cross.png";
 import checkMark from "../../assets/images/checkMark.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
@@ -13,18 +18,18 @@ import listGray from "../../assets/images/listGray.png";
 import tiles from "../../assets/images/tiles.png";
 import tilesGray from "../../assets/images/tilesGray.png";
 import geoPurple from "../../assets/images/geoPurple.png";
-import { useDispatch, useSelector } from "react-redux";
-import { setApartments } from "../../store/slices/searchApartmentsSlice";
-import Card from "../../components/Card";
-import clsx from "clsx";
-import CardList from "../../components/CardList";
-import Pagination from "../../components/Pagination";
 import vk from "../../assets/images/vk.png";
 import whatsApp from "../../assets/images/whatsApp.png";
 import viber from "../../assets/images/Viber.png";
 import faceBook from "../../assets/images/Facebook.png";
 import telegram from "../../assets/images/telegram.png";
 import geoYellow from "../../assets/images/geoYellow.png";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setApartments } from "../../store/slices/searchApartmentsSlice";
+
+import { motion } from "framer-motion";
+import styles from "./apartments.module.scss";
 
 const Apartments = () => {
   const location = useLocation();
@@ -367,7 +372,7 @@ const Apartments = () => {
               >
                 <div className={styles["city-wrapper"]}>
                   {filterData.nameSelect}
-                  <img src={checkMark} alt="checkMark" />
+                  <img src={checkMark} alt="checkMark-img" />
                 </div>
               </div>
               <div
@@ -473,7 +478,7 @@ const Apartments = () => {
           >
             <div className={styles.more}>
               Больше опций
-              <img src={more} alt="more" />
+              <img src={more} alt="more-img" />
             </div>
           </div>
         </div>
@@ -532,7 +537,7 @@ const Apartments = () => {
               }
             >
               <p>{moreDetailInfo.selectSleeping}</p>
-              <img src={checkMark} alt="checkMark" />
+              <img src={checkMark} alt="checkMark-img" />
             </div>
             <div
               className={styles["detail_select_modal-window"]}
@@ -613,7 +618,7 @@ const Apartments = () => {
               }
             >
               <p>{moreDetailInfo.selectDistrict}</p>
-              <img src={checkMark} alt="checkMark" />
+              <img src={checkMark} alt="checkMark-img" />
             </div>
             <div
               className={styles["detail_select_modal-window"]}
@@ -738,7 +743,7 @@ const Apartments = () => {
               }
             >
               <p>{moreDetailInfo.selectMetro}</p>
-              <img src={checkMark} alt="checkMark" />
+              <img src={checkMark} alt="checkMark-img" />
             </div>
             <div
               className={styles["detail_select_modal-window"]}
@@ -1036,7 +1041,7 @@ const Apartments = () => {
             }}
           />
           <p>По умолчанию</p>
-          <img src={checkMark} alt="checkmark-png" />
+          <img src={checkMark} alt="checkmark-img" />
         </div>
         <div
           className={clsx(
@@ -1203,7 +1208,7 @@ const Apartments = () => {
             </p>
             <button>
               <div>
-                <img src={geoYellow} alt="geoYellow" />
+                <img src={geoYellow} alt="geoYellow-img" />
                 <p>Открыть карту</p>
               </div>
             </button>

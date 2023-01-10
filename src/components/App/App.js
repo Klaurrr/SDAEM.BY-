@@ -1,18 +1,21 @@
+import { useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+
 import LoginPage from "../../pages/LoginPage";
 import Main from "../../pages/MainPage";
-import { useState } from "react";
 import Apartments from "../../pages/ApartmentsPage";
-import styles from "./app.module.scss";
-import Header from "../Header";
 import RegisterPage from "../../pages/RegisterPage";
 import DetailPage from "../../pages/DetailPage";
-import { AnimatePresence } from "framer-motion";
+import BookMarks from "../../pages/BookMarksPage";
+import ContactsPage from "../../pages/ContactsPage";
 import NewsPage from "../../pages/NewsPage";
 import ErrorPage from "../../pages/ErrorPage";
+
+import Header from "../Header";
 import Footer from "../Footer";
-import BookMarks from "../../pages/BookMarks";
-import ContactsPage from "../../pages/ContactsPage";
+
+import { AnimatePresence } from "framer-motion";
+import styles from "./app.module.scss";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(

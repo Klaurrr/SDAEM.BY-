@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import BreadCrumbs from "../../components/BreadCrumbs";
-import magnifier from "../../assets/images/magnifier.png";
-import styles from "./news.module.scss";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+
 import NewsCard from "../../components/NewsCard";
 import Pagination from "../../components/Pagination";
+import BreadCrumbs from "../../components/BreadCrumbs";
+
+import magnifier from "../../assets/images/magnifier.png";
+
+import { useSelector } from "react-redux";
+
+import { motion } from "framer-motion";
+import styles from "./news.module.scss";
 
 const NewsPage = () => {
   const [value, setValue] = useState("");

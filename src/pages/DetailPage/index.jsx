@@ -1,17 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import BreadCrumbs from "../../components/BreadCrumbs";
+import NewsCard from "../../components/NewsCard";
+
+import { useSelector } from "react-redux";
+
 import vk from "../../assets/images/vk.png";
 import whatsApp from "../../assets/images/whatsApp.png";
 import viber from "../../assets/images/Viber.png";
 import faceBook from "../../assets/images/Facebook.png";
 import telegram from "../../assets/images/telegram.png";
 import hotel from "../../assets/images/hotel.png";
-import styles from "./detail.module.scss";
 import gaps from "../../assets/images/gaps.png";
+
 import { motion } from "framer-motion";
-import NewsCard from "../../components/NewsCard";
+import styles from "./detail.module.scss";
 
 const DetailPage = () => {
   const { id } = useParams();

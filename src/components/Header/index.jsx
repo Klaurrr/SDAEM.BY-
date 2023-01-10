@@ -1,16 +1,17 @@
-import React, { useLayoutEffect } from "react";
+import { useLayoutEffect, useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
 import logo from "../../assets/images/logo.png";
 import geoYellow from "../../assets/images/geoYellow.png";
 import geoGray from "../../assets/images/geoGray.png";
 import heart from "../../assets/images/heart.png";
-import styles from "./header.module.scss";
 import cat from "../../assets/images/cat.jpg";
 import checkMark from "../../assets/images/checkMark.png";
 import heartFilled from "../../assets/images/HeartFilled.png";
-import { useState } from "react";
-import { useEffect } from "react";
+
 import { useSelector } from "react-redux";
+
+import styles from "./header.module.scss";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [drop, setDrop] = useState(false);
@@ -113,7 +114,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               }
               to="/ADS"
             >
-              <img src={geoGray} alt="geo-gray" />
+              <img src={geoGray} alt="geo-gray-img" />
               Объявления на карте
             </NavLink>
           </div>
@@ -159,7 +160,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               Закладки
               <img
                 src={flats.length > 0 ? heartFilled : heart}
-                alt="heart"
+                alt="heart-img"
                 className={styles.heart}
               />
             </NavLink>
@@ -217,7 +218,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
             src={logo}
-            alt="logo"
+            alt="logo-img"
             onClick={() => {
               navigate("/main");
               setFlatsValue("Квартиры на сутки");
@@ -244,7 +245,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                 </a>
               </div>
 
-              <img src={geoYellow} alt="geo-yellow" />
+              <img src={geoYellow} alt="geo-yellow-img" />
             </div>
             <div className={styles.linkWrap}>
               <div>

@@ -1,7 +1,9 @@
-import styles from "./crumbs.module.scss";
+import { useNavigate } from "react-router-dom";
+
 import House from "../../assets/images/House.png";
 import breadCrumbsDot from "../../assets/images/BreadCrumbDot.png";
-import { useNavigate } from "react-router-dom";
+
+import styles from "./crumbs.module.scss";
 
 const BreadCrumbs = ({ crumbTitle, crumbSubTitle }) => {
   const navigate = useNavigate();

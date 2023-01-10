@@ -1,12 +1,9 @@
-import React from "react";
-
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import logo from "../../assets/images/logo.png";
 import instagram from "../../assets/images/instagram.png";
 import vk from "../../assets/images/vkBlack.png";
 import faceBook from "../../assets/images/facebookBlack.png";
-
 import verifiedByVisa from "../../assets/images/verified-by-visa.png";
 import webpay from "../../assets/images/webpay.png";
 import visa from "../../assets/images/visa.png";

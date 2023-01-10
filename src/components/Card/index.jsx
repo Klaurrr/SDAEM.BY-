@@ -1,18 +1,21 @@
-import flatOne from "../../assets/images/flat_one.png";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+
+import flatOne from "../../assets/images/flat_one.png";
 import userIcon from "../../assets/images/userIcon.png";
 import geoGray from "../../assets/images/geoGray2.png";
 import metro from "../../assets/images/metro.png";
 import phone from "../../assets/images/phone.png";
-import styles from "./card.module.scss";
 import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
 import viberWhite from "../../assets/images/ViberWhite.png";
 import heartRed from "../../assets/images/HeartRed.png";
 import heartFilled from "../../assets/images/HeartFilled.png";
 import mail from "../../assets/images/mail.png";
-import { useLocation } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setBookMarks } from "../../store/slices/bookMarksSlice";
+
+import styles from "./card.module.scss";
 
 const Card = ({ data }) => {
   const [contact, setContact] = useState(false);
@@ -35,7 +38,7 @@ const Card = ({ data }) => {
           }}
         >
           <div className={styles.img}>
-            <img src={flatOne} alt="flatOne" />
+            <img src={flatOne} alt="flatOne-img" />
             <p>Gold</p>
           </div>
           <div className={styles.desc_container}>
@@ -62,13 +65,17 @@ const Card = ({ data }) => {
               <p>
                 <img
                   src={geoGray}
-                  alt="geoGray"
+                  alt="geoGray-img"
                   style={{ paddingRight: "11px" }}
                 />
                 {flat.city}, б-р Мулявина, д. 10
               </p>
               <p>
-                <img src={metro} alt="metro" style={{ paddingRight: "6px" }} />
+                <img
+                  src={metro}
+                  alt="metro-img"
+                  style={{ paddingRight: "6px" }}
+                />
                 Грушевка <span>•</span>Шабаны
               </p>
             </div>
@@ -110,7 +117,7 @@ const Card = ({ data }) => {
                   setCardId(flat.id);
                 }}
               >
-                <img src={phone} alt="phone" />
+                <img src={phone} alt="phone-img" />
                 Контакты
               </button>
               <button className={styles.button_yellow}>Подробнее</button>
@@ -146,13 +153,13 @@ const Card = ({ data }) => {
               </a>
               <div className={styles.socials}>
                 <div style={{ background: "#7B519D" }}>
-                  <img src={viberWhite} alt="viber-png" />
+                  <img src={viberWhite} alt="viber-img" />
                 </div>
                 <div style={{ background: "#0DBB41" }}>
-                  <img src={whatsAppWhite} alt="whatsApp-png" />
+                  <img src={whatsAppWhite} alt="whatsApp-img" />
                 </div>
                 <div style={{ background: "#664EF9" }}>
-                  <img src={mail} alt="email-png" />
+                  <img src={mail} alt="email-img" />
                 </div>
               </div>
             </div>

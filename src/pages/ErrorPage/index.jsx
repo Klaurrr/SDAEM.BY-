@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import gaps from "../../assets/images/gaps.png";
@@ -7,7 +5,6 @@ import gapsWhite from "../../assets/images/gaps_2.png";
 import House from "../../assets/images/House.png";
 
 import { motion } from "framer-motion";
-
 import styles from "./error.module.scss";
 
 const ErrorPage = () => {
