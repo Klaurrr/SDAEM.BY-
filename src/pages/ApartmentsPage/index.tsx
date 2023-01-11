@@ -28,6 +28,9 @@ import geoYellow from "../../assets/images/geoYellow.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setApartments } from "../../store/slices/searchApartmentsSlice";
 
+import { IState } from "types/IState";
+import { IApartments } from "types/IApartments";
+
 import { motion } from "framer-motion";
 import styles from "./apartments.module.scss";
 
@@ -35,10 +38,10 @@ const Apartments = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const apartments = useSelector((state) => state.data.apartments);
-  const searchedApartments = useSelector((state) => state.search);
+  const apartments = useSelector((state: IState) => state.data.apartments);
+  const searchedApartments = useSelector((state: IState) => state.search);
 
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState<IApartments[] | undefined>(undefined);
 
   const [apartmentsInfo, setApartmentsInfo] = useState({
     city:
@@ -111,7 +114,7 @@ const Apartments = () => {
   const lastApartmentsIndex = currentPage * apartmentsPerPage;
   const firstApartmentsIndex = lastApartmentsIndex - apartmentsPerPage;
 
-  const selectValue = (e) => {
+  const selectValue = (e: any) => {
     setFilterData((prev) => ({
       ...prev,
       selectActive: !filterData.selectActive,
@@ -176,7 +179,7 @@ const Apartments = () => {
     );
   };
 
-  const checkbox = (el) => {
+  const checkbox = (el: string) => {
     setFilterData((prev) => ({ ...prev, selected: el }));
     setData(
       apartments.filter((item) =>
@@ -197,7 +200,7 @@ const Apartments = () => {
     );
   };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <motion.section
@@ -248,91 +251,91 @@ const Apartments = () => {
               <div>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Недорогие
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   1-комнатные
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   2-комнатные
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   3-комнатные
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   4-комнатные
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   5-комнатные
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Заводской р.
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Ленинский р.{" "}
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Московский р.{" "}
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Октябрьский р.{" "}
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Партизанский р.
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Первомайский р.
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Советский р.
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Фрунзенский р.
                 </button>
                 <button
                   className={styles.checkbox}
-                  onClick={(e) => checkbox(e.target.outerText)}
+                  onClick={(e: any) => checkbox(e.target.outerText)}
                 >
                   Центральный р.
                 </button>
@@ -386,7 +389,6 @@ const Apartments = () => {
                   <p
                     className={styles["city-p"]}
                     onClick={(e) => selectValue(e)}
-                    value={1}
                   >
                     1 комн.
                   </p>
@@ -430,7 +432,7 @@ const Apartments = () => {
               <input
                 type="text"
                 placeholder="От"
-                onChange={(e) => {
+                onChange={(e:any) => {
                   setApartmentsInfo((prev) => ({
                     ...prev,
                     costMin: e.target.value,
@@ -446,7 +448,7 @@ const Apartments = () => {
               <input
                 type="text"
                 placeholder="До"
-                onChange={(e) => {
+                onChange={(e:any) => {
                   setApartmentsInfo((prev) => ({
                     ...prev,
                     costMax: e.target.value,
@@ -546,7 +548,7 @@ const Apartments = () => {
               }}
             >
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectSleepActive: false,
@@ -557,7 +559,7 @@ const Apartments = () => {
                 <p>1</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectSleepActive: false,
@@ -568,7 +570,7 @@ const Apartments = () => {
                 <p>2</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectSleepActive: false,
@@ -579,7 +581,7 @@ const Apartments = () => {
                 <p>3</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectSleepActive: false,
@@ -590,7 +592,7 @@ const Apartments = () => {
                 <p>4</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectSleepActive: false,
@@ -627,7 +629,7 @@ const Apartments = () => {
               }}
             >
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -638,7 +640,7 @@ const Apartments = () => {
                 <p>Заводской</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -649,7 +651,7 @@ const Apartments = () => {
                 <p>Ленинский</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -660,7 +662,7 @@ const Apartments = () => {
                 <p>Московский</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -671,7 +673,7 @@ const Apartments = () => {
                 <p>Октябрьский</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -682,7 +684,7 @@ const Apartments = () => {
                 <p>Партизанский</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -693,7 +695,7 @@ const Apartments = () => {
                 <p>Первомайский</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -704,7 +706,7 @@ const Apartments = () => {
                 <p>Советский</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -715,7 +717,7 @@ const Apartments = () => {
                 <p>Фрунзенский</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectDistrictActive: false,
@@ -752,7 +754,7 @@ const Apartments = () => {
               }}
             >
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectMetroActive: false,
@@ -763,7 +765,7 @@ const Apartments = () => {
                 <p>Есть</p>
               </div>
               <div
-                onClick={(e) =>
+                onClick={(e: any) =>
                   setMoreDetailInfo((prev) => ({
                     ...prev,
                     selectMetroActive: false,
@@ -784,7 +786,7 @@ const Apartments = () => {
                 id="1"
                 className={styles.custom_checkbox}
               />
-              <label for="1">Газовая плита</label>
+              <label htmlFor="1">Газовая плита</label>
             </div>
             <div>
               <input
@@ -792,7 +794,7 @@ const Apartments = () => {
                 id="2"
                 className={styles.custom_checkbox}
               />
-              <label for="2">Духовка</label>
+              <label htmlFor="2">Духовка</label>
             </div>
             <div>
               <input
@@ -800,7 +802,7 @@ const Apartments = () => {
                 id="3"
                 className={styles.custom_checkbox}
               />
-              <label for="3">Кофеварка</label>
+              <label htmlFor="3">Кофеварка</label>
             </div>
             <div>
               <input
@@ -808,7 +810,7 @@ const Apartments = () => {
                 id="4"
                 className={styles.custom_checkbox}
               />
-              <label for="4">Микроволновая печь</label>
+              <label htmlFor="4">Микроволновая печь</label>
             </div>
             <div>
               <input
@@ -816,7 +818,7 @@ const Apartments = () => {
                 id="5"
                 className={styles.custom_checkbox}
               />
-              <label for="5">Посуда</label>
+              <label htmlFor="5">Посуда</label>
             </div>
             <div>
               <input
@@ -824,7 +826,7 @@ const Apartments = () => {
                 id="6"
                 className={styles.custom_checkbox}
               />
-              <label for="6">Посудомоечная машина</label>
+              <label htmlFor="6">Посудомоечная машина</label>
             </div>
           </div>
           <div>
@@ -834,7 +836,7 @@ const Apartments = () => {
                 id="7"
                 className={styles.custom_checkbox}
               />
-              <label for="7">Газовая плита</label>
+              <label htmlFor="7">Газовая плита</label>
             </div>
             <div>
               <input
@@ -842,7 +844,7 @@ const Apartments = () => {
                 id="8"
                 className={styles.custom_checkbox}
               />
-              <label for="8">Духовка</label>
+              <label htmlFor="8">Духовка</label>
             </div>
             <div>
               <input
@@ -850,7 +852,7 @@ const Apartments = () => {
                 id="9"
                 className={styles.custom_checkbox}
               />
-              <label for="9">Кофеварка</label>
+              <label htmlFor="9">Кофеварка</label>
             </div>
             <div>
               <input
@@ -858,7 +860,7 @@ const Apartments = () => {
                 id="10"
                 className={styles.custom_checkbox}
               />
-              <label for="10">Микроволновая печь</label>
+              <label htmlFor="10">Микроволновая печь</label>
             </div>
             <div>
               <input
@@ -866,7 +868,7 @@ const Apartments = () => {
                 id="11"
                 className={styles.custom_checkbox}
               />
-              <label for="11">Посуда</label>
+              <label htmlFor="11">Посуда</label>
             </div>
             <div>
               <input
@@ -874,7 +876,7 @@ const Apartments = () => {
                 id="12"
                 className={styles.custom_checkbox}
               />
-              <label for="12">Посудомоечная машина</label>
+              <label htmlFor="12">Посудомоечная машина</label>
             </div>
           </div>
           <div>
@@ -884,7 +886,7 @@ const Apartments = () => {
                 id="13"
                 className={styles.custom_checkbox}
               />
-              <label for="13">Газовая плита</label>
+              <label htmlFor="13">Газовая плита</label>
             </div>
             <div>
               <input
@@ -892,7 +894,7 @@ const Apartments = () => {
                 id="14"
                 className={styles.custom_checkbox}
               />
-              <label for="14">Духовка</label>
+              <label htmlFor="14">Духовка</label>
             </div>
             <div>
               <input
@@ -900,7 +902,7 @@ const Apartments = () => {
                 id="15"
                 className={styles.custom_checkbox}
               />
-              <label for="15">Кофеварка</label>
+              <label htmlFor="15">Кофеварка</label>
             </div>
             <div>
               <input
@@ -908,7 +910,7 @@ const Apartments = () => {
                 id="16"
                 className={styles.custom_checkbox}
               />
-              <label for="16">Микроволновая печь</label>
+              <label htmlFor="16">Микроволновая печь</label>
             </div>
             <div>
               <input
@@ -916,7 +918,7 @@ const Apartments = () => {
                 id="17"
                 className={styles.custom_checkbox}
               />
-              <label for="17">Посуда</label>
+              <label htmlFor="17">Посуда</label>
             </div>
             <div>
               <input
@@ -924,7 +926,7 @@ const Apartments = () => {
                 id="18"
                 className={styles.custom_checkbox}
               />
-              <label for="18">Посудомоечная машина</label>
+              <label htmlFor="18">Посудомоечная машина</label>
             </div>
           </div>
           <div>
@@ -934,7 +936,7 @@ const Apartments = () => {
                 id="19"
                 className={styles.custom_checkbox}
               />
-              <label for="19">Газовая плита</label>
+              <label htmlFor="19">Газовая плита</label>
             </div>
             <div>
               <input
@@ -942,7 +944,7 @@ const Apartments = () => {
                 id="20"
                 className={styles.custom_checkbox}
               />
-              <label for="20">Духовка</label>
+              <label htmlFor="20">Духовка</label>
             </div>
             <div>
               <input
@@ -950,7 +952,7 @@ const Apartments = () => {
                 id="21"
                 className={styles.custom_checkbox}
               />
-              <label for="21">Кофеварка</label>
+              <label htmlFor="21">Кофеварка</label>
             </div>
             <div>
               <input
@@ -958,7 +960,7 @@ const Apartments = () => {
                 id="22"
                 className={styles.custom_checkbox}
               />
-              <label for="22">Микроволновая печь</label>
+              <label htmlFor="22">Микроволновая печь</label>
             </div>
             <div>
               <input
@@ -966,7 +968,7 @@ const Apartments = () => {
                 id="23"
                 className={styles.custom_checkbox}
               />
-              <label for="23">Посуда</label>
+              <label htmlFor="23">Посуда</label>
             </div>
             <div>
               <input
@@ -974,7 +976,7 @@ const Apartments = () => {
                 id="24"
                 className={styles.custom_checkbox}
               />
-              <label for="24">Посудомоечная машина</label>
+              <label htmlFor="24">Посудомоечная машина</label>
             </div>
           </div>
           <div>
@@ -984,7 +986,7 @@ const Apartments = () => {
                 id="25"
                 className={styles.custom_checkbox}
               />
-              <label for="25">Газовая плита</label>
+              <label htmlFor="25">Газовая плита</label>
             </div>
             <div>
               <input
@@ -992,7 +994,7 @@ const Apartments = () => {
                 id="26"
                 className={styles.custom_checkbox}
               />
-              <label for="26">Духовка</label>
+              <label htmlFor="26">Духовка</label>
             </div>
             <div>
               <input
@@ -1000,7 +1002,7 @@ const Apartments = () => {
                 id="27"
                 className={styles.custom_checkbox}
               />
-              <label for="27">Кофеварка</label>
+              <label htmlFor="27">Кофеварка</label>
             </div>
             <div>
               <input
@@ -1008,7 +1010,7 @@ const Apartments = () => {
                 id="28"
                 className={styles.custom_checkbox}
               />
-              <label for="28">Микроволновая печь</label>
+              <label htmlFor="28">Микроволновая печь</label>
             </div>
             <div>
               <input
@@ -1016,7 +1018,7 @@ const Apartments = () => {
                 id="29"
                 className={styles.custom_checkbox}
               />
-              <label for="29">Посуда</label>
+              <label htmlFor="29">Посуда</label>
             </div>
             <div>
               <input
@@ -1024,7 +1026,7 @@ const Apartments = () => {
                 id="30"
                 className={styles.custom_checkbox}
               />
-              <label for="30">Посудомоечная машина</label>
+              <label htmlFor="30">Посудомоечная машина</label>
             </div>
           </div>
         </div>
@@ -1038,7 +1040,7 @@ const Apartments = () => {
               filter:
                 sort &&
                 "invert(57%) sepia(85%) saturate(3360%) hue-rotate(225deg) brightness(91%) contrast(160%)",
-            }}
+            } as React.CSSProperties}
           />
           <p>По умолчанию</p>
           <img src={checkMark} alt="checkmark-img" />

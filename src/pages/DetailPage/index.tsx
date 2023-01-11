@@ -13,12 +13,15 @@ import telegram from "../../assets/images/telegram.png";
 import hotel from "../../assets/images/hotel.png";
 import gaps from "../../assets/images/gaps.png";
 
+import { IData } from "types/IData";
+
 import { motion } from "framer-motion";
 import styles from "./detail.module.scss";
+import { IState } from "types/IState";
 
 const DetailPage = () => {
-  const { id } = useParams();
-  const data = useSelector((state) => state.data.news);
+  const { id } = useParams<string>();
+  const data = useSelector((state: IState) => state.data.news);
 
   const news = data && data.filter((item) => item.id === Number(id));
   window.scrollTo(0, 0);

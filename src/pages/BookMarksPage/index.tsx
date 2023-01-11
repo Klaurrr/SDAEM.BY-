@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 import { motion } from "framer-motion";
 import styles from "./bookMarks.module.scss";
+import { IBookMarks } from "types/IBookMarks";
 
 const BookMarks = () => {
   const [liActive, setLiActive] = useState("Квартиры");
@@ -18,9 +19,9 @@ const BookMarks = () => {
   const lastApartmentsIndex = currentPage * apartmentsPerPage;
   const firstApartmentsIndex = lastApartmentsIndex - apartmentsPerPage;
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const bookMarks = useSelector((state) => state.bookMarks.bookMarks);
+  const bookMarks = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
 
   return (
     <motion.section
@@ -40,25 +41,25 @@ const BookMarks = () => {
           <ul>
             <li
               className={liActive === "Квартиры" && styles.active}
-              onClick={(e) => setLiActive(e.target.outerText)}
+              onClick={(e: any) => setLiActive(e.target.outerText)}
             >
               Квартиры
             </li>
             <li
               className={liActive === "Коттеджи/Усадьбы" && styles.active}
-              onClick={(e) => setLiActive(e.target.outerText)}
+              onClick={(e: any) => setLiActive(e.target.outerText)}
             >
               Коттеджи/Усадьбы
             </li>
             <li
               className={liActive === "Бани" && styles.active}
-              onClick={(e) => setLiActive(e.target.outerText)}
+              onClick={(e: any) => setLiActive(e.target.outerText)}
             >
               Бани
             </li>
             <li
               className={liActive === "Авто напрокат" && styles.active}
-              onClick={(e) => setLiActive(e.target.outerText)}
+              onClick={(e: any) => setLiActive(e.target.outerText)}
             >
               Авто напрокат
             </li>

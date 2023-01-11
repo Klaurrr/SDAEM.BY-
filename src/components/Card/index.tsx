@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import flatOne from "../../assets/images/flat_one.png";
@@ -15,15 +15,19 @@ import mail from "../../assets/images/mail.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setBookMarks } from "../../store/slices/bookMarksSlice";
 
+import { IBookMarks } from "types/IBookMarks";
+import { IApartments } from "types/IApartments";
+
 import styles from "./card.module.scss";
 
-const Card = ({ data }) => {
+
+const Card = ({ data }: {data: IApartments[]}) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const flats = useSelector((state) => state.bookMarks.bookMarks);
+  const flats = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
 
   return (
     <>
@@ -35,7 +39,7 @@ const Card = ({ data }) => {
             marginBottom:
               (location.pathname.slice(0, 11) === "/apartments" && "30px") ||
               (location.pathname === "/bookMarks" && "30px"),
-          }}
+          } as React.CSSProperties}
         >
           <div className={styles.img}>
             <img src={flatOne} alt="flatOne-img" />
@@ -114,8 +118,9 @@ const Card = ({ data }) => {
                 className={styles.button_purple}
                 onClick={() => {
                   setContact(!contact);
-                  setCardId(flat.id);
+                  setCardId(flat.id!);
                 }}
+                
               >
                 <img src={phone} alt="phone-img" />
                 Контакты

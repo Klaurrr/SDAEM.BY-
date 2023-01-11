@@ -189,7 +189,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                 >
                   {localStorage.getItem("remember") === "true"
                     ? localStorage.getItem("login")
-                    : sessionStorage.getItem("login")}
+                    : JSON.parse(sessionStorage.getItem("login"))}
                 </p>
                 <img src={checkMark}></img>
               </div>

@@ -32,7 +32,6 @@ const ContactsPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    validate,
     clearErrors,
   } = useForm();
 
@@ -188,7 +187,6 @@ const ContactsPage = () => {
             <div className={styles.textarea}>
               <p>Ваше сообщение</p>
               <textarea
-                type="text"
                 style={{ border: errors.textarea && "2px solid red" }}
                 {...register("textarea", {
                   required: true,

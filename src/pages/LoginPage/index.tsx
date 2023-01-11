@@ -7,15 +7,18 @@ import userLogin from "./../../assets/images/UserLogin.png";
 import lock from "./../../assets/images/lock.png";
 import alert from "../../assets/images/alert.png";
 
+import { IUser } from "types/IUser";
+
 import { motion } from "framer-motion";
 import styles from "./login.module.scss";
 
-const LoginPage = ({ setIsLoggedIn, setUserName }) => {
+
+const LoginPage = ({ setIsLoggedIn, setUserName }: {setIsLoggedIn: (open: boolean) => void, setUserName: (open: string) => void}) => {
   const navigateTo = useNavigate();
 
   useEffect(() => {
     setIsLoggedIn(false);
-    localStorage.setItem("Logged", false);
+    localStorage.setItem("Logged", JSON.stringify(false));
     localStorage.removeItem("remember");
   }, []);
 
@@ -26,20 +29,20 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
     handleSubmit,
     formState: { errors },
     clearErrors,
-  } = useForm();
+  } = useForm<IUser>();
 
-  const logged = (data) => {
+  const logged = (data: IUser) => {
     navigateTo("/main");
     setIsLoggedIn(true);
     setUserName(data.login);
     labelState
-      ? localStorage.setItem("Logged", true)
-      : sessionStorage.setItem("Logged", true);
-    localStorage.setItem("remember", labelState);
-    sessionStorage.setItem("login", localStorage.getItem("login"));
+      ? localStorage.setItem("Logged", JSON.stringify(true))
+      : sessionStorage.setItem("Logged", JSON.stringify(true));
+    localStorage.setItem("remember", JSON.stringify(labelState));
+    sessionStorage.setItem("login", JSON.stringify(localStorage.getItem("login")));
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: IUser) => {
     localStorage.getItem("login") === data.login &&
       localStorage.getItem("password") === data.password &&
       logged(data);
@@ -84,7 +87,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                     errors.login ? `Логин не зарегестрирован` : "Логин"
                   }
                   onChange={() => clearErrors("login")}
-                  autoсomplete="on"
+                  autoComplete="on"
                 />
                 <img
                   src={alert}
@@ -111,7 +114,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }) => {
                   style={{ paddingLeft: "20px" }}
                   onChange={() => clearErrors("password")}
                   placeholder={errors.password ? `Неверный пароль` : "Пароль"}
-                  autoсomplete="on"
+                  autoComplete="on"
                 />
                 <img
                   src={alert}
