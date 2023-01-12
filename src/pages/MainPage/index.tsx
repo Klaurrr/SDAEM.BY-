@@ -22,8 +22,11 @@ import geoYellow from "../../assets/images/geoYellow.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setApartments } from "../../store/slices/searchApartmentsSlice";
 
+import { IState } from "types/IState";
+
 import { motion } from "framer-motion";
 import styles from "./main.module.scss";
+
 
 const Main = () => {
   const [style, setStyle] = useState("one");
@@ -52,10 +55,10 @@ const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const news = useSelector((state) => state.data.news);
-  const apartments = useSelector((state) => state.data.apartments);
+  const news = useSelector((state: IState) => state.data.news);
+  const apartments = useSelector((state: IState) => state.data.apartments);
 
-  const selectValueFirst = (e) => {
+  const selectValueFirst = (e: any) => {
     setSelectIsOpen((prev) => ({
       ...prev,
       selectCity: !selectIsOpen.selectCity,
@@ -64,7 +67,7 @@ const Main = () => {
     setNameSelect((prev) => ({ ...prev, city: e.target.outerText }));
   };
 
-  const selectValueSecond = (e) => {
+  const selectValueSecond = (e: any) => {
     setSelectIsOpen((prev) => ({
       ...prev,
       selectRooms: !selectIsOpen.selectRooms,
@@ -73,14 +76,14 @@ const Main = () => {
     setNameSelect((prev) => ({ ...prev, rooms: e.target.outerText }));
   };
 
-  const setDropDown = (e) => {
+  const setDropDown = (e: any) => {
     setSelectIsOpen((prev) => ({
       ...prev,
       selectMetro: !selectIsOpen.selectMetro,
     }));
     setNameSelect((prev) => ({ ...prev, metro: e }));
   };
-  const setDropDownTwo = (e) => {
+  const setDropDownTwo = (e: any) => {
     setSelectIsOpen((prev) => ({
       ...prev,
       selectDistrict: !selectIsOpen.selectDistrict,
@@ -89,7 +92,7 @@ const Main = () => {
   };
 
   useLayoutEffect(() => {
-    window.addEventListener("keyup", (e) => {
+    window.addEventListener("keyup", (e: any) => {
       if (e.key === "Escape") {
         setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
         setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
@@ -375,7 +378,7 @@ const Main = () => {
                 <input
                   type="number"
                   placeholder="От"
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setData((prev) => ({ ...prev, costMin: e.target.value }))
                   }
                 />
@@ -383,7 +386,7 @@ const Main = () => {
                 <input
                   type="number"
                   placeholder="До"
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setData((prev) => ({ ...prev, costMax: e.target.value }))
                   }
                 />
@@ -670,10 +673,10 @@ const Main = () => {
               }
             >
               <div>
-                <p onClick={(e) => setDropDown(e.target.outerText)}>Есть</p>
+                <p onClick={(e: any) => setDropDown(e.target.outerText)}>Есть</p>
               </div>
               <div>
-                <p onClick={(e) => setDropDown(e.target.outerText)}>Нет</p>
+                <p onClick={(e: any) => setDropDown(e.target.outerText)}>Нет</p>
               </div>
             </div>
             <div
@@ -685,22 +688,22 @@ const Main = () => {
               style={{ left: "16em" }}
             >
               <div>
-                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                <p onClick={(e: any) => setDropDownTwo(e.target.outerText)}>
                   Район 1
                 </p>
               </div>
               <div>
-                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                <p onClick={(e: any) => setDropDownTwo(e.target.outerText)}>
                   Район 2
                 </p>
               </div>
               <div>
-                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                <p onClick={(e: any) => setDropDownTwo(e.target.outerText)}>
                   Район 3
                 </p>
               </div>
               <div>
-                <p onClick={(e) => setDropDownTwo(e.target.outerText)}>
+                <p onClick={(e: any) => setDropDownTwo(e.target.outerText)}>
                   Район 4
                 </p>
               </div>

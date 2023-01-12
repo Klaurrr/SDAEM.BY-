@@ -8,25 +8,30 @@ import magnifier from "../../assets/images/magnifier.png";
 
 import { useSelector } from "react-redux";
 
+import { IState } from "types/IState";
+import { INews } from "types/INews";
+
 import { motion } from "framer-motion";
 import styles from "./news.module.scss";
 
 const NewsPage = () => {
+
   const [value, setValue] = useState("");
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<INews[]>([]);
+
+  const data = useSelector((state: IState) => state.data.news);
+  window.scrollTo(0, 0);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [newsPerPage] = useState(9);
-
-  const data = useSelector((state) => state.data.news);
-  window.scrollTo(0, 0);
 
   const lastNewsIndex = currentPage * newsPerPage;
   const firstNewsIndex = lastNewsIndex - newsPerPage;
   const currentNews = data.slice(firstNewsIndex, lastNewsIndex);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: any) => {
     e.preventDefault();
     setNews(
       value != ""

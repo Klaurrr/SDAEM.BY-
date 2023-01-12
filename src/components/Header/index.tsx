@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useEffect } from "react";
+import React, { useLayoutEffect, useState, useEffect, HTMLAttributes } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/images/logo.png";
@@ -11,9 +11,11 @@ import heartFilled from "../../assets/images/HeartFilled.png";
 
 import { useSelector } from "react-redux";
 
+import { IBookMarks } from "types/IBookMarks";
+
 import styles from "./header.module.scss";
 
-const Header = ({ isLoggedIn, setIsLoggedIn }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLoggedIn: (open: boolean) => void}) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
   const [userDrop, setUserDrop] = useState(false);
@@ -21,7 +23,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const flats = useSelector((state) => state.bookMarks.bookMarks);
+  const flats = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
 
   useEffect(() => {
     location.pathname === "/apartments/Minsk"
@@ -40,7 +42,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   }, [location.pathname]);
 
   useLayoutEffect(() => {
-    window.addEventListener("keyup", (e) => {
+    window.addEventListener("keyup", (e: any) => {
       if (e.key === "Escape") {
         setDrop(false);
         setUserDrop(false);
@@ -55,7 +57,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         <nav className={styles["col-1__nav-1"]}>
           <div>
             <NavLink
-              style={({ isActive }) =>
+              style={({ isActive }): any =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
@@ -72,7 +74,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           <div>
             {" "}
             <NavLink
-              style={({ isActive }) =>
+              style={({ isActive }): any =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
@@ -88,7 +90,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           <div>
             {" "}
             <NavLink
-              style={({ isActive }) =>
+              style={({ isActive }): any =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
@@ -104,7 +106,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           <div>
             {" "}
             <NavLink
-              style={({ isActive }) =>
+              style={({ isActive }): any =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
@@ -121,7 +123,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           <div>
             {" "}
             <NavLink
-              style={({ isActive }) =>
+              style={({ isActive }): any =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
@@ -189,7 +191,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                 >
                   {localStorage.getItem("remember") === "true"
                     ? localStorage.getItem("login")
-                    : JSON.parse(sessionStorage.getItem("login"))}
+                    : JSON.parse(sessionStorage.getItem("login")!)}
                 </p>
                 <img src={checkMark}></img>
               </div>
@@ -250,7 +252,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
             <div className={styles.linkWrap}>
               <div>
                 <NavLink
-                  style={({ isActive }) =>
+                  style={({ isActive }): any =>
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
@@ -267,7 +269,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
             <div className={styles.linkWrap}>
               <div>
                 <NavLink
-                  style={({ isActive }) =>
+                  style={({ isActive }): any =>
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
@@ -284,7 +286,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
             <div className={styles.linkWrap}>
               <div>
                 <NavLink
-                  style={({ isActive }) =>
+                  style={({ isActive }): any =>
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",

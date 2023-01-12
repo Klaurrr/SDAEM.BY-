@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ dataPerPage, totalData, currentPage, paginate }) => {
+const Pagination = ({ dataPerPage, totalData, currentPage, paginate }: {dataPerPage: number, totalData: number, currentPage: number, paginate: (open: number) => void}) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalData / dataPerPage); i++) {

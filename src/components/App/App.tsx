@@ -42,18 +42,17 @@ const App = () => {
             location.pathname !== "/register" &&
             location.pathname !== "/" && (
               <Header
-                userName={userName}
-                isLoggedIn={isLoggedIn}
+                isLoggedIn={!!isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
               />
             )}
           <AnimatePresence>
-            <Routes path="/">
-              <Route default path="main" element={<Main />} />
-              <Route path="apartments/:city" element={<Apartments />} />
-              <Route path="newsList" element={<NewsPage />} />
+            <Routes>
+              <Route path="/main" element={<Main />} />
+              <Route path="/apartments/:city" element={<Apartments />} />
+              <Route path="/newsList" element={<NewsPage />} />
               <Route
-                path="login"
+                path="/login"
                 element={
                   <LoginPage
                     setIsLoggedIn={setIsLoggedIn}
@@ -61,12 +60,12 @@ const App = () => {
                   />
                 }
               />
-              <Route path="register" element={<RegisterPage />} />
-              <Route path="newsList/detail/:id" element={<DetailPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/newsList/detail/:id" element={<DetailPage />} />
               <Route path="/" element={<Navigate to="/main" replace />} />
               <Route path="*" element={<ErrorPage />} />
-              <Route path="bookMarks" element={<BookMarks />} />
-              <Route path="contacts" element={<ContactsPage />} />
+              <Route path="/bookMarks" element={<BookMarks />} />
+              <Route path="/contacts" element={<ContactsPage />} />
             </Routes>
           </AnimatePresence>
           {location.pathname !== "/login" &&
