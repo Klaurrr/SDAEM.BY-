@@ -302,7 +302,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
             </div>
           </nav>
         </div>
-        <button>+ Разместить объявление</button>
+        <button onClick={() => navigate('/rates')}>+ Разместить объявление</button>
       </div>
       <div
         className={styles.modalWindow}

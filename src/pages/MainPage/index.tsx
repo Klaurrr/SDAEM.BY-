@@ -451,7 +451,7 @@ const Main = () => {
                     </li>
                   </ul>
                 </div>
-                <div className={styles.cottages}>
+                <div className={styles.cottages} onClick={() => navigate('/cottagesList')}>
                   <p className={styles["title-2"]}>СНЯТЬ коттедж НА ПРАЗДНИК</p>
                   <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
                   <img
@@ -465,7 +465,7 @@ const Main = () => {
                 className={styles["wrapper-2"]}
                 style={{ marginTop: "30px" }}
               >
-                <div className={styles.bathHouse}>
+                <div className={styles.bathHouse} onClick={() => navigate('/bathHousesList')}>
                   <p className={styles["title-2"]}>
                     Попариться в бане с друзьями
                   </p>
@@ -476,7 +476,7 @@ const Main = () => {
                     alt="chevron-img"
                   />
                 </div>
-                <div className={styles.cars}>
+                <div className={styles.cars} onClick={() => navigate('/carsList')}>
                   <p className={styles["title-2"]}>EСЛИ СРОЧНО НУЖНА МАШИНА</p>
                   <p className={styles["subtitle-2"]}>Авто на прокат</p>
                   <img
@@ -767,7 +767,7 @@ const Main = () => {
                     объявления на сайте.
                   </p>
                 </div>
-                <button>+ Разместить объявление</button>
+                <button onClick={() => navigate('/rates')}>+ Разместить объявление</button>
               </div>
             </div>
             <div className={styles["search-cards"]}>
@@ -794,7 +794,7 @@ const Main = () => {
                     пользователь не повторит процедуру.
                   </p>
                 </div>
-                <button>
+                <button onClick={() => navigate('/rates')}>
                   <p>Узнать стоимость услуги</p>
                   <img
                     style={{ filter: "invert(1)" }}
@@ -833,7 +833,7 @@ const Main = () => {
                     позицию, что делает размещение одинаковым для всех.
                   </p>
                 </div>
-                <button id={styles["btn-purple"]}>
+                <button id={styles["btn-purple"]} onClick={() => navigate('/rates')}>
                   <p>Еще о тарифе Gold</p>
                   <img src={checkMarkRight} alt="checkMarkRight-img" />
                 </button>

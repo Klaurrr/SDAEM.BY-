@@ -48,8 +48,7 @@ const Card = ({ data }: {data: IApartments[]}) => {
           <div className={styles.desc_container}>
             <div className={styles.wrapper_1}>
               <div className={styles.price}>
-                <p>{flat.costMin}.00 BY</p>
-
+                <p>{flat.costMin}.00 BYN</p>
                 <span>за сутки</span>
               </div>
               <div className={styles.desc_container_2}>

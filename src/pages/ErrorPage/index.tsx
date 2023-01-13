@@ -6,9 +6,14 @@ import House from "../../assets/images/House.png";
 
 import { motion } from "framer-motion";
 import styles from "./error.module.scss";
+import { useEffect } from "react";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <motion.div
