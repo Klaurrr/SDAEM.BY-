@@ -6,9 +6,10 @@ import Pagination from "../../components/Pagination";
 
 import { useSelector } from "react-redux";
 
+import { IBookMarks } from "types/IBookMarks";
+
 import { motion } from "framer-motion";
 import styles from "./bookMarks.module.scss";
-import { IBookMarks } from "types/IBookMarks";
 
 const BookMarks = () => {
   const [liActive, setLiActive] = useState("Квартиры");

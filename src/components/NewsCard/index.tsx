@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+
 import { INews } from "types/INews";
 
 import hotel from "../../assets/images/hotel.png";

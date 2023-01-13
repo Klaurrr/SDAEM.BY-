@@ -13,11 +13,10 @@ import telegram from "../../assets/images/telegram.png";
 import hotel from "../../assets/images/hotel.png";
 import gaps from "../../assets/images/gaps.png";
 
-import { IData } from "types/IData";
+import { IState } from "types/IState";
 
 import { motion } from "framer-motion";
 import styles from "./detail.module.scss";
-import { IState } from "types/IState";
 
 const DetailPage = () => {
   const { id } = useParams<string>();

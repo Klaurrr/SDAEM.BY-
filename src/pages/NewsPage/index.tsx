@@ -74,7 +74,7 @@ const NewsPage = () => {
         <div className={styles.card_container}>
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             {news.length > 0
-              ? news.map((item) => (
+              ? news.slice(firstNewsIndex, lastNewsIndex).map((item) => (
                   <div className={styles.wrapper} key={item.id}>
                     <NewsCard item={item} />
                   </div>
@@ -88,7 +88,7 @@ const NewsPage = () => {
           <div style={{ marginBottom: "100px", position: "relative" }}>
             <Pagination
               dataPerPage={newsPerPage}
-              totalData={data.length}
+              totalData={news.length > 0 ? news.length : data.length}
               paginate={paginate}
               currentPage={currentPage}
             />

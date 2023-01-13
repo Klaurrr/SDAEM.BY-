@@ -13,9 +13,10 @@ import captcha from "../../assets/images/recaptcha.jpg";
 import alert from "../../assets/images/alert.png";
 import alertWhite from "../../assets/images/alertWhite.png";
 
+import { IUser } from "types/IUser";
+
 import { motion } from "framer-motion";
 import styles from "./register.module.scss";
-import { IUser } from "types/IUser";
 
 const RegisterPage = () => {
   const navigateToLogin = useNavigate();

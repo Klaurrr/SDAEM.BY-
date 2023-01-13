@@ -9,6 +9,7 @@ const Pagination = ({ dataPerPage, totalData, currentPage, paginate }: {dataPerP
     pageNumbers.push(i);
   }
 
+
   return (
     <div style={{ marginTop: "50px" }}>
       <ul className={styles.ul}>

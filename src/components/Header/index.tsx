@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect, HTMLAttributes } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/images/logo.png";
