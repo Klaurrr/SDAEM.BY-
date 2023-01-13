@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import styles from "./login.module.scss";
 
 
-const LoginPage = ({ setIsLoggedIn, setUserName }: {setIsLoggedIn: (open: boolean) => void, setUserName: (open: string) => void}) => {
+const LoginPage = ({ setIsLoggedIn }: {setIsLoggedIn: (open: boolean) => void}) => {
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -31,10 +31,9 @@ const LoginPage = ({ setIsLoggedIn, setUserName }: {setIsLoggedIn: (open: boolea
     clearErrors,
   } = useForm<IUser>();
 
-  const logged = (data: IUser) => {
+  const logged = () => {
     navigateTo("/main");
     setIsLoggedIn(true);
-    setUserName(data.login);
     labelState
       ? localStorage.setItem("Logged", JSON.stringify(true))
       : sessionStorage.setItem("Logged", JSON.stringify(true));
@@ -44,8 +43,7 @@ const LoginPage = ({ setIsLoggedIn, setUserName }: {setIsLoggedIn: (open: boolea
 
   const onSubmit = (data: IUser) => {
     localStorage.getItem("login") === data.login &&
-      localStorage.getItem("password") === data.password &&
-      logged(data);
+      localStorage.getItem("password") === data.password && logged()
   };
 
   return (

@@ -26,7 +26,6 @@ const App = () => {
 
   let location = useLocation();
 
-  const [userName, setUserName] = useState(localStorage.getItem("userName"));
 
   return (
     <div
@@ -56,7 +55,6 @@ const App = () => {
                 element={
                   <LoginPage
                     setIsLoggedIn={setIsLoggedIn}
-                    setUserName={setUserName}
                   />
                 }
               />
