@@ -555,10 +555,10 @@
         margin-left: 50px;
 
         img {
-            margin: 0 10px 0px 15px
+            margin: 0 10px 0px 15px;
         }
 
-        ;
+
 
         p {
             font-weight: 600;
@@ -567,12 +567,12 @@
 }
 
 
-.button_active {
-    background: #FFFFFF !important;
-    box-shadow: 0px 5px 20px rgba(0, 96, 206, 0.1) !important;
+#button_active {
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px rgba(0, 96, 206, 0.1);
 
     p {
-        font-weight: 600 !important;
+        font-weight: 600;
     }
 }
 

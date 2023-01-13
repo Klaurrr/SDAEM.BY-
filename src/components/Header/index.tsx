@@ -57,13 +57,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
         <nav className={styles["col-1__nav-1"]}>
           <div>
             <NavLink
-              style={({ isActive }): any =>
+              style={({ isActive }) =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
                       paddingBottom: "9px",
                     }
-                  : undefined
+                  : {}
               }
               to="/main"
               onClick={() => setFlatsValue("Квартиры на сутки")}
@@ -74,13 +74,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
           <div>
             {" "}
             <NavLink
-              style={({ isActive }): any =>
+              style={({ isActive }) =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
                       paddingBottom: "9px",
                     }
-                  : undefined
+                  : {}
               }
               to="/newsList"
             >
@@ -90,13 +90,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
           <div>
             {" "}
             <NavLink
-              style={({ isActive }): any =>
+              style={({ isActive }) =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
                       paddingBottom: "9px",
                     }
-                  : undefined
+                  : {}
               }
               to="/rates"
             >
@@ -106,13 +106,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
           <div>
             {" "}
             <NavLink
-              style={({ isActive }): any =>
+              style={({ isActive }) =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
                       paddingBottom: "9px",
                     }
-                  : undefined
+                  : {}
               }
               to="/ADS"
             >
@@ -123,13 +123,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
           <div>
             {" "}
             <NavLink
-              style={({ isActive }): any =>
+              style={({ isActive }) =>
                 isActive
                   ? {
                       borderBottom: "3px solid #FFD54F",
                       paddingBottom: "9px",
                     }
-                  : undefined
+                  : {}
               }
               to="/contacts"
             >
@@ -150,12 +150,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
                       alignItems: "center",
                     }
                   : {
-                      marginRight: "0px",
-                      position: "absolute",
-                      top: "2px",
-                      display: "flex",
-                      alignItems: "center",
-                    }
+                    marginRight: "0px",
+                    position: "absolute",
+                    top: "2px",
+                    display: "flex",
+                    alignItems: "center",
+                  }
               }
               to="/bookMarks"
             >
@@ -252,13 +252,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
             <div className={styles.linkWrap}>
               <div>
                 <NavLink
-                  style={({ isActive }): any =>
+                  style={({ isActive }) =>
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
                           paddingBottom: "18px",
                         }
-                      : undefined
+                      : {}
                   }
                   to={"/cottagesList"}
                 >
@@ -269,13 +269,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
             <div className={styles.linkWrap}>
               <div>
                 <NavLink
-                  style={({ isActive }): any =>
+                  style={({ isActive }) =>
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
                           paddingBottom: "18px",
                         }
-                      : undefined
+                      : {}
                   }
                   to={"/bathHousesList"}
                 >
@@ -286,13 +286,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
             <div className={styles.linkWrap}>
               <div>
                 <NavLink
-                  style={({ isActive }): any =>
+                  style={({ isActive }) =>
                     isActive
                       ? {
                           borderBottom: "3px solid #FFD54F",
                           paddingBottom: "18px",
                         }
-                      : undefined
+                      : {}
                   }
                   to={"/carsList"}
                 >

@@ -101,7 +101,7 @@ const Card = ({ data }: {data: IApartments[]}) => {
                     })
                   )
                 }
-                className={styles.heart}
+                id={styles.heart}
                 style={{
                   display:
                     location.pathname.slice(0, 11) === "/apartments"

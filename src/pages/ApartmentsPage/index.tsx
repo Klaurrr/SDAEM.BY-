@@ -1046,10 +1046,8 @@ const Apartments = () => {
           <img src={checkMark} alt="checkmark-img" />
         </div>
         <div
-          className={clsx(
-            styles.button_list,
-            showApartments === "list" && styles.button_active
-          )}
+          className={styles.button_list}
+          id={showApartments === "list" && styles.button_active}
           onClick={() => setShowApartments("list")}
         >
           <img
@@ -1059,10 +1057,8 @@ const Apartments = () => {
           <p>Список</p>
         </div>
         <div
-          className={clsx(
-            styles.button_tiles,
-            showApartments === "tiles" && styles.button_active
-          )}
+          className={styles.button_tiles}
+          id={showApartments === "tiles" && styles.button_active}
           onClick={() => setShowApartments("tiles")}
         >
           <img

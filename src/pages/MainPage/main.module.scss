@@ -738,7 +738,7 @@
     }
 
     .gold {
-        background: transparent linear-gradient(105.54deg, #FFD54F 33.53%, #FEC100 94.13%) !important;
+        background: transparent linear-gradient(105.54deg, #FFD54F 33.53%, #FEC100 94.13%);
         position: relative;
 
         h2 {
@@ -762,13 +762,18 @@
             line-height: 17px;
             color: #242424;
 
+            p {
+                position: relative;
+                z-index: 5;
+            }
+
             p:first-child {
                 width: 302px;
             }
 
             p:last-child {
                 width: 328px;
-                margin-bottom: 0px;
+                margin: 14px 0px 0px 0px;
             }
         }
 
