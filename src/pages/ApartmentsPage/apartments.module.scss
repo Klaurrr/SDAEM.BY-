@@ -275,6 +275,9 @@
     &_item {
         border-right: 1px solid rgba(189, 189, 189, 0.4);
         padding: 0px 20px 0px 25px;
+        height: 82px;
+        display: flex;
+        align-items: center;
 
         .more {
             display: flex;
@@ -286,13 +289,6 @@
                 margin-left: 11px;
             }
 
-        }
-
-        &:last-child {
-            height: 82px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
         }
 
         .city {

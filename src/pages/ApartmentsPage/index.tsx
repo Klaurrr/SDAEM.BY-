@@ -108,6 +108,8 @@ const Apartments = () => {
           ? "Гродно"
           : "Могилев",
     }));
+    setFilterData((prev) => ({ ...prev, selected: "", selectActive: false, nameSelect: 'Выберите' }))
+    setData(undefined);
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
@@ -180,7 +182,7 @@ const Apartments = () => {
   };
 
   const checkbox = (el: string) => {
-    setFilterData((prev) => ({ ...prev, selected: el }));
+    setFilterData((prev) => ({ ...prev, selected: el, nameSelect: 'Выберите' }));
     setData(
       apartments.filter((item) =>
         el === "Недорогие"
@@ -463,7 +465,7 @@ const Apartments = () => {
             </div>
           </div>
         </div>
-        <div style={{ width: "187px" }}>
+        <div style={{ width: "187px", cursor: 'pointer' }}>
           <div
             className={styles["select_item"]}
             onClick={() =>
@@ -1077,7 +1079,7 @@ const Apartments = () => {
           Найдено{" "}
           {data
             ? data.length
-            : searchedApartments.searchedApartments.length > 0
+            : searchedApartments.searchedApartments.filter(item => item.city === apartmentsInfo.city).length > 0
             ? searchedApartments.searchedApartments.length
             : apartments.filter((item) => item.city === apartmentsInfo.city)
                 .length}{" "}
@@ -1106,12 +1108,13 @@ const Apartments = () => {
                 }
               />
             )
-          ) : searchedApartments.searchedApartments.length ? (
+          ) : searchedApartments.searchedApartments.filter(item => item.city === apartmentsInfo.city).length ? (
             showApartments === "tiles" ? (
               <Card
                 data={
                   sort
                     ? [...searchedApartments.searchedApartments]
+                        .filter((item) => item.city === apartmentsInfo.city)
                         .sort((a, b) => a.costMin - b.costMin)
                         .slice(firstApartmentsIndex, lastApartmentsIndex)
                     : [...searchedApartments.searchedApartments].slice(
@@ -1125,6 +1128,7 @@ const Apartments = () => {
                 data={
                   sort
                     ? [...searchedApartments.searchedApartments]
+                        .filter((item) => item.city === apartmentsInfo.city)
                         .sort((a, b) => a.costMin - b.costMin)
                         .slice(firstApartmentsIndex, lastApartmentsIndex)
                     : [...searchedApartments.searchedApartments].slice(
