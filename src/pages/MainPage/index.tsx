@@ -1,5 +1,5 @@
-import { useState, useLayoutEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useLayoutEffect, useEffect } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import clsx from "clsx";
 
@@ -54,6 +54,7 @@ const Main = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation()
 
   const news = useSelector((state: IState) => state.data.news);
   const apartments = useSelector((state: IState) => state.data.apartments);
@@ -91,19 +92,23 @@ const Main = () => {
     setNameSelect((prev) => ({ ...prev, district: e }));
   };
 
+  useEffect(() => {
+    location.pathname === '/main' && dispatch(setApartments({searchedApartments: []}))
+  }, [location.pathname])
+
   useLayoutEffect(() => {
     window.addEventListener("keyup", (e: any) => {
       if (e.key === "Escape") {
-        setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
-        setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
-        setSelectIsOpen((prev) => ({ ...prev, selectMetro: false }));
-        setSelectIsOpen((prev) => ({ ...prev, selectDistrict: false }));
+        selectIsOpen.selectCity && setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
+        selectIsOpen.selectRooms && setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
+        selectIsOpen.selectMetro && setSelectIsOpen((prev) => ({ ...prev, selectMetro: false }));
+        selectIsOpen.selectDistrict && setSelectIsOpen((prev) => ({ ...prev, selectDistrict: false }));
         window.removeEventListener("keyup", e);
       }
     });
-  });
+  }, [selectIsOpen]);
 
-  const createFinallyObj = () => {
+  const dispatchSearchedApartments = () => {
     dispatch(
       setApartments({
         searchedApartments: apartments.filter((el) => {
@@ -412,7 +417,7 @@ const Main = () => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    data.city ? createFinallyObj() : alert("Укажите город");
+                    data.city ? dispatchSearchedApartments() : alert("Укажите город");
                   }}
                 >
                   Показать

@@ -23,8 +23,9 @@ const Pagination = ({ dataPerPage, totalData, currentPage, paginate }: {dataPerP
                     styles.li,
                     currentPage === number && styles.li_active
                   )}
+                  onClick={() => paginate(number)}
                 >
-                  <p onClick={() => paginate(number)}>{number}</p>
+                  <p>{number}</p>
                 </li>
               ))}
               <p style={{ margin: "0px 8px" }}>...</p>
@@ -38,8 +39,9 @@ const Pagination = ({ dataPerPage, totalData, currentPage, paginate }: {dataPerP
                       styles.li,
                       currentPage === number && styles.li_active
                     )}
+                    onClick={() => paginate(number)}
                   >
-                    <p onClick={() => paginate(number)}>{number}</p>
+                    <p>{number}</p>
                   </li>
                 ))}
             </>
@@ -52,8 +54,9 @@ const Pagination = ({ dataPerPage, totalData, currentPage, paginate }: {dataPerP
                     styles.li,
                     currentPage === number && styles.li_active
                   )}
+                  onClick={() => paginate(number)}
                 >
-                  <p onClick={() => paginate(number)}>{number}</p>
+                  <p>{number}</p>
                 </li>
               ))}
             </>

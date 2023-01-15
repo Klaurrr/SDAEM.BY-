@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import flatOne from "../../assets/images/flat_one.png";
@@ -26,8 +26,11 @@ const Card = ({ data }: {data: IApartments[]}) => {
   const [cardId, setCardId] = useState(0);
 
   const location = useLocation();
+
   const dispatch = useDispatch();
+  
   const flats = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
+
 
   return (
     <>

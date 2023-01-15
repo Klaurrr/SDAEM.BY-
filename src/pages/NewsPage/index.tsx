@@ -40,6 +40,7 @@ const NewsPage = () => {
           )
         : []
     );
+    setCurrentPage(1)
   };
 
   return (

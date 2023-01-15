@@ -44,12 +44,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
   useLayoutEffect(() => {
     window.addEventListener("keyup", (e: any) => {
       if (e.key === "Escape") {
-        setDrop(false);
-        setUserDrop(false);
+        drop && setDrop(false);
+        userDrop && setUserDrop(false)
         window.removeEventListener("keyup", e);
       }
     });
-  });
+  }, [drop, userDrop]);
 
   return (
     <header>
