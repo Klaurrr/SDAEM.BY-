@@ -28,7 +28,6 @@
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.7",
     "redux": "^4.2.0",
-    "redux-devtools": "^3.7.0",
     "redux-toolkit": "^1.1.2",
     "sass": "^1.54.4",
     "scss": "^0.2.4",
