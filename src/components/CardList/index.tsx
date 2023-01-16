@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import userIcon from "../../assets/images/userIcon.png";
@@ -20,14 +20,33 @@ import { IBookMarks } from "types/IBookMarks";
 
 import styles from "./cardList.module.scss";
 
-const CardList = ({ data }: {data: IApartments[]}) => {
+const CardList = ({ data }: { data: IApartments[] }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
+
+  const ref = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target)) {
+        setContact(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [contact]);
 
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const flats = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
+  const flats = useSelector(
+    (state: { bookMarks: IBookMarks }) => state.bookMarks.bookMarks
+  );
 
   return (
     <>
@@ -107,47 +126,52 @@ const CardList = ({ data }: {data: IApartments[]}) => {
               <span>за сутки</span>
             </div>
           </div>
-          <div
-            className={styles.modal}
-            style={{
-              display: cardId === flat.id && contact ? "block" : "none",
-              right:
-                location.pathname.slice(0, 11) === "/apartments"
-                  ? "95px"
-                  : "184px",
-            }}
-          >
-            <div className={styles.modal__img}>
-              <img
-                src={require(`../../assets/images/${flat.img}`)}
-                alt="boy-img"
-              />
-            </div>
-            <div className={styles.modal__desc}>
-              <p className={styles.owner__title}>Владелец</p>
-              <p className={styles.owner__info}>{flat.owner}</p>
-              <p
-                className={styles.owner__info}
-                style={{ marginBottom: "15px" }}
-              >
-                <a href={`tel: +${flat.phone}`}>+{flat.phone}</a>
-              </p>
-              <a className={styles.owner__email} href={`mailto: ${flat.email}`}>
-                {flat.email}
-              </a>
-              <div className={styles.socials}>
-                <div style={{ background: "#7B519D" }}>
-                  <img src={viberWhite} alt="viber-img" />
-                </div>
-                <div style={{ background: "#0DBB41" }}>
-                  <img src={whatsAppWhite} alt="whatsApp-img" />
-                </div>
-                <div style={{ background: "#664EF9" }}>
-                  <img src={mail} alt="email-img" />
+          {cardId === flat.id && contact && (
+            <div
+              ref={ref}
+              className={styles.modal}
+              style={{
+                right:
+                  location.pathname.slice(0, 11) === "/apartments"
+                    ? "95px"
+                    : "184px",
+              }}
+            >
+              <div className={styles.modal__img}>
+                <img
+                  src={require(`../../assets/images/${flat.img}`)}
+                  alt="boy-img"
+                />
+              </div>
+              <div className={styles.modal__desc}>
+                <p className={styles.owner__title}>Владелец</p>
+                <p className={styles.owner__info}>{flat.owner}</p>
+                <p
+                  className={styles.owner__info}
+                  style={{ marginBottom: "15px" }}
+                >
+                  <a href={`tel: +${flat.phone}`}>+{flat.phone}</a>
+                </p>
+                <a
+                  className={styles.owner__email}
+                  href={`mailto: ${flat.email}`}
+                >
+                  {flat.email}
+                </a>
+                <div className={styles.socials}>
+                  <div style={{ background: "#7B519D" }}>
+                    <img src={viberWhite} alt="viber-img" />
+                  </div>
+                  <div style={{ background: "#0DBB41" }}>
+                    <img src={whatsAppWhite} alt="whatsApp-img" />
+                  </div>
+                  <div style={{ background: "#664EF9" }}>
+                    <img src={mail} alt="email-img" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       ))}
     </>

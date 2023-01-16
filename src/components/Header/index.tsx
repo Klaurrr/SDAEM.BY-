@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
+import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/images/logo.png";
@@ -15,7 +15,13 @@ import { IBookMarks } from "types/IBookMarks";
 
 import styles from "./header.module.scss";
 
-const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLoggedIn: (open: boolean) => void}) => {
+const Header = ({
+  isLoggedIn,
+  setIsLoggedIn,
+}: {
+  isLoggedIn: boolean;
+  setIsLoggedIn: (open: boolean) => void;
+}) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
   const [userDrop, setUserDrop] = useState(false);
@@ -23,7 +29,26 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
   const location = useLocation();
   const navigate = useNavigate();
 
-  const flats = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
+  const flats = useSelector(
+    (state: { bookMarks: IBookMarks }) => state.bookMarks.bookMarks
+  );
+
+  const ref = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target)) {
+        setDrop(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [drop]);
 
   useEffect(() => {
     location.pathname === "/apartments/Minsk"
@@ -45,7 +70,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
     window.addEventListener("keyup", (e: any) => {
       if (e.key === "Escape") {
         drop && setDrop(false);
-        userDrop && setUserDrop(false)
+        userDrop && setUserDrop(false);
         window.removeEventListener("keyup", e);
       }
     });
@@ -150,12 +175,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
                       alignItems: "center",
                     }
                   : {
-                    marginRight: "0px",
-                    position: "absolute",
-                    top: "2px",
-                    display: "flex",
-                    alignItems: "center",
-                  }
+                      marginRight: "0px",
+                      position: "absolute",
+                      top: "2px",
+                      display: "flex",
+                      alignItems: "center",
+                    }
               }
               to="/bookMarks"
             >
@@ -195,21 +220,20 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
                 </p>
                 <img src={checkMark}></img>
               </div>
-              <div
-                className={styles.userDrop}
-                style={{ display: userDrop ? "flex" : "none" }}
-              >
-                <p
-                  onClick={() => {
-                    localStorage.removeItem("Logged");
-                    sessionStorage.removeItem("Logged");
-                    setUserDrop(false);
-                    setIsLoggedIn(false);
-                  }}
-                >
-                  Выйти
-                </p>
-              </div>
+              {userDrop && (
+                <div className={styles.userDrop}>
+                  <p
+                    onClick={() => {
+                      localStorage.removeItem("Logged");
+                      sessionStorage.removeItem("Logged");
+                      setUserDrop(false);
+                      setIsLoggedIn(false);
+                    }}
+                  >
+                    Выйти
+                  </p>
+                </div>
+              )}
             </div>
           ) : (
             <li onClick={() => navigate("/login")}>Вход и регистрация</li>
@@ -302,33 +326,34 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: {isLoggedIn: boolean, setIsLogged
             </div>
           </nav>
         </div>
-        <button onClick={() => navigate('/rates')}>+ Разместить объявление</button>
+        <button onClick={() => navigate("/rates")}>
+          + Разместить объявление
+        </button>
       </div>
-      <div
-        className={styles.modalWindow}
-        style={drop ? { display: "block" } : { display: "none" }}
-      >
-        <nav>
-          <NavLink to="/apartments/Minsk" onClick={() => setDrop(false)}>
-            Квартиры на сутки в Минске
-          </NavLink>
-          <NavLink to="/apartments/Gomel" onClick={() => setDrop(false)}>
-            Квартиры на сутки в Гомеле
-          </NavLink>
-          <NavLink to="/apartments/Brest" onClick={() => setDrop(false)}>
-            Квартиры на сутки в Бресте
-          </NavLink>
-          <NavLink to="/apartments/Vitebsk" onClick={() => setDrop(false)}>
-            Квартиры на сутки в Витебске
-          </NavLink>
-          <NavLink to="/apartments/Grodno" onClick={() => setDrop(false)}>
-            Квартиры на сутки в Гродно
-          </NavLink>
-          <NavLink to="/apartments/Mogilev" onClick={() => setDrop(false)}>
-            Квартиры на сутки в Могилеве
-          </NavLink>
-        </nav>
-      </div>
+      {drop && (
+        <div ref={ref} className={styles.modalWindow}>
+          <nav>
+            <NavLink to="/apartments/Minsk" onClick={() => setDrop(false)}>
+              Квартиры на сутки в Минске
+            </NavLink>
+            <NavLink to="/apartments/Gomel" onClick={() => setDrop(false)}>
+              Квартиры на сутки в Гомеле
+            </NavLink>
+            <NavLink to="/apartments/Brest" onClick={() => setDrop(false)}>
+              Квартиры на сутки в Бресте
+            </NavLink>
+            <NavLink to="/apartments/Vitebsk" onClick={() => setDrop(false)}>
+              Квартиры на сутки в Витебске
+            </NavLink>
+            <NavLink to="/apartments/Grodno" onClick={() => setDrop(false)}>
+              Квартиры на сутки в Гродно
+            </NavLink>
+            <NavLink to="/apartments/Mogilev" onClick={() => setDrop(false)}>
+              Квартиры на сутки в Могилеве
+            </NavLink>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

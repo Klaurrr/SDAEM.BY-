@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import clsx from "clsx";
@@ -37,6 +37,8 @@ import styles from "./apartments.module.scss";
 const Apartments = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const ref = useRef<null | HTMLDivElement>(null);
 
   const apartments = useSelector((state: IState) => state.data.apartments);
   const searchedApartments = useSelector((state: IState) => state.search);
@@ -87,6 +89,24 @@ const Apartments = () => {
   const [sort, setSort] = useState(false);
 
   useEffect(() => {
+    const handler = (e: any) => {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target)) {
+        setFilterData((prev) => ({
+          ...prev,
+          selectActive: false,
+        }));
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [filterData.selectActive]);
+
+  useEffect(() => {
     showApartments === "list"
       ? setApartmentsPerPage(4)
       : setApartmentsPerPage(9);
@@ -108,7 +128,12 @@ const Apartments = () => {
           ? "Гродно"
           : "Могилев",
     }));
-    setFilterData((prev) => ({ ...prev, selected: "", selectActive: false, nameSelect: 'Выберите' }))
+    setFilterData((prev) => ({
+      ...prev,
+      selected: "",
+      selectActive: false,
+      nameSelect: "Выберите",
+    }));
     setData(undefined);
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -182,7 +207,11 @@ const Apartments = () => {
   };
 
   const checkbox = (el: string) => {
-    setFilterData((prev) => ({ ...prev, selected: el, nameSelect: 'Выберите' }));
+    setFilterData((prev) => ({
+      ...prev,
+      selected: el,
+      nameSelect: "Выберите",
+    }));
     setData(
       apartments.filter((item) =>
         el === "Недорогие"
@@ -381,6 +410,7 @@ const Apartments = () => {
                 </div>
               </div>
               <div
+                ref={ref}
                 className={
                   filterData.selectActive
                     ? `${styles["drop-down-active"]}`
@@ -434,7 +464,7 @@ const Apartments = () => {
               <input
                 type="text"
                 placeholder="От"
-                onChange={(e:any) => {
+                onChange={(e: any) => {
                   setApartmentsInfo((prev) => ({
                     ...prev,
                     costMin: e.target.value,
@@ -450,7 +480,7 @@ const Apartments = () => {
               <input
                 type="text"
                 placeholder="До"
-                onChange={(e:any) => {
+                onChange={(e: any) => {
                   setApartmentsInfo((prev) => ({
                     ...prev,
                     costMax: e.target.value,
@@ -465,7 +495,7 @@ const Apartments = () => {
             </div>
           </div>
         </div>
-        <div style={{ width: "187px", cursor: 'pointer' }}>
+        <div style={{ width: "187px", cursor: "pointer" }}>
           <div
             className={styles["select_item"]}
             onClick={() =>
@@ -1038,11 +1068,13 @@ const Apartments = () => {
           <img
             src={byDefault}
             alt="byDefault-img"
-            style={{
-              filter:
-                sort &&
-                "invert(57%) sepia(85%) saturate(3360%) hue-rotate(225deg) brightness(91%) contrast(160%)",
-            } as React.CSSProperties}
+            style={
+              {
+                filter:
+                  sort &&
+                  "invert(57%) sepia(85%) saturate(3360%) hue-rotate(225deg) brightness(91%) contrast(160%)",
+              } as React.CSSProperties
+            }
           />
           <p>По умолчанию</p>
           <img src={checkMark} alt="checkmark-img" />
@@ -1079,7 +1111,9 @@ const Apartments = () => {
           Найдено{" "}
           {data
             ? data.length
-            : searchedApartments.searchedApartments.filter(item => item.city === apartmentsInfo.city).length > 0
+            : searchedApartments.searchedApartments.filter(
+                (item) => item.city === apartmentsInfo.city
+              ).length > 0
             ? searchedApartments.searchedApartments.length
             : apartments.filter((item) => item.city === apartmentsInfo.city)
                 .length}{" "}
@@ -1108,7 +1142,9 @@ const Apartments = () => {
                 }
               />
             )
-          ) : searchedApartments.searchedApartments.filter(item => item.city === apartmentsInfo.city).length ? (
+          ) : searchedApartments.searchedApartments.filter(
+              (item) => item.city === apartmentsInfo.city
+            ).length ? (
             showApartments === "tiles" ? (
               <Card
                 data={

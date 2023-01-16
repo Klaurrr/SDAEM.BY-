@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import flatOne from "../../assets/images/flat_one.png";
@@ -20,17 +20,34 @@ import { IApartments } from "types/IApartments";
 
 import styles from "./card.module.scss";
 
-
-const Card = ({ data }: {data: IApartments[]}) => {
+const Card = ({ data }: { data: IApartments[] }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
+
+  const ref = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target)) {
+        setContact(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [contact]);
 
   const location = useLocation();
 
   const dispatch = useDispatch();
-  
-  const flats = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
 
+  const flats = useSelector(
+    (state: { bookMarks: IBookMarks }) => state.bookMarks.bookMarks
+  );
 
   return (
     <>
@@ -38,11 +55,13 @@ const Card = ({ data }: {data: IApartments[]}) => {
         <div
           className={styles.container}
           key={flat.id}
-          style={{
-            marginBottom:
-              (location.pathname.slice(0, 11) === "/apartments" && "30px") ||
-              (location.pathname === "/bookMarks" && "30px"),
-          } as React.CSSProperties}
+          style={
+            {
+              marginBottom:
+                (location.pathname.slice(0, 11) === "/apartments" && "30px") ||
+                (location.pathname === "/bookMarks" && "30px"),
+            } as React.CSSProperties
+          }
         >
           <div className={styles.img}>
             <img src={flatOne} alt="flatOne-img" />
@@ -122,7 +141,6 @@ const Card = ({ data }: {data: IApartments[]}) => {
                   setContact(!contact);
                   setCardId(flat.id!);
                 }}
-                
               >
                 <img src={phone} alt="phone-img" />
                 Контакты
@@ -130,47 +148,52 @@ const Card = ({ data }: {data: IApartments[]}) => {
               <button className={styles.button_yellow}>Подробнее</button>
             </div>
           </div>
-          <div
-            className={styles.modal}
-            style={{
-              display: cardId === flat.id && contact ? "block" : "none",
-              right:
-                location.pathname.slice(0, 11) === "/apartments"
-                  ? "95px"
-                  : "184px",
-            }}
-          >
-            <div className={styles.modal__img}>
-              <img
-                src={require(`../../assets/images/${flat.img}`)}
-                alt="boy-img"
-              />
-            </div>
-            <div className={styles.modal__desc}>
-              <p className={styles.owner__title}>Владелец</p>
-              <p className={styles.owner__info}>{flat.owner}</p>
-              <p
-                className={styles.owner__info}
-                style={{ marginBottom: "15px" }}
-              >
-                <a href={`tel: +${flat.phone}`}>+{flat.phone}</a>
-              </p>
-              <a className={styles.owner__email} href={`mailto: ${flat.email}`}>
-                {flat.email}
-              </a>
-              <div className={styles.socials}>
-                <div style={{ background: "#7B519D" }}>
-                  <img src={viberWhite} alt="viber-img" />
-                </div>
-                <div style={{ background: "#0DBB41" }}>
-                  <img src={whatsAppWhite} alt="whatsApp-img" />
-                </div>
-                <div style={{ background: "#664EF9" }}>
-                  <img src={mail} alt="email-img" />
+          {cardId === flat.id && contact && (
+            <div
+              ref={ref}
+              className={styles.modal}
+              style={{
+                right:
+                  location.pathname.slice(0, 11) === "/apartments"
+                    ? "95px"
+                    : "184px",
+              }}
+            >
+              <div className={styles.modal__img}>
+                <img
+                  src={require(`../../assets/images/${flat.img}`)}
+                  alt="boy-img"
+                />
+              </div>
+              <div className={styles.modal__desc}>
+                <p className={styles.owner__title}>Владелец</p>
+                <p className={styles.owner__info}>{flat.owner}</p>
+                <p
+                  className={styles.owner__info}
+                  style={{ marginBottom: "15px" }}
+                >
+                  <a href={`tel: +${flat.phone}`}>+{flat.phone}</a>
+                </p>
+                <a
+                  className={styles.owner__email}
+                  href={`mailto: ${flat.email}`}
+                >
+                  {flat.email}
+                </a>
+                <div className={styles.socials}>
+                  <div style={{ background: "#7B519D" }}>
+                    <img src={viberWhite} alt="viber-img" />
+                  </div>
+                  <div style={{ background: "#0DBB41" }}>
+                    <img src={whatsAppWhite} alt="whatsApp-img" />
+                  </div>
+                  <div style={{ background: "#664EF9" }}>
+                    <img src={mail} alt="email-img" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       ))}
     </>

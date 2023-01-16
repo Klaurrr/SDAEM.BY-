@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import clsx from "clsx";
@@ -27,7 +27,6 @@ import { IState } from "types/IState";
 import { motion } from "framer-motion";
 import styles from "./main.module.scss";
 
-
 const Main = () => {
   const [style, setStyle] = useState("one");
 
@@ -54,7 +53,11 @@ const Main = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation()
+  const location = useLocation();
+  const cityRef = useRef<null | HTMLDivElement>(null);
+  const roomsRef = useRef<null | HTMLDivElement>(null);
+  const metroRef = useRef<null | HTMLDivElement>(null);
+  const districtRef = useRef<null | HTMLDivElement>(null);
 
   const news = useSelector((state: IState) => state.data.news);
   const apartments = useSelector((state: IState) => state.data.apartments);
@@ -93,16 +96,52 @@ const Main = () => {
   };
 
   useEffect(() => {
-    location.pathname === '/main' && dispatch(setApartments({searchedApartments: []}))
-  }, [location.pathname])
+    location.pathname === "/main" &&
+      dispatch(setApartments({ searchedApartments: [] }));
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (!cityRef.current) return;
+      if (!cityRef.current.contains(e.target)) {
+        selectIsOpen.selectCity &&
+          setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
+      }
+      if (!roomsRef.current) return;
+      if (!roomsRef.current.contains(e.target)) {
+        selectIsOpen.selectRooms &&
+          setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
+      }
+      if (!metroRef.current) return;
+      if (!metroRef.current.contains(e.target)) {
+        selectIsOpen.selectMetro &&
+          setSelectIsOpen((prev) => ({ ...prev, selectMetro: false }));
+      }
+      if (!districtRef.current) return;
+      if (!districtRef.current.contains(e.target)) {
+        selectIsOpen.selectDistrict &&
+          setSelectIsOpen((prev) => ({ ...prev, selectDistrict: false }));
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [selectIsOpen]);
 
   useLayoutEffect(() => {
     window.addEventListener("keyup", (e: any) => {
       if (e.key === "Escape") {
-        selectIsOpen.selectCity && setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
-        selectIsOpen.selectRooms && setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
-        selectIsOpen.selectMetro && setSelectIsOpen((prev) => ({ ...prev, selectMetro: false }));
-        selectIsOpen.selectDistrict && setSelectIsOpen((prev) => ({ ...prev, selectDistrict: false }));
+        selectIsOpen.selectCity &&
+          setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
+        selectIsOpen.selectRooms &&
+          setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
+        selectIsOpen.selectMetro &&
+          setSelectIsOpen((prev) => ({ ...prev, selectMetro: false }));
+        selectIsOpen.selectDistrict &&
+          setSelectIsOpen((prev) => ({ ...prev, selectDistrict: false }));
         window.removeEventListener("keyup", e);
       }
     });
@@ -254,6 +293,7 @@ const Main = () => {
                   </div>
                 </div>
                 <div
+                  ref={cityRef}
                   style={{ position: "relative", left: "0" }}
                   className={
                     selectIsOpen.selectCity
@@ -327,6 +367,7 @@ const Main = () => {
                   </div>
                 </div>
                 <div
+                  ref={roomsRef}
                   style={{ position: "relative", left: "0" }}
                   className={
                     selectIsOpen.selectRooms
@@ -417,7 +458,9 @@ const Main = () => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    data.city ? dispatchSearchedApartments() : alert("Укажите город");
+                    data.city
+                      ? dispatchSearchedApartments()
+                      : alert("Укажите город");
                   }}
                 >
                   Показать
@@ -456,7 +499,10 @@ const Main = () => {
                     </li>
                   </ul>
                 </div>
-                <div className={styles.cottages} onClick={() => navigate('/cottagesList')}>
+                <div
+                  className={styles.cottages}
+                  onClick={() => navigate("/cottagesList")}
+                >
                   <p className={styles["title-2"]}>СНЯТЬ коттедж НА ПРАЗДНИК</p>
                   <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
                   <img
@@ -470,7 +516,10 @@ const Main = () => {
                 className={styles["wrapper-2"]}
                 style={{ marginTop: "30px" }}
               >
-                <div className={styles.bathHouse} onClick={() => navigate('/bathHousesList')}>
+                <div
+                  className={styles.bathHouse}
+                  onClick={() => navigate("/bathHousesList")}
+                >
                   <p className={styles["title-2"]}>
                     Попариться в бане с друзьями
                   </p>
@@ -481,7 +530,10 @@ const Main = () => {
                     alt="chevron-img"
                   />
                 </div>
-                <div className={styles.cars} onClick={() => navigate('/carsList')}>
+                <div
+                  className={styles.cars}
+                  onClick={() => navigate("/carsList")}
+                >
                   <p className={styles["title-2"]}>EСЛИ СРОЧНО НУЖНА МАШИНА</p>
                   <p className={styles["subtitle-2"]}>Авто на прокат</p>
                   <img
@@ -671,6 +723,7 @@ const Main = () => {
               </div>
             </div>
             <div
+              ref={metroRef}
               className={
                 selectIsOpen.selectMetro
                   ? `${styles["drop-down-active"]}`
@@ -678,13 +731,16 @@ const Main = () => {
               }
             >
               <div>
-                <p onClick={(e: any) => setDropDown(e.target.outerText)}>Есть</p>
+                <p onClick={(e: any) => setDropDown(e.target.outerText)}>
+                  Есть
+                </p>
               </div>
               <div>
                 <p onClick={(e: any) => setDropDown(e.target.outerText)}>Нет</p>
               </div>
             </div>
             <div
+              ref={districtRef}
               className={
                 selectIsOpen.selectDistrict
                   ? `${styles["drop-down-active"]}`
@@ -772,7 +828,9 @@ const Main = () => {
                     объявления на сайте.
                   </p>
                 </div>
-                <button onClick={() => navigate('/rates')}>+ Разместить объявление</button>
+                <button onClick={() => navigate("/rates")}>
+                  + Разместить объявление
+                </button>
               </div>
             </div>
             <div className={styles["search-cards"]}>
@@ -799,7 +857,7 @@ const Main = () => {
                     пользователь не повторит процедуру.
                   </p>
                 </div>
-                <button onClick={() => navigate('/rates')}>
+                <button onClick={() => navigate("/rates")}>
                   <p>Узнать стоимость услуги</p>
                   <img
                     style={{ filter: "invert(1)" }}
@@ -838,7 +896,10 @@ const Main = () => {
                     позицию, что делает размещение одинаковым для всех.
                   </p>
                 </div>
-                <button id={styles["btn-purple"]} onClick={() => navigate('/rates')}>
+                <button
+                  id={styles["btn-purple"]}
+                  onClick={() => navigate("/rates")}
+                >
                   <p>Еще о тарифе Gold</p>
                   <img src={checkMarkRight} alt="checkMarkRight-img" />
                 </button>
