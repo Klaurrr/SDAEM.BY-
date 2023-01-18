@@ -1,7 +1,5 @@
-import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
+import { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-
-import clsx from "clsx";
 
 import Card from "../../components/Card";
 
@@ -23,6 +21,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApartments } from "../../store/slices/searchApartmentsSlice";
 
 import { IState } from "types/IState";
+
+import clsx from "clsx";
 
 import { motion } from "framer-motion";
 import styles from "./main.module.scss";

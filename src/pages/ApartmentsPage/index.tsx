@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import clsx from "clsx";
-
 import Card from "../../components/Card";
 import CardList from "../../components/CardList";
 import Pagination from "../../components/Pagination";
@@ -30,6 +28,8 @@ import { setApartments } from "../../store/slices/searchApartmentsSlice";
 
 import { IState } from "types/IState";
 import { IApartments } from "types/IApartments";
+
+import clsx from "clsx";
 
 import { motion } from "framer-motion";
 import styles from "./apartments.module.scss";

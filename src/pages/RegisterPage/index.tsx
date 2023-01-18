@@ -33,7 +33,7 @@ const RegisterPage = () => {
   } = useForm<IUser>();
 
   const onSubmit = (data: IUser) => {
-    console.log(data)
+    console.log(data);
     dispatch(
       setUser({ login: data.login, password: data.password, email: data.email })
     );
@@ -72,7 +72,11 @@ const RegisterPage = () => {
         ) : (
           <div
             className={styles["form-wrapper"]}
-            style={{ height: Object.entries(errors).length != 0 && "654px" } as React.CSSProperties}
+            style={
+              {
+                height: Object.entries(errors).length != 0 && "654px",
+              } as React.CSSProperties
+            }
           >
             <h3>Регистрация</h3>
             <div style={{ display: "flex" }}>

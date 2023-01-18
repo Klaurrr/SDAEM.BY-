@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-import { INews } from "types/INews";
-
 import hotel from "../../assets/images/hotel.png";
+
+import { INews } from "types/INews";
 
 import styles from "./newsCard.module.scss";
 
-const NewsCard = ({ item }: {item: INews}) => {
+const NewsCard = ({ item }: { item: INews }) => {
   return (
     <div className={styles.card}>
       <img src={hotel} alt="hotel-img" />
