@@ -26,7 +26,6 @@ const App = () => {
 
   let location = useLocation();
 
-
   return (
     <div
       className={
@@ -40,10 +39,7 @@ const App = () => {
           {location.pathname !== "/login" &&
             location.pathname !== "/register" &&
             location.pathname !== "/" && (
-              <Header
-                isLoggedIn={!!isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
+              <Header isLoggedIn={!!isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             )}
           <AnimatePresence>
             <Routes>
@@ -52,11 +48,7 @@ const App = () => {
               <Route path="/newsList" element={<NewsPage />} />
               <Route
                 path="/login"
-                element={
-                  <LoginPage
-                    setIsLoggedIn={setIsLoggedIn}
-                  />
-                }
+                element={<LoginPage setIsLoggedIn={setIsLoggedIn} />}
               />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/newsList/detail/:id" element={<DetailPage />} />
