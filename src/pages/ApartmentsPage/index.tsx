@@ -186,17 +186,17 @@ const Apartments = () => {
     setData(
       apartments.filter((item) =>
         el === "Недорогие"
-          ? item.costMin < 30 && item.city == apartmentsInfo.city
+          ? item.costMin < 30 && item.city === apartmentsInfo.city
           : el === "1-комнатные"
-          ? item.rooms === 1 && item.city == apartmentsInfo.city
+          ? item.rooms === 1 && item.city === apartmentsInfo.city
           : el === "2-комнатные"
-          ? item.rooms === 2 && item.city == apartmentsInfo.city
+          ? item.rooms === 2 && item.city === apartmentsInfo.city
           : el === "3-комнатные"
-          ? item.rooms === 3 && item.city == apartmentsInfo.city
+          ? item.rooms === 3 && item.city === apartmentsInfo.city
           : el === "4-комнатные"
-          ? item.rooms === 4 && item.city == apartmentsInfo.city
+          ? item.rooms === 4 && item.city === apartmentsInfo.city
           : el === "5-комнатные"
-          ? item.rooms === 5 && item.city == apartmentsInfo.city
+          ? item.rooms === 5 && item.city === apartmentsInfo.city
           : ""
       )
     );
