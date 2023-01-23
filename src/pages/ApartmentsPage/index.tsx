@@ -154,54 +154,25 @@ const Apartments = () => {
   };
 
   const foundApartments = () => {
+    const filteredData = JSON.parse(JSON.stringify(apartmentsInfo));
     setData(
-      apartments.filter((el) => {
-        {
-          if (apartmentsInfo.rooms && apartmentsInfo.rooms !== "Выберите") {
-            if (apartmentsInfo.costMin && apartmentsInfo.costMax) {
-              return (
-                apartmentsInfo.city == el.city &&
-                apartmentsInfo.rooms == el.rooms &&
-                apartmentsInfo.costMin <= el.costMin &&
-                apartmentsInfo.costMax >= el.costMin
-              );
-            } else if (apartmentsInfo.costMin) {
-              return (
-                apartmentsInfo.rooms == el.rooms &&
-                apartmentsInfo.costMin <= el.costMin &&
-                apartmentsInfo.city == el.city
-              );
-            } else if (apartmentsInfo.costMax) {
-              return (
-                apartmentsInfo.rooms == el.rooms &&
-                apartmentsInfo.city == el.city &&
-                apartmentsInfo.costMax > el.costMin
-              );
-            } else
-              return (
-                apartmentsInfo.rooms == el.rooms &&
-                apartmentsInfo.city == el.city
-              );
-          } else {
-            if (apartmentsInfo.costMin && apartmentsInfo.costMax) {
-              return (
-                apartmentsInfo.city == el.city &&
-                apartmentsInfo.costMin <= el.costMin &&
-                apartmentsInfo.costMax >= el.costMin
-              );
-            } else if (apartmentsInfo.costMin) {
-              return (
-                apartmentsInfo.city == el.city &&
-                apartmentsInfo.costMin <= el.costMin
-              );
-            } else if (apartmentsInfo.costMax) {
-              return (
-                apartmentsInfo.city == el.city &&
-                apartmentsInfo.costMax > el.costMin
-              );
-            } else return undefined;
+      apartments.filter((entry: any) => {
+        return (Object.keys(filteredData) as Array<keyof typeof data>).every(
+          (key) => {
+            if (key === "costMin" || key === "costMax") {
+              if (key === "costMax") {
+                return entry["costMin"] <= apartmentsInfo[key]!;
+              } else if (key === "costMin") {
+                return entry[key] >= apartmentsInfo[key]!;
+              } else if (key === "costMin" && key === "costMax") {
+                return (
+                  entry[key] >= apartmentsInfo[key] &&
+                  entry["costMin"] <= apartmentsInfo[key]
+                );
+              }
+            } else return entry[key] == apartmentsInfo[key];
           }
-        }
+        );
       })
     );
   };

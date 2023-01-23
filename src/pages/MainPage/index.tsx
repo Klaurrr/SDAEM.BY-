@@ -148,69 +148,25 @@ const Main = () => {
   }, [selectIsOpen]);
 
   const dispatchSearchedApartments = () => {
+    const filteredData = JSON.parse(JSON.stringify(data));
     dispatch(
       setApartments({
-        searchedApartments: apartments.filter((el) => {
-          if (data.city && data.city !== "Выберите") {
-            if (data.rooms && data.rooms !== "Выберите") {
-              if (data.costMin && data.costMax) {
-                return (
-                  data.city === el.city &&
-                  data.rooms == el.rooms &&
-                  data.costMin <= el.costMin &&
-                  data.costMax >= el.costMin
-                );
-              } else if (data.costMin) {
-                return (
-                  data.city === el.city &&
-                  data.rooms == el.rooms &&
-                  data.costMin <= el.costMin
-                );
-              } else if (data.costMax) {
-                return (
-                  data.city === el.city &&
-                  data.costMax > el.costMin &&
-                  data.rooms == el.rooms
-                );
-              } else {
-                return data.city === el.city && data.rooms == el.rooms;
-              }
-            } else {
-              if (data.costMin && data.costMax) {
-                return (
-                  data.city === el.city &&
-                  data.costMin <= el.costMin &&
-                  data.costMax >= el.costMin
-                );
-              } else if (data.costMin) {
-                return data.city === el.city && data.costMin <= el.costMin;
-              } else if (data.costMax) {
-                return data.city === el.city && data.costMax > el.costMin;
-              } else return data.city === el.city;
+        searchedApartments: apartments.filter((entry: any) => {
+          return (Object.keys(filteredData) as Array<keyof typeof data>).every(
+            (key) => {
+              if (key === "costMin" || key === "costMax") {
+                if (key === "costMax") {
+                  return entry["costMin"] <= data[key]!;
+                } else if (key === "costMin") {
+                  return entry[key] >= data[key]!;
+                } else if (key === "costMin" && key === "costMax") {
+                  return (
+                    entry[key] >= data[key] && entry["costMin"] <= data[key]
+                  );
+                }
+              } else return entry[key] == data[key];
             }
-          } else {
-            if (data.rooms && data.rooms !== "Выберите") {
-              if (data.costMin && data.costMax) {
-                return (
-                  data.rooms == el.rooms &&
-                  data.costMin <= el.costMin &&
-                  data.costMax >= el.costMin
-                );
-              } else if (data.costMin) {
-                return data.rooms == el.rooms && data.costMin <= el.costMin;
-              } else if (data.costMax) {
-                return data.rooms == el.rooms && data.costMax > el.costMin;
-              } else return data.rooms == el.rooms;
-            } else {
-              if (data.costMin && data.costMax) {
-                return data.costMin <= el.costMin && data.costMax >= el.costMin;
-              } else if (data.costMin) {
-                return data.costMin <= el.costMin;
-              } else if (data.costMax) {
-                return data.costMax > el.costMin;
-              } else return undefined;
-            }
-          }
+          );
         }),
       })
     );
