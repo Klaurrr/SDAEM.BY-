@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import flatOne from "../../assets/images/flat_one.png";
+import Carousel from "components/Carousel/Carousel";
+
 import userIcon from "../../assets/images/userIcon.png";
 import geoGray from "../../assets/images/geoGray2.png";
 import metro from "../../assets/images/metro.png";
@@ -63,10 +64,26 @@ const Card = ({ data }: { data: IApartments[] }) => {
             } as React.CSSProperties
           }
         >
-          <div className={styles.img}>
-            <img src={flatOne} alt="flatOne-img" />
-            <p>Gold</p>
+          <div className={styles.wrapper_inner}>
+            <div className={styles.img}>
+              <Carousel view="card">
+                <img
+                  src={require(`../../assets/images/${flat.flatView_1}`)}
+                  alt="flatView-img"
+                />
+                <img
+                  src={require(`../../assets/images/${flat.flatView_2}`)}
+                  alt="flatView-img"
+                />
+                <img
+                  src={require(`../../assets/images/${flat.flatView_3}`)}
+                  alt="flatView-img"
+                />
+              </Carousel>
+            </div>
+            <p className={styles.gold}>Gold</p>
           </div>
+
           <div className={styles.desc_container}>
             <div className={styles.wrapper_1}>
               <div className={styles.price}>

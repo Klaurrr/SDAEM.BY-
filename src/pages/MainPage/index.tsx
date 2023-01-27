@@ -13,7 +13,7 @@ import checkMark from "../../assets/images/checkMark.png";
 import glare from "../../assets/images/glare.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
 import AdFree from "../../assets/images/AD_Free.png";
-import orchid from "../../assets/images/orchid.png";
+import flatView from "../../assets/images/flatView_3.png";
 import AdUp from "../../assets/images/AD_Up.png";
 import geoYellow from "../../assets/images/geoYellow.png";
 
@@ -880,7 +880,7 @@ const Main = () => {
             <h3 className={styles["subtitle-4"]}>Квартира на сутки в Минске</h3>
             <div style={{ width: "842px", marginTop: "30px" }}>
               <div style={{ display: "flex", position: "relative" }}>
-                <img src={orchid} alt="orchid_img" id={styles.orchid} />
+                <img src={flatView} alt="flatView" id={styles.orchid} />
                 <img
                   style={{
                     position: "absolute",

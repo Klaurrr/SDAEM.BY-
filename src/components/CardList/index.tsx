@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import Carousel from "components/Carousel/Carousel";
+
 import userIcon from "../../assets/images/userIcon.png";
 import geoPurple from "../../assets/images/geoPurple.png";
 import metroPurple from "../../assets/images/metroPurple.png";
@@ -9,7 +11,6 @@ import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
 import phone from "../../assets/images/phone.png";
 import heartRed from "../../assets/images/HeartRed.png";
 import heartFilled from "../../assets/images/HeartFilled.png";
-import orchid from "../../assets/images/orchid.png";
 import mail from "../../assets/images/mail.png";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -52,11 +53,24 @@ const CardList = ({ data }: { data: IApartments[] }) => {
     <>
       {data.map((flat) => (
         <div className={styles.container} key={flat.id}>
-          <div style={{ position: "relative", marginRight: "25px" }}>
-            <img className={styles.orchid} src={orchid} alt="orchid-img" />
+          <div className={styles.wrapper_inner}>
+            <Carousel view="cardList">
+              <img
+                src={require(`../../assets/images/${flat.flatView_1}`)}
+                alt="flatView-img"
+              />
+              <img
+                src={require(`../../assets/images/${flat.flatView_2}`)}
+                alt="flatView-img"
+              />
+              <img
+                src={require(`../../assets/images/${flat.flatView_3}`)}
+                alt="flatView-img"
+              />
+            </Carousel>
             <p className={styles.gold}>Gold</p>
           </div>
-          <div>
+          <div style={{ marginLeft: "25px" }}>
             <h4>{flat.rooms} комн. апартаменты на Грушевке</h4>
             <div className={styles.geo}>
               <img src={geoPurple} alt="geoPurple-img" />

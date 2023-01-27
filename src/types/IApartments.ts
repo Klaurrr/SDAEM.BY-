@@ -6,6 +6,9 @@ export interface IApartments {
     phone?: number,
     email?: string,
     img?: string,
+    flatView_1?: string,
+    flatView_2?: string,
+    flatView_3?: string,
     id?: number
 }
 

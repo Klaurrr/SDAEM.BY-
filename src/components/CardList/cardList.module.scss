@@ -22,19 +22,28 @@
         height: 300px;
     }
 
-    .gold {
-        position: absolute;
-        color: #FFFFFF;
-        text-shadow: 0px 1px 0px rgba(147, 79, 0, 0.3);
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 22px;
-        padding: 7.5px 12px;
-        background: linear-gradient(106.06deg, #FFD54F 1.12%, #FEC100 97.96%);
-        border-radius: 0px 10px 10px 10px;
-        top: 0px;
-        right: 0px;
+    .wrapper_inner {
+        position: relative;
+
+        .gold {
+            position: absolute;
+            color: #FFFFFF;
+            text-shadow: 0px 1px 0px rgba(147, 79, 0, 0.3);
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 22px;
+            padding: 7.5px 12px;
+            background: linear-gradient(106.06deg, #FFD54F 1.12%, #FEC100 97.96%);
+            border-radius: 0px 10px 10px 10px;
+            top: 0px;
+            right: 0px;
+        }
+
     }
+
+
+
+
 
     .geo {
         display: flex;
