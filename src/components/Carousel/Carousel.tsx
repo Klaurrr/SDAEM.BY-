@@ -1,11 +1,24 @@
-import { useEffect, useState, Children, cloneElement } from "react";
+import React, {
+  useEffect,
+  useState,
+  Children,
+  cloneElement,
+  ReactElement,
+  PropsWithChildren,
+} from "react";
 
 import carouselChevron from "../../assets/images/carouselChevron.png";
 
 import styles from "./carousel.module.scss";
 
-const Carousel = ({ children, view }: any) => {
-  const [pages, setPages] = useState([]);
+const Carousel = ({
+  children,
+  view,
+}: {
+  view: string;
+  children: JSX.Element[];
+}) => {
+  const [pages, setPages] = useState<any>([]);
   const [offset, setOffset] = useState(0);
 
   const page_width = view === "card" ? 406 : 537;
