@@ -1,11 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  Children,
-  cloneElement,
-  ReactElement,
-  PropsWithChildren,
-} from "react";
+import { useEffect, useState, Children, cloneElement } from "react";
 
 import carouselChevron from "../../assets/images/carouselChevron.png";
 
