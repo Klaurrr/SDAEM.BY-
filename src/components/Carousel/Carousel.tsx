@@ -13,8 +13,17 @@ const Carousel = ({
 }) => {
   const [pages, setPages] = useState<any>([]);
   const [offset, setOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const page_width = view === "card" ? 406 : 537;
+
+  useEffect(() => {
+    setCurrentPage(Math.abs(offset / page_width));
+  }, [offset]);
+
+  useEffect(() => {
+    console.log(currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     setPages(
@@ -67,6 +76,18 @@ const Carousel = ({
         >
           {pages}
         </div>
+      </div>
+      <div className={styles.dots}>
+        {pages.map((_item: any, index: string | undefined) => (
+          <button
+            className={
+              index == String(currentPage)
+                ? styles.button_active
+                : styles.button
+            }
+            onClick={() => console.log(offset)}
+          />
+        ))}
       </div>
     </div>
   );
