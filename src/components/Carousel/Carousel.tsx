@@ -4,13 +4,12 @@ import carouselChevron from "../../assets/images/carouselChevron.png";
 
 import styles from "./carousel.module.scss";
 
-const Carousel = ({
-  children,
-  view,
-}: {
+type Props = {
   view: string;
   children: JSX.Element[];
-}) => {
+};
+
+const Carousel: React.FC<Props> = ({ children, view }) => {
   const [pages, setPages] = useState<any>([]);
   const [offset, setOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -20,10 +19,6 @@ const Carousel = ({
   useEffect(() => {
     setCurrentPage(Math.abs(offset / page_width));
   }, [offset]);
-
-  useEffect(() => {
-    console.log(currentPage);
-  }, [currentPage]);
 
   useEffect(() => {
     setPages(
@@ -41,6 +36,7 @@ const Carousel = ({
 
   const handleClickLeft = () => {
     setOffset((currentOffset) => {
+      console.log(currentOffset);
       const newOffset = currentOffset + page_width;
 
       return Math.min(newOffset, 0);
@@ -78,14 +74,14 @@ const Carousel = ({
         </div>
       </div>
       <div className={styles.dots}>
-        {pages.map((_item: any, index: string | undefined) => (
+        {pages.map((_item: any, index?: string) => (
           <button
             className={
               index == String(currentPage)
                 ? styles.button_active
                 : styles.button
             }
-            onClick={() => console.log(offset)}
+            onClick={() => console.log(currentPage)}
           />
         ))}
       </div>

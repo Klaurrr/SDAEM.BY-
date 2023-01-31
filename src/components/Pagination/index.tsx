@@ -2,13 +2,24 @@ import clsx from "clsx";
 
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ dataPerPage, totalData, currentPage, paginate }: {dataPerPage: number, totalData: number, currentPage: number, paginate: (open: number) => void}) => {
+type Props = {
+  dataPerPage: number;
+  totalData: number;
+  currentPage: number;
+  paginate: (open: number) => void;
+};
+
+const Pagination: React.FC<Props> = ({
+  dataPerPage,
+  totalData,
+  currentPage,
+  paginate,
+}) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalData / dataPerPage); i++) {
     pageNumbers.push(i);
   }
-
 
   return (
     <div style={{ marginTop: "50px" }}>

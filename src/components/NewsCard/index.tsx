@@ -6,7 +6,11 @@ import { INews } from "types/INews";
 
 import styles from "./newsCard.module.scss";
 
-const NewsCard = ({ item }: { item: INews }) => {
+type Props = {
+  item: INews;
+};
+
+const NewsCard: React.FC<Props> = ({ item }) => {
   return (
     <div className={styles.card}>
       <img src={hotel} alt="hotel-img" />

@@ -12,8 +12,11 @@ import { IUser } from "types/IUser";
 import { motion } from "framer-motion";
 import styles from "./login.module.scss";
 
+type Props = {
+  setIsLoggedIn: (open: boolean) => void;
+};
 
-const LoginPage = ({ setIsLoggedIn }: {setIsLoggedIn: (open: boolean) => void}) => {
+const LoginPage: React.FC<Props> = ({ setIsLoggedIn }) => {
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -38,12 +41,16 @@ const LoginPage = ({ setIsLoggedIn }: {setIsLoggedIn: (open: boolean) => void}) 
       ? localStorage.setItem("Logged", JSON.stringify(true))
       : sessionStorage.setItem("Logged", JSON.stringify(true));
     localStorage.setItem("remember", JSON.stringify(labelState));
-    sessionStorage.setItem("login", JSON.stringify(localStorage.getItem("login")));
+    sessionStorage.setItem(
+      "login",
+      JSON.stringify(localStorage.getItem("login"))
+    );
   };
 
   const onSubmit = (data: IUser) => {
     localStorage.getItem("login") === data.login &&
-      localStorage.getItem("password") === data.password && logged()
+      localStorage.getItem("password") === data.password &&
+      logged();
   };
 
   return (

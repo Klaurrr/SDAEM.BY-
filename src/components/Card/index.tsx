@@ -21,7 +21,11 @@ import { IApartments } from "types/IApartments";
 
 import styles from "./card.module.scss";
 
-const Card = ({ data }: { data: IApartments[] }) => {
+type Props = {
+  data: IApartments[];
+};
+
+const Card: React.FC<Props> = ({ data }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
 

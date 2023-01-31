@@ -7,7 +7,6 @@ import Pagination from "../../components/Pagination";
 import BreadCrumbs from "../../components/BreadCrumbs";
 
 import more from "../../assets/images/more.png";
-import cross from "../../assets/images/cross.png";
 import checkMark from "../../assets/images/checkMark.png";
 import checkMarkRight from "../../assets/images/checkMark_right.png";
 import byDefault from "../../assets/images/byDefault.png";
@@ -33,6 +32,9 @@ import clsx from "clsx";
 
 import { motion } from "framer-motion";
 import styles from "./apartments.module.scss";
+import DropDownButton from "components/DropDownButton";
+import Checkbox from "components/Checkbox";
+import CustomCheckbox from "components/CustomCheckbox";
 
 const Apartments = () => {
   const location = useLocation();
@@ -43,11 +45,9 @@ const Apartments = () => {
   const apartments = useSelector((state: IState) => state.data.apartments);
   const searchedApartments = useSelector((state: IState) => state.search);
 
-  const [data, setData] = useState<IApartments[] | undefined>(undefined);
-
-  const [apartmentsInfo, setApartmentsInfo] = useState({
-    city:
-      location.pathname === "/apartments/Minsk"
+  const currentCity = (declination?: string) => {
+    if (!declination) {
+      return location.pathname === "/apartments/Minsk"
         ? "Минск"
         : location.pathname === "/apartments/Gomel"
         ? "Гомель"
@@ -57,7 +57,25 @@ const Apartments = () => {
         ? "Витебск"
         : location.pathname === "/apartments/Grodno"
         ? "Гродно"
-        : "Могилев",
+        : "Могилев";
+    }
+    return location.pathname === "/apartments/Minsk"
+      ? "Минске"
+      : location.pathname === "/apartments/Gomel"
+      ? "Гомеле"
+      : location.pathname === "/apartments/Brest"
+      ? "Бресте"
+      : location.pathname === "/apartments/Vitebsk"
+      ? "Витебске"
+      : location.pathname === "/apartments/Grodno"
+      ? "Гродно"
+      : "Могилеве";
+  };
+
+  const [data, setData] = useState<IApartments[] | undefined>(undefined);
+
+  const [apartmentsInfo, setApartmentsInfo] = useState({
+    city: currentCity(),
     rooms: undefined,
     costMin: undefined,
     costMax: undefined,
@@ -115,18 +133,7 @@ const Apartments = () => {
   useEffect(() => {
     setApartmentsInfo((prev) => ({
       ...prev,
-      city:
-        location.pathname === "/apartments/Minsk"
-          ? "Минск"
-          : location.pathname === "/apartments/Gomel"
-          ? "Гомель"
-          : location.pathname === "/apartments/Brest"
-          ? "Брест"
-          : location.pathname === "/apartments/Vitebsk"
-          ? "Витебск"
-          : location.pathname === "/apartments/Grodno"
-          ? "Гродно"
-          : "Могилев",
+      city: currentCity(),
     }));
     setFilterData((prev) => ({
       ...prev,
@@ -204,6 +211,61 @@ const Apartments = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  // const chunk = 5;
+  // let oneChunk: any[] | null = null;
+  // const customCheckbox = () => {
+  //   let checkboxes: string[] = [];
+  //   for (let i = 0; i < 6; i++) {
+  //     checkboxes = checkboxes.concat([
+  //       "Газовая плита",
+  //       "Духовка",
+  //       "Микроволновая печь",
+  //       "Посуда",
+  //       "Посудомоечная машина",
+  //     ]);
+  //   }
+  //   for (let i = 0; i < checkboxes.length; i += chunk) {
+  //     oneChunk = checkboxes.slice(i, i + chunk);
+  //   }
+
+  //   return oneChunk?.map((item, index) => (
+  //     <CustomCheckbox id={String(index)} text={item} />
+  //   ));
+
+  //   // return checkboxes.map((item, index) => (
+  //   //   <CustomCheckbox id={String(index)} text={item} />
+  //   // ));
+  // };
+
+  const districts = [
+    "Заводской",
+    "Ленинский",
+    "Московский",
+    "Октябрьский",
+    "Партизанский",
+    "Первомайский",
+    "Советский",
+    "Фрунзенский",
+    "Центральный",
+  ];
+
+  const checkboxes = [
+    "Недорогие",
+    "1-комнатные",
+    "2-комнатные",
+    "3-комнатные",
+    "4-комнатные",
+    "5-комнатные",
+    "Заводской р.",
+    "Ленинский р.",
+    "Московский р.",
+    "Октябрьский р.",
+    "Партизанский р.",
+    "Советский р.",
+    "Фрунзенский р.",
+    "Центральный р.",
+  ];
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -214,19 +276,7 @@ const Apartments = () => {
         <div className={styles.background}></div>
         <div className={styles.container}>
           <BreadCrumbs
-            crumbSubTitle={`Квартиры в ${
-              location.pathname === "/apartments/Minsk"
-                ? "Минске"
-                : location.pathname === "/apartments/Gomel"
-                ? "Гомеле"
-                : location.pathname === "/apartments/Brest"
-                ? "Бресте"
-                : location.pathname === "/apartments/Vitebsk"
-                ? "Витебске"
-                : location.pathname === "/apartments/Grodno"
-                ? "Гродно"
-                : "Могилеве"
-            }`}
+            crumbSubTitle={`Квартиры в ${currentCity("Склоняется")}`}
           />
           <h1
             style={{
@@ -234,126 +284,29 @@ const Apartments = () => {
                 filterData.selected === "" ? "30px 0px 40px" : "30px 0px 15px",
             }}
           >
-            Аренда квартир на сутки в{" "}
-            {location.pathname === "/apartments/Minsk"
-              ? "Минске"
-              : location.pathname === "/apartments/Gomel"
-              ? "Гомеле"
-              : location.pathname === "/apartments/Brest"
-              ? "Бресте"
-              : location.pathname === "/apartments/Vitebsk"
-              ? "Витебске"
-              : location.pathname === "/apartments/Grodno"
-              ? "Гродно"
-              : "Могилеве"}
+            Аренда квартир на сутки в {currentCity("Склоняется")}
           </h1>
           {filterData.selected === "" ? (
             <div>
               <p className={styles.subtitle}>Рекомендуем посмотреть</p>
               <div>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Недорогие
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  1-комнатные
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  2-комнатные
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  3-комнатные
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  4-комнатные
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  5-комнатные
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Заводской р.
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Ленинский р.{" "}
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Московский р.{" "}
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Октябрьский р.{" "}
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Партизанский р.
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Первомайский р.
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Советский р.
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Фрунзенский р.
-                </button>
-                <button
-                  className={styles.checkbox}
-                  onClick={(e: any) => checkbox(e.target.outerText)}
-                >
-                  Центральный р.
-                </button>
+                {checkboxes.map((text) => (
+                  <Checkbox
+                    text={text}
+                    setState={(e: any) => checkbox(e.target.outerText)}
+                  />
+                ))}
               </div>
             </div>
           ) : (
-            <button
-              className={clsx(styles.checkbox, styles.checkbox_active)}
-              onClick={() => {
+            <Checkbox
+              active={true}
+              text={filterData.selected}
+              setState={() => {
                 setFilterData((prev) => ({ ...prev, selected: "" }));
                 setData(undefined);
               }}
-            >
-              {filterData.selected}
-              <img src={cross} alt="cross-img" style={{ marginLeft: "10px" }} />
-            </button>
+            />
           )}
         </div>
       </div>
@@ -388,39 +341,12 @@ const Apartments = () => {
                     : `${styles["drop-down-unactive"]}`
                 }
               >
-                <div>
-                  <p
-                    className={styles["city-p"]}
-                    onClick={(e) => selectValue(e)}
-                  >
-                    1 комн.
-                  </p>
-                </div>
-                <div>
-                  <p
-                    className={styles["city-p"]}
-                    onClick={(e) => selectValue(e)}
-                  >
-                    2 комн.
-                  </p>
-                </div>
-                <div>
-                  {" "}
-                  <p
-                    className={styles["city-p"]}
-                    onClick={(e) => selectValue(e)}
-                  >
-                    3 комн.
-                  </p>
-                </div>
-                <div>
-                  <p
-                    className={styles["city-p"]}
-                    onClick={(e) => selectValue(e)}
-                  >
-                    4 комн.
-                  </p>
-                </div>
+                {["1 комн.", "2 комн.", "3 комн.", "4 комн."].map((room) => (
+                  <DropDownButton
+                    text={room}
+                    setState={(e: any) => selectValue(e)}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -550,61 +476,18 @@ const Apartments = () => {
                 display: moreDetailInfo.selectSleepActive ? "block" : "none",
               }}
             >
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectSleepActive: false,
-                    selectSleeping: e.target.outerText,
-                  }))
-                }
-              >
-                <p>1</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectSleepActive: false,
-                    selectSleeping: e.target.outerText,
-                  }))
-                }
-              >
-                <p>2</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectSleepActive: false,
-                    selectSleeping: e.target.outerText,
-                  }))
-                }
-              >
-                <p>3</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectSleepActive: false,
-                    selectSleeping: e.target.outerText,
-                  }))
-                }
-              >
-                <p>4</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectSleepActive: false,
-                    selectSleeping: e.target.outerText,
-                  }))
-                }
-              >
-                <p>5</p>
-              </div>
+              {["1", "2", "3", "4", "5"].map((item) => (
+                <DropDownButton
+                  text={item}
+                  setState={(event: any) =>
+                    setMoreDetailInfo((prev) => ({
+                      ...prev,
+                      selectSleepActive: false,
+                      selectSleeping: event.target.outerText,
+                    }))
+                  }
+                />
+              ))}
             </div>
           </div>
           <div style={{ position: "relative", marginRight: "50px" }}>
@@ -631,105 +514,18 @@ const Apartments = () => {
                 display: moreDetailInfo.selectDistrictActive ? "block" : "none",
               }}
             >
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Заводской</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Ленинский</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Московский</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Октябрьский</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Партизанский</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Первомайский</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Советский</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Фрунзенский</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectDistrictActive: false,
-                    selectDistrict: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Центральный</p>
-              </div>
+              {districts.map((district) => (
+                <DropDownButton
+                  text={district}
+                  setState={(event: any) =>
+                    setMoreDetailInfo((prev) => ({
+                      ...prev,
+                      selectDistrictActive: false,
+                      selectDistrict: event.target.outerText,
+                    }))
+                  }
+                />
+              ))}
             </div>
           </div>
           <div style={{ position: "relative" }}>
@@ -756,281 +552,32 @@ const Apartments = () => {
                 display: moreDetailInfo.selectMetroActive ? "block" : "none",
               }}
             >
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectMetroActive: false,
-                    selectMetro: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Есть</p>
-              </div>
-              <div
-                onClick={(e: any) =>
-                  setMoreDetailInfo((prev) => ({
-                    ...prev,
-                    selectMetroActive: false,
-                    selectMetro: e.target.outerText,
-                  }))
-                }
-              >
-                <p>Нет</p>
-              </div>
+              {["Есть", "Нет"].map((text) => (
+                <DropDownButton
+                  text={text}
+                  setState={(e: any) =>
+                    setMoreDetailInfo((prev) => ({
+                      ...prev,
+                      selectMetroActive: false,
+                      selectMetro: e.target.outerText,
+                    }))
+                  }
+                />
+              ))}
             </div>
           </div>
         </div>
         <div className={styles["more_detail-wrapper-2"]}>
           <div>
-            <div>
-              <input
-                type="checkbox"
-                id="1"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="1">Газовая плита</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="2"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="2">Духовка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="3"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="3">Кофеварка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="4"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="4">Микроволновая печь</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="5"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="5">Посуда</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="6"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="6">Посудомоечная машина</label>
-            </div>
-          </div>
-          <div>
-            <div>
-              <input
-                type="checkbox"
-                id="7"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="7">Газовая плита</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="8"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="8">Духовка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="9"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="9">Кофеварка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="10"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="10">Микроволновая печь</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="11"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="11">Посуда</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="12"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="12">Посудомоечная машина</label>
-            </div>
-          </div>
-          <div>
-            <div>
-              <input
-                type="checkbox"
-                id="13"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="13">Газовая плита</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="14"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="14">Духовка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="15"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="15">Кофеварка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="16"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="16">Микроволновая печь</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="17"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="17">Посуда</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="18"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="18">Посудомоечная машина</label>
-            </div>
-          </div>
-          <div>
-            <div>
-              <input
-                type="checkbox"
-                id="19"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="19">Газовая плита</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="20"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="20">Духовка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="21"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="21">Кофеварка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="22"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="22">Микроволновая печь</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="23"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="23">Посуда</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="24"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="24">Посудомоечная машина</label>
-            </div>
-          </div>
-          <div>
-            <div>
-              <input
-                type="checkbox"
-                id="25"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="25">Газовая плита</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="26"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="26">Духовка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="27"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="27">Кофеварка</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="28"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="28">Микроволновая печь</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="29"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="29">Посуда</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="30"
-                className={styles.custom_checkbox}
-              />
-              <label htmlFor="30">Посудомоечная машина</label>
-            </div>
+            {[
+              "Газовая плита",
+              "Духовка",
+              "Микроволновая печь",
+              "Посуда",
+              "Посудомоечная машина",
+            ].map((item, index) => (
+              <CustomCheckbox id={String(index)} text={item} />
+            ))}
           </div>
         </div>
       </div>

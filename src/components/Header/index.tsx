@@ -15,13 +15,12 @@ import { IBookMarks } from "types/IBookMarks";
 
 import styles from "./header.module.scss";
 
-const Header = ({
-  isLoggedIn,
-  setIsLoggedIn,
-}: {
+type Props = {
   isLoggedIn: boolean;
   setIsLoggedIn: (open: boolean) => void;
-}) => {
+};
+
+const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
   const [userDrop, setUserDrop] = useState(false);

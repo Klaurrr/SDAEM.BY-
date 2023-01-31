@@ -21,7 +21,11 @@ import { IBookMarks } from "types/IBookMarks";
 
 import styles from "./cardList.module.scss";
 
-const CardList = ({ data }: { data: IApartments[] }) => {
+type Props = {
+  data: IApartments[];
+};
+
+const CardList: React.FC<Props> = ({ data }) => {
   const [contact, setContact] = useState(false);
   const [cardId, setCardId] = useState(0);
 

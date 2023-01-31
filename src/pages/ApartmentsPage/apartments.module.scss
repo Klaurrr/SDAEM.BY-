@@ -24,27 +24,6 @@
         line-height: 100%;
         margin-bottom: 10px;
     }
-
-    .checkbox {
-        background: rgba(102, 78, 249, 0.1);
-        border-radius: 17px;
-        padding: 6px 10px;
-        color: #664EF9;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s;
-        margin: 15px 15px 0px 0px;
-
-        &_active {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        &:hover {
-            background: rgba(102, 78, 249, 0.2);
-        }
-    }
 }
 
 .search {
@@ -95,64 +74,6 @@
     border: 1px solid rgba(78, 100, 249, 0.1);
     box-shadow: 0px 20px 40px rgba(135, 124, 202, 0.15);
 
-
-    .custom_checkbox {
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-
-        &:hover:checked+label::before {
-            border-color: #664EF9;
-            background-color: #664EF9;
-            background-image: url('../../assets/images/checkbox.png');
-        }
-
-        &:checked+label::before {
-            border-color: #664EF9;
-            background-color: #664EF9;
-            background-image: url('../../assets/images/checkbox.png');
-        }
-
-        &+label {
-            display: inline-flex;
-            align-items: center;
-            user-select: none;
-            margin-bottom: 10px;
-            cursor: pointer;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 17px;
-            color: #1E2123;
-
-            &:hover::before {
-                content: '';
-                background: rgba(102, 78, 249, 0.1);
-                border: 1px solid rgba(102, 78, 249, 0.1);
-                background-image: url('../../assets/images/checkbox.png');
-                background-repeat: no-repeat;
-                background-position: center center;
-            }
-
-
-
-            &::before {
-                content: '';
-                display: inline-block;
-                width: 18px;
-                height: 18px;
-                flex-shrink: 0;
-                flex-grow: 0;
-                border: 1px solid #adb5bd;
-                border-radius: 0.25em;
-                margin-right: 10px;
-                background-repeat: no-repeat;
-                background-position: center center;
-
-            }
-
-
-        }
-    }
 
     &-wrapper {
         display: flex;
@@ -451,6 +372,11 @@
         }
 
         p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: #1E2123;
+            padding-top: 10px;
             cursor: pointer;
             color: black;
             padding: 10px 0px 10px 15px;

@@ -5,14 +5,21 @@ import breadCrumbsDot from "../../assets/images/BreadCrumbDot.png";
 
 import styles from "./crumbs.module.scss";
 
-const BreadCrumbs = ({ crumbTitle, crumbSubTitle }: {crumbTitle?: string, crumbSubTitle?: string}) => {
+type Props = {
+  crumbTitle?: string;
+  crumbSubTitle?: string;
+};
+
+const BreadCrumbs: React.FC<Props> = ({ crumbTitle, crumbSubTitle }) => {
   const navigate = useNavigate();
 
   return (
     <div className={styles.wrapper}>
       <img src={House} alt="house-img" onClick={() => navigate("/main")} />
       <span style={{ display: crumbTitle ? "block" : "none" }}>
-        <p onClick={() => navigate(crumbTitle === "Новости" ? "/newsList" : '')}>
+        <p
+          onClick={() => navigate(crumbTitle === "Новости" ? "/newsList" : "")}
+        >
           {crumbTitle}
         </p>
       </span>
