@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import NewsCard from "../../components/NewsCard";
-import Pagination from "../../components/Pagination";
-import BreadCrumbs from "../../components/BreadCrumbs";
+import NewsCard from "components/NewsCard";
+import Pagination from "components/Pagination";
+import BreadCrumbs from "components/BreadCrumbs";
 
-import magnifier from "../../assets/images/magnifier.png";
+import magnifier from "assets/images/magnifier.png";
 
 import { useSelector } from "react-redux";
 
@@ -15,7 +15,6 @@ import { motion } from "framer-motion";
 import styles from "./news.module.scss";
 
 const NewsPage = () => {
-
   const [value, setValue] = useState("");
   const [news, setNews] = useState<INews[]>([]);
 
@@ -40,7 +39,7 @@ const NewsPage = () => {
           )
         : []
     );
-    setCurrentPage(1)
+    setCurrentPage(1);
   };
 
   return (

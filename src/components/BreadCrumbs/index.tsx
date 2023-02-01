@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-import House from "../../assets/images/House.png";
-import breadCrumbsDot from "../../assets/images/BreadCrumbDot.png";
+import House from "assets/images/House.png";
+import breadCrumbsDot from "assets/images/BreadCrumbDot.png";
 
 import styles from "./crumbs.module.scss";
 

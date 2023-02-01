@@ -1,9 +1,11 @@
 import clsx from "clsx";
-import cross from "../../assets/images/cross.png";
+
+import icons from "assets/icons";
+
 import styles from "./checkbox.module.scss";
 
 type Props = {
-  active?: any;
+  active?: boolean;
   text: string;
   setState: React.MouseEventHandler<HTMLButtonElement>;
 };
@@ -18,7 +20,7 @@ const Checkbox: React.FC<Props> = ({ active, text, setState }) => {
     >
       {text}
       {active && (
-        <img src={cross} alt="cross-img" style={{ marginLeft: "10px" }} />
+        <img src={icons.cross} alt="cross-img" style={{ marginLeft: "10px" }} />
       )}
     </button>
   );

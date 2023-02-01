@@ -1,20 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import geoWhite from "../../assets/images/geoWhite.png";
-import watch from "../../assets/images/watch.png";
-import letter from "../../assets/images/letter.png";
-import phoneWhite from "../../assets/images/phoneWhite.png";
-import viber from "../../assets/images/ViberWhite.png";
-import tg from "../../assets/images/tgWhite.png";
-import whatsApp from "../../assets/images/whatsAppWhite.png";
-import warning from "../../assets/images/warning.png";
-import userGray from "./../../assets/images/userGray.png";
-import alert from "../../assets/images/alert.png";
-import email from "../../assets/images/email.png";
-import instagram from "../../assets/images/instWhite.png";
-import vk from "../../assets/images/vkWhite.png";
-import faceBook from "../../assets/images/facebookWhite.png";
+import socials from "assets/socials";
+import icons from "assets/icons";
 
 import { motion } from "framer-motion";
 import styles from "./contacts.module.scss";
@@ -63,30 +51,30 @@ const ContactsPage = () => {
             <div className={styles.desc_2}>
               <div className={styles.wrapper_2}>
                 <div>
-                  <img src={geoWhite} alt="geoWhite-img" />
+                  <img src={icons.geoWhite} alt="geoWhite-img" />
                 </div>
                 <p>220068, РБ, г. Минск, ул. Осипенко, 21, кв.23</p>
               </div>
               <div className={styles.wrapper_2}>
                 <div>
-                  <img src={phoneWhite} alt="phoneWhite-img" />
+                  <img src={icons.phoneWhite} alt="phoneWhite-img" />
                 </div>
                 <div className={styles.contacts}>
                   <p>+375 29 621-48-33</p>
                   <div style={{ marginLeft: "20px" }}>
-                    <img src={viber} alt="viber-img" />
+                    <img src={socials.viberWhite} alt="viber-img" />
                   </div>
                   <div style={{ marginLeft: "10px" }}>
-                    <img src={tg} alt="tg-img" />
+                    <img src={socials.telegramWhite} alt="tg-img" />
                   </div>
                   <div style={{ marginLeft: "10px" }}>
-                    <img src={whatsApp} alt="whatsApp-img" />
+                    <img src={socials.whatsAppWhite} alt="whatsApp-img" />
                   </div>
                 </div>
               </div>
               <div className={styles.wrapper_2}>
                 <div>
-                  <img src={letter} alt="letter-img" />
+                  <img src={icons.letter} alt="letter-img" />
                 </div>
                 <p style={{ textDecoration: "underline" }}>
                   <a href="mailto: sdaem@sdaem.by">sdaem@sdaem.by</a>
@@ -94,7 +82,7 @@ const ContactsPage = () => {
               </div>
               <div className={styles.wrapper_2}>
                 <div>
-                  <img src={watch} alt="watch-img" />
+                  <img src={icons.watch} alt="watch-img" />
                 </div>
                 <p>
                   <span>Режим работы:</span> 08:00-22:00
@@ -106,7 +94,7 @@ const ContactsPage = () => {
               горисполкомом 10.02.2016
             </p>
             <div className={styles.warning}>
-              <img src={warning} alt="warning-img" />
+              <img src={icons.warning} alt="warning-img" />
               <p>
                 Администрация сайта не владеет информацией <br /> о наличии
                 свободных квартир
@@ -123,7 +111,7 @@ const ContactsPage = () => {
                     border: errors.name && "2px solid red",
                   }}
                 >
-                  <img src={userGray} alt="userGray-img" />
+                  <img src={icons.userGray} alt="userGray-img" />
                   <input
                     type="name"
                     {...register("name", { required: true })}
@@ -141,7 +129,7 @@ const ContactsPage = () => {
                     value={inputValue.firstInput}
                   />
                   <img
-                    src={alert}
+                    src={icons.alert}
                     alt="alert-img"
                     style={{ display: errors.name ? "block" : "none" }}
                   />
@@ -155,7 +143,11 @@ const ContactsPage = () => {
                     border: errors.email && "2px solid red",
                   }}
                 >
-                  <img src={email} alt="email-img" style={{ opacity: "0.3" }} />
+                  <img
+                    src={socials.email}
+                    alt="email-img"
+                    style={{ opacity: "0.3" }}
+                  />
                   <input
                     type="email"
                     {...register("email", {
@@ -177,7 +169,7 @@ const ContactsPage = () => {
                     value={inputValue.secondInput}
                   />
                   <img
-                    src={alert}
+                    src={icons.alert}
                     alt="alert-img"
                     style={{ display: errors.email ? "block" : "none" }}
                   />
@@ -209,13 +201,13 @@ const ContactsPage = () => {
           </form>
           <div className={styles.icons}>
             <div>
-              <img src={instagram} alt="instagram-img" />
+              <img src={socials.instWhite} alt="instagram-img" />
             </div>
             <div>
-              <img src={vk} alt="vk-img" />
+              <img src={socials.vkWhite} alt="vk-img" />
             </div>
             <div>
-              <img src={faceBook} alt="facebook-img" />
+              <img src={socials.faceBookWhite} alt="facebook-img" />
             </div>
           </div>
         </div>

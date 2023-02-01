@@ -1,6 +1,6 @@
 import { useEffect, useState, Children, cloneElement } from "react";
 
-import carouselChevron from "../../assets/images/carouselChevron.png";
+import chevrons from "assets/chevrons";
 
 import styles from "./carousel.module.scss";
 
@@ -59,10 +59,10 @@ const Carousel: React.FC<Props> = ({ children, view }) => {
     >
       <div className={styles.chevrons}>
         <div onClick={handleClickLeft}>
-          <img src={carouselChevron} alt="carouselChevron-img" />
+          <img src={chevrons.carouselChevron} alt="carouselChevron-img" />
         </div>
         <div onClick={handleClickRight}>
-          <img src={carouselChevron} alt="carouselChevron-img" />
+          <img src={chevrons.carouselChevron} alt="carouselChevron-img" />
         </div>
       </div>
       <div className={styles.window}>
@@ -76,12 +76,12 @@ const Carousel: React.FC<Props> = ({ children, view }) => {
       <div className={styles.dots}>
         {pages.map((_item: any, index?: string) => (
           <button
+            key={index}
             className={
               index == String(currentPage)
                 ? styles.button_active
                 : styles.button
             }
-            onClick={() => console.log(currentPage)}
           />
         ))}
       </div>

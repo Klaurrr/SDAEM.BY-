@@ -1,17 +1,12 @@
 import { useParams } from "react-router-dom";
 
-import BreadCrumbs from "../../components/BreadCrumbs";
-import NewsCard from "../../components/NewsCard";
+import BreadCrumbs from "components/BreadCrumbs";
+import NewsCard from "components/NewsCard";
 
 import { useSelector } from "react-redux";
 
-import vk from "../../assets/images/vk.png";
-import whatsApp from "../../assets/images/whatsApp.png";
-import viber from "../../assets/images/Viber.png";
-import faceBook from "../../assets/images/Facebook.png";
-import telegram from "../../assets/images/telegram.png";
-import hotel from "../../assets/images/hotel.png";
-import gaps from "../../assets/images/gaps.png";
+import socials from "assets/socials";
+import icons from "assets/icons";
 
 import { IState } from "types/IState";
 
@@ -37,7 +32,7 @@ const DetailPage = () => {
           <div key={item.id}>
             <div className={styles.background}></div>
             <img
-              src={gaps}
+              src={icons.gaps}
               alt="gaps-img"
               style={{ position: "absolute", margin: "37px 0px 0px 189px" }}
             />
@@ -61,24 +56,24 @@ const DetailPage = () => {
                       className={styles.img_wrapper}
                       style={{ marginLeft: "15px" }}
                     >
-                      <img src={vk} alt="vk-img" />
+                      <img src={socials.vk} alt="vk-img" />
                     </div>
                     <div className={styles.img_wrapper}>
-                      <img src={faceBook} alt="facebook-img" />
+                      <img src={socials.faceBook} alt="facebook-img" />
                     </div>
                     <div className={styles.img_wrapper}>
-                      <img src={viber} alt="viber-img" />
+                      <img src={socials.viber} alt="viber-img" />
                     </div>
                     <div className={styles.img_wrapper}>
-                      <img src={telegram} alt="telegram-img" />
+                      <img src={socials.telegram} alt="telegram-img" />
                     </div>
                     <div className={styles.img_wrapper}>
                       {" "}
-                      <img src={whatsApp} alt="whatsApp-img" />
+                      <img src={socials.whatsApp} alt="whatsApp-img" />
                     </div>
                   </div>
                 </div>
-                <img src={hotel} className={styles.hotel}></img>
+                <img src={icons.hotel} className={styles.hotel}></img>
               </div>
               <div>
                 <p className={styles.desc}>{item.description}</p>

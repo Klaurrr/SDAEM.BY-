@@ -3,15 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/slices/userSlice";
+import { setUser } from "store/slices/userSlice";
 
-import BG from "./../../assets/images/BG.png";
-import userGray from "./../../assets/images/userGray.png";
-import lock from "./../../assets/images/lock.png";
-import email from "../../assets/images/email.png";
-import captcha from "../../assets/images/recaptcha.jpg";
-import alert from "../../assets/images/alert.png";
-import alertWhite from "../../assets/images/alertWhite.png";
+import BG from "assets/images/BG.png";
+import socials from "assets/socials";
+import icons from "assets/icons";
 
 import { IUser } from "types/IUser";
 
@@ -88,7 +84,7 @@ const RegisterPage = () => {
                       border: errors.login && "2px solid red",
                     }}
                   >
-                    <img src={userGray} alt="userGray-img" />
+                    <img src={icons.userGray} alt="userGray-img" />
                     <input
                       type="name"
                       {...register("login", { required: true, minLength: 4 })}
@@ -99,7 +95,7 @@ const RegisterPage = () => {
                       autoComplete="on"
                     />
                     <img
-                      src={alert}
+                      src={icons.alert}
                       alt="alert-img"
                       style={{ display: errors.login ? "block" : "none" }}
                     />
@@ -111,7 +107,7 @@ const RegisterPage = () => {
                     }}
                   >
                     <img
-                      src={email}
+                      src={socials.email}
                       style={{ opacity: "0.3" }}
                       alt="email-img"
                     />
@@ -132,7 +128,7 @@ const RegisterPage = () => {
                       autoComplete="on"
                     />
                     <img
-                      src={alert}
+                      src={icons.alert}
                       alt="alert-img"
                       style={{ display: errors.email ? "block" : "none" }}
                     />
@@ -143,7 +139,11 @@ const RegisterPage = () => {
                       border: errors.password && "2px solid red",
                     }}
                   >
-                    <img src={lock} style={{ opacity: "0.3" }} alt="lock-img" />
+                    <img
+                      src={icons.lock}
+                      style={{ opacity: "0.3" }}
+                      alt="lock-img"
+                    />
                     <input
                       type="password"
                       {...register("password", {
@@ -162,7 +162,7 @@ const RegisterPage = () => {
                       autoComplete="on"
                     />
                     <img
-                      src={alert}
+                      src={icons.alert}
                       alt="alert-img"
                       style={{ display: errors.password ? "block" : "none" }}
                     />
@@ -173,7 +173,11 @@ const RegisterPage = () => {
                       border: errors.repeatPass && "2px solid red",
                     }}
                   >
-                    <img src={lock} style={{ opacity: "0.3" }} alt="lock-img" />
+                    <img
+                      src={icons.lock}
+                      style={{ opacity: "0.3" }}
+                      alt="lock-img"
+                    />
                     <input
                       type="password"
                       {...register("repeatPass", {
@@ -192,7 +196,7 @@ const RegisterPage = () => {
                       autoComplete="on"
                     />
                     <img
-                      src={alert}
+                      src={icons.alert}
                       alt="alert-img"
                       style={{ display: errors.repeatPass ? "block" : "none" }}
                     />
@@ -222,7 +226,7 @@ const RegisterPage = () => {
                           {errors.checkbox ? "Вы робот?" : "Я не робот"}
                         </p>
                       </div>
-                      <img src={captcha} alt="reCaptcha-img" />
+                      <img src={icons.captcha} alt="reCaptcha-img" />
                     </div>
                     <p className={styles["captcha-desc"]}>
                       Конфиденциальность - Условия использования
@@ -236,7 +240,7 @@ const RegisterPage = () => {
                     }}
                   >
                     Ошибка ввода
-                    <img src={alertWhite} alt="alertWhite-img" />
+                    <img src={icons.alertWhite} alt="alertWhite-img" />
                   </div>
                   <button type="submit">Зарегистрироваться</button>
                 </div>

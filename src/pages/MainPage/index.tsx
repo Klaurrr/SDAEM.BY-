@@ -1,24 +1,14 @@
 import { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-import Card from "../../components/Card";
+import Card from "components/Card";
 
-import chevron from "../../assets/images/chevron.png";
-import more from "../../assets/images/more.png";
-import geoPurple from "../../assets/images/geoPurple.png";
-import gaps from "../../assets/images/gaps.png";
-import gapsWhite from "../../assets/images/gaps_2.png";
-import metro from "../../assets/images/metro.png";
-import checkMark from "../../assets/images/checkMark.png";
-import glare from "../../assets/images/glare.png";
-import checkMarkRight from "../../assets/images/checkMark_right.png";
-import AdFree from "../../assets/images/AD_Free.png";
-import flatView from "../../assets/images/flatView_3.png";
-import AdUp from "../../assets/images/AD_Up.png";
-import geoYellow from "../../assets/images/geoYellow.png";
+import icons from "assets/icons";
+import chevrons from "assets/chevrons";
+import flats from "assets/flats";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setApartments } from "../../store/slices/searchApartmentsSlice";
+import { setApartments } from "store/slices/searchApartmentsSlice";
 
 import { IState } from "types/IState";
 
@@ -245,7 +235,7 @@ const Main = () => {
                 >
                   <div className={styles["city-wrapper"]}>
                     {nameSelect.city}
-                    <img src={checkMark} alt="checkmark-img" />
+                    <img src={chevrons.checkMarkPurple} alt="checkmark-img" />
                   </div>
                 </div>
                 <div
@@ -319,7 +309,7 @@ const Main = () => {
                 >
                   <div className={styles["city-wrapper"]}>
                     {nameSelect.rooms}
-                    <img src={checkMark} alt="checkMark-img" />
+                    <img src={chevrons.checkMarkPurple} alt="checkMark-img" />
                   </div>
                 </div>
                 <div
@@ -400,7 +390,7 @@ const Main = () => {
             >
               <div className={styles.more}>
                 Больше опций
-                <img src={more} alt="more-img" />
+                <img src={icons.more} alt="more-img" />
               </div>
             </div>
             <div className={styles["select_item"]}>
@@ -408,7 +398,7 @@ const Main = () => {
                 На карте
                 <img
                   className="img_geo-purple"
-                  src={geoPurple}
+                  src={icons.geoPurple}
                   alt="geo-purple-img"
                 />
                 <button
@@ -420,7 +410,7 @@ const Main = () => {
                   }}
                 >
                   Показать
-                  <img src={checkMarkRight} alt="checkmarkRight-img" />
+                  <img src={chevrons.checkMarkWhite} alt="checkmarkRight-img" />
                 </button>
               </div>
             </div>
@@ -463,7 +453,7 @@ const Main = () => {
                   <p className={styles["subtitle-2"]}>Коттеджи и усадьбы</p>
                   <img
                     style={{ paddingLeft: "346px", marginTop: "20%" }}
-                    src={chevron}
+                    src={chevrons.chevronWhite}
                     alt="chevron-img"
                   />
                 </div>
@@ -482,7 +472,7 @@ const Main = () => {
                   <p className={styles["subtitle-2"]}>Бани и сауны</p>
                   <img
                     style={{ paddingLeft: "346px", marginTop: "20%" }}
-                    src={chevron}
+                    src={chevrons.chevronWhite}
                     alt="chevron-img"
                   />
                 </div>
@@ -498,7 +488,7 @@ const Main = () => {
                       marginTop: "16%",
                       padding: "0px",
                     }}
-                    src={chevron}
+                    src={chevrons.chevronWhite}
                     alt="chevron-img"
                   />
                 </div>
@@ -510,7 +500,7 @@ const Main = () => {
                   height: "61.19px",
                   marginLeft: "-28px",
                 }}
-                src={gaps}
+                src={icons.gaps}
                 alt="gaps-img"
               ></img>
             </div>
@@ -624,7 +614,7 @@ const Main = () => {
                 onClick={() => navigate("/apartments/Minsk")}
               >
                 Посмотреть все
-                <img src={checkMarkRight} alt="checkMarkRight-img" />
+                <img src={chevrons.checkMarkWhite} alt="checkMarkRight-img" />
               </button>
             </div>
           </div>
@@ -650,12 +640,12 @@ const Main = () => {
                     alignItems: "center",
                   }}
                 >
-                  <img src={metro} alt="metro-img" />
+                  <img src={icons.metro} alt="metro-img" />
                   <p style={{ marginLeft: "8px" }}>{nameSelect.metro}</p>
                 </div>
                 <img
                   style={{ marginRight: "16px" }}
-                  src={checkMark}
+                  src={chevrons.checkMarkPurple}
                   alt="checkmark-img"
                 />
               </div>
@@ -673,7 +663,7 @@ const Main = () => {
                 </p>
                 <img
                   style={{ marginRight: "16px" }}
-                  src={checkMark}
+                  src={chevrons.checkMarkPurple}
                   alt="checkmark-img"
                 />
               </div>
@@ -728,11 +718,11 @@ const Main = () => {
           </div>
           <div className={styles.chevrons}>
             <div>
-              <img src={checkMark} alt="chevronNavigate-img" />
+              <img src={chevrons.checkMarkPurple} alt="chevronNavigate-img" />
             </div>
             <div>
               {" "}
-              <img src={checkMark} alt="chevronNavigate-img" />
+              <img src={chevrons.checkMarkPurple} alt="chevronNavigate-img" />
             </div>
           </div>
         </div>
@@ -740,7 +730,7 @@ const Main = () => {
       <section style={{ position: "relative" }}>
         <img
           style={{ position: "absolute", right: "140px", top: "46px" }}
-          src={gapsWhite}
+          src={icons.gapsWhite}
           alt="gaps_white-img"
         />
         <div className={styles["wrapper-4"]}>
@@ -753,7 +743,7 @@ const Main = () => {
               </p>
               <button>
                 <div>
-                  <img src={geoYellow} alt="geoYellow-img" />
+                  <img src={icons.geoYellow} alt="geoYellow-img" />
                   <p>Открыть карту</p>
                 </div>
               </button>
@@ -770,7 +760,7 @@ const Main = () => {
               >
                 <div className={styles["search-cards-title"]}>
                   <div className={styles.circle}>
-                    <img src={AdFree} alt="ad_free-img" />
+                    <img src={icons.AdFree} alt="ad_free-img" />
                   </div>
                   <p>
                     Начните привлекать <br /> клиентов бесплатно!
@@ -799,7 +789,7 @@ const Main = () => {
               >
                 <div className={styles["search-cards-title"]}>
                   <div className={styles.circle}>
-                    <img src={AdUp} alt="AD_UP-img" />
+                    <img src={icons.AdUp} alt="AD_UP-img" />
                   </div>
                   <p>
                     Поднимайте <br /> объявления
@@ -817,7 +807,7 @@ const Main = () => {
                   <p>Узнать стоимость услуги</p>
                   <img
                     style={{ filter: "invert(1)" }}
-                    src={checkMarkRight}
+                    src={chevrons.checkMarkWhite}
                     alt="checkMarkRight-img"
                   />
                 </button>
@@ -825,7 +815,7 @@ const Main = () => {
             </div>
             <div className={clsx(styles["search-cards"], styles.gold)}>
               <img
-                src={glare}
+                src={icons.glare}
                 alt="glare-img"
                 style={{
                   position: "absolute",
@@ -857,7 +847,7 @@ const Main = () => {
                   onClick={() => navigate("/rates")}
                 >
                   <p>Еще о тарифе Gold</p>
-                  <img src={checkMarkRight} alt="checkMarkRight-img" />
+                  <img src={chevrons.checkMarkWhite} alt="checkMarkRight-img" />
                 </button>
               </div>
             </div>
@@ -868,7 +858,7 @@ const Main = () => {
               right: "165px",
               top: "705px",
             }}
-            src={gaps}
+            src={icons.gaps}
             alt="gaps-img"
           />
         </div>
@@ -880,14 +870,14 @@ const Main = () => {
             <h3 className={styles["subtitle-4"]}>Квартира на сутки в Минске</h3>
             <div style={{ width: "842px", marginTop: "30px" }}>
               <div style={{ display: "flex", position: "relative" }}>
-                <img src={flatView} alt="flatView" id={styles.orchid} />
+                <img src={flats.flat_3} alt="flatView" id={styles.orchid} />
                 <img
                   style={{
                     position: "absolute",
                     marginTop: "181px",
                     marginLeft: "346px",
                   }}
-                  src={gaps}
+                  src={icons.gaps}
                   alt="gaps-img"
                 />
                 <div className={styles["desc-4"]}>
@@ -930,7 +920,8 @@ const Main = () => {
                   ))}
               </div>
               <button onClick={() => navigate("/newsList")}>
-                Посмотреть все <img src={checkMark} alt="checkMarkRight-img" />
+                Посмотреть все{" "}
+                <img src={chevrons.checkMarkWhite} alt="checkMarkRight-img" />
               </button>
             </div>
           </div>

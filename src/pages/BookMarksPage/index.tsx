@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import BreadCrumbs from "../../components/BreadCrumbs";
-import Card from "../../components/Card";
-import Pagination from "../../components/Pagination";
+import BreadCrumbs from "components/BreadCrumbs";
+import Card from "components/Card";
+import Pagination from "components/Pagination";
 
 import { useSelector } from "react-redux";
 
@@ -22,7 +22,9 @@ const BookMarks = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const bookMarks = useSelector((state: {bookMarks: IBookMarks}) => state.bookMarks.bookMarks);
+  const bookMarks = useSelector(
+    (state: { bookMarks: IBookMarks }) => state.bookMarks.bookMarks
+  );
 
   return (
     <motion.section

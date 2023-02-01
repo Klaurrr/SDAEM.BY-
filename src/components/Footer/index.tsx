@@ -1,15 +1,8 @@
 import { useNavigate } from "react-router";
 
-import logo from "../../assets/images/logo.png";
-import instagram from "../../assets/images/instagram.png";
-import vk from "../../assets/images/vkBlack.png";
-import faceBook from "../../assets/images/facebookBlack.png";
-import verifiedByVisa from "../../assets/images/verified-by-visa.png";
-import webpay from "../../assets/images/webpay.png";
-import visa from "../../assets/images/visa.png";
-import masterCard from "../../assets/images/masterCard.png";
-import masterCardSecure from "../../assets/images/masterCardSecure.png";
-import belkart from "../../assets/images/belkart.png";
+import logo from "assets/images/logo.png";
+import socials from "assets/socials";
+import payments from "assets/payments";
 
 import styles from "./footer.module.scss";
 
@@ -102,17 +95,17 @@ const Footer = () => {
           <div className={styles.col_2}>
             <div className={styles.socials}>
               <p>Мы в соцсетях</p>
-              <img src={instagram} alt="instagram-img" />
-              <img src={vk} alt="vk-img" />
-              <img src={faceBook} alt="facebook-img" />
+              <img src={socials.inst} alt="instagram-img" />
+              <img src={socials.vkBlack} alt="vk-img" />
+              <img src={socials.faceBookBlack} alt="facebook-img" />
             </div>
             <div className={styles.payment}>
-              <img src={visa} alt="visa-img" />
-              <img src={webpay} alt="webpay-img" />
-              <img src={verifiedByVisa} alt="verifiedByVisa-img" />
-              <img src={masterCard} alt="masterCard-img" />
-              <img src={masterCardSecure} alt="masterCardSecure-img" />
-              <img src={belkart} alt="belkart-img" />
+              <img src={payments.visa} alt="visa-img" />
+              <img src={payments.webpay} alt="webpay-img" />
+              <img src={payments.verifiedByVisa} alt="verifiedByVisa-img" />
+              <img src={payments.masterCard} alt="masterCard-img" />
+              <img src={payments.masterCardSecure} alt="masterCardSecure-img" />
+              <img src={payments.belkart} alt="belkart-img" />
             </div>
           </div>
         </div>

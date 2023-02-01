@@ -178,9 +178,18 @@
             margin-left: 100px;
             display: flex;
 
-            &>* {
-                margin-right: 50px;
+            .checkboxes_wrapper {
+                display: flex;
+                height: 175px;
+                flex-direction: column;
+                flex-wrap: wrap;
+
+                &>* {
+                    margin-right: 50px;
+                }
             }
+
+
         }
     }
 }

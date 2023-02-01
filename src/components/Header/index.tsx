@@ -1,13 +1,10 @@
 import { useLayoutEffect, useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-import logo from "../../assets/images/logo.png";
-import geoYellow from "../../assets/images/geoYellow.png";
-import geoGray from "../../assets/images/geoGray.png";
-import heart from "../../assets/images/heart.png";
-import cat from "../../assets/images/cat.jpg";
-import checkMark from "../../assets/images/checkMark.png";
-import heartFilled from "../../assets/images/HeartFilled.png";
+import logo from "assets/images/logo.png";
+import cat from "assets/images/cat.jpg";
+import icons from "assets/icons";
+import chevrons from "assets/chevrons";
 
 import { useSelector } from "react-redux";
 
@@ -140,7 +137,7 @@ const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
               }
               to="/ADS"
             >
-              <img src={geoGray} alt="geo-gray-img" />
+              <img src={icons.geoGray} alt="geo-gray-img" />
               Объявления на карте
             </NavLink>
           </div>
@@ -185,7 +182,7 @@ const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               Закладки
               <img
-                src={flats.length > 0 ? heartFilled : heart}
+                src={flats.length > 0 ? icons.heartFilled : icons.heart}
                 alt="heart-img"
                 className={styles.heart}
               />
@@ -217,7 +214,7 @@ const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
                     ? localStorage.getItem("login")
                     : JSON.parse(sessionStorage.getItem("login")!)}
                 </p>
-                <img src={checkMark}></img>
+                <img src={chevrons.checkMarkPurple}></img>
               </div>
               {userDrop && (
                 <div className={styles.userDrop}>
@@ -270,7 +267,7 @@ const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
                 </a>
               </div>
 
-              <img src={geoYellow} alt="geo-yellow-img" />
+              <img src={icons.geoYellow} alt="geo-yellow-img" />
             </div>
             <div className={styles.linkWrap}>
               <div>

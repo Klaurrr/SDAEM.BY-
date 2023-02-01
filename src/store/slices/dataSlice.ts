@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import flats from "assets/flats";
 
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
       date: "14 Января",
       year: 2008,
       id: 1,
+      img: flats.flat_1
     },
     {
       title: "Дворцово-парковый комплекс Чапских",
@@ -20,6 +22,7 @@ const initialState = {
       date: "15 Декабря",
       year: 2022,
       id: 2,
+      img: flats.flat_2,
     },
     {
       title: "Дворцово-парковый комплекс Усовых",
@@ -29,6 +32,7 @@ const initialState = {
       date: "14 Января",
       year: 2000,
       id: 3,
+      img: flats.flat_3,
     },
     {
       title: "Хокинг брос: Апартаменты для фронтенд-разработчиков",
@@ -38,6 +42,7 @@ const initialState = {
       date: "5 Августа",
       year: 2006,
       id: 4,
+      img: flats.cottages
     },
     {
       title: "Линия Сталина: суровый отдых в усадьбах на сутки",
@@ -47,6 +52,7 @@ const initialState = {
       date: "23 Июня",
       year: 1997,
       id: 5,
+      img: flats.flat_1
     },
     {
       title: "Нижегородский буткемп: нескучные выходные",
@@ -56,6 +62,7 @@ const initialState = {
       date: "12 Декабря",
       year: 2000,
       id: 6,
+      img: flats.flat_2
     },
     {
       title: "Нижегородский буткемп: нескучные выходные",
@@ -65,6 +72,7 @@ const initialState = {
       date: "12 Декабря",
       year: 1999,
       id: 7,
+      img: flats.flat_3
     },
     {
       title: "Московские будни: Тусовка на яхте",
@@ -74,6 +82,7 @@ const initialState = {
       date: "12 Января",
       year: 1700,
       id: 8,
+      img: flats.flat_1
     },
     {
       title: "Московские будни: Тусовка на яхте",
@@ -83,6 +92,7 @@ const initialState = {
       date: "15 Февраля",
       year: 1990,
       id: 9,
+      img: flats.flat_3
     },
     {
       title: "Дворцово-парковый комплекс Усовых",
@@ -92,6 +102,7 @@ const initialState = {
       date: "12 Июля",
       year: 1999,
       id: 10,
+      img: flats.flat_2
     },
     {
       title: "Дворцово-парковый комплекс Чапских",
@@ -101,6 +112,7 @@ const initialState = {
       date: "12 Декабря",
       year: 1700,
       id: 11,
+      img: flats.apartments
     },
     {
       title: "Дворцово-парковый комплекс Челогузовых",
@@ -110,6 +122,7 @@ const initialState = {
       date: "12 Мая",
       year: 2005,
       id: 12,
+      img: flats.flat_1
     },
     {
       title: "Дворец Елизаветы: Историческое насыщение",
@@ -119,6 +132,7 @@ const initialState = {
       date: "10 Января",
       year: 1744,
       id: 13,
+      img: flats.flat_3
     },
     {
       title: "Дворец Екатерины: Историческое насыщение",
@@ -128,6 +142,7 @@ const initialState = {
       date: "5 Августа",
       year: 1756,
       id: 14,
+      img: flats.flat_2
     },
     {
       title: "Дворец Екатерины: Историческое насыщение",
@@ -137,6 +152,7 @@ const initialState = {
       date: "12 Декабря",
       year: 1756,
       id: 15,
+      img: flats.apartments
     },
   ],
   apartments: [
@@ -273,7 +289,7 @@ const initialState = {
     {
       city: "Могилев",
       rooms: 4,
-      costMin: 20,
+      costMin: 50,
       owner: "Антон",
       phone: +561260051454,
       email: "email@yandex.ru",

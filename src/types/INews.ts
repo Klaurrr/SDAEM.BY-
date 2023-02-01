@@ -4,6 +4,7 @@ export interface INews {
     description: string,
     date: string,
     year: number,
-    id: number
+    id: number,
+    img: string
 }
 

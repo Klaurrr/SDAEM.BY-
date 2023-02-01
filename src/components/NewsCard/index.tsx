@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 
-import hotel from "../../assets/images/hotel.png";
-
 import { INews } from "types/INews";
+
+import flats from "assets/flats";
 
 import styles from "./newsCard.module.scss";
 
@@ -13,7 +13,7 @@ type Props = {
 const NewsCard: React.FC<Props> = ({ item }) => {
   return (
     <div className={styles.card}>
-      <img src={hotel} alt="hotel-img" />
+      <img src={flats.flat_2} alt="hotel-img" />
       <div className={styles.card__desc}>
         <h4>{item.title}</h4>
         <p className={styles["card__desc-p"]}>

@@ -3,18 +3,11 @@ import { useLocation } from "react-router-dom";
 
 import Carousel from "components/Carousel/Carousel";
 
-import userIcon from "../../assets/images/userIcon.png";
-import geoGray from "../../assets/images/geoGray2.png";
-import metro from "../../assets/images/metro.png";
-import phone from "../../assets/images/phone.png";
-import whatsAppWhite from "../../assets/images/whatsAppWhite.png";
-import viberWhite from "../../assets/images/ViberWhite.png";
-import heartRed from "../../assets/images/HeartRed.png";
-import heartFilled from "../../assets/images/HeartFilled.png";
-import mail from "../../assets/images/mail.png";
+import socials from "assets/socials";
+import icons from "assets/icons";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setBookMarks } from "../../store/slices/bookMarksSlice";
+import { setBookMarks } from "store/slices/bookMarksSlice";
 
 import { IBookMarks } from "types/IBookMarks";
 import { IApartments } from "types/IApartments";
@@ -97,7 +90,7 @@ const Card: React.FC<Props> = ({ data }) => {
               <div className={styles.desc_container_2}>
                 <p className={styles.desc}>
                   <img
-                    src={userIcon}
+                    src={icons.userIcon}
                     alt="userIcon"
                     style={{ marginRight: "6px" }}
                   />{" "}
@@ -110,7 +103,7 @@ const Card: React.FC<Props> = ({ data }) => {
             <div className={styles.wrapper_2}>
               <p>
                 <img
-                  src={geoGray}
+                  src={icons.geoGray_2}
                   alt="geoGray-img"
                   style={{ paddingRight: "11px" }}
                 />
@@ -118,9 +111,9 @@ const Card: React.FC<Props> = ({ data }) => {
               </p>
               <p>
                 <img
-                  src={metro}
+                  src={icons.metro}
                   alt="metro-img"
-                  style={{ paddingRight: "6px" }}
+                  style={{ paddingRight: "5px" }}
                 />
                 Грушевка <span>•</span>Шабаны
               </p>
@@ -152,7 +145,11 @@ const Card: React.FC<Props> = ({ data }) => {
                 }}
               >
                 <img
-                  src={flats.indexOf(flat) != -1 ? heartFilled : heartRed}
+                  src={
+                    flats.indexOf(flat) != -1
+                      ? icons.heartFilled
+                      : icons.heartRed
+                  }
                   alt="heartRed-img"
                 />
               </button>
@@ -163,7 +160,7 @@ const Card: React.FC<Props> = ({ data }) => {
                   setCardId(flat.id!);
                 }}
               >
-                <img src={phone} alt="phone-img" />
+                <img src={icons.phone} alt="phone-img" />
                 Контакты
               </button>
               <button className={styles.button_yellow}>Подробнее</button>
@@ -203,13 +200,13 @@ const Card: React.FC<Props> = ({ data }) => {
                 </a>
                 <div className={styles.socials}>
                   <div style={{ background: "#7B519D" }}>
-                    <img src={viberWhite} alt="viber-img" />
+                    <img src={socials.viberWhite} alt="viber-img" />
                   </div>
                   <div style={{ background: "#0DBB41" }}>
-                    <img src={whatsAppWhite} alt="whatsApp-img" />
+                    <img src={socials.whatsAppWhite} alt="whatsApp-img" />
                   </div>
                   <div style={{ background: "#664EF9" }}>
-                    <img src={mail} alt="email-img" />
+                    <img src={socials.mail} alt="email-img" />
                   </div>
                 </div>
               </div>

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
-import LoginPage from "../../pages/LoginPage";
-import Main from "../../pages/MainPage";
-import Apartments from "../../pages/ApartmentsPage";
-import RegisterPage from "../../pages/RegisterPage";
-import DetailPage from "../../pages/DetailPage";
-import BookMarks from "../../pages/BookMarksPage";
-import ContactsPage from "../../pages/ContactsPage";
-import NewsPage from "../../pages/NewsPage";
-import ErrorPage from "../../pages/ErrorPage";
+import LoginPage from "pages/LoginPage";
+import Main from "pages/MainPage";
+import Apartments from "pages/ApartmentsPage";
+import RegisterPage from "pages/RegisterPage";
+import DetailPage from "pages/DetailPage";
+import BookMarks from "pages/BookMarksPage";
+import ContactsPage from "pages/ContactsPage";
+import NewsPage from "pages/NewsPage";
+import ErrorPage from "pages/ErrorPage";
 
 import Header from "../Header";
 import Footer from "../Footer";

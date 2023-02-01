@@ -1,29 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import Card from "../../components/Card";
-import CardList from "../../components/CardList";
-import Pagination from "../../components/Pagination";
-import BreadCrumbs from "../../components/BreadCrumbs";
+import Card from "components/Card";
+import CardList from "components/CardList";
+import Pagination from "components/Pagination";
+import BreadCrumbs from "components/BreadCrumbs";
+import DropDownButton from "components/DropDownButton";
+import Checkbox from "components/Checkbox";
+import CustomCheckbox from "components/CustomCheckbox";
 
-import more from "../../assets/images/more.png";
-import checkMark from "../../assets/images/checkMark.png";
-import checkMarkRight from "../../assets/images/checkMark_right.png";
-import byDefault from "../../assets/images/byDefault.png";
-import list from "../../assets/images/list.png";
-import listGray from "../../assets/images/listGray.png";
-import tiles from "../../assets/images/tiles.png";
-import tilesGray from "../../assets/images/tilesGray.png";
-import geoPurple from "../../assets/images/geoPurple.png";
-import vk from "../../assets/images/vk.png";
-import whatsApp from "../../assets/images/whatsApp.png";
-import viber from "../../assets/images/Viber.png";
-import faceBook from "../../assets/images/Facebook.png";
-import telegram from "../../assets/images/telegram.png";
-import geoYellow from "../../assets/images/geoYellow.png";
+import chevrons from "assets/chevrons";
+import socials from "assets/socials";
+import icons from "assets/icons";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setApartments } from "../../store/slices/searchApartmentsSlice";
+import { setApartments } from "store/slices/searchApartmentsSlice";
 
 import { IState } from "types/IState";
 import { IApartments } from "types/IApartments";
@@ -32,9 +23,6 @@ import clsx from "clsx";
 
 import { motion } from "framer-motion";
 import styles from "./apartments.module.scss";
-import DropDownButton from "components/DropDownButton";
-import Checkbox from "components/Checkbox";
-import CustomCheckbox from "components/CustomCheckbox";
 
 const Apartments = () => {
   const location = useLocation();
@@ -211,31 +199,40 @@ const Apartments = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // const chunk = 5;
-  // let oneChunk: any[] | null = null;
-  // const customCheckbox = () => {
-  //   let checkboxes: string[] = [];
-  //   for (let i = 0; i < 6; i++) {
-  //     checkboxes = checkboxes.concat([
-  //       "Газовая плита",
-  //       "Духовка",
-  //       "Микроволновая печь",
-  //       "Посуда",
-  //       "Посудомоечная машина",
-  //     ]);
-  //   }
-  //   for (let i = 0; i < checkboxes.length; i += chunk) {
-  //     oneChunk = checkboxes.slice(i, i + chunk);
-  //   }
+  const outputApartments = (
+    arr: IApartments[],
+    sort: boolean = false,
+    filter: boolean = false
+  ) => {
+    if (sort && filter) {
+      return arr
+        .filter((item) => item.city === apartmentsInfo.city)
+        .sort((a, b) => a.costMin - b.costMin)
+        .slice(firstApartmentsIndex, lastApartmentsIndex);
+    } else if (sort && filter === false) {
+      return arr
+        .sort((a, b) => a.costMin - b.costMin)
+        .slice(firstApartmentsIndex, lastApartmentsIndex);
+    } else if (filter && sort === false) {
+      return arr
+        .filter((item) => item.city === apartmentsInfo.city)
+        .slice(firstApartmentsIndex, lastApartmentsIndex);
+    } else return arr.slice(firstApartmentsIndex, lastApartmentsIndex);
+  };
 
-  //   return oneChunk?.map((item, index) => (
-  //     <CustomCheckbox id={String(index)} text={item} />
-  //   ));
-
-  //   // return checkboxes.map((item, index) => (
-  //   //   <CustomCheckbox id={String(index)} text={item} />
-  //   // ));
-  // };
+  const customCheckboxArray = () => {
+    let checkboxArray: string[] = [];
+    for (let i = 0; i < 5; i++) {
+      checkboxArray = checkboxArray.concat([
+        "Газовая плита",
+        "Духовка",
+        "Микроволновая печь",
+        "Посуда",
+        "Посудомоечная машина",
+      ]);
+    }
+    return checkboxArray;
+  };
 
   const districts = [
     "Заводской",
@@ -330,7 +327,7 @@ const Apartments = () => {
               >
                 <div className={styles["city-wrapper"]}>
                   {filterData.nameSelect}
-                  <img src={checkMark} alt="checkMark-img" />
+                  <img src={chevrons.checkMarkPurple} alt="checkMark-img" />
                 </div>
               </div>
               <div
@@ -409,7 +406,7 @@ const Apartments = () => {
           >
             <div className={styles.more}>
               Больше опций
-              <img src={more} alt="more-img" />
+              <img src={icons.more} alt="more-img" />
             </div>
           </div>
         </div>
@@ -441,7 +438,7 @@ const Apartments = () => {
           </button>
           <button onClick={() => foundApartments()}>
             Показать объекты
-            <img src={checkMarkRight} alt="checkMarkRight-img" />
+            <img src={chevrons.checkMarkWhite} alt="checkMarkRight-img" />
           </button>
         </div>
       </div>
@@ -468,7 +465,7 @@ const Apartments = () => {
               }
             >
               <p>{moreDetailInfo.selectSleeping}</p>
-              <img src={checkMark} alt="checkMark-img" />
+              <img src={chevrons.checkMarkPurple} alt="checkMark-img" />
             </div>
             <div
               className={styles["detail_select_modal-window"]}
@@ -506,7 +503,7 @@ const Apartments = () => {
               }
             >
               <p>{moreDetailInfo.selectDistrict}</p>
-              <img src={checkMark} alt="checkMark-img" />
+              <img src={chevrons.checkMarkPurple} alt="checkMark-img" />
             </div>
             <div
               className={styles["detail_select_modal-window"]}
@@ -544,7 +541,7 @@ const Apartments = () => {
               }
             >
               <p>{moreDetailInfo.selectMetro}</p>
-              <img src={checkMark} alt="checkMark-img" />
+              <img src={chevrons.checkMarkPurple} alt="checkMark-img" />
             </div>
             <div
               className={styles["detail_select_modal-window"]}
@@ -568,14 +565,8 @@ const Apartments = () => {
           </div>
         </div>
         <div className={styles["more_detail-wrapper-2"]}>
-          <div>
-            {[
-              "Газовая плита",
-              "Духовка",
-              "Микроволновая печь",
-              "Посуда",
-              "Посудомоечная машина",
-            ].map((item, index) => (
+          <div className={styles.checkboxes_wrapper}>
+            {customCheckboxArray().map((item, index) => (
               <CustomCheckbox id={String(index)} text={item} />
             ))}
           </div>
@@ -584,7 +575,7 @@ const Apartments = () => {
       <div className={styles.buttons_2}>
         <div className={styles.button_byDefault} onClick={() => setSort(!sort)}>
           <img
-            src={byDefault}
+            src={icons.byDefault}
             alt="byDefault-img"
             style={
               {
@@ -595,7 +586,7 @@ const Apartments = () => {
             }
           />
           <p>По умолчанию</p>
-          <img src={checkMark} alt="checkmark-img" />
+          <img src={chevrons.checkMarkPurple} alt="checkmark-img" />
         </div>
         <div
           className={styles.button_list}
@@ -603,7 +594,7 @@ const Apartments = () => {
           onClick={() => setShowApartments("list")}
         >
           <img
-            src={showApartments === "list" ? list : listGray}
+            src={showApartments === "list" ? icons.list : icons.listGray}
             alt="list-img"
           />
           <p>Список</p>
@@ -614,13 +605,13 @@ const Apartments = () => {
           onClick={() => setShowApartments("tiles")}
         >
           <img
-            src={showApartments === "tiles" ? tiles : tilesGray}
+            src={showApartments === "tiles" ? icons.tiles : icons.tilesGray}
             alt="tiles-img"
           />
           <p>Плитки</p>
         </div>
         <div className={styles.button_map}>
-          <img src={geoPurple} alt="geoPurple-img" />
+          <img src={icons.geoPurple} alt="geoPurple-img" />
           <p>Показать на карте</p>
         </div>
       </div>
@@ -643,20 +634,16 @@ const Apartments = () => {
               <Card
                 data={
                   sort
-                    ? [...data]
-                        .sort((a, b) => a.costMin - b.costMin)
-                        .slice(firstApartmentsIndex, lastApartmentsIndex)
-                    : [...data].slice(firstApartmentsIndex, lastApartmentsIndex)
+                    ? outputApartments([...data], true)
+                    : outputApartments([...data])
                 }
               />
             ) : (
               <CardList
                 data={
                   sort
-                    ? [...data]
-                        .sort((a, b) => a.costMin - b.costMin)
-                        .slice(firstApartmentsIndex, lastApartmentsIndex)
-                    : [...data].slice(firstApartmentsIndex, lastApartmentsIndex)
+                    ? outputApartments([...data], true)
+                    : outputApartments([...data])
                 }
               />
             )
@@ -667,28 +654,28 @@ const Apartments = () => {
               <Card
                 data={
                   sort
-                    ? [...searchedApartments.searchedApartments]
-                        .filter((item) => item.city === apartmentsInfo.city)
-                        .sort((a, b) => a.costMin - b.costMin)
-                        .slice(firstApartmentsIndex, lastApartmentsIndex)
-                    : [...searchedApartments.searchedApartments].slice(
-                        firstApartmentsIndex,
-                        lastApartmentsIndex
+                    ? outputApartments(
+                        [...searchedApartments.searchedApartments],
+                        true,
+                        true
                       )
+                    : outputApartments([
+                        ...searchedApartments.searchedApartments,
+                      ])
                 }
               />
             ) : (
               <CardList
                 data={
                   sort
-                    ? [...searchedApartments.searchedApartments]
-                        .filter((item) => item.city === apartmentsInfo.city)
-                        .sort((a, b) => a.costMin - b.costMin)
-                        .slice(firstApartmentsIndex, lastApartmentsIndex)
-                    : [...searchedApartments.searchedApartments].slice(
-                        firstApartmentsIndex,
-                        lastApartmentsIndex
+                    ? outputApartments(
+                        [...searchedApartments.searchedApartments],
+                        true,
+                        true
                       )
+                    : outputApartments([
+                        ...searchedApartments.searchedApartments,
+                      ])
                 }
               />
             )
@@ -696,26 +683,16 @@ const Apartments = () => {
             <Card
               data={
                 sort
-                  ? [...apartments]
-                      .filter((item) => item.city === apartmentsInfo.city)
-                      .sort((a, b) => a.costMin - b.costMin)
-                      .slice(firstApartmentsIndex, lastApartmentsIndex)
-                  : [...apartments]
-                      .filter((item) => item.city === apartmentsInfo.city)
-                      .slice(firstApartmentsIndex, lastApartmentsIndex)
+                  ? outputApartments([...apartments], true, true)
+                  : outputApartments([...apartments], false, true)
               }
             />
           ) : (
             <CardList
               data={
                 sort
-                  ? [...apartments]
-                      .filter((item) => item.city === apartmentsInfo.city)
-                      .sort((a, b) => a.costMin - b.costMin)
-                      .slice(firstApartmentsIndex, lastApartmentsIndex)
-                  : [...apartments]
-                      .filter((item) => item.city === apartmentsInfo.city)
-                      .slice(firstApartmentsIndex, lastApartmentsIndex)
+                  ? outputApartments([...apartments], true, true)
+                  : outputApartments([...apartments], false, true)
               }
             />
           )}
@@ -738,19 +715,19 @@ const Apartments = () => {
         <div className={styles.share}>
           <p>Поделиться</p>
           <div>
-            <img src={vk} alt="vk-img" />
+            <img src={socials.vk} alt="vk-img" />
           </div>
           <div>
-            <img src={faceBook} alt="facebook-img" />
+            <img src={socials.faceBook} alt="facebook-img" />
           </div>
           <div>
-            <img src={viber} alt="viber-img" />
+            <img src={socials.viber} alt="viber-img" />
           </div>
           <div>
-            <img src={telegram} alt="telegram-img" />
+            <img src={socials.telegram} alt="telegram-img" />
           </div>
           <div>
-            <img src={whatsApp} alt="whatsApp-img" />
+            <img src={socials.whatsApp} alt="whatsApp-img" />
           </div>
         </div>
       </div>
@@ -764,7 +741,7 @@ const Apartments = () => {
             </p>
             <button>
               <div>
-                <img src={geoYellow} alt="geoYellow-img" />
+                <img src={icons.geoYellow} alt="geoYellow-img" />
                 <p>Открыть карту</p>
               </div>
             </button>

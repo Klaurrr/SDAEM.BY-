@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import BG from "./../../assets/images/BG.png";
-import userLogin from "./../../assets/images/UserLogin.png";
-import lock from "./../../assets/images/lock.png";
-import alert from "../../assets/images/alert.png";
+import icons from "assets/icons";
+import BG from "assets/images/BG.png";
 
 import { IUser } from "types/IUser";
 
@@ -78,7 +76,7 @@ const LoginPage: React.FC<Props> = ({ setIsLoggedIn }) => {
                   border: errors.login && "2px solid red",
                 }}
               >
-                <img src={userLogin} />
+                <img src={icons.userLogin} />
                 <input
                   type="name"
                   {...register("login", {
@@ -95,7 +93,7 @@ const LoginPage: React.FC<Props> = ({ setIsLoggedIn }) => {
                   autoComplete="on"
                 />
                 <img
-                  src={alert}
+                  src={icons.alert}
                   alt="alert-img"
                   style={{ display: errors.login ? "block" : "none" }}
                 />
@@ -106,7 +104,7 @@ const LoginPage: React.FC<Props> = ({ setIsLoggedIn }) => {
                   border: errors.password && "2px solid red",
                 }}
               >
-                <img src={lock} />
+                <img src={icons.lock} />
                 <input
                   type="password"
                   {...register("password", {
@@ -122,7 +120,7 @@ const LoginPage: React.FC<Props> = ({ setIsLoggedIn }) => {
                   autoComplete="on"
                 />
                 <img
-                  src={alert}
+                  src={icons.alert}
                   alt="alert-img"
                   style={{ display: errors.password ? "block" : "none" }}
                 />
