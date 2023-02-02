@@ -10,7 +10,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.container}>
+    <footer className={styles.container}>
       <div className={styles.wrapper}>
         <div>
           <img src={logo} alt="logo-img" />
@@ -110,7 +110,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

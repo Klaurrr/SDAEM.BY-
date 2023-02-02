@@ -1,31 +1,3 @@
-.background {
-    background: linear-gradient(90deg, #94AFFF 0%, #4E64F9 94.5%);
-    opacity: 0.1;
-    height: 100%;
-}
-
-.container {
-    position: absolute;
-    top: 45px;
-    left: 80px;
-    right: 104px;
-
-    h1 {
-        font-weight: 700;
-        font-size: 25px;
-        line-height: 100%;
-        color: #1E2123;
-    }
-
-    .subtitle {
-
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 100%;
-        margin-bottom: 10px;
-    }
-}
-
 .search {
     height: 82px;
     background: #FFFFFF;

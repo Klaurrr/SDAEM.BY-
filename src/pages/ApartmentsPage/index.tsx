@@ -4,9 +4,7 @@ import { useLocation } from "react-router-dom";
 import Card from "components/Card";
 import CardList from "components/CardList";
 import Pagination from "components/Pagination";
-import BreadCrumbs from "components/BreadCrumbs";
 import DropDownButton from "components/DropDownButton";
-import Checkbox from "components/Checkbox";
 import CustomCheckbox from "components/CustomCheckbox";
 
 import chevrons from "assets/chevrons";
@@ -23,6 +21,7 @@ import clsx from "clsx";
 
 import { motion } from "framer-motion";
 import styles from "./apartments.module.scss";
+import ApartmentsDesc from "./ApartmentsDesc";
 
 const Apartments = () => {
   const location = useLocation();
@@ -95,9 +94,10 @@ const Apartments = () => {
   const [sort, setSort] = useState(false);
 
   useEffect(() => {
-    const handler = (e: any) => {
+    const handler = (e: MouseEvent): void => {
+      const target = e.target as HTMLElement;
       if (!ref.current) return;
-      if (!ref.current.contains(e.target)) {
+      if (!ref.current.contains(target)) {
         setFilterData((prev) => ({
           ...prev,
           selectActive: false,
@@ -172,31 +172,6 @@ const Apartments = () => {
     );
   };
 
-  const checkbox = (el: string) => {
-    setFilterData((prev) => ({
-      ...prev,
-      selected: el,
-      nameSelect: "Выберите",
-    }));
-    setData(
-      apartments.filter((item) =>
-        el === "Недорогие"
-          ? item.costMin < 30 && item.city === apartmentsInfo.city
-          : el === "1-комнатные"
-          ? item.rooms === 1 && item.city === apartmentsInfo.city
-          : el === "2-комнатные"
-          ? item.rooms === 2 && item.city === apartmentsInfo.city
-          : el === "3-комнатные"
-          ? item.rooms === 3 && item.city === apartmentsInfo.city
-          : el === "4-комнатные"
-          ? item.rooms === 4 && item.city === apartmentsInfo.city
-          : el === "5-комнатные"
-          ? item.rooms === 5 && item.city === apartmentsInfo.city
-          : ""
-      )
-    );
-  };
-
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const outputApartments = (
@@ -246,67 +221,19 @@ const Apartments = () => {
     "Центральный",
   ];
 
-  const checkboxes = [
-    "Недорогие",
-    "1-комнатные",
-    "2-комнатные",
-    "3-комнатные",
-    "4-комнатные",
-    "5-комнатные",
-    "Заводской р.",
-    "Ленинский р.",
-    "Московский р.",
-    "Октябрьский р.",
-    "Партизанский р.",
-    "Советский р.",
-    "Фрунзенский р.",
-    "Центральный р.",
-  ];
-
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div style={{ height: "319px", position: "relative" }}>
-        <div className={styles.background}></div>
-        <div className={styles.container}>
-          <BreadCrumbs
-            crumbSubTitle={`Квартиры в ${currentCity("Склоняется")}`}
-          />
-          <h1
-            style={{
-              margin:
-                filterData.selected === "" ? "30px 0px 40px" : "30px 0px 15px",
-            }}
-          >
-            Аренда квартир на сутки в {currentCity("Склоняется")}
-          </h1>
-          {filterData.selected === "" ? (
-            <div>
-              <p className={styles.subtitle}>Рекомендуем посмотреть</p>
-              <div>
-                {checkboxes.map((text) => (
-                  <Checkbox
-                    text={text}
-                    setState={(e: any) => checkbox(e.target.outerText)}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <Checkbox
-              active={true}
-              text={filterData.selected}
-              setState={() => {
-                setFilterData((prev) => ({ ...prev, selected: "" }));
-                setData(undefined);
-              }}
-            />
-          )}
-        </div>
-      </div>
+      <ApartmentsDesc
+        currentCity={currentCity}
+        setData={setData}
+        apartmentsInfo={apartmentsInfo}
+        setFilterData={setFilterData}
+        filterData={filterData}
+      />
       <div className={styles.search}>
         <div>
           <div className={clsx(styles["select_item"], styles.rooms)}>
