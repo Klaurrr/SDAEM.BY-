@@ -15,10 +15,17 @@ import styles from "./main.module.scss";
 import chevrons from "assets/chevrons";
 import icons from "assets/icons";
 
+type Data = {
+  city?: string;
+  rooms?: string;
+  costMin?: string;
+  costMax?: string;
+};
+
 const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
   const [style, setStyle] = useState("one");
 
-  const [data, setData] = useState({
+  const [data, setData] = useState<Data>({
     city: undefined,
     rooms: undefined,
     costMin: undefined,
@@ -47,9 +54,9 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
             (key) => {
               if (key === "costMin" || key === "costMax") {
                 if (key === "costMax") {
-                  return entry["costMin"] <= data[key]!;
+                  return entry["costMin"] <= parseFloat(data[key]!);
                 } else if (key === "costMin") {
-                  return entry[key] >= data[key]!;
+                  return entry[key] >= parseFloat(data[key]!);
                 } else if (key === "costMin" && key === "costMax") {
                   return (
                     entry[key] >= data[key] && entry["costMin"] <= data[key]
@@ -103,7 +110,7 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
       ...prev,
       selectCity: !selectIsOpen.selectCity,
     }));
-    setData((prev): any => ({ ...prev, city: e }));
+    setData((prev) => ({ ...prev, city: e }));
     setNameSelect((prev) => ({ ...prev, city: e }));
   };
 
@@ -112,7 +119,7 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
       ...prev,
       selectRooms: !selectIsOpen.selectRooms,
     }));
-    setData((prev: any) => ({ ...prev, rooms: e }));
+    setData((prev) => ({ ...prev, rooms: e }));
     setNameSelect((prev) => ({ ...prev, rooms: e }));
   };
 
@@ -202,7 +209,7 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
                     : `${styles.city}`
                 }
                 onClick={() =>
-                  setSelectIsOpen((prev: any) => ({
+                  setSelectIsOpen((prev) => ({
                     ...prev,
                     selectRooms: !selectIsOpen.selectRooms,
                   }))
@@ -240,7 +247,7 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
                 type="number"
                 placeholder="От"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setData((prev: any) => ({ ...prev, costMin: e.target.value }))
+                  setData((prev) => ({ ...prev, costMin: e.target.value }))
                 }
               />
               -
@@ -248,7 +255,7 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
                 type="number"
                 placeholder="До"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setData((prev): any => ({ ...prev, costMax: e.target.value }))
+                  setData((prev) => ({ ...prev, costMax: e.target.value }))
                 }
               />
             </div>

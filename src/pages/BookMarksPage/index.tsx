@@ -42,30 +42,16 @@ const BookMarks = () => {
       <div className={styles.col_2}>
         <div className={styles.menu}>
           <ul>
-            <li
-              className={liActive === "Квартиры" && styles.active}
-              onClick={(e: any) => setLiActive(e.target.outerText)}
-            >
-              Квартиры
-            </li>
-            <li
-              className={liActive === "Коттеджи/Усадьбы" && styles.active}
-              onClick={(e: any) => setLiActive(e.target.outerText)}
-            >
-              Коттеджи/Усадьбы
-            </li>
-            <li
-              className={liActive === "Бани" && styles.active}
-              onClick={(e: any) => setLiActive(e.target.outerText)}
-            >
-              Бани
-            </li>
-            <li
-              className={liActive === "Авто напрокат" && styles.active}
-              onClick={(e: any) => setLiActive(e.target.outerText)}
-            >
-              Авто напрокат
-            </li>
+            {["Квартиры", "Коттеджи/Усадьбы", "Бани", "Авто напрокат"].map(
+              (item) => (
+                <li
+                  className={liActive === item && styles.active}
+                  onClick={() => setLiActive(item)}
+                >
+                  {item}
+                </li>
+              )
+            )}
           </ul>
         </div>
         <div className={styles.wrapper}>

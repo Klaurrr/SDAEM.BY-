@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 import NewsCard from "components/NewsCard";
 import Pagination from "components/Pagination";
@@ -30,7 +30,7 @@ const NewsPage = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setNews(
       value != ""

@@ -29,7 +29,6 @@ const RegisterPage = () => {
   } = useForm<IUser>();
 
   const onSubmit = (data: IUser) => {
-    console.log(data);
     dispatch(
       setUser({ login: data.login, password: data.password, email: data.email })
     );
