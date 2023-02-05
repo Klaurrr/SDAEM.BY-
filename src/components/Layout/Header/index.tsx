@@ -1,33 +1,28 @@
 import { useLayoutEffect, useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
+import HeaderLink from "components/HeaderLinks";
+
 import logo from "assets/images/logo.png";
 import cat from "assets/images/cat.jpg";
 import icons from "assets/icons";
 import chevrons from "assets/chevrons";
 
-import { useSelector } from "react-redux";
-
-import { IBookMarks } from "types/IBookMarks";
-
 import styles from "./header.module.scss";
 
-type Props = {
-  isLoggedIn: boolean;
-  setIsLoggedIn: (open: boolean) => void;
-};
+const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("Logged") === "true"
+      ? localStorage.getItem("Logged") === "true"
+      : sessionStorage.getItem("Logged")
+  );
 
-const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
   const [drop, setDrop] = useState(false);
   const [flatsValue, setFlatsValue] = useState("Квартиры на сутки");
   const [userDrop, setUserDrop] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
-
-  const flats = useSelector(
-    (state: { bookMarks: IBookMarks }) => state.bookMarks.bookMarks
-  );
 
   const ref = useRef<null | HTMLDivElement>(null);
 
@@ -76,120 +71,30 @@ const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
     <header>
       <div className={styles["col-1"]}>
         <nav className={styles["col-1__nav-1"]}>
-          <div>
-            <NavLink
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      borderBottom: "3px solid #FFD54F",
-                      paddingBottom: "9px",
-                    }
-                  : {}
-              }
-              to="/main"
-              onClick={() => setFlatsValue("Квартиры на сутки")}
-            >
-              Главная
-            </NavLink>
-          </div>
-          <div>
-            {" "}
-            <NavLink
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      borderBottom: "3px solid #FFD54F",
-                      paddingBottom: "9px",
-                    }
-                  : {}
-              }
-              to="/newsList"
-            >
-              Новости
-            </NavLink>
-          </div>
-          <div>
-            {" "}
-            <NavLink
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      borderBottom: "3px solid #FFD54F",
-                      paddingBottom: "9px",
-                    }
-                  : {}
-              }
-              to="/rates"
-            >
-              Размещение и тарифы
-            </NavLink>
-          </div>
-          <div>
-            {" "}
-            <NavLink
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      borderBottom: "3px solid #FFD54F",
-                      paddingBottom: "9px",
-                    }
-                  : {}
-              }
-              to="/ADS"
-            >
-              <img src={icons.geoGray} alt="geo-gray-img" />
-              Объявления на карте
-            </NavLink>
-          </div>
-          <div>
-            {" "}
-            <NavLink
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      borderBottom: "3px solid #FFD54F",
-                      paddingBottom: "9px",
-                    }
-                  : {}
-              }
-              to="/contacts"
-            >
-              Контакты
-            </NavLink>
-          </div>
-          <div style={{ marginLeft: "230px", position: "relative" }}>
-            <NavLink
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      borderBottom: "3px solid #FFD54F",
-                      paddingBottom: "9px",
-                      marginRight: "0px",
-                      position: "absolute",
-                      top: "2px",
-                      display: "flex",
-                      alignItems: "center",
-                    }
-                  : {
-                      marginRight: "0px",
-                      position: "absolute",
-                      top: "2px",
-                      display: "flex",
-                      alignItems: "center",
-                    }
-              }
-              to="/bookMarks"
-            >
-              Закладки
-              <img
-                src={flats.length > 0 ? icons.heartFilled : icons.heart}
-                alt="heart-img"
-                className={styles.heart}
+          {["main", "newsList", "rates", "ADS", "contacts", "bookMarks"].map(
+            (path) => (
+              <HeaderLink
+                path={path}
+                style={
+                  path === "bookMarks"
+                    ? {
+                        borderBottom: "3px solid #FFD54F",
+                        paddingBottom: "9px",
+                        marginRight: "0px",
+                        position: "absolute",
+                        top: "2px",
+                        display: "flex",
+                        alignItems: "center",
+                      }
+                    : {
+                        borderBottom: "3px solid #FFD54F",
+                        paddingBottom: "9px",
+                      }
+                }
               />
-            </NavLink>
-          </div>
+            )
+          )}
         </nav>
-
         <ul className={styles["col-1__ul-2"]}>
           {isLoggedIn ? (
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -269,57 +174,17 @@ const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
 
               <img src={icons.geoYellow} alt="geo-yellow-img" />
             </div>
-            <div className={styles.linkWrap}>
-              <div>
-                <NavLink
-                  style={({ isActive }) =>
-                    isActive
-                      ? {
-                          borderBottom: "3px solid #FFD54F",
-                          paddingBottom: "18px",
-                        }
-                      : {}
-                  }
-                  to={"/cottagesList"}
-                >
-                  Коттеджи и усадьбы
-                </NavLink>
+            {["cottagesList", "bathHousesList", "carsList"].map((path) => (
+              <div className={styles.linkWrap}>
+                <HeaderLink
+                  path={path}
+                  style={{
+                    borderBottom: "3px solid #FFD54F",
+                    paddingBottom: "18px",
+                  }}
+                />
               </div>
-            </div>
-            <div className={styles.linkWrap}>
-              <div>
-                <NavLink
-                  style={({ isActive }) =>
-                    isActive
-                      ? {
-                          borderBottom: "3px solid #FFD54F",
-                          paddingBottom: "18px",
-                        }
-                      : {}
-                  }
-                  to={"/bathHousesList"}
-                >
-                  Бани и сауны
-                </NavLink>
-              </div>
-            </div>
-            <div className={styles.linkWrap}>
-              <div>
-                <NavLink
-                  style={({ isActive }) =>
-                    isActive
-                      ? {
-                          borderBottom: "3px solid #FFD54F",
-                          paddingBottom: "18px",
-                        }
-                      : {}
-                  }
-                  to={"/carsList"}
-                >
-                  Авто напрокат{" "}
-                </NavLink>
-              </div>
-            </div>
+            ))}
           </nav>
         </div>
         <button onClick={() => navigate("/rates")}>
@@ -329,24 +194,27 @@ const Header: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
       {drop && (
         <div ref={ref} className={styles.modalWindow}>
           <nav>
-            <NavLink to="/apartments/Minsk" onClick={() => setDrop(false)}>
-              Квартиры на сутки в Минске
-            </NavLink>
-            <NavLink to="/apartments/Gomel" onClick={() => setDrop(false)}>
-              Квартиры на сутки в Гомеле
-            </NavLink>
-            <NavLink to="/apartments/Brest" onClick={() => setDrop(false)}>
-              Квартиры на сутки в Бресте
-            </NavLink>
-            <NavLink to="/apartments/Vitebsk" onClick={() => setDrop(false)}>
-              Квартиры на сутки в Витебске
-            </NavLink>
-            <NavLink to="/apartments/Grodno" onClick={() => setDrop(false)}>
-              Квартиры на сутки в Гродно
-            </NavLink>
-            <NavLink to="/apartments/Mogilev" onClick={() => setDrop(false)}>
-              Квартиры на сутки в Могилеве
-            </NavLink>
+            {["Minsk", "Gomel", "Brest", "Vitebsk", "Grodno", "Mogilev"].map(
+              (city) => (
+                <NavLink
+                  to={`/apartments/${city}`}
+                  onClick={() => setDrop(false)}
+                >
+                  Квартиры на сутки в{" "}
+                  {city === "Minsk"
+                    ? "Минске"
+                    : city === "Gomel"
+                    ? "Гомеле"
+                    : city === "Brest"
+                    ? "Бресте"
+                    : city === "Vitebsk"
+                    ? "Витебске"
+                    : city === "Grodno"
+                    ? "Гродно"
+                    : "Могилеве"}
+                </NavLink>
+              )
+            )}
           </nav>
         </div>
       )}

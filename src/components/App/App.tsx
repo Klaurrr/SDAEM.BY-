@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import { Layout } from "components/Layout/Layout";
@@ -17,12 +16,6 @@ import { AnimatePresence } from "framer-motion";
 import styles from "./app.module.scss";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("Logged") === "true"
-      ? localStorage.getItem("Logged") === "true"
-      : sessionStorage.getItem("Logged")
-  );
-
   let location = useLocation();
 
   return (
@@ -39,10 +32,7 @@ const App = () => {
             <Route path="/main" element={<Main />} />
             <Route path="/apartments/:city" element={<Apartments />} />
             <Route path="/newsList" element={<NewsPage />} />
-            <Route
-              path="/login"
-              element={<LoginPage setIsLoggedIn={setIsLoggedIn} />}
-            />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/newsList/detail/:id" element={<DetailPage />} />
             <Route path="/" element={<Navigate to="/main" replace />} />

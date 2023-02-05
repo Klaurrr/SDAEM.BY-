@@ -10,12 +10,6 @@ type Props = {
 export const Layout: React.FC<Props> = ({ children }) => {
   const location = useLocation();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("Logged") === "true"
-      ? localStorage.getItem("Logged") === "true"
-      : sessionStorage.getItem("Logged")
-  );
-
   const unhide =
     location.pathname !== "/login" &&
     location.pathname !== "/register" &&
@@ -23,9 +17,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
 
   return (
     <div>
-      {unhide && (
-        <Header isLoggedIn={!!isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      )}
+      {unhide && <Header />}
       {children}
       {unhide && <Footer />}
     </div>

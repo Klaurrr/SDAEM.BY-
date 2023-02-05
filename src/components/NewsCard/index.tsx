@@ -24,11 +24,11 @@ const NewsCard: React.FC<Props> = ({ item }) => {
         </p>
       </div>{" "}
       <div className={styles.buttons}>
-        <p className={styles["card_date"]}>
+        <p className={styles.card_date}>
           {item.date} {item.year}
         </p>
         <NavLink to={`/newsList/detail/${item.id}`}>
-          <p className={styles["card_read"]}>Читать</p>
+          <p className={styles.card_read}>Читать</p>
         </NavLink>
       </div>
     </div>

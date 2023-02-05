@@ -20,6 +20,7 @@
             img {
                 width: 9px;
                 height: 15px;
+                user-select: none;
             }
 
             &:first-child {
@@ -31,6 +32,7 @@
 
                 img {
                     transform: rotate(180deg);
+                    user-select: none;
                 }
             }
         }

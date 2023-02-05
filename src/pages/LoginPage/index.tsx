@@ -10,15 +10,10 @@ import { IUser } from "types/IUser";
 import { motion } from "framer-motion";
 import styles from "./login.module.scss";
 
-type Props = {
-  setIsLoggedIn: (open: boolean) => void;
-};
-
-const LoginPage: React.FC<Props> = ({ setIsLoggedIn }) => {
+const LoginPage = () => {
   const navigateTo = useNavigate();
 
   useEffect(() => {
-    setIsLoggedIn(false);
     localStorage.setItem("Logged", JSON.stringify(false));
     localStorage.removeItem("remember");
   }, []);
@@ -34,7 +29,6 @@ const LoginPage: React.FC<Props> = ({ setIsLoggedIn }) => {
 
   const logged = () => {
     navigateTo("/main");
-    setIsLoggedIn(true);
     labelState
       ? localStorage.setItem("Logged", JSON.stringify(true))
       : sessionStorage.setItem("Logged", JSON.stringify(true));

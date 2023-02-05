@@ -197,7 +197,6 @@ const MainRent: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
             <img src={chevrons.checkMarkPurple} alt="chevronNavigate-img" />
           </div>
           <div>
-            {" "}
             <img src={chevrons.checkMarkPurple} alt="chevronNavigate-img" />
           </div>
         </div>

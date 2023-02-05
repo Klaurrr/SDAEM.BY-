@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import DropDownButton from "components/DropDownButton";
 
+import chevrons from "assets/chevrons";
+import icons from "assets/icons";
+
 import { IState } from "types/IState";
 import { MainProps } from "types/TMainProps";
 
@@ -12,8 +15,6 @@ import { setApartments } from "store/slices/searchApartmentsSlice";
 import clsx from "clsx";
 
 import styles from "./main.module.scss";
-import chevrons from "assets/chevrons";
-import icons from "assets/icons";
 
 type Data = {
   city?: string;
