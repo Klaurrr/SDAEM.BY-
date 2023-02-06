@@ -27,9 +27,9 @@ const Header = () => {
   const ref = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
-    const handler = (e: any) => {
+    const handler = (e: MouseEvent) => {
       if (!ref.current) return;
-      if (!ref.current.contains(e.target)) {
+      if (!ref.current.contains(e.target as Node)) {
         setDrop(false);
       }
     };
@@ -58,11 +58,11 @@ const Header = () => {
   }, [location.pathname]);
 
   useLayoutEffect(() => {
-    window.addEventListener("keyup", (e: any) => {
+    window.addEventListener("keyup", (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         drop && setDrop(false);
         userDrop && setUserDrop(false);
-        window.removeEventListener("keyup", e);
+        window.removeEventListener("keyup", e as any);
       }
     });
   }, [drop, userDrop]);
@@ -108,7 +108,7 @@ const Header = () => {
               >
                 <img src={cat} className={styles.cat}></img>
                 <p
-                  className={styles.userName}
+                  className={styles.user_name}
                   style={{
                     color: "#1E2123",
                     marginRight: "15px",
@@ -122,7 +122,7 @@ const Header = () => {
                 <img src={chevrons.checkMarkPurple}></img>
               </div>
               {userDrop && (
-                <div className={styles.userDrop}>
+                <div className={styles.user_drop}>
                   <p
                     onClick={() => {
                       localStorage.removeItem("Logged");
@@ -154,7 +154,7 @@ const Header = () => {
           />
 
           <nav>
-            <div className={styles.linkWrap}>
+            <div className={styles.link_wrap}>
               <div>
                 <a
                   onClick={() => setDrop(!drop)}
@@ -175,7 +175,7 @@ const Header = () => {
               <img src={icons.geoYellow} alt="geo-yellow-img" />
             </div>
             {["cottagesList", "bathHousesList", "carsList"].map((path) => (
-              <div className={styles.linkWrap}>
+              <div className={styles.link_wrap}>
                 <HeaderLink
                   path={path}
                   style={{
@@ -192,7 +192,7 @@ const Header = () => {
         </button>
       </div>
       {drop && (
-        <div ref={ref} className={styles.modalWindow}>
+        <div ref={ref} className={styles.modal_window}>
           <nav>
             {["Minsk", "Gomel", "Brest", "Vitebsk", "Grodno", "Mogilev"].map(
               (city) => (

@@ -132,9 +132,7 @@ const LoginPage = () => {
                 </div>
                 <p className={styles["forgot-pass"]}>Забыли пароль?</p>
               </div>
-              <button className="login_page-btn" type="submit">
-                Войти
-              </button>
+              <button type="submit">Войти</button>
             </div>
           </form>
           <p className={styles["create-acc"]}>

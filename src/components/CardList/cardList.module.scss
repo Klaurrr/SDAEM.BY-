@@ -25,6 +25,10 @@
     .wrapper_inner {
         position: relative;
 
+        img {
+            user-select: none;
+        }
+
         .gold {
             position: absolute;
             color: #FFFFFF;

@@ -86,14 +86,13 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
 
   useEffect(() => {
     const handler = (e: MouseEvent): void => {
-      const target = e.target as HTMLElement;
       if (!cityRef.current) return;
-      if (!cityRef.current.contains(target)) {
+      if (!cityRef.current.contains(e.target as Node)) {
         selectIsOpen.selectCity &&
           setSelectIsOpen((prev) => ({ ...prev, selectCity: false }));
       }
       if (!roomsRef.current) return;
-      if (!roomsRef.current.contains(target)) {
+      if (!roomsRef.current.contains(e.target as Node)) {
         selectIsOpen.selectRooms &&
           setSelectIsOpen((prev) => ({ ...prev, selectRooms: false }));
       }

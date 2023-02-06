@@ -24,10 +24,18 @@ const Card: React.FC<Props> = ({ data }) => {
 
   const ref = useRef<null | HTMLDivElement>(null);
 
+  const location = useLocation();
+
+  const dispatch = useDispatch();
+
+  const flats = useSelector(
+    (state: { bookMarks: IBookMarks }) => state.bookMarks.bookMarks
+  );
+
   useEffect(() => {
-    const handler = (e: any) => {
+    const handler = (e: TouchEvent | MouseEvent) => {
       if (!ref.current) return;
-      if (!ref.current.contains(e.target)) {
+      if (!ref.current.contains(e.target as Node)) {
         setContact(false);
       }
     };
@@ -38,14 +46,6 @@ const Card: React.FC<Props> = ({ data }) => {
       document.removeEventListener("mousedown", handler);
     };
   }, [contact]);
-
-  const location = useLocation();
-
-  const dispatch = useDispatch();
-
-  const flats = useSelector(
-    (state: { bookMarks: IBookMarks }) => state.bookMarks.bookMarks
-  );
 
   return (
     <>

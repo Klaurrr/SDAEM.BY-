@@ -66,9 +66,8 @@ const ApartmentsSearchEngine: React.FC<ApartmentsProps> = ({
 
   useEffect(() => {
     const handler = (e: MouseEvent): void => {
-      const target = e.target as HTMLElement;
       if (!ref.current) return;
-      if (!ref.current.contains(target)) {
+      if (!ref.current.contains(e.target as Node)) {
         setFilterData((prev) => ({
           ...prev,
           selectActive: false,

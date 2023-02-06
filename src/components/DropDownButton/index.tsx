@@ -1,6 +1,6 @@
 type Props = {
   text: string;
-  setState: any;
+  setState: React.Dispatch<React.SetStateAction<any>>;
 };
 
 const DropDownButton: React.FC<Props> = ({ text, setState }) => {

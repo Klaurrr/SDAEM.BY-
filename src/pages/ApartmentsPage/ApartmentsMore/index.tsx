@@ -69,23 +69,22 @@ const ApartmentsMore: React.FC<Props> = ({ filterData }) => {
 
   useEffect(() => {
     const handler = (e: MouseEvent): void => {
-      const target = e.target as HTMLElement;
       if (!sleepRef.current) return;
-      if (!sleepRef.current.contains(target)) {
+      if (!sleepRef.current.contains(e.target as Node)) {
         setMoreDetailInfo((prev) => ({
           ...prev,
           selectSleepActive: false,
         }));
       }
       if (!districtRef.current) return;
-      if (!districtRef.current.contains(target)) {
+      if (!districtRef.current.contains(e.target as Node)) {
         setMoreDetailInfo((prev) => ({
           ...prev,
           selectDistrictActive: false,
         }));
       }
       if (!metroRef.current) return;
-      if (!metroRef.current.contains(target)) {
+      if (!metroRef.current.contains(e.target as Node)) {
         setMoreDetailInfo((prev) => ({
           ...prev,
           selectMetroActive: false,

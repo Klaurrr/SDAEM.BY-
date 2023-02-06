@@ -69,7 +69,7 @@ const MainRent: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
         <p className={styles["title-3"]}>Квартиры на сутки</p>
         <h3 className={styles["subtitle-3"]}>Аренда квартир в Минске</h3>
 
-        <div className={styles["flat-Wrap"]}>
+        <div className={styles.flat_wrap}>
           <Card
             data={[...apartments]
               .slice(0, 3)
