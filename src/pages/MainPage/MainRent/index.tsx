@@ -164,8 +164,9 @@ const MainRent: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
                 : `${styles["drop-down-unactive"]}`
             }
           >
-            {["Есть", "Нет"].map((metro) => (
+            {["Есть", "Нет"].map((metro, key) => (
               <DropDownButton
+                key={key}
                 text={metro}
                 setState={(e: { target: { outerText: string } }) =>
                   setDropDown(e.target.outerText)
@@ -182,14 +183,17 @@ const MainRent: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
             }
             style={{ left: "16em" }}
           >
-            {["Район 1", "Район 2", "Район 3", "Район 4"].map((district) => (
-              <DropDownButton
-                text={district}
-                setState={(e: { target: { outerText: string } }) =>
-                  setDropDownTwo(e.target.outerText)
-                }
-              />
-            ))}
+            {["Район 1", "Район 2", "Район 3", "Район 4"].map(
+              (district, key) => (
+                <DropDownButton
+                  key={key}
+                  text={district}
+                  setState={(e: { target: { outerText: string } }) =>
+                    setDropDownTwo(e.target.outerText)
+                  }
+                />
+              )
+            )}
           </div>
         </div>
         <div className={styles.chevrons}>

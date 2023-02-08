@@ -114,8 +114,9 @@ const ApartmentsSearchEngine: React.FC<ApartmentsProps> = ({
                   : `${styles["drop-down-unactive"]}`
               }
             >
-              {["1 комн.", "2 комн.", "3 комн.", "4 комн."].map((room) => (
+              {["1 комн.", "2 комн.", "3 комн.", "4 комн."].map((room, key) => (
                 <DropDownButton
+                  key={key}
                   text={room}
                   setState={(e: { target: { outerText: string } }) =>
                     selectValue(e.target.outerText)

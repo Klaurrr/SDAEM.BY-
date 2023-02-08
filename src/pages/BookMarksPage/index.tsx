@@ -43,12 +43,12 @@ const BookMarks = () => {
         <div className={styles.menu}>
           <ul>
             {["Квартиры", "Коттеджи/Усадьбы", "Бани", "Авто напрокат"].map(
-              (item) => (
+              (name) => (
                 <li
-                  className={liActive === item && styles.active}
-                  onClick={() => setLiActive(item)}
+                  className={liActive === name && styles.active}
+                  onClick={() => setLiActive(name)}
                 >
-                  {item}
+                  {name}
                 </li>
               )
             )}

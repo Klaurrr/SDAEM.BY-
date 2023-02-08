@@ -24,7 +24,7 @@ type Data = {
 };
 
 const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
-  const [style, setStyle] = useState("one");
+  const [style, setStyle] = useState("Квартиры на сутки");
 
   const [data, setData] = useState<Data>({
     city: undefined,
@@ -130,30 +130,19 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
           Sdaem.by - у нас живут <span>ваши объявления</span>
         </h1>
         <ul className={styles.ul}>
-          <li
-            onClick={() => setStyle(style === "one" ? "one" : "one")}
-            className={`main_li ${style === "one" && `${styles.active}`}`}
-          >
-            Квартиры на сутки
-          </li>
-          <li
-            onClick={() => setStyle(style === "two" ? "two" : "two")}
-            className={`main_li ${style === "two" && `${styles.active}`}`}
-          >
-            Коттеджи и усадьбы
-          </li>
-          <li
-            onClick={() => setStyle(style == "three" ? "three" : "three")}
-            className={`main_li ${style === "three" && `${styles.active}`}`}
-          >
-            Бани и сауны
-          </li>
-          <li
-            onClick={() => setStyle(style == "four" ? "four" : "four")}
-            className={`main_li ${style === "four" && `${styles.active}`}`}
-          >
-            Авто напрокат
-          </li>
+          {[
+            "Квартиры на сутки",
+            "Коттеджи и усадьбы",
+            "Бани и сауны",
+            " Авто напрокат",
+          ].map((name) => (
+            <li
+              onClick={() => setStyle(name)}
+              className={style === name && styles.active}
+            >
+              {name}
+            </li>
+          ))}
         </ul>
         <form className={styles.select}>
           <div className={clsx(styles.select_item, styles.city)}>
@@ -187,8 +176,9 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
                 }
               >
                 {["Минск", "Гомель", "Гродно", "Могилев", "Брест"].map(
-                  (city) => (
+                  (city, key) => (
                     <DropDownButton
+                      key={key}
                       text={city}
                       setState={(e: { target: { outerText: string } }) =>
                         selectValueFirst(e.target.outerText)
@@ -229,8 +219,9 @@ const MainChoice: React.FC<MainProps> = ({ selectIsOpen, setSelectIsOpen }) => {
                     : `${styles["drop-down-unactive"]}`
                 }
               >
-                {["1", "2", "3", "4"].map((room) => (
+                {["1", "2", "3", "4"].map((room, key) => (
                   <DropDownButton
+                    key={key}
                     text={room}
                     setState={(e: { target: { outerText: string } }) =>
                       selectValueSecond(e.target.outerText)

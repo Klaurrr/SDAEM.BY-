@@ -68,8 +68,12 @@ const ApartmentsDesc: React.FC<ApartmentsProps> = ({
           <div>
             <p className={styles.subtitle}>Рекомендуем посмотреть</p>
             <div>
-              {checkboxes.map((text) => (
-                <Checkbox text={text} setState={() => checkbox(text)} />
+              {checkboxes.map((text, key) => (
+                <Checkbox
+                  text={text}
+                  setState={() => checkbox(text)}
+                  key={key}
+                />
               ))}
             </div>
           </div>

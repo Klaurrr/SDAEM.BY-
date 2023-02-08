@@ -72,8 +72,9 @@ const Header = () => {
       <div className={styles["col-1"]}>
         <nav className={styles["col-1__nav-1"]}>
           {["main", "newsList", "rates", "ADS", "contacts", "bookMarks"].map(
-            (path) => (
+            (path, key) => (
               <HeaderLink
+                key={key}
                 path={path}
                 style={
                   path === "bookMarks"
@@ -165,7 +166,7 @@ const Header = () => {
                           borderBottom: "3px solid #FFD54F",
                           paddingBottom: "18px",
                         }
-                      : undefined
+                      : {}
                   }
                 >
                   {flatsValue}
@@ -174,9 +175,10 @@ const Header = () => {
 
               <img src={icons.geoYellow} alt="geo-yellow-img" />
             </div>
-            {["cottagesList", "bathHousesList", "carsList"].map((path) => (
+            {["cottagesList", "bathHousesList", "carsList"].map((path, key) => (
               <div className={styles.link_wrap}>
                 <HeaderLink
+                  key={key}
                   path={path}
                   style={{
                     borderBottom: "3px solid #FFD54F",

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Layout } from "components/Layout/Layout";
 
@@ -13,36 +13,25 @@ import NewsPage from "pages/NewsPage";
 import ErrorPage from "pages/ErrorPage";
 
 import { AnimatePresence } from "framer-motion";
-import styles from "./app.module.scss";
 
 const App = () => {
-  let location = useLocation();
-
   return (
-    <div
-      className={
-        location.pathname === "/login" || location.pathname === "/register"
-          ? null
-          : styles.container
-      }
-    >
-      <Layout>
-        <AnimatePresence>
-          <Routes>
-            <Route path="/main" element={<Main />} />
-            <Route path="/apartments/:city" element={<Apartments />} />
-            <Route path="/newsList" element={<NewsPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/newsList/detail/:id" element={<DetailPage />} />
-            <Route path="/" element={<Navigate to="/main" replace />} />
-            <Route path="*" element={<ErrorPage />} />
-            <Route path="/bookMarks" element={<BookMarks />} />
-            <Route path="/contacts" element={<ContactsPage />} />
-          </Routes>
-        </AnimatePresence>
-      </Layout>
-    </div>
+    <Layout>
+      <AnimatePresence>
+        <Routes>
+          <Route path="/main" element={<Main />} />
+          <Route path="/apartments/:city" element={<Apartments />} />
+          <Route path="/newsList" element={<NewsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/newsList/detail/:id" element={<DetailPage />} />
+          <Route path="/" element={<Navigate to="/main" replace />} />
+          <Route path="*" element={<ErrorPage />} />
+          <Route path="/bookMarks" element={<BookMarks />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Routes>
+      </AnimatePresence>
+    </Layout>
   );
 };
 

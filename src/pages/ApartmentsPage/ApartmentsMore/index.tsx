@@ -53,7 +53,7 @@ const ApartmentsMore: React.FC<Props> = ({ filterData }) => {
     "Центральный",
   ];
 
-  const customCheckboxArray = () => {
+  const checkboxMocks = () => {
     let checkboxArray: string[] = [];
     for (let i = 0; i < 5; i++) {
       checkboxArray = checkboxArray.concat([
@@ -136,8 +136,9 @@ const ApartmentsMore: React.FC<Props> = ({ filterData }) => {
             }}
             ref={sleepRef}
           >
-            {["1", "2", "3", "4", "5"].map((item) => (
+            {["1", "2", "3", "4", "5"].map((item, key) => (
               <DropDownButton
+                key={key}
                 text={item}
                 setState={(e: { target: { outerText: string } }) =>
                   setMoreDetailInfo((prev) => ({
@@ -175,8 +176,9 @@ const ApartmentsMore: React.FC<Props> = ({ filterData }) => {
             }}
             ref={districtRef}
           >
-            {districts.map((district) => (
+            {districts.map((district, key) => (
               <DropDownButton
+                key={key}
                 text={district}
                 setState={(e: { target: { outerText: string } }) =>
                   setMoreDetailInfo((prev) => ({
@@ -214,8 +216,9 @@ const ApartmentsMore: React.FC<Props> = ({ filterData }) => {
             }}
             ref={metroRef}
           >
-            {["Есть", "Нет"].map((text) => (
+            {["Есть", "Нет"].map((text, key) => (
               <DropDownButton
+                key={key}
                 text={text}
                 setState={(e: { target: { outerText: string } }) =>
                   setMoreDetailInfo((prev) => ({
@@ -231,8 +234,8 @@ const ApartmentsMore: React.FC<Props> = ({ filterData }) => {
       </div>
       <div className={styles["more_detail-wrapper-2"]}>
         <div className={styles.checkboxes_wrapper}>
-          {customCheckboxArray().map((item, index) => (
-            <CustomCheckbox id={String(index)} text={item} />
+          {checkboxMocks().map((item, index) => (
+            <CustomCheckbox id={index.toString()} text={item} key={index} />
           ))}
         </div>
       </div>
