@@ -8,6 +8,8 @@
 
 </section>
 
+## Docker pull klaurrr/sdaem.by:latest
+
 ### Work in progress
 
 <details>
