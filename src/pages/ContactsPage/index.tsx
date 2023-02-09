@@ -200,15 +200,13 @@ const ContactsPage = () => {
             <button type="submit">Отправить</button>
           </form>
           <div className={styles.icons}>
-            <div>
-              <img src={socials.instWhite} alt="instagram-img" />
-            </div>
-            <div>
-              <img src={socials.vkWhite} alt="vk-img" />
-            </div>
-            <div>
-              <img src={socials.faceBookWhite} alt="facebook-img" />
-            </div>
+            {[socials.instWhite, socials.vkWhite, socials.faceBookWhite].map(
+              (social) => (
+                <div>
+                  <img src={social} alt="social-img" />
+                </div>
+              )
+            )}
           </div>
         </div>
         <div

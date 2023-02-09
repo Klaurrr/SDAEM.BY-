@@ -117,6 +117,10 @@
             .textarea {
                 margin-left: 40px;
 
+                textarea {
+                    resize: none;
+                }
+
                 p {
                     margin-bottom: 15px;
                 }

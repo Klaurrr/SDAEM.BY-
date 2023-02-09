@@ -52,25 +52,22 @@ const DetailPage = () => {
                   </p>
                   <div className={styles.share}>
                     <p>Поделиться</p>
-                    <div
-                      className={styles.img_wrapper}
-                      style={{ marginLeft: "15px" }}
-                    >
-                      <img src={socials.vk} alt="vk-img" />
-                    </div>
-                    <div className={styles.img_wrapper}>
-                      <img src={socials.faceBook} alt="facebook-img" />
-                    </div>
-                    <div className={styles.img_wrapper}>
-                      <img src={socials.viber} alt="viber-img" />
-                    </div>
-                    <div className={styles.img_wrapper}>
-                      <img src={socials.telegram} alt="telegram-img" />
-                    </div>
-                    <div className={styles.img_wrapper}>
-                      {" "}
-                      <img src={socials.whatsApp} alt="whatsApp-img" />
-                    </div>
+                    {[
+                      socials.vk,
+                      socials.faceBook,
+                      socials.viber,
+                      socials.telegram,
+                      socials.whatsApp,
+                    ].map((social) => (
+                      <div
+                        className={styles.img_wrapper}
+                        style={
+                          social === socials.vk ? { marginLeft: "15px" } : {}
+                        }
+                      >
+                        <img src={social} alt="social-img" />
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <img src={icons.hotel} className={styles.hotel}></img>

@@ -298,21 +298,16 @@ const Apartments = () => {
         />
         <div className={styles.share}>
           <p>Поделиться</p>
-          <div>
-            <img src={socials.vk} alt="vk-img" />
-          </div>
-          <div>
-            <img src={socials.faceBook} alt="facebook-img" />
-          </div>
-          <div>
-            <img src={socials.viber} alt="viber-img" />
-          </div>
-          <div>
-            <img src={socials.telegram} alt="telegram-img" />
-          </div>
-          <div>
-            <img src={socials.whatsApp} alt="whatsApp-img" />
-          </div>
+          {[
+            socials.vk,
+            socials.faceBook,
+            socials.telegram,
+            socials.whatsApp,
+          ].map((social) => (
+            <div>
+              <img src={social} alt="social-img" />
+            </div>
+          ))}
         </div>
       </div>
       <div className={styles.wrapper_3}>
