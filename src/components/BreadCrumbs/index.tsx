@@ -6,8 +6,7 @@ import breadCrumbsDot from "assets/images/BreadCrumbDot.png";
 import styles from "./crumbs.module.scss";
 
 type Props = {
-  crumbTitle?: string;
-  crumbSubTitle?: string;
+  [key: string]: string | undefined;
 };
 
 const BreadCrumbs: React.FC<Props> = ({ crumbTitle, crumbSubTitle }) => {

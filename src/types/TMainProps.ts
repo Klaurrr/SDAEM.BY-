@@ -1,9 +1,6 @@
 export type MainProps = {
         selectIsOpen: {
-          selectCity: boolean;
-          selectRooms: boolean;
-          selectMetro: boolean;
-          selectDistrict: boolean;
+          [key: string]: boolean
         };
         setSelectIsOpen: React.Dispatch<
           React.SetStateAction<{
