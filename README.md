@@ -10,7 +10,7 @@
 
 ## Docker pull klaurrr/sdaem.by:latest
 
-### Work in progress
+### Work ended
 
 <details>
   <summary>Example picture</summary>
