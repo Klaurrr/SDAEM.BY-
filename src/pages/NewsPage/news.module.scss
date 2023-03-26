@@ -1,0 +1,94 @@
+.container {
+    display: flex;
+    margin-top: 30px;
+    padding-left: 80px;
+    position: relative;
+
+    .contaiter__inner {
+
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        left: 80px;
+        right: 0px;
+
+        h1 {
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 100%;
+            color: #1E2123;
+            margin-top: 25px;
+        }
+
+        .form {
+            position: absolute;
+            top: 55px;
+            left: 97px;
+
+            input {
+                width: 595px;
+                height: 37px;
+                background: #FFFFFF;
+                box-shadow: 0px 10px 20px rgba(0, 96, 206, 0.05);
+                border-radius: 20px;
+                border: none;
+                padding: 0px 0px 0px 21px;
+
+
+                &:focus {
+                    outline: none;
+                }
+
+                &::-webkit-input-placeholder {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #686868;
+                }
+            }
+
+            .button {
+                background: #664EF9;
+                border-radius: 19px;
+                border: none;
+                cursor: pointer;
+                height: 37.07px;
+                width: 53.07px;
+                padding: 0;
+                position: absolute;
+                right: 0px;
+            }
+        }
+
+        .background {
+            background: linear-gradient(90deg, #94AFFF 0%, #4E64F9 94.5%);
+            opacity: 0.1;
+            border-radius: 40px 0px 0px 0px;
+            width: 848px;
+            height: 970px;
+            z-index: -5;
+        }
+    }
+
+
+
+    .card_container {
+        margin-top: 143px
+    }
+
+    .wrapper {
+
+        margin-bottom: 30px;
+
+
+
+        &:nth-child(2) {
+            margin: 0px 30px;
+        }
+
+
+        &:nth-child(3n + 2) {
+            margin: 0px 30px;
+        }
+    }
+}

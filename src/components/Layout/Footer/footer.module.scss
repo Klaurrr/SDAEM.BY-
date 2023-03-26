@@ -1,0 +1,97 @@
+.container {
+    height: 250px;
+    width: 1440px;
+    background: #FFFFFF;
+    box-shadow: 0px -11px 40px rgba(39, 95, 158, 0.05);
+    position: relative;
+
+    .wrapper {
+        padding: 40px 0px 53px 80px;
+        display: flex;
+
+        .title {
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            color: #8291A3;
+            text-transform: uppercase;
+            margin: 5px 0px 36px 0px;
+        }
+
+        .owner {
+            font-weight: 400;
+            font-size: 11px;
+            line-height: 13px;
+            width: 297px;
+            height: 78px;
+            color: #8291A3;
+
+        }
+
+        .col_1 {
+            display: flex;
+            margin-left: 30px;
+
+            .services {
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 17px;
+                color: #1E2123;
+                margin-bottom: 21px;
+            }
+
+            .services_2 {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                color: #8291A3;
+                cursor: pointer;
+                margin-bottom: 8px;
+
+                &:hover {
+                    color: #664EF9;
+                }
+            }
+        }
+
+        .col_2 {
+            margin: 31px 0px 0px 30px;
+            display: flex;
+            align-items: center;
+
+            .socials {
+                display: flex;
+                align-items: center;
+                margin-right: 289px;
+
+
+                img {
+                    cursor: pointer;
+                }
+
+
+                img:nth-child(3) {
+                    margin: 0px 22px;
+
+                }
+
+                p {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #1E2123;
+                    margin-right: 28px;
+                }
+            }
+
+            .payment {
+                display: flex;
+                align-items: center;
+
+                img {
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+}

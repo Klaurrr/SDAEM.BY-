@@ -1,0 +1,71 @@
+//4 контейнер
+
+
+
+
+
+
+
+.drop-down {
+    position: absolute;
+    top: 58px;
+    left: 326px;
+    display: flex;
+    z-index: 10;
+
+    &__item {
+        background: #FFFFFF;
+        box-shadow: 0px 10px 20px rgba(0, 96, 206, 0.1);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 185px;
+        height: 40px;
+        margin-left: 30px;
+        cursor: pointer;
+
+
+        p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: #686868;
+
+        }
+
+        &_wrap {
+            margin-left: 14px;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &-active {
+        display: block;
+        position: absolute;
+        left: 10%;
+        top: 120%;
+        background: white;
+        border-radius: 10px;
+        width: 165px;
+
+        div:hover {
+            background: #F8F8F8;
+            border-radius: 10px;
+        }
+
+        p {
+            cursor: pointer;
+            color: #1E2123;
+            padding: 10px 0px 10px 15px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+        }
+    }
+
+    &-unactive {
+        display: none;
+    }
+}

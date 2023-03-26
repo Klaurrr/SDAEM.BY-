@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+
+
+    img:first-child {
+        cursor: pointer;
+    }
+
+
+    p {
+        font-weight: 400;
+        font-size: 14px;
+        color: #686868;
+    }
+
+    span {
+        p {
+            color: #4E64F9;
+            margin: 0px 0px 0px 7px;
+            cursor: pointer;
+        }
+
+    }
+}

@@ -1,0 +1,20 @@
+.checkbox {
+    background: rgba(102, 78, 249, 0.1);
+    border-radius: 17px;
+    padding: 6px 10px;
+    color: #664EF9;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 15px 15px 0px 0px;
+
+    &_active {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &:hover {
+        background: rgba(102, 78, 249, 0.2);
+    }
+}

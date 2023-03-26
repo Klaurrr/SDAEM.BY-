@@ -1,0 +1,125 @@
+.more_detail {
+    width: 1440px;
+    height: 314px;
+    border: 1px solid rgba(78, 100, 249, 0.1);
+    box-shadow: 0px 20px 40px rgba(135, 124, 202, 0.15);
+
+
+    &-wrapper {
+        display: flex;
+        margin: 20px 0px 30px 101px;
+
+
+
+        .detail_select {
+            width: 200px;
+            height: 37px;
+            background: #F8F8F8;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            justify-content: space-between;
+
+            img {
+                margin-right: 15px;
+            }
+
+            p {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                color: #1E2123;
+                margin: 9px 0px 11px 12px;
+                border-radius: 22px;
+            }
+
+            &:hover {
+                background: rgba(102, 78, 249, 0.1);
+            }
+
+            &-active {
+                width: 196px;
+                border: 2px solid rgba(102, 78, 249, 0.8);
+                background: #F8F8F8;
+                border-radius: 22px;
+                cursor: pointer;
+                color: #686868;
+                display: flex;
+                align-items: center;
+                height: 33px;
+                justify-content: space-between;
+
+                img {
+                    margin-right: 13px;
+                }
+
+
+                p {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #1E2123;
+                    margin: 9px 0px 11px 10px;
+                }
+            }
+
+            &_modal-window {
+                position: absolute;
+                width: 200px;
+                background: #FFFFFF;
+                box-shadow: 0px 0px 40px rgba(39, 95, 158, 0.1);
+                border-radius: 10px;
+                margin-top: 10px;
+
+                div {
+                    height: 37px;
+
+                    &:hover {
+                        background: #F8F8F8;
+                        cursor: pointer;
+                    }
+
+                    p {
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 17px;
+                        color: #1E2123;
+                        padding: 10px 0px 10px 15px;
+                    }
+                }
+
+
+            }
+
+
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: #664EF9;
+            margin-bottom: 10px;
+        }
+
+        &-2 {
+            margin-left: 100px;
+            display: flex;
+
+            .checkboxes_wrapper {
+                display: flex;
+                height: 175px;
+                flex-direction: column;
+                flex-wrap: wrap;
+
+                &>* {
+                    margin-right: 50px;
+                }
+            }
+
+
+        }
+    }
+}
