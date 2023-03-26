@@ -74,7 +74,7 @@ const Carousel: React.FC<Props> = ({ children, view }) => {
         </div>
       </div>
       <div className={styles.dots}>
-        {pages.map((_item: undefined, index?: string) => (
+        {pages.map((_item: undefined, index: string) => (
           <button
             key={index}
             onClick={() => {
