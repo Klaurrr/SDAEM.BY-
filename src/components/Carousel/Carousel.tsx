@@ -77,6 +77,10 @@ const Carousel: React.FC<Props> = ({ children, view }) => {
         {pages.map((_item: undefined, index?: string) => (
           <button
             key={index}
+            onClick={() => {
+                        setOffset(-index * page_width);
+                        setCurrentPage(Number(index));
+                    }}
             className={
               index == String(currentPage)
                 ? styles.button_active
